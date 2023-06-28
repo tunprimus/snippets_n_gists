@@ -1,0 +1,890 @@
+/* This is a master CSS for me to use across projects. */
+
+/*
+ * >>> From https://9elements.com/css-rule-order/css.pdf
+ * 
+	
+	
+*/
+
+/* -------------------- */
+/* VARIABLES AND RESET */
+/* -------------------- */
+
+/* -------------- */
+/* Root variables */
+/* -------------- */
+:root {
+	/* Preferred colours variables */
+	--amethyst: #9966CC;
+	--amethyst: hsl(270, 50%, 60%);
+	--aqua-blue: #0AFFFF;
+	--aqua-blue: hsl(180, 100%, 52%);
+	--beige: #F5F5DC;
+	--beige: hsl(60, 56%, 91%);
+	--beryl: #56E9DB;
+	--beryl: hsl(174, 77%, 63%);
+	--blue: #0000FF;
+	--blue: hsl(240, 100%, 50%);
+	--bronze: #CD7F32;
+	--bronze: hsl(30, 61%, 50%);
+	--butter: #FFFFD2;
+	--butter: hsl(60, 100%, 91%);
+	--carbuncle: #943241;
+	--carbuncle: hsl(351, 49%, 39%);
+	--chalcedony: #7784B8;
+	--chalcedony: hsl(228, 31%, 59%);
+	--charcoal: #101820;
+	--charcoal: hsl(210, 35%, 9%);
+	--chrysolite: #5A6C20;
+	--chrysolite: hsl(74, 54%, 27%);
+	--chrysoprasus: #028255;
+	--chrysoprasus: hsl(159, 97%, 26%);
+	--cocoa-brown: #1E1917;
+	--cocoa-brown: hsl(17, 13%, 10%);
+	--darkblue: #00008B;
+	--darkblue: hsl(240, 100%, 27%);
+	--darlslategrey: #2F4F4F;
+	--darlslategrey: hsl(180, 25%, 25%);
+	--dimgrey: #696969;
+	--dimgrey: hsl(0, 0%, 41%);
+	--ebony: #3C3431;
+	--ebony: hsl(16, 10%, 21%);
+	--emerald-variant: #006B37;
+	--emerald-variant: hsl(151, 100%, 21%);
+	--emerald: #50C878;
+	--emerald: hsl(140,52%,55%);
+	--gold: #FFD700;
+	--gold: hsl(51, 100%, 50%);
+	--green: #00FF00;
+	--green: hsl(120, 100%, 50%);
+	--grey: #808080;
+	--grey: hsl(0, 0%, 50%);
+	--hotpink: #FF69B4;
+	--hotpink: hsl(330, 100%, 71%);
+	--indigo: #4B0082;
+	--indigo: hsl(275, 100%, 25%);
+	--ivory: #FFFFF0;
+	--ivory: hsl(60, 100%, 97%);
+	--jacinth: #FF3A03;
+	--jacinth: hsl(13, 100%, 51%);
+	--jasper-modern: #D73B3E;
+	--jasper-modern: hsl(359, 66%, 54%);
+	--jasper: #D05340;
+	--jasper: hsl(8, 61%, 53%);
+	--light-olive: #E7E8D1;
+	--light-olive: hsl(63, 33%, 86%);
+	--linen: #FAF0E6;
+	--linen: hsl(31, 68%, 94%);
+	--midnightblue: #191970;
+	--midnightblue: hsl(240, 64%, 27%);
+	--navy: #000080;
+	--navy: hsl(240, 100%, 25%);
+	--off-white-1: #F7F7F7;
+	--off-white-1: hsl(0, 0%, 97%);
+	--off-white-2: #FAFAFA;
+	--off-white-2: hsl(0, 0%, 98%);
+	--off-white-3: #F2F2F2;
+	--off-white-3: hsl(0, 0%, 95%);
+	--off-white-4: #F3F2F1;
+	--off-white-4: hsl(30, 8%, 95%);
+	--off-white-5: #F9FAFB;
+	--off-white-5: hsl(210, 25%, 98%);
+	--off-white-6: #FCFCFC;
+	--off-white-6: hsl(0, 0%, 99%);
+	--off-white-7: #E0E0E0;
+	--off-white-7: hsl(0, 0%, 88%);
+	--onyx: #0F0F0F;
+	--onyx: hsl(0, 0%, 6%);
+	--orange: #FFA500;
+	--orange: hsl(39, 100%, 50%);
+	--pearl: #EAE0C8;
+	--pearl: hsl(42, 45%, 85%);
+	--purple: #800080;
+	--purple: hsl(300, 100%, 25%);
+	--red: #FF0000;
+	--red: hsl(0, 100%, 50%);
+	--ruby: #E0115F;
+	--ruby: hsl(337, 86%, 47%);
+	--sapphire: #0F52BA;
+	--sapphire: hsl(216, 85%, 39%);
+	--sardius: #87210D;
+	--sardius: hsl(10, 82%, 29%);
+	--sardonyx: #E4433F;
+	--sardonyx: hsl(1, 75%, 57%);
+	--scarlet: #FF2400;
+	--scarlet: hsl(8, 100%, 50%);
+	--silver: #C0C0C0;
+	--silver: hsl(0, 0%, 75%);
+	--solarised-black: #073672;
+	--solarised-black: hsl(214, 88%, 24%);
+	--solarised-blue: #268BD2;
+	--solarised-blue: hsl(205, 69%, 49%);
+	--solarised-brblack: #002B36;
+	--solarised-brblack: hsl(192, 100%, 11%);
+	--solarised-brblue: #839496;
+	--solarised-brblue: hsl(186, 8%, 55%);
+	--solarised-brcyan: #93A1A1;
+	--solarised-brcyan: hsl(180, 7%, 60%);
+	--solarised-brgreen: #586E75;
+	--solarised-brgreen: hsl(194, 14%, 40%);
+	--solarised-brmagenta: #6C71C4;
+	--solarised-brmagenta: hsl(237, 43%, 60%);
+	--solarised-brred: #CB4B16;
+	--solarised-brred: hsl(18, 80%, 44%);
+	--solarised-brwhite: #FDF6E3;
+	--solarised-brwhite: hsl(44, 87%, 94%);
+	--solarised-bryellow: #657B83;
+	--solarised-bryellow: hsl(196, 13%, 45%);
+	--solarised-cyan: #2AA198;
+	--solarised-cyan: hsl(175, 59%, 40%);
+	--solarised-green: #859900;
+	--solarised-green: hsl(68, 100%, 30%);
+	--solarised-magenta: #D33682;
+	--solarised-magenta: hsl(331, 64%, 52%);
+	--solarised-red: #DC322F;
+	--solarised-red: hsl(1, 71%, 52%);
+	--solarised-white: #EEE8D5;
+	--solarised-white: hsl(46, 42%, 88%);
+	--solarised-yellow: #B58900;
+	--solarised-yellow: hsl(45, 100%, 35%);
+	--topaz: #FFC87C;
+	--topaz: hsl(35, 100%, 74%);
+	--violet: #EE82EE;
+	--violet: hsl(300, 76%, 72%);
+	--white: #FFFFFF;
+	--white: hsl(0, 0%, 100%);
+	--yellow: #FFFF00;
+	--yellow: hsl(60, 100%, 50%);
+	/*-- End of preferred colours --*/
+	
+    /* Colour themes */
+	/* >>> Building a colour scheme. https://web.dev/building-a-colour-scheme/
+	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-colour-theming/ */
+	--theme-colour-HSL: hsl(...);
+	--theme-colour-h: ...;
+	--theme-colour-s: ...%;
+	--theme-colour-l: ...%;
+
+	--theme-colour: hsl(var(--theme-colour-h), var(--theme-colour-s), var(--theme-colour-l));
+	--lighten-percentage: 20%;
+	--darken-percentage: 15%;
+
+	--theme-colour-background: var(--theme-colour);
+	--theme-colour--light: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + var(--lighten-percentage)));
+	--theme-colour--light-l: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + var(--lighten-percentage)));
+	--theme-colour--light-d: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) + var(--lighten-percentage)));
+
+	--theme-colour--dark: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
+	--theme-colour--dark-l: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) - var(--darken-percentage)));
+	--theme-colour--dark-d: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - var(--darken-percentage)));
+
+	--theme-colour--complement: hsl(calc(var(--theme-colour-h) + 180), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--complement--split1: hsl(calc(var(--theme-colour-h) + 150), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--complement--split2: hsl(calc(var(--theme-colour-h) + 210), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--triad1: hsl(calc(var(--theme-colour-h) + 120), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--triad2: hsl(calc(var(--theme-colour-h) + 240), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--tetrad1: hsl(calc(var(--theme-colour-h) + 90), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--tetrad2: hsl(calc(var(--theme-colour-h) + 180), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--tetrad3: hsl(calc(var(--theme-colour-h) + 270), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--analogue1: hsl(calc(var(--theme-colour-h) + 30), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--analogue2: hsl(calc(var(--theme-colour-h) + 60), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--analogue3: hsl(calc(var(--theme-colour-h) + 90), var(--theme-colour-s), var(--theme-colour-l));
+
+	--light-theme-accent1: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
+	--light-theme-accent2: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - calc(var(--golden-ratio) * var(--lighten-percentage))));
+	--dark-theme-accent1: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + calc(2 * var(--lighten-percentage))));
+	--dark-theme-accent1: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + calc(var(--golden-ratio) * var(--lighten-percentage))));
+
+	--shadow-colour: hsl(var(--theme-colour-h), 60%, 50%);
+	--shadow-start: 1px;
+	--alpha-07: 0.70;
+	--alpha-03: 0.33;
+	--alpha-02: 0.20;
+	/* box-shadow: X-offset Y-offset Blur-size Colour*/
+	--box-shadow1: calc(var(--shadow-start) / 2) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-07));
+
+	--box-shadow2: var(--shadow-start) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-03)), calc(var(--shadow-start) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) hsla(var(--shadow-colour) / var(--alpha-03));
+
+	--box-shadow3: var(--shadow-start) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-02)), calc(var(--shadow-start) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) hsla(var(--shadow-colour) / var(--alpha-02)), calc(var(--shadow-start) * 4) calc(var(--shadow-start) * var(--golden-ratio) * 4) calc(var(--shadow-start) * var(--golden-ratio) * 4) hsla(var(--shadow-colour) / var(--alpha-02));
+
+	/**-- Change contrastThreshold to 50% when L value of colour equals 50% --**/
+	--contrast-threshold: 60%;
+	--switch: calc((var(--theme-colour-l) - var(--contrast-threshold)) * -100);
+	--theme-text-colour: hsl(0, 0%, var(--switch));
+	
+	--text-grey12: hsl(0, 0%, 12%);
+	--text-grey25: hsl(0, 0%, 25%);
+	--text-grey50: hsl(0, 0%, 50%);
+	--text-grey75: hsl(0, 0%, 75%);
+
+	--accordion-border-colour: var(--input-border);
+
+	/* Inputs colours */
+	--input-border: var(--text-grey50);
+	--input-focus-h: 245;
+	--input-focus-s: 100%;
+	--input-focus-l: 42%;
+	/*-- End of inputs colours --*/
+
+	/*-- End of colour themes  --*/
+
+
+    /* Fonts */
+	--font-stack-title: Garamond, Georgia, Palatino, serif;
+	--font-stack-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Open Sans", "Helvetica Neue", Helvetica, Arial, Poppins, Verdana, Tahoma, sans-serif;
+	--custom-font-size-1: calc(1vw + 1vh + .5vmin);
+	--custom-font-size-2: calc(0.9rem + 1vw);
+	--custom-font-size-3: calc(15px + 0.390625vw);
+	--custom-font-size-4: calc(1rem + ((1vw - 3px) * 0.6173));
+	--custom-font-size-5: calc(1rem + (1.5 - 1) * ((100vw - 21rem) / (35 - 21)));
+	--min-font-size: 16;
+    --max-font-size: 32;
+    --min-viewport-width: 320;
+    --max-viewport-width: 2560;
+    --custom-font-size-6: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
+	min-height: 0vw;
+	
+	--golden-ratio: 1.618;
+	--perfect-fifth: 1.500;
+	--augmented-fourth: 1.414;
+	--perfect-fourth: 1.333;
+	--major-third: 1.250;
+	--minor-third: 1.200;
+	--major-second: 1.125;
+	--minor-second: 1.067;
+
+	--font-scale-ratio: var(/**/);
+	/* >>> Modular scale: https://every-layout.dev/rudiments/modular-scale/ */
+	--fs-5: calc(var(--fs-4) / var(--font-scale-ratio));
+	--fs-4: calc(var(--fs-3) / var(--font-scale-ratio));
+	--fs-3: calc(var(--fs-2) / var(--font-scale-ratio));
+	--fs-2: calc(var(--fs-1) / var(--font-scale-ratio));
+	--fs-1: calc(var(--fs0) / var(--font-scale-ratio));
+	--fs0: var(--custom-font-size-N);
+	--fs1: calc(var(--fs0) * var(--font-scale-ratio));
+	--fs2: calc(var(--fs1) * var(--font-scale-ratio));
+	--fs3: calc(var(--fs2) * var(--font-scale-ratio));
+	--fs4: calc(var(--fs3) * var(--font-scale-ratio));
+	--fs5: calc(var(--fs4) * var(--font-scale-ratio));
+	/*-- End of fonts --*/
+
+	--grid-min: 20ch;
+	--flex-min: 35rem;
+	--pancake-min: var(--grid-min);
+
+	/* >>> Contextual Spacing For Intrinsic Web Design: https://moderncss.dev/contextual-spacing-for-intrinsic-web-design/ */
+	/* Paddings, Margins, Gaps */
+	--padding-sm: clamp(1rem, 3%, 1.5rem);
+	--padding-md: clamp(1.5rem, 6%, 3rem);
+	--padding-lg: clamp(3rem, 12%, 6rem);
+
+	--margin-sm: min(2rem, 4vh);
+	--margin-md: min(4rem, 8vh);
+	--margin-lg: min(8rem, 16vh);
+
+	--layout-gap-sm: clamp(1rem, 3vmax, 1.5rem);
+	--layout-gap-md: clamp(1.5rem, 6vmax, 3rem);
+	--layout-gap-lg: clamp(3rem, 8vmax, 4rem);
+
+	--flexbox-albatross-margin: 1rem;
+	--flexbox-albatross-container-size: 40rem;
+	--flexbox-albatross-modifier: calc(var(--flexbox-albatross-container-size) - 100%);
+	/*-- End of paddings, margins and gaps --*/
+
+	color-scheme: light dark;
+}
+
+/*-- End of root variables --*/
+
+
+/* ------ */
+/* Resets */
+/* ------ */
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+	border: 0;
+	background-repeat: no-repeat;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+html {
+    font-size: var(--custom-font-size-N);
+	scroll-behavior: smooth;
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+html, body {
+	height: 100%;
+	min-height: 100%;
+}
+
+body {
+	min-height: 100vh;
+	line-height: var(--golden-ratio);
+	line-height: calc(3px + 2.5ex + 3px);
+	line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
+	-webkit-font-smoothing: antialiased;
+	color: var(--theme-text-colour);
+}
+
+p {
+	max-width: 65ch;
+}
+
+/* HTML5 blocks - needed in older browsers */
+article, aside, figcaption, figure, footer, header, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+	list-style-position: unset;
+}
+
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+	text-decoration: inherit;
+	color: inherit;
+	display: inline-block;
+	background-color: transparent;
+}
+
+img, picture, video, iframe, canvas, object, embed, svg  {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border-style: none;
+}
+
+svg {
+	fill: currentColor;
+}
+
+input, button, textarea, optgroup, select {
+	font: inherit;
+	font-size: 100%;
+	vertical-align: middle;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+}
+
+input[type="button"] {
+	cursor: pointer;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+	font-size: 16px;
+}
+
+button {
+	border: none;
+	border-radius: 0.4rem;
+	font-family: inherit;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+p, li, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+	hyphens: auto;
+	font-weight: 400;
+}
+
+sup, sub {
+	line-height: 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+textarea {
+	resize: vertical;
+}
+
+details summary {
+	cursor: pointer;
+}
+
+/* For frameworks */
+#root,
+#__next {
+	isolation: isolate;
+}
+
+/*-- End of Resets --*/
+
+/*---------*/
+/* CLASSES */
+/*---------*/
+
+.container {
+	width: min(100vw - 3rem, var(--container-max, 80ch));
+	margin-inline: auto;
+}
+
+.container-flexbox-albatross {
+	display: flex;
+	flex-wrap: wrap;
+	/* --margin: 1rem;
+	--modifier: calc(40rem - 100%); */
+	margin: calc(var(--flexbox-albatross-margin) * -1);
+}
+
+.container-flexbox-albatross > * {
+	flex-grow: 1;
+	flex-basis: calc(var(--flexbox-albatross-modifier) * 999);
+	margin: var(--flexbox-albatross-margin);
+}
+
+/* Container queries */
+/* >>> Container Query Solutions with CSS Grid and Flexbox: https://moderncss.dev/container-query-solutions-with-css-grid-and-flexbox/ */
+.grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(var(--grid-min), 1fr));
+}
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 1rem -0.5rem;
+}
+
+.flex > * {
+	flex-grow: 1;
+	flex-basis: calc((var(--flex-min) - 100%) * 999);
+	margin: 0.5rem;
+}
+
+.flex > *.flex--auto {
+	flex: 0 1 auto;
+}
+
+.flex-pancake {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 1rem -0.5rem;
+}
+
+.flex-pancake > * {
+	flex: 1 1 var(--pancake-min);
+	margin: 0.5rem;
+}
+
+.flex-pancake > *.flex--auto {
+	flex: 0 1 auto;
+}
+
+.header {
+	font: inherit;
+}
+
+.content {
+	font: inherit;
+}
+
+.hr {
+	overflow: visible;
+	padding: 0;
+	margin: 1rem auto;
+	border: none;
+	border-top: 1px solid transparent;
+	text-align: center;
+	width: 80%;
+}
+
+.hr::after {
+	content:" \00A7 ";
+	display: inline-block;
+	position: relative;
+	top: -0.75rem;
+	padding: 0 0.25rem;
+}
+
+.image {
+	display: block;
+	font-family: sans-serif;
+	font-weight: 300;
+	height: auto;
+	line-height: 2;
+	position: relative;
+	text-align: center;
+	width: 100%;
+}
+
+.image::before {
+	content: "Sorry, this image is unavailable.";
+	display: block;
+	margin-bottom: 8px;
+}
+
+.image::after {
+	content: "(url: " attr(src) ")";
+	display: block;
+	font-size: 12px;
+}
+
+/* https://htmlandcssguidebook.com/css/link-states/ */
+/* The best link order is default, visited, hover, focus, then active. You can remember this order using a handy mnemonic device: "Very Hungry Feline Acrobats".
+A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
+*/
+
+/* Buttons */
+.button {
+	--btn-h: var(...);
+	--btn-sat: var(...);
+	--btn-light: var(...);
+	--border-light: calc(var(--btn-light) * 0.7);
+	--border-alpha: calc((var(--btn-light) - var(--border-threshold)) * 10);
+	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: start;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	margin: 2px 0;
+	border: 2px solid transparent;
+	border: 0.2em solid hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
+	-webkit-border-radius: 0.4rem;
+	-moz-border-radius: 0.4rem;
+	border-radius: var(--border-radius-value);
+	box-shadow: var(--box-shadow1);
+	min-width: 10ch;
+	min-height: 44px;
+	/* padding: 0.5rem 1rem; */
+	padding: 0.25em 0.75em;
+	cursor: pointer;
+	color: inherit;
+	background: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
+	background-color: inherit;
+	outline: solid transparent;
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	text-align: center;
+	text-decoration: none;
+	line-height: 1.1;
+	white-space: nowrap;
+}
+
+.button--secondary {
+	/* sets the background color as a 60º rotated hue */
+	--btn-h: calc(var(--hue) + 60);
+}
+
+.button:visited {
+	font-weight: bold;
+}
+
+.button:focus {
+	outline-style: solid;
+    outline-color: transparent;
+	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
+}
+
+.button:hover {
+	color: inherit;
+	border-color: inherit;
+	background-color: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 0.80));
+	opacity: 0.5;
+}
+
+
+.button:active {
+	color: inherit;
+	transform: translateY(1px);
+	filter: saturate(150%);
+}
+
+.button__icon {
+	/* You may wish to have your icons appear larger or smaller in relation to the text */
+	width: 0.9em;
+	height: 0.9em;
+	fill: currentColor;
+	margin-right: 0.5em;
+}
+
+.button__icon--end {
+	margin-right: 0;
+    margin-left: 0.5em;
+}
+
+
+.icon-button {
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0.35em;
+	border-radius: 50%;
+}
+
+.icon-button__icon {
+	width: 100%;
+    height: 100%;
+    fill: currentColor;
+}
+
+/* Inputs */
+
+.input {
+	font-size: 16px;
+	font-size: max(16px, 1em);
+	font-family: inherit;
+	padding: 0.25em 0.5em;
+	background-color: var(--solarised-white);
+	border: 2px solid var(--input-border);
+	border-radius: var(--border-radius-value);
+}
+
+.input:focus {
+	border-color: hsl(var(--input-focus-h), var(--input-focus-s), var(--input-focus-l));
+	box-shadow: 0 0 0 3px hsla(var(--input-focus-h), var(--input-focus-s), calc(var(--input-focus-l) + 40%), 0.8);
+	outline: 3px solid transparent;
+}
+
+.input:not(textarea) {
+	line-height: 1;
+	height: 2.25rem;
+}
+
+input[type=file],
+.input[type=file] {
+	font-size: 0.9em;
+	padding-top: 0.35rem;
+}
+
+.textarea.input,
+textarea.input {
+	resize: vertical;
+}
+
+.input[readonly] {
+	border-style: dotted;
+	cursor: not-allowed;
+	color: var(--text-grey25);
+}
+
+.input[disabled] {
+	--input-border: var(--text-grey25);
+	background-color: var(--text-grey75);
+	cursor: not-allowed;
+}
+
+input[type="radio"],
+.input[type="radio"] {
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: var(--off-white);
+	margin: 0;
+	font: inherit;
+	color: currentColor;
+	width: 1.15em;
+	height: 1.15em;
+	border: 0.15em solid currentColor;
+	border-radius: 50%;
+	transform: translateY(-0.075em);
+	display: grid;
+	place-content: center;
+}
+
+input[type="radio"]::before,
+.input[type="radio"]::before {
+	content: "";
+	width: 0.65em;
+	height: 0.65em;
+	border-radius: 50%;
+	transform: scale(0);
+	transition: 120ms transform ease-in-out;
+	box-shadow: inset 1em 1em var(--form-control-color);
+	background-color: CanvasText;
+}
+
+input[type="radio"]:checked::before,
+.input[type="radio"]:checked::before {
+	transform: scale(1);
+}
+
+input[type="radio"]:focus,
+.input[type="radio"]:focus {
+	outline: max(2px, 0.15em) solid currentColor;
+	outline-offset: max(2px, 0.15em);
+}
+
+/* Links */
+a, .link,
+a:link, .link:link,
+a:visited, .link:visited,
+a:focus, .link:focus,
+a:hover, .link:hover,
+a:active, .link:active {
+	position: relative;
+	padding: 0.35rem;
+  	padding-bottom: 0.01rem;
+}
+
+a::after, .link::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0.01em;
+	height: 0.15em;
+	width: 100%;
+	background: linear-gradient(110deg, var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
+	transition: height 0.25s cubic-bezier(.6,0,.4,1);
+}
+
+/* Details / Accordion */
+.details .summary {
+	cursor: pointer;
+}
+   
+.details > .summary::-webkit-details-marker {
+	display: none;
+}
+
+.details {
+	border: solid 0.1rem var(--accordion-border-colour);
+	border-radius: var(--border-radius-value);
+	box-shadow: var(--box-shadow1);
+}
+
+.details > .summary {
+	list-style: none;
+	border: solid 0.1rem var(--accordion-border-colour);
+	border-radius: var(--border-radius-value);
+	font-size: var(--fs0);
+	font-style: normal;
+	font-weight: 500;
+}
+
+.details > .summary:focus {
+	outline: none;
+}
+
+.details > .summary::before {
+	content: "";
+	display: inline-block;
+	width: 0.4rem;
+	height: 0.4rem;
+	border: solid 0.1rem var(--accordion-border-colour);
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+	margin-right: 0.6rem;
+	transform: rotate(-45deg) translate(-20%, 20%);
+	transition: transform 0.3s;
+}
+
+.details[open] > .summary {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-width: thin;
+}
+
+
+.details[open] > :not(.summary) {
+	border-left: solid 0.1rem var(--accordion-border-colour);
+	border-right: solid 0.1rem var(--accordion-border-colour);
+}
+
+
+.details[open] {
+	border-left: solid 0.1rem var(--accordion-border-colour);
+	border-right: solid 0.1rem var(--accordion-border-colour);
+	background: var(--colourPrimary--light-d);
+}
+
+.details[open] > :last-child {
+	border-bottom: solid 0.1rem var(--accordion-border-colour);
+	border-bottom-left-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+}
+
+.details[open] > .summary::before {
+	transform: rotate(135deg) translate(-20%, 20%);
+}
+   
+
+
+/* To hide */
+.hidden-all {
+	display: none;
+}
+
+.offscreen, .sr-only, .visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+	-webkit-clip-path: inset(50%);
+	clip-path: inset(50%);
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+/*-- End of classes --*/
+
+
+
+
+
+/* ------------- */
+/* Media Queries */
+/* ------------- */
+/* Tablet portrait only */
+@media (min-width: 600px) and (max-width: 899px) {}
+/* Tablet landscape only */
+@media (min-width: 900px) and (max-width: 1199px) {}
+/* Desktop only */
+@media (min-width: 1200px) and (max-width: 1799px) {}
+/* Big desktop upwards */
+@media (min-width: 1200px) {}
+
+/* Prevent scaling beyond this breakpoint */
+@media (min-width: 1800px) {
+	:root {
+		font-size: 32px;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--cocoa-brown: #1E1917;
+		--cocoa-brown: hsl(17, 13%, 10%);
+	}
+	html, body {
+		background-color: var(--cocoa-brown);
+	}
+}
+
+/*-- End of Media Queries --*/

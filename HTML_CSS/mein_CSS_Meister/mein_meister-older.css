@@ -1,0 +1,488 @@
+/* This is a master CSS for me to use across projects. */
+
+/*
+ * >>> From https://9elements.com/css-rule-order/css.pdf
+ * 
+	//SASS INHERITANCE
+	* @extend; @mixin;
+	* 
+	//GENERATED CONTENT
+	* content;
+	* 
+	//POSITION AND LAYOUT
+	* position; z-index; top; bottom; left; right; Flexbox properties; float; clear;
+	* 
+	//DISPLAY AND VISIBILITY
+	* display; opacity; transform;
+	* 
+	//CLIPPING
+	* overflow; clip;
+	* 
+	//ANIMATION
+	* animation; transition;
+	* 
+	//BOX MODEL (FROM OUTSIDE IN)
+	* margin; box-shadow; border; border-radius; box-sizing; width; height; padding;
+	* 
+	//BACKGROUND
+	* background; cursor;
+	* 
+	//TYPOGRAPHY
+	* font-size; line-height; font-family; font-weight; font-style; text-align; text-transform; word-spacing; colour;
+	* 
+	//PSEUDO-CLASSES & PSEUDO-ELEMENTS (NESTED RULES)
+	* :hover; :focus; :active; :before; :after; :first-child; :last-child;
+
+*/
+
+/* -------------------- */
+/* VARIABLES AND RESET */
+/* -------------------- */
+
+/* -------------- */
+/* Root variables */
+/* -------------- */
+:root {
+	/* Preferred colours variables */
+	--amethyst: #9966CC;
+	--amethyst: hsl(270, 50%, 60%);
+	--aqua-blue: #0AFFFF;
+	--aqua-blue: hsl(180, 100%, 52%);
+	--beige: #F5F5DC;
+	--beige: hsl(60, 56%, 91%);
+	--beryl: #56E9DB;
+	--beryl: hsl(174, 77%, 63%);
+	--blue: #0000FF;
+	--blue: hsl(240, 100%, 50%);
+	--bronze: #CD7F32;
+	--bronze: hsl(30, 61%, 50%);
+	--butter: #FFFFD2;
+	--butter: hsl(60, 100%, 91%);
+	--carbuncle: #943241;
+	--carbuncle: hsl(351, 49%, 39%);
+	--chalcedony: #7784B8;
+	--chalcedony: hsl(228, 31%, 59%);
+	--charcoal: #101820;
+	--charcoal: hsl(210, 35%, 9%);
+	--chrysolite: #5A6C20;
+	--chrysolite: hsl(74, 54%, 27%);
+	--chrysoprasus: #028255;
+	--chrysoprasus: hsl(159, 97%, 26%);
+	--cocoa-brown: #1E1917;
+	--cocoa-brown: hsl(17, 13%, 10%);
+	--darkblue: #00008B;
+	--darkblue: hsl(240, 100%, 27%);
+	--darlslategrey: #2F4F4F;
+	--darlslategrey: hsl(180, 25%, 25%);
+	--dimgrey: #696969;
+	--dimgrey: hsl(0, 0%, 41%);
+	--ebony: #3C3431;
+	--ebony: hsl(16, 10%, 21%);
+	--emerald-variant: #006B37;
+	--emerald-variant: hsl(151, 100%, 21%);
+	--emerald: #50C878;
+	--emerald: hsl(140,52%,55%);
+	--gold: #FFD700;
+	--gold: hsl(51, 100%, 50%);
+	--green: #00FF00;
+	--green: hsl(120, 100%, 50%);
+	--grey: #808080;
+	--grey: hsl(0, 0%, 50%);
+	--hotpink: #FF69B4;
+	--hotpink: hsl(330, 100%, 71%);
+	--indigo: #4B0082;
+	--indigo: hsl(275, 100%, 25%);
+	--ivory: #FFFFF0;
+	--ivory: hsl(60, 100%, 97%);
+	--jacinth: #FF3A03;
+	--jacinth: hsl(13, 100%, 51%);
+	--jasper-modern: #D73B3E;
+	--jasper-modern: hsl(359, 66%, 54%);
+	--jasper: #D05340;
+	--jasper: hsl(8, 61%, 53%);
+	--light-olive: #E7E8D1;
+	--light-olive: hsl(63, 33%, 86%);
+	--linen: #FAF0E6;
+	--linen: hsl(31, 68%, 94%);
+	--midnightblue: #191970;
+	--midnightblue: hsl(240, 64%, 27%);
+	--navy: #000080;
+	--navy: hsl(240, 100%, 25%);
+	--off-white: #F8F8F8;
+	--off-white: hsl(0, 0%, 97%);
+	--onyx: #0F0F0F;
+	--onyx: hsl(0, 0%, 6%);
+	--orange: #FFA500;
+	--orange: hsl(39, 100%, 50%);
+	--pearl: #EAE0C8;
+	--pearl: hsl(42, 45%, 85%);
+	--purple: #800080;
+	--purple: hsl(300, 100%, 25%);
+	--red: #FF0000;
+	--red: hsl(0, 100%, 50%);
+	--ruby: #E0115F;
+	--ruby: hsl(337, 86%, 47%);
+	--sapphire: #0F52BA;
+	--sapphire: hsl(216, 85%, 39%);
+	--sardius: #87210D;
+	--sardius: hsl(10, 82%, 29%);
+	--sardonyx: #E4433F;
+	--sardonyx: hsl(1, 75%, 57%);
+	--scarlet: #FF2400;
+	--scarlet: hsl(8, 100%, 50%);
+	--silver: #C0C0C0;
+	--silver: hsl(0, 0%, 75%);
+	--solarised-black: #073672;
+	--solarised-black: hsl(214, 88%, 24%);
+	--solarised-blue: #268BD2;
+	--solarised-blue: hsl(205, 69%, 49%);
+	--solarised-brblack: #002B36;
+	--solarised-brblack: hsl(192, 100%, 11%);
+	--solarised-brblue: #839496;
+	--solarised-brblue: hsl(186, 8%, 55%);
+	--solarised-brcyan: #93A1A1;
+	--solarised-brcyan: hsl(180, 7%, 60%);
+	--solarised-brgreen: #586E75;
+	--solarised-brgreen: hsl(194, 14%, 40%);
+	--solarised-brmagenta: #6C71C4;
+	--solarised-brmagenta: hsl(237, 43%, 60%);
+	--solarised-brred: #CB4B16;
+	--solarised-brred: hsl(18, 80%, 44%);
+	--solarised-brwhite: #FDF6E3;
+	--solarised-brwhite: hsl(44, 87%, 94%);
+	--solarised-bryellow: #657B83;
+	--solarised-bryellow: hsl(196, 13%, 45%);
+	--solarised-cyan: #2AA198;
+	--solarised-cyan: hsl(175, 59%, 40%);
+	--solarised-green: #859900;
+	--solarised-green: hsl(68, 100%, 30%);
+	--solarised-magenta: #D33682;
+	--solarised-magenta: hsl(331, 64%, 52%);
+	--solarised-red: #DC322F;
+	--solarised-red: hsl(1, 71%, 52%);
+	--solarised-white: #EEE8D5;
+	--solarised-white: hsl(46, 42%, 88%);
+	--solarised-yellow: #B58900;
+	--solarised-yellow: hsl(45, 100%, 35%);
+	--topaz: #FFC87C;
+	--topaz: hsl(35, 100%, 74%);
+	--violet: #EE82EE;
+	--violet: hsl(300, 76%, 72%);
+	--white: #FFFFFF;
+	--white: hsl(0, 0%, 100%);
+	--yellow: #FFFF00;
+	--yellow: hsl(60, 100%, 50%);
+	/*-- End of preferred colours --*/
+	
+    /* Colour themes */
+	/* >>> Building a colour scheme. https://web.dev/building-a-colour-scheme/ */
+    --themeW: hsl();
+    --themeW-hue: ...;
+    --themeW-saturation: ...;
+    --themeW-lightness: ...;
+    /* light */
+	--themeW-light: hsl(var(--themeW-hue) var(--themeW-saturation) var(--themeW-lightness));
+    --text1-light: hsl(var(--themeW-hue) var(--themeW-saturation) 10%);
+    --text2-light: hsl(var(--themeW-hue) 30% 30%);
+    --surface1-light: hsl(var(--themeW-hue) 25% 90%);
+    --surface2-light: hsl(var(--themeW-hue) 20% 99%);
+    --surface3-light: hsl(var(--themeW-hue) 20% 92%);
+    --surface4-light: hsl(var(--themeW-hue) 20% 85%);
+    --surface-shadow-light: var(--themeW-hue) 10% calc(var(--themeW-lightness) / 5);
+    --shadow-strength-light: .02;
+    /* dark */
+    --themeW-dark: hsl(var(--themeW-hue) calc(var(--themeW-saturation) / 2) calc(var(--themeW-lightness) / 1.5));
+    --text1-dark: hsl(var(--themeW-hue) 15% 85%);
+    --text2-dark: hsl(var(--themeW-hue) 5% 65%);
+    --surface1-dark: hsl(var(--themeW-hue) 10% 10%);
+    --surface2-dark: hsl(var(--themeW-hue) 10% 15%);
+    --surface3-dark: hsl(var(--themeW-hue) 5%  20%);
+    --surface4-dark: hsl(var(--themeW-hue) 5% 25%);
+    --surface-shadow-dark: var(--themeW-hue) 50% 3%;
+    --shadow-strength-dark: .8;
+    /* dim */
+    --themeW-dim: hsl(var(--themeW-hue) calc(var(--themeW-saturation) / 1.25) calc(var(--themeW-lightness) / 1.25));
+    --text1-dim: hsl(var(--themeW-hue) 15% 75%);
+    --text2-dim: hsl(var(--themeW-hue) 10% 61%);
+    --surface1-dim: hsl(var(--themeW-hue) 10% 20%);
+    --surface2-dim: hsl(var(--themeW-hue) 10% 25%);
+    --surface3-dim: hsl(var(--themeW-hue) 5%  30%);
+    --surface4-dim: hsl(var(--themeW-hue) 5% 35%);
+    --surface-shadow-dim: var(--themeW-hue) 30% 13%;
+    --shadow-strength-dim: .2;
+
+	/* >>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-colour-theming/ */
+	--theme: hsl(...);
+	--theme-h: ...;
+	--theme-s: ...;
+	--theme-l: ...;
+
+	--theme: hsl(var(--theme-h), var(--theme-s), var(--theme-l));
+	--lighten-percentage: 20%;
+	--darken-percentage: 15%;
+
+	--theme--light: hsl(var(--theme-h), var(--theme-s), calc(var(--theme-l) + var(--lighten-percentage)));
+	--theme--light-l: hsl(var(--theme-h), calc(var(--theme-s) + var(--lighten-percentage)), calc(var(--theme-l) + var(--lighten-percentage)));
+	--theme--light-d: hsl(var(--theme-h), calc(var(--theme-s) - var(--darken-percentage)), calc(var(--theme-l) + var(--lighten-percentage)));
+
+	--theme--dark: hsl(var(--theme-h), var(--theme-s), calc(var(--theme-l) - var(--darken-percentage)));
+	--theme--dark-l: hsl(var(--theme-h), calc(var(--theme-s) + var(--lighten-percentage)), calc(var(--theme-l) - var(--darken-percentage)));
+	--theme--dark-l: hsl(var(--theme-h), calc(var(--theme-s) - var(--darken-percentage)), calc(var(--theme-l) - var(--darken-percentage)));
+
+	--theme--complement: hsl(calc(var(--theme-h) + 180), var(--theme-s), var(--theme-l));
+	--theme--complement--split1: hsl(calc(var(--theme-h) + 150), var(--theme-s), var(--theme-l));
+	--theme--complement--split2: hsl(calc(var(--theme-h) + 210), var(--theme-s), var(--theme-l));
+	--theme--triad1: hsl(calc(var(--theme-h) + 120), var(--theme-s), var(--theme-l));
+	--theme--triad2: hsl(calc(var(--theme-h) + 240), var(--theme-s), var(--theme-l));
+	--theme--tetrad1: hsl(calc(var(--theme-h) + 90), var(--theme-s), var(--theme-l));
+	--theme--tetrad2: hsl(calc(var(--theme-h) + 180), var(--theme-s), var(--theme-l));
+	--theme--tetrad3: hsl(calc(var(--theme-h) + 270), var(--theme-s), var(--theme-l));
+	--theme--analogue1: hsl(calc(var(--theme-h) + 30), var(--theme-s), var(--theme-l));
+	--theme--analogue2: hsl(calc(var(--theme-h) + 60), var(--theme-s), var(--theme-l));
+	--theme--analogue3: hsl(calc(var(--theme-h) + 90), var(--theme-s), var(--theme-l));
+
+	--contrastThreshold: 60%;
+	--theme-background: var(--theme);
+	--switch: calc((var(--theme-l) - var(--contrastThreshold)) * -100);
+	--theme-text-color: hsl(0, 0%, var(--switch));
+	--text-color--lighter1: hsl(var(--theme-h), var(--theme-s), var(--darken-percentage));
+	--text-color--lighter2: hsl(var(--theme-h), calc(var(--theme-s) + var(--lighten-percentage)), var(--darken-percentage));
+	--text-color--darker1: hsl(var(--theme-h), var(--theme-s), var(--lighten-percentage));
+	--text-color--darker2: hsl(var(--theme-h), calc(var(--theme-s) - var(--darken-percentage)), var(--lighten-percentage));
+	/*-- End of colour themes  --*/
+
+
+    /* Fonts */
+	--font-title: Garamond, Georgia, Palatino, serif;
+	--font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', Helvetica, Arial, Poppins, Verdana, Tahoma, sans-serif;
+	--custom-font-size-1: calc(1vw + 1vh + .5vmin);
+	--custom-font-size-2: calc(0.9rem + 1vw);
+	--custom-font-size-3: calc(15px + 0.390625vw);
+	--custom-font-size-4: calc(1rem + ((1vw - 3px) * 0.6173));
+	--custom-font-size-5: calc(1rem + (1.5 - 1) * ((100vw - 21rem) / (35 - 21)));
+	--min-font-size: 16;
+    --max-font-size: 32;
+    --min-viewport-width: 320;
+    --max-viewport-width: 2560;
+    --custom-font-size-6: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
+	min-height: 0vw;
+	--golden-ratio: 1.61803398875;
+	/* >>> Modular scale: https://every-layout.dev/rudiments/modular-scale/ */
+	--fs-5: calc(var(--fs-4) / var(--golden-ratio));
+	--fs-4: calc(var(--fs-3) / var(--golden-ratio));
+	--fs-3: calc(var(--fs-2) / var(--golden-ratio));
+	--fs-2: calc(var(--fs-1) / var(--golden-ratio));
+	--fs-1: calc(var(--fs0) / var(--golden-ratio));
+	--fs0: var(--custom-font-size-N);
+	--fs1: calc(var(--fs0) * var(--golden-ratio));
+	--fs2: calc(var(--fs1) * var(--golden-ratio));
+	--fs3: calc(var(--fs2) * var(--golden-ratio));
+	--fs4: calc(var(--fs3) * var(--golden-ratio));
+	--fs5: calc(var(--fs4) * var(--golden-ratio));
+	/*-- End of fonts --*/
+}
+
+/*-- End of root variables --*/
+
+
+/* ------ */
+/* Resets */
+/* ------ */
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+	border: 0;
+	background-repeat: no-repeat;
+    max-width: 100%;
+    overflow-x: hidden;
+    position: relative;
+}
+
+html {
+    font-size: var(--custom-font-size-N);
+	scroll-behavior: smooth;
+}
+
+html, body {
+	height: 100%;
+	min-height: 100%;
+}
+
+body {
+	line-height: var(--golden-ratio);
+	line-height: calc(3px + 2.5ex + 3px);
+	line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
+	-webkit-font-smoothing: antialiased;
+}
+
+p {
+	max-width: 65ch;
+}
+
+/* HTML5 blocks - needed in older browsers */
+article, aside, figcaption, figure, footer, header, nav, section {
+	display: block;
+}
+
+ol, ul {
+	list-style: none;
+	list-style-position: unset;
+}
+
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+	text-decoration: none;
+	color: inherit;
+	display: inline-block;
+	background-color: transparent;
+}
+
+img, picture, video, canvas, svg  {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border-style: none;
+}
+
+svg {
+	fill: currentColor;
+}
+
+input, button, textarea, optgroup, select {
+	font: inherit;
+	font-size: 100%;
+	vertical-align: middle;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+}
+
+input[type="button"] {
+	cursor: pointer;
+}
+
+button {
+	border: none;
+	border-radius: 0.4rem;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+p, li, h1, h2, h3, h4, h5, h6 {
+	overflow-wrap: break-word;
+	hyphens: auto;
+}
+
+sup, sub {
+	line-height: 0;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/* https://htmlandcssguidebook.com/css/link-states/ */
+/* The best link order is default, visited, hover, focus, then active. You can remember this order using a handy mnemonic device: "Very Hungry Feline Acrobats".
+A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
+*/
+
+.button {
+	display: inline-block;
+	/* display: inline-flex;
+	align-items: center;
+	justify-content: center; */
+	text-align: center;
+	text-decoration: none;
+	margin: 2px 0;
+	border: 2px solid transparent;
+	-webkit-border-radius: 0.4rem;
+	-moz-border-radius: 0.4rem;
+	border-radius: 0.4rem;
+	padding: 0.5rem 1rem;
+	min-width: 10ch;
+	min-height: 44px;
+	color: inherit;
+	background-color: inherit;
+	outline: solid transparent;
+	-webkit-transition: all 0.4s;
+	-moz-transition: all 0.4s;
+	-o-transition: all 0.4s;
+	transition: all 0.4s;
+	cursor: pointer;
+}
+
+.button:visited {
+	font-weight: bold;
+}
+
+.button:hover {
+	color: inherit;
+	border-color: inherit;
+	background-color: inherit;
+	opacity: 0.5;
+}
+
+.button:focus {
+	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
+}
+
+.button:active {
+	color: inherit;
+	transform: translateY(1px);
+	filter: saturate(150%);
+}
+
+
+.offscreen {
+	position: absolute;
+	white-space: nowrap;
+	border: 0;
+	clip-path: inset(50%);
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+}
+
+/*-- End of Resets --*/
+
+
+
+
+
+/* ------------- */
+/* Media Queries */
+/* ------------- */
+/* Tablet portrait only */
+@media (min-width: 600px) and (max-width: 899px) {}
+/* Tablet landscape only */
+@media (min-width: 900px) and (max-width: 1199px) {}
+/* Desktop only */
+@media (min-width: 1200px) and (max-width: 1799px) {}
+/* Big desktop upwards */
+@media (min-width: 1200px) {}
+
+/* Prevent scaling beyond this breakpoint */
+@media (min-width: 1800px) {
+	:root {
+		font-size: 32px;
+	}
+}
+
+/*-- End of Media Queries --*/
