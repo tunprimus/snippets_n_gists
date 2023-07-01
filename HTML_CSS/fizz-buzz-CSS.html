@@ -1,0 +1,49 @@
+<!-- Fizz Buzz in CSS - https://logicalmoon.com/2020/01/fizz-buzz-in-css/ -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fizz Buzz in CSS</title>
+  <style>
+    li:nth-child(3n)::before {
+      content: "fizz";
+      color: red;
+    }
+
+    li:nth-child(5n)::after {
+      content: "buzz";
+      color: blue;
+    }
+
+    li:nth-child(3n) > span,
+    li:nth-child(5n) > span {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li><span>1</span></li>
+    <li><span>2</span></li>
+    <li><span>3</span></li>
+    <li><span>4</span></li>
+    <li><span>5</span></li>
+    <li><span>6</span></li>
+    <li><span>7</span></li>
+    <li><span>8</span></li>
+    <li><span>9</span></li>
+    <li><span>10</span></li>
+    <li><span>11</span></li>
+    <li><span>12</span></li>
+    <li><span>13</span></li>
+    <li><span>14</span></li>
+    <li><span>15</span></li>
+    <li><span>16</span></li>
+    <li><span>17</span></li>
+    <li><span>18</span></li>
+    <li><span>19</span></li>
+    <li><span>20</span></li>
+  </ul>
+</body>
+</html>
