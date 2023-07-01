@@ -91,7 +91,7 @@ function jsGcd(number1, number2){
           inCommon.push(i);
       }
   }
-  return inCommon.sort((a,b)=> b - a)[0];
+  return inCommon.sort((a, b) => b - a)[0];
 }
 
 function gcd(number1, number2){
