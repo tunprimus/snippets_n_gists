@@ -1,0 +1,143 @@
+<!-- Dark mode with 1(or few) line of CSS - https://ksengine.hashnode.dev/dark-mode-with-1or-few-line-of-css -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dark mode with 1(or few) line of CSS</title>
+  <style>
+    .dark,
+    .dark img,
+    .dark picture,
+    .dark video,
+    .dark canvas {
+      filter: invert(100%) hue-rotate(180deg); /* This is the line */
+    }
+
+    .nofilter {
+      filter: none !important;
+    }
+
+    html,
+    img,
+    picture,
+    video,
+    canvas {
+      transition: filter 0.3s ease-in-out;
+    }
+
+    html,
+    body {
+      color: #222222;
+      background-color: #FFFFFF;
+      height: 100%;
+    }
+
+    body {
+      padding: 1rem;
+    }
+
+    button {
+      background: transparent;
+      border: transparent;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+  </style>
+</head>
+<body>
+  <main>
+    <button onclick="toggleDark()">
+      <svg aria-hidden="true" data-prefix="fas" data-icon="moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="height: 2rem; width: 2rem;" class="svg-inline--fa fa-moon">
+        <path fill="currentColor" d="M32 256C32 132.2 132.3 32 255.8 32c11.36 0 29.7 1.668 40.9 3.746 9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3 9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480 132.1 480 32 379.6 32 256z"></path>
+      </svg>
+    </button>
+    
+    <h1 align="center">Hi 👋, I'm Kavindu Santhusa</h1>
+    <p align="center">A Sri Lankan 17 years old student.</p>
+    <ul>
+      <li>
+        <p>👋 Hi, I’m @ksenginew</p>
+      </li>
+      <li>
+        <p>👀 I’m interested in coding</p>
+      </li>
+      <li>
+        <p>🌱 I’m currently learning <strong>CSS, JavaScript, Typescript</strong></p>
+      </li>
+      <li>
+        <p>💞️ I’m looking to collaborate on cool projects</p>
+      </li>
+      <li>
+        <p>📫 How to reach me <strong><a href="mailto:ksengine.github@gmail.com">ksengine.github@gmail.com</a></strong></p>
+      </li>
+      <li>
+        <p>⚡ Fun Fact</p>
+        <img src="https://readme-jokes.vercel.app/api" alt="Jokes card" />
+      </li>
+    </ul>
+    <table border>
+      <tr>
+        <th>
+          <h3 align="left">Connect with me:</h3>
+        </th>
+        <th>
+          <h3 align="left">Languages and Tools:</h3>
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <p align="left">
+            <a href="https://github.com/ksenginew" target="blank"><img class="nofilter" align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/github.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://codepen.io/ksengine" target="blank"><img class="nofilter" align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/codepen.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://dev.to/ksengine" target="blank"><img class="nofilter" align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/dev-dot-to.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://twitter.com/ksengine" target="blank"><img class="nofilter" align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://linkedin.com/in/ksengine" target="blank"><img class="nofilter" align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://stackoverflow.com/users/ksengine" target="blank"><img class="nofilter" align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/stack-overflow.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://codesandbox.com/ksengine" target="blank"><img class="nofilter" align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/codesandbox.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://kaggle.com/ksengine" target="blank"><img class="nofilter" align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/kaggle.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://medium.com/@ksengine" target="blank"><img class="nofilter" align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/medium.svg" alt="@ksengine" height="30" width="40" /></a>
+            <a href="https://www.codechef.com/users/ksengine" target="blank"><img class="nofilter" align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.1.0/icons/codechef.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://www.hackerrank.com/ksengine" target="blank"><img class="nofilter" align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hackerrank.svg" alt="ksengine" height="30" width="40" /></a>
+            <a href="https://codeforces.com/profile/kse" target="blank"><img class="nofilter" align="center" src="https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/codeforces.svg" alt="kse" height="30" width="40" /></a>
+          </p>
+        </td>
+        <td>
+          <p align="left">
+            <a href="https://www.w3schools.com/css/" target="_blank"><img class="nofilter" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40" /></a>
+            <a href="https://git-scm.com/" target="_blank"> <img class="nofilter" src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40" /></a>
+            <a href="https://golang.org" target="_blank"> <img class="nofilter" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg" alt="go" width="40" height="40" /></a>
+            <a href="https://www.w3.org/html/" target="_blank"><img class="nofilter" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40" /></a>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank"><img class="nofilter" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40" /> </a> <a href="https://jekyllrb.com/" target="_blank"><img class="nofilter" src="https://www.vectorlogo.zone/logos/jekyllrb/jekyllrb-icon.svg" alt="jekyll" width="40" height="40" /></a>
+            <a href="https://jestjs.io" target="_blank"><img class="nofilter" src="https://www.vectorlogo.zone/logos/jestjsio/jestjsio-icon.svg" alt="jest" width="40" height="40" /></a>
+            <a href="https://nodejs.org" target="_blank"><img class="nofilter" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40" /></a>
+            <a href="https://www.python.org" target="_blank"><img class="nofilter" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40" /></a>
+            <a href="https://sass-lang.com" target="_blank"><img class="nofilter" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/sass/sass-original.svg" alt="sass" width="40" height="40" /></a>
+            <a href="https://www.typescriptlang.org/" target="_blank"><img class="nofilter" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40" /></a>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </main>
+  <!-- JavaScript Here -->
+  <script>
+    let toggleDark = () => {
+      let result = document.documentElement.classList.toggle("dark");
+      localStorage.theme = result ? "dark" : "light";
+    };
+
+    if (localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
+  </script>
+</body>
+</html>
