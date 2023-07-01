@@ -44,8 +44,8 @@
 	--cocoa-brown: hsl(17, 13%, 10%);
 	--darkblue: #00008B;
 	--darkblue: hsl(240, 100%, 27%);
-	--darlslategrey: #2F4F4F;
-	--darlslategrey: hsl(180, 25%, 25%);
+	--darkslategrey: #2F4F4F;
+	--darkslategrey: hsl(180, 25%, 25%);
 	--dimgrey: #696969;
 	--dimgrey: hsl(0, 0%, 41%);
 	--ebony: #3C3431;
@@ -156,6 +156,9 @@
 	--white: hsl(0, 0%, 100%);
 	--yellow: #FFFF00;
 	--yellow: hsl(60, 100%, 50%);
+
+	/* Extending rainbow-like colours to 12 */
+	--twelve-colour-combo: var(var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
 	/*-- End of preferred colours --*/
 	
     /* Colour themes */
@@ -239,10 +242,10 @@
 	--custom-font-size-4: calc(1rem + ((1vw - 3px) * 0.6173));
 	--custom-font-size-5: calc(1rem + (1.5 - 1) * ((100vw - 21rem) / (35 - 21)));
 	--min-font-size: 16;
-    --max-font-size: 32;
-    --min-viewport-width: 320;
-    --max-viewport-width: 2560;
-    --custom-font-size-6: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
+  --max-font-size: 32;
+  --min-viewport-width: 320;
+  --max-viewport-width: 2560;
+  --custom-font-size-6: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
 	min-height: 0vw;
 	
 	--golden-ratio: 1.618;
@@ -304,25 +307,25 @@
 *,
 *::before,
 *::after {
-    -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 	border: 0;
 	background-repeat: no-repeat;
-    max-width: 100%;
-    overflow-x: hidden;
-    position: relative;
+  max-width: 100%;
+  overflow-x: hidden;
+  position: relative;
 }
 
 html {
-    font-size: var(--custom-font-size-N);
+  font-size: var(--custom-font-size-N);
 	scroll-behavior: smooth;
 	text-rendering: optimizeLegibility;
 	-webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html, body {
@@ -411,6 +414,7 @@ button {
 
 p, li, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
+	-webkit-hyphens: auto;
 	hyphens: auto;
 	font-weight: 400;
 }
@@ -607,7 +611,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button:focus {
 	outline-style: solid;
-    outline-color: transparent;
+  outline-color: transparent;
 	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
 }
 
@@ -635,7 +639,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button__icon--end {
 	margin-right: 0;
-    margin-left: 0.5em;
+  margin-left: 0.5em;
 }
 
 
@@ -648,8 +652,8 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .icon-button__icon {
 	width: 100%;
-    height: 100%;
-    fill: currentColor;
+  height: 100%;
+  fill: currentColor;
 }
 
 /* Inputs */
@@ -747,7 +751,7 @@ a:hover, .link:hover,
 a:active, .link:active {
 	position: relative;
 	padding: 0.35rem;
-  	padding-bottom: 0.01rem;
+  padding-bottom: 0.01rem;
 }
 
 a::after, .link::after {
@@ -765,7 +769,7 @@ a::after, .link::after {
 .details .summary {
 	cursor: pointer;
 }
-   
+
 .details > .summary::-webkit-details-marker {
 	display: none;
 }
@@ -830,7 +834,7 @@ a::after, .link::after {
 .details[open] > .summary::before {
 	transform: rotate(135deg) translate(-20%, 20%);
 }
-   
+
 
 
 /* To hide */
