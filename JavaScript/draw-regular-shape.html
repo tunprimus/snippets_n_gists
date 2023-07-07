@@ -9,22 +9,23 @@
 </head>
 <body>
   <canvas></canvas>
+  <canvas></canvas>
 
   <!-- JavaScript Here -->
   <script>
-    const canvas = document.querySelector('canvas');
-    canvas.width = 400;
-    canvas.height = 200;
+    const canvas0 = document.querySelectorAll('canvas')[0];
+    canvas0.width = 400;
+    canvas0.height = 200;
 
-    const ctx = canvas.getContext('2d');
-    const cx = 200;
-    const cy = 100;
+    const ctx0 = canvas0.getContext('2d');
+    const cx0 = 200;
+    const cy0 = 100;
 
     // Set the radius of the hexagon
-    const radius = 50;
+    const radius0 = 50;
 
     // Move the canvas to the centre position
-    ctx.translate(cx, cy);
+    ctx0.translate(cx0, cy0);
 
     for (let i = 0; i < 6; i++) {
       // Calculate the rotation
@@ -32,16 +33,16 @@
 
       // For the first point move to
       if (i === 0) {
-        ctx.moveTo(radius * Math.cos(rotation), radius * Math.sin(rotation));
+        ctx0.moveTo(radius0 * Math.cos(rotation), radius0 * Math.sin(rotation));
       } else {
         // For the rest draw a line
-        ctx.lineTo(radius * Math.cos(rotation), radius * Math.sin(rotation));
+        ctx0.lineTo(radius0 * Math.cos(rotation), radius0 * Math.sin(rotation));
       }
     }
 
     // Close path and stroke it
-    ctx.closePath();
-    ctx.stroke();
+    ctx0.closePath();
+    ctx0.stroke();
 
     // Function to draw any polygon
     const drawShape = (context, x, y, r, sides) => {
@@ -67,6 +68,15 @@
       // Reset the translate position
       context.resetTransform();
     }
+
+    const canvas1 = document.querySelectorAll('canvas')[1];
+    // canvas1.width = 300;
+    // canvas1.height = 300;
+    const ctx1 = canvas1.getContext('2d');
+
+    drawShape(ctx1, 100, 100, 50, 3);
+    drawShape(ctx1, 225, 100, 50, 7);
+    drawShape(ctx1, 200, 100, 50, 4);
   </script>
 </body>
 </html>
