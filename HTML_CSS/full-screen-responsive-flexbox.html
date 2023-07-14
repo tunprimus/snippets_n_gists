@@ -1,0 +1,213 @@
+<!-- How to Build a Full-Screen Responsive Page With Flexbox - https://webdesign.tutsplus.com/how-to-build-a-full-screen-responsive-page-with-flexbox--cms-32086t -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Build a Full-Screen Responsive Page With Flexbox</title>
+  <link href="https://unpkg.com/ionicons@4.4.6/dist/css/ionicons.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --main-white-colour: #F2F2F2;
+      --main-black-colour: black;
+      --main-purple-colour: #9E89B8;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      color: white;
+      font: 16px/1.5 "Dosis", sans-serif;
+    }
+
+    button {
+      background: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* ---------- CONTAINER ---------- */
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .wrapper > * {
+      padding: 20px;
+    }
+
+    /* ---------- HEADER ---------- */
+    .page-header {
+      background: #592E83;
+      background: var(--main-white-colour);
+      color: var(--main-black-colour);
+    }
+
+    .page-header nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .page-header ul {
+      display: flex;
+      flex-wrap: wrap;
+      order: 1;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .page-header ul li:not(:last-child) {
+      padding-right: 15px;
+    }
+
+    .page-header .cta-contact {
+      font-family: inherit;
+      font-size: 1.2rem;
+      padding: 5px 18px;
+      border: 1px solid;
+      border-radius: 5px;
+    }
+
+    /* ---------- MAIN ---------- */
+    .page-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
+      min-height: 350px;
+      background: #331E4D;
+      background: var(--main-purple-colour) url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/city.jpg) no-repeat
+        center / cover;
+      background-blend-mode: luminosity;
+      color: var(--main-white-colour);
+    }
+
+    .page-main div {
+      max-width: 500px;
+    }
+
+    .page-main h1 {
+      margin-bottom: 20px;
+    }
+
+    .page-main p + p {
+      margin-top: 10px;
+    }
+
+    /* ---------- FOOTER ---------- */
+    .page-footer {
+      display: flex;
+      flex-direction: column-reverse;
+      background: #9984D4;
+      background: var(--main-white-colour);
+      color: var(--main-black-colour);
+    }
+
+    .page-footer ul {
+      display: flex;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .page-footer ul li:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    /* ---------- MEDIA QUERIES ---------- */
+    @media screen and (min-width: 550px) {
+      .page-header ul {
+        width: auto;
+        margin-top: 0;
+      }
+
+      .page-header .cta-contact {
+        order: 1;
+      }
+
+      .page-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .page-footer ul {
+        margin-bottom: 0;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      body {
+        font-size: 18px;
+      }
+
+      .page-main {
+        padding-left: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header class="page-header">
+      <nav>
+        <h2 class="logo">LOGO</h2>
+        <ul>
+          <li href="">Work</li>
+          <li href="">Services</li>
+          <li href="">Team</li>
+          <li href="">Careers</li>
+        </ul>
+        <button class="cta-contact">Get in touch</button>
+      </nav>
+    </header>
+    <main class="page-main">
+      <div>
+        <h1>We are here to help you</h1>
+        <p>One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.</p>
+        <p>It wasn't a dream. His room, a proper human.</p>
+      </div>
+    </main>
+    <footer class="page-footer">
+      <small>© Copyright 2018. All rights reserved.</small>
+      <ul>
+        <li>
+          <a href="" target="_blank">
+            <i class="icon ion-logo-facebook"></i>
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank">
+            <i class="icon ion-logo-twitter"></i>
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank">
+            <i class="icon ion-logo-linkedin"></i>
+          </a>
+        </li>
+        <li>
+          <a href="" target="_blank">
+            <i class="icon ion-logo-github"></i>
+          </a>
+        </li>
+      </ul>
+    </footer>
+  </div>
+</body>
+</html>
