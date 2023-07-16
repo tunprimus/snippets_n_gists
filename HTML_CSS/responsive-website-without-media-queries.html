@@ -30,6 +30,7 @@
       height: 100px;
       background: orange;
     }
+
     /* --- Responsive flex: using flex & flex-wrap - control number of items --- */
     .responsive-flex2 {
       display: flex;
@@ -42,6 +43,7 @@
       flex: max(400px, (100% - 20px) / 3); /* and this */
       background: yellow;
     }
+
     /* --- Responsive flex: using flex & flex-wrap - control number of items + optimised gap --- */
     .responsive-flex3 {
       display: flex;
@@ -54,6 +56,7 @@
       flex: max(400px, 100% / 4 + 0.1%); /* and this */
       background: green;
     }
+
     /* --- CSS grid responsive: using auto-fit & minmax + optimised gap --- */
     .responsive-grid2 {
       --wide: 400px;
@@ -68,6 +71,7 @@
       height: 100px;
       background: blue;
     }
+
     /* --- CSS grid responsive: using auto-fit & minmax + optimised gap + control shrink effect --- */
     .responsive-grid3 {
       --wide: 400px;
@@ -82,6 +86,7 @@
       height: 100px;
       background: indigo;
     }
+
     /* --- CSS grid responsive: using auto-fit & minmax + optimised gap + control shrink effect + control wrap --- */
     .responsive-grid4 {
       --wide: 400px;
@@ -96,6 +101,7 @@
       height: 100px;
       background: violet;
     }
+
     /* --- CSS grid responsive: using auto-fit, minmax & clamp + moving from N to M columns --- */
     .responsive-grid5 {
       --wide: 400px;
@@ -111,6 +117,7 @@
       height: 100px;
       background: firebrick;
     }
+
     /* --- CSS grid responsive: using auto-fill, minmax & clamp + moving from N to M columns to 1 column --- */
     .responsive-grid6 {
       /* first breakpoint */
@@ -129,6 +136,7 @@
       height: 100px;
       background: chocolate;
     }
+
     /* --- CSS grid responsive: using auto-fill, minmax & clamp + moving from N to M columns to 1 column + extra --- */
     .responsive-grid7 {
       /* first breakpoint */
@@ -161,6 +169,7 @@
     .extra > div {
       background: chartreuse;
     }
+
     /* --- CSS grid responsive: using auto-fill, minmax & clamp + moving from N to M to P columns to 1 column --- */
     .responsive-grid8 {
       /* first breakpoint */
@@ -199,6 +208,7 @@
     .extra2 > div {
       background: darkmagenta;
     }
+
     /* --- CSS grid responsive: using auto-fill, minmax & clamp + container queries  --- */
     .responsive-grid9 {
       /* first breakpoint */
@@ -357,6 +367,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fit & minmax -->
     <!-- Similar to the previous example, the repeat(auto-fit,minmax(400px,1fr)) will define the base width and we will have a similar wrapping behaviour. -->
     <!-- ✔️ Easy to use, only 1 line of code is required
@@ -375,6 +386,7 @@
       </div>
     </section>
     <br>
+
     <!-- Responsive flex: using flex & flex-wrap - control number of items -->
     <!-- In our first example, let's change flex: 400px to flex: max(400px, (100% - 20px)/3). Resize the screen and you will notice that each row will not have more than 3 items (even for a large screen width). 
     The logic is easy. When the screen width increase, 100%/3 will be bigger than 400px so it's the max value that will get used. We cannot have more than 3 items per row if all of them have a width equal to 100%/3.
@@ -394,6 +406,7 @@
       </div>
     </section>
     <br>
+
     <!-- Responsive flex: using flex & flex-wrap - control number of items + optimised gap -->
     <!-- We can still optimise the formula to remove the gap and use max(400px, 100%/(N + 1) + 0.1%). We tell the browser that each item will be equal to 100%/(N + 1) so N + 1 items per row but we add a tiny percentage (the 0.1%) thus one of the items will wrap and we end with only N items per row! -->
     <!-- ✔️ Now we can control the maximum number of items per row. -->
@@ -408,6 +421,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fit & minmax + optimised gap -->
     <!-- We optimise the formula to remove the gap and use max(400px, 100%/(N + 1) + 0.1%). We tell the browser that each item will be equal to 100%/(N + 1) so N + 1 items per row but we add a tiny percentage (the 0.1%) thus one of the items will wrap and we end with only N items per row! -->
     <!-- ✔️ Now we can control the maximum number of items per row. -->
@@ -422,6 +436,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fit & minmax + optimised gap + control shrink effect -->
     <!-- Using CSS grid we may have an overflow if the base width is bigger than the container width unlike with Flexbox where we  have the flex-shrink.
     To overcome this we change max(400px, 100%/(N + 1) + 0.1%) to clamp(100%/(N + 1) + 0.1%, 400px, 100%).
@@ -440,6 +455,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fit & minmax + optimised gap + control shrink effect + control wrap -->
     <!-- In all the previous examples, we have no control over the wrap. We don't know when it will happen. It depends on the base width, the gap, the container width, etc
 
@@ -465,6 +481,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fit, minmax & clamp + moving from N to M columns -->
     <!-- We simply update our clamp() function like below:
     clamp(100%/(N + 1) + 0.1%, (400px - 100vw)*1000, 100%/(M + 1) + 0.1%)
@@ -483,6 +500,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fill, minmax & clamp + moving from N to M columns to 1 column -->
     <!-- We can do this by nesting clamp() functions like the below:
     clamp(clamp(100%/(N + 1) + 0.1%, (W1 - 100vw)*1000,100%/(M + 1) + 0.1%), (W2 - 100vw)*1000, 100%)
@@ -507,6 +525,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fill, minmax & clamp + moving from N to M columns to 1 column + extra -->
     <!-- We did 2 media queries using only one CSS declaration! Not only this, but we can easily adjust that declaration using CSS variables which means that we can update the logic for different containers easily.
     How many media queries until now? well, I stopped the count ...
@@ -537,6 +556,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fill, minmax & clamp + moving from N to M to P columns to 1 column -->
     <!-- We have our responsive design without any single media queries -->
     <!-- ✔️ Only one line of code
@@ -569,6 +589,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fill, minmax & clamp + container queries -->
     <!-- Everyone is excited to use this new feature that considers the width of the element instead of the screen to create media queries but no need to wait for it.
 
@@ -597,6 +618,7 @@
       </div>
     </section>
     <br>
+
     <!-- CSS grid responsive: using auto-fill, minmax & clamp + background colour change -->
     <!-- I will end this post with a final trick that allows you to change the colouration of your items without using media queries as well.
     We consider 3 gradient layers plus a background-color. The size of each gradient is defined using one of the breakpoints. If calc() is negative then the gradient will not show. If calc() is positive then the size will also be positive and thanks to the repeat feature, it will cover all the area.
@@ -630,6 +652,7 @@
       </div>
     </section>
     <br>
+    
     <!-- CSS grid responsive: using auto-fill, minmax & clamp + background colour change + container width -->
     <!-- To make the colouration work based on the container width, we update the code slightly and use a pseudo-element that we position relatively to the container and we clip the overflow -->
     <section class="section">
