@@ -243,11 +243,21 @@
 	--custom-font-size-3: calc(15px + 0.390625vw);
 	--custom-font-size-4: calc(1rem + ((1vw - 3px) * 0.6173));
 	--custom-font-size-5: calc(1rem + (1.5 - 1) * ((100vw - 21rem) / (35 - 21)));
+	/* https://websemantics.uk/tools/responsive-font-calculator/
+	font-size  = calc(ZZ + ((1vw - XX) * YY))
+	Where   XX = min_viewport / 100
+	        YY = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
+	           = 100 * font_size_difference / viewport_difference
+					ZZ = Minimum font-size stated in REM
+
+	Equivalent in longhand
+	font-size = calc(min_font_size_in_REM + (max_font_size - min_font_size) * ((100vw - min_viewport_including_unit) / (max_viewport - min_viewport)))     */
+	--custom-font-size-6: calc(1rem + (32 - 16) * ((100vw - 320px) / (2560 - 320)));
 	--min-font-size: 16;
   --max-font-size: 32;
   --min-viewport-width: 320;
   --max-viewport-width: 2560;
-  --custom-font-size-6: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
+  --custom-font-size-7: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
 	min-height: 0vw;
 	
 	--golden-ratio: 1.618;
@@ -283,6 +293,8 @@
 	--padding-sm: clamp(1rem, 3%, 1.5rem);
 	--padding-md: clamp(1.5rem, 6%, 3rem);
 	--padding-lg: clamp(3rem, 12%, 6rem);
+	/* https://matthewjamestaylor.com/responsive-padding */
+	--padding-responsive: calc(8px + 1.5625vw);
 
 	--margin-sm: min(2rem, 4vh);
 	--margin-md: min(4rem, 8vh);
@@ -296,6 +308,9 @@
 	--flexbox-albatross-container-size: 40rem;
 	--flexbox-albatross-modifier: calc(var(--flexbox-albatross-container-size) - 100%);
 	/*-- End of paddings, margins and gaps --*/
+
+	--border-radius-value: 0.4rem;
+	--border-radius-circle-value: 50%;
 
 	color-scheme: light dark;
 }
@@ -337,6 +352,7 @@ html, body {
 
 body {
 	min-height: 100vh;
+	font-family: var(--font-stack-body);
 	line-height: var(--golden-ratio);
 	line-height: calc(3px + 2.5ex + 3px);
 	line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
@@ -877,7 +893,7 @@ a::after, .link::after {
 @media (min-width: 1200px) {}
 
 /* Prevent scaling beyond this breakpoint */
-@media (min-width: 1800px) {
+@media (min-width: 2560px) {
 	:root {
 		font-size: 32px;
 	}
