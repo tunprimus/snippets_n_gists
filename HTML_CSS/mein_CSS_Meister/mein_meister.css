@@ -248,7 +248,7 @@
 	Where   XX = min_viewport / 100
 	        YY = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
 	           = 100 * font_size_difference / viewport_difference
-					ZZ = Minimum font-size stated in REM
+					  dZZ = Minimum font-size stated in REM
 
 	Equivalent in longhand
 	font-size = calc(min_font_size_in_REM + (max_font_size - min_font_size) * ((100vw - min_viewport_including_unit) / (max_viewport - min_viewport)))     */
@@ -312,6 +312,7 @@
 	--border-radius-value: 0.4rem;
 	--border-radius-circle-value: 50%;
 
+	tab-size: 4;
 	color-scheme: light dark;
 }
 
@@ -334,6 +335,12 @@
   max-width: 100%;
   overflow-x: hidden;
   position: relative;
+}
+
+*::before,
+*::after {
+	text-decoration: inherit;
+	vertical-align: inherit;
 }
 
 html {
@@ -365,7 +372,7 @@ p {
 }
 
 /* HTML5 blocks - needed in older browsers */
-article, aside, figcaption, figure, footer, header, nav, section {
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section {
 	display: block;
 }
 
@@ -386,21 +393,43 @@ a:active {
 	background-color: transparent;
 }
 
-img, picture, video, iframe, canvas, object, embed, svg  {
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+}
+
+audio, img, picture, video, iframe, canvas, object, embed, svg  {
 	display: block;
 	max-width: 100%;
 	height: auto;
 	border-style: none;
+	/* vertical-align: middle; */
+}
+
+audio:not([controls]) {
+	display: none;
 }
 
 svg {
 	fill: currentColor;
+	overflow: hidden;
 }
 
-input, button, textarea, optgroup, select {
+button, input, optgroup, select, textarea {
 	font: inherit;
 	font-size: 100%;
 	vertical-align: middle;
+}
+
+button,
+select {
+	text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+	-webkit-appearance: button;
 }
 
 input:focus,
@@ -442,7 +471,9 @@ sup, sub {
 }
 
 table {
+	border-color: inherit;
 	border-collapse: collapse;
+	text-indent: 0;
 }
 
 textarea {
@@ -451,6 +482,33 @@ textarea {
 
 details summary {
 	cursor: pointer;
+}
+
+hr {
+	color: inherit;
+}
+
+progress {
+	vertical-align: baseline;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+	height: auto;
+}
+
+[type="search"] {
+	-webkit-appearance: textfield;
+	outline-offset: -2px;
+}
+
+::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	font: inherit;
 }
 
 /* For frameworks */
@@ -780,6 +838,7 @@ a::after, .link::after {
 	height: 0.15em;
 	width: 100%;
 	background: linear-gradient(110deg, var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
+	background: linear-gradient(110deg, var(--twelve-colour-combo));
 	transition: height 0.25s cubic-bezier(.6,0,.4,1);
 }
 
@@ -906,6 +965,21 @@ a::after, .link::after {
 	}
 	html, body {
 		background-color: var(--cocoa-brown);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms;
+		animation-iteration-count: 1;
+		transition-duration: 0.01ms;
+		scroll-behavior: auto;
 	}
 }
 
