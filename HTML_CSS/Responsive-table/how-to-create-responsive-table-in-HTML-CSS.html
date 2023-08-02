@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Create Responsive Table in HTML & CSS</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #32312F;
+      font-family: sans-serif;
+    }
+
+    .table-container {
+      padding: 0 10%;
+      margin: 40px auto 0 auto;
+    }
+
+    .heading {
+      font-size: 40px;
+      text-align: center;
+      color: #F1F1F1;
+      margin-bottom: 40px;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table thead {
+      background-color: #EE2828;
+    }
+
+    .table thead tr th {
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.35px;
+      color: #FFFFFF;
+      opacity: 1;
+      padding: 12px;
+      vertical-align: top;
+      border: 1px solid #DEE2E6;
+    }
+
+    .table tbody tr td {
+      font-size: 14px;
+      letter-spacing: 0.35px;
+      font-weight: normal;
+      color: #F1F1F1;
+      background-color: #3C3F44;
+      padding: 8px;
+      text-align: center;
+      border: 1px solid #DEE2E6;
+    }
+
+    .table .text_open {
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 0.35px;
+      color: #FF1046;
+    }
+
+    .table tbody tr td .btn {
+      width: 130px;
+      text-decoration: none;
+      line-height: 35px;
+      display: inline-block;
+      background-color: #FF1046;
+      font-weight: medium;
+      color: #FFFFFF;
+      text-align: center;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      user-select: none;
+      border: 1px solid transparent;
+      font-size: 14px;
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .table thead {
+        display: none;
+      }
+
+      .table,
+      .table tbody,
+      .table tr,
+      .table td {
+        display: block;
+        width: 100%;
+      }
+
+      .table tr {
+        margin-bottom: 15px;
+      }
+
+      .table tbody tr td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+
+      .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-weight: 600;
+        font-size: 14px;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="table-container">
+    <h1 class="heading">Responsive Table</h1>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Start Date</th>
+          <th>Start / End Time</th>
+          <th>Batch Type</th>
+          <th>Training Mode</th>
+          <th>Batch Status</th>
+          <th>#</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 1st row -->
+        <tr>
+          <td data-label="Start Date">1 Jan 2021</td>
+          <td data-label="Start / End Time">09:00 - 13:00 (IST)</td>
+          <td data-label="Batch Type">Weekend</td>
+          <td data-label="Training Mode">Online Training</td>
+          <td data-label="Batch Status"><span class="text_open">[ Open ]</span></td>
+          <td data-label="#"><a href="#" class="btn">Enrol Now</a></td>
+        </tr>
+        <!-- 2nd row -->
+        <tr>
+          <td data-label="Start Date">2 Jan 2021</td>
+          <td data-label="Start / End Time">09:00 - 13:00 (IST)</td>
+          <td data-label="Batch Type">Weekend</td>
+          <td data-label="Training Mode">Online Training</td>
+          <td data-label="Batch Status"><span class="text_open">[ Open ]</span></td>
+          <td data-label="#"><a href="#" class="btn">Enrol Now</a></td>
+        </tr>
+        <!-- 3rd row -->
+        <tr>
+          <td data-label="Start Date">3 Jan 2021</td>
+          <td data-label="Start / End Time">09:00 - 13:00 (IST)</td>
+          <td data-label="Batch Type">Weekend</td>
+          <td data-label="Training Mode">Online Training</td>
+          <td data-label="Batch Status"><span class="text_open">[ Open ]</span></td>
+          <td data-label="#"><a href="#" class="btn">Enrol Now</a></td>
+        </tr>
+        <!-- 4th row -->
+        <tr>
+          <td data-label="Start Date">4 Jan 2021</td>
+          <td data-label="Start / End Time">09:00 - 13:00 (IST)</td>
+          <td data-label="Batch Type">Weekend</td>
+          <td data-label="Training Mode">Online Training</td>
+          <td data-label="Batch Status"><span class="text_open">[ Open ]</span></td>
+          <td data-label="#"><a href="#" class="btn">Enrol Now</a></td>
+        </tr>
+        <!-- 5th row -->
+        <tr>
+          <td data-label="Start Date">5 Jan 2021</td>
+          <td data-label="Start / End Time">09:00 - 13:00 (IST)</td>
+          <td data-label="Batch Type">Weekend</td>
+          <td data-label="Training Mode">Online Training</td>
+          <td data-label="Batch Status"><span class="text_open">[ Open ]</span></td>
+          <td data-label="#"><a href="#" class="btn">Enrol Now</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
