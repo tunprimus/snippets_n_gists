@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Table Using HTML and CSS</title>
+
+  <style type="text/css">
+    body {
+      min-height: 100vh;
+      /* height: 100%; */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: blue;
+    }
+
+    table {
+      font-family: sans-serif;
+      border-collapse: collapse;
+    }
+
+    th {
+      background-color: #333333;
+      color: #FFFFFF;
+    }
+
+    th, td {
+      padding: 0.8rem;
+      font-size: 1.4rem;
+    }
+
+    tbody {
+      background-color: #EEEEEE;
+      color: #555555;
+    }
+
+    /* Media Queries */
+    @media screen and (max-width: 600px) {
+      thead {
+        display: none;
+      }
+
+      td {
+        display: block;
+        text-align: right;
+      }
+
+      td:first-child {
+        background-color: #333333;
+        color: #FFFFFF;
+        text-align: center;
+      }
+
+      td:nth-child(2)::before {
+        content: "Company";
+      }
+
+      td:nth-child(3)::before {
+        content: "Age";
+      }
+
+      td:nth-child(4)::before {
+        content: "Designation";
+      }
+
+      td:nth-child(5)::before {
+        content: "Hobbies";
+      }
+
+      td::before {
+        float: left;
+        margin-right: 3rem;
+        font-weight: bold;
+      }
+    }
+  </style>
+
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Age</th>
+        <th>Designation</th>
+        <th>Hobbies</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- 1st row -->
+      <tr>
+        <td>John</td>
+        <td>Google</td>
+        <td>28</td>
+        <td>Developer</td>
+        <td>Swimming</td>
+      </tr>
+      <!-- 2nd row -->
+      <tr>
+        <td>Linda</td>
+        <td>Facebook</td>
+        <td>26</td>
+        <td>Designer</td>
+        <td>Football</td>
+      </tr>
+      <!-- 3rd row -->
+      <tr>
+        <td>Shawn</td>
+        <td>Apple</td>
+        <td>35</td>
+        <td>Branding</td>
+        <td>Surfing</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
