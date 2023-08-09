@@ -1,0 +1,107 @@
+<!-- Responsive CSS border radius with the Fab Four technique - https://blog.logrocket.com/responsive-css-border-radius-fab-four-technique/ -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive CSS border radius with the Fab Four technique</title>
+  <style type="text/css">
+    /* .dynamic-card {
+          border-radius: max(0px, min(DESIRED_BORDER_RADIUS, (100% - WIDTH_BREAKPOINT + 1px) * 9999)) / DESIRED_BORDER_RADIUS;
+        } 
+        1. min(DESIRED_BORDER_RADIUS, (100% - WIDTH_BREAKPOINT + 1px) * 9999)
+        2. max(0px, RESULT_FROM_MIN)
+        3. border-radius: RESULT_FROM_MAX / DESIRED_BORDER_RADIUS;
+        This is not a division operator, but an extended syntax to apply border-radius to an element.
+    */
+    .dynamic-card {
+    --border-radius: 16px;
+    --breakpoint: 400px;
+    }
+    .dynamic-border {
+      border-radius: max(0px, min(var(--border-radius), (100% - var(--breakpoint) + 1px) * 9999)) / var(--border-radius);
+    }
+
+    .dynamic-card {
+      margin-top: 8px;
+      border: 1px solid red;
+      border-radius: max(0px, min(16px, (100% - 400px + 1px) * 9999)) / 16px;
+      max-width: 400px;
+    }
+
+    .card-title {
+      padding: 8px;
+    }
+
+    .card-image {
+      width: 100%;
+    }
+
+    .card-content {
+      padding: 8px;
+    }
+
+    .resizable {
+      position: relative;
+      width: 480px;
+      padding: 8px;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .resizer {
+      width: 8px;
+      margin-right: -8px;
+      height: 100%;
+      background: lightgray;
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      cursor: e-resize;
+    }
+    /* Reversing the logic
+      In such cases, we can invert the logic:
+      From: (100% - WIDTH_BREAKPOINT + 1px) * 9999))
+      To: (WIDTH_BREAKPOINT - 1px - 100%) * 9999))
+      This would apply the desired value only when the width is below the breakpoint.
+    */
+  </style>
+</head>
+<body>
+  <div class="resizable">
+    <div class="container">
+      <div class="dynamic-card">
+        <div class="card-title">
+          Sample Title
+        </div>
+        <img class="card-image" src="https://picsum.photos/id/10/400/200" alt=""/>
+        <div class="card-content">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam, eligendi, magni architecto debitis laboriosam deserunt nihil sed consequuntur, iusto hic ipsam voluptas porro voluptatum delectus molestiae sapiente ea voluptate! Rerum?
+        </div>
+      </div>
+      <div class="dynamic-card filter drop-shadow-lg">
+        <div class="card-title">
+          Sample Title
+        </div>
+        <img class="card-image" src="https://picsum.photos/id/12/400/200" alt=""/>
+        <div class="card-content">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam, eligendi, magni architecto debitis laboriosam deserunt nihil sed consequuntur, iusto hic ipsam voluptas porro voluptatum delectus molestiae sapiente ea voluptate! Rerum?
+        </div>
+      </div>
+      <div class="dynamic-card filter drop-shadow-lg">
+        <div class="card-title">
+          Sample Title
+        </div>
+        <img class="card-image" src="https://picsum.photos/id/11/400/200" alt=""/>
+        <div class="card-content">
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam, eligendi, magni architecto debitis laboriosam deserunt nihil sed consequuntur, iusto hic ipsam voluptas porro voluptatum delectus molestiae sapiente ea voluptate! Rerum?
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
