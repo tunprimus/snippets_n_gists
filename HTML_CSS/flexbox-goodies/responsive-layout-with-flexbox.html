@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Layout with Flexbox</title>
+  <style type="text/css">
+    body {
+      padding: 5vw;
+      max-width: 180ch;
+    }
+
+    .flexbox-grid {
+      /* --min: 30ch; */
+      --min: 25ch;
+
+      display: flex;
+      flex-wrap: wrap;
+      margin: 1rem;
+      gap: 1rem;
+    }
+
+    .flexbox-grid > * {
+      flex: 1 1 var(--min);
+    }
+  </style>
+</head>
+<body>
+  <ul role="list" class="flexbox-grid">
+    <li class="card">
+      <h3>Lorem, ipsum.</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </li>
+    <li class="card" style="--min: 40ch">
+      <h3>Minus, pariatur?</h3>
+      <p>Molestiae cumque quis culpa commodi dolores, officia inventore.</p>
+    </li>
+    <li class="card">
+      <h3>Labore corrupti</h3>
+      <p>Tempora dolore exercitationem quas sit consectetur architecto quisquam?</p>
+    </li>
+    <li class="card">
+      <h3>Culpa, amet.</h3>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    </li>
+    <li class="card">
+      <h3>Quisquam, pariatur?</h3>
+      <p>Molestiae cumque quis culpa commodi dolores, officia inventore.</p>
+    </li>
+  </ul>
+</body>
+</html>
