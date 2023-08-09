@@ -1,0 +1,78 @@
+<!-- The Fab Four technique to create Responsive Emails without Media Queries - https://www.freecodecamp.org/news/the-fab-four-technique-to-create-responsive-emails-without-media-queries-baf11fdfa848/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Fab Four technique to create Responsive Emails without Media Queries</title>
+  <style type="text/css">
+    .body {
+      max-width: 500px;
+      min-width: 260px;
+    }
+    .main {
+      display:inline-block;
+      min-width:240px;
+      width:50%;
+      max-width:100%;
+      min-width:-webkit-calc(50%);
+      min-width:calc(50%);
+      width:-webkit-calc(230400px — 48000%);
+      width:calc(230400px — 48000%);
+    }
+    .item {
+      margin: 0.25rem;
+    }
+    .item::before {
+      display: inline-block;
+      width: 15rem;
+      height: 15rem;
+      content: "";
+      vertical-align: 0.125em;
+      background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z' clip-rule='evenodd'/></svg>");
+      background-repeat: no-repeat;
+      background-size: 1rem 1rem;
+    }
+    .red {
+      background-color: red;
+    }
+    .orange {
+      background-color: orange;
+    }
+    .cyan {
+      background-color: cyan;
+    }
+    .yellow {
+      background-color: yellow;
+    }
+    .green {
+      background-color: green;
+    }
+    .indigo {
+      background-color: indigo;
+    }
+    .violet {
+      background-color: violet;
+    }
+    .grey {
+      background-color: grey;
+    }
+    .magenta {
+      background-color: magenta;
+    }
+  </style>
+</head>
+<body class="body">
+  <main class="main">
+    <div class="item red"></div>
+    <div class="item orange"></div>
+    <div class="item cyan"></div>
+    <div class="item yellow"></div>
+    <div class="item green"></div>
+    <div class="item indigo"></div>
+    <div class="item violet"></div>
+    <div class="item grey"></div>
+    <div class="item magenta"></div>
+  </main>
+</body>
+</html>
