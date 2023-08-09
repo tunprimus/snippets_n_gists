@@ -1,0 +1,144 @@
+<!-- MQ-less - https://codepen.io/thierry/pen/ZQgEoZ?editors=1100 -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MQ-less</title>
+  <style type="text/css">
+    body {
+      font: 1em/1.25 sans-serif;
+      background: #FFFFFF;
+    }
+
+    .grid {
+      margin-top: 20px;
+      font-size: 0;
+      text-align: center;
+    }
+
+    .column {
+      display: inline-block;
+      vertical-align: top;
+      min-width: 25%; /* value to use above 700px */
+      max-width: 100%; /* value to use below 700px */
+      width: calc((700px - 100%) * 700);
+      text-align: left;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+
+    .media {
+      padding: 0 0 0 10px;
+      font-size: 0;
+      background: #FBFBFB;
+      border: 1px solid #CFCFCF;
+    }
+
+    .media img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .media h1 {
+      margin: 0 0 0 10px;
+      font-size: 1.125rem;
+    }
+
+    .media p {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .media-body,
+    .media-img {
+      display: inline-block;
+      min-width: 30%; /* value to use above 400px */
+      width: calc((400px - 100%) * 400px); /* 400px "breakpoint" */
+      max-width: 100%; /* value to use below 400px */
+      vertical-align: top;
+      padding: 10px 10px 10px 0;
+      box-sizing: border-box;
+    }
+
+    .media-body {
+      min-width: 70%;
+    }
+  </style>
+</head>
+<body>
+  <h1>MQ-less</h1>
+  <p>Original idea from <a href="https://medium.com/@hteumeuleu">Rémi Parmentier</a> (I'm just duplicating styles one level up), see:</p>
+  <ul>
+    <li>
+      <a href="https://medium.freecodecamp.com/the-fab-four-technique-to-create-responsive-emails-without-media-queries-baf11fdfa848#.vuk56496i">The Fab Four technique to create Responsive Emails without Media Queries</a>
+    </li>
+    <li>
+      <a href="http://www.hteumeuleu.fr/wp-content/uploads/2016/02/cq-usecases.html">Element Queries with calc(), width, min-width and max-width</a>
+    </li>
+  </ul>
+  <p>A convention could be to write the 3 declarations in this order (to help understand which value will be applied in relation to the "BP"):</p>
+  <pre>
+    min-width: /* value to be used above the "breakpoint" */
+    width:     /* calc() func containing the "breakpoint" */
+    max-width: /* value to be used below the "breakpoint" */
+  </pre>
+
+  <!-- markup from http://www.hteumeuleu.fr/wp-content/uploads/2016/02/cq-usecases.html -->
+  <div class="grid">
+    <div class="column">
+      <div class="media">
+        <div class="media-img">
+          <img src="https://picsum.photos/200" alt="" />
+        </div>
+        <div class="media-body">
+          <h1>Lorem Ipsum Dolor Sit Amet</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero corporis quia eos temporibus.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="media">
+        <div class="media-img">
+          <img src="https://picsum.photos/200" alt="" />
+        </div>
+        <div class="media-body">
+          <h1>Lorem Ipsum Dolor Sit Amet</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero corporis quia eos temporibus.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="media">
+        <div class="media-img">
+          <img src="https://picsum.photos/200" alt="" />
+        </div>
+        <div class="media-body">
+          <h1>Lorem Ipsum Dolor Sit Amet</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero corporis quia eos temporibus.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="media">
+        <div class="media-img">
+          <img src="https://picsum.photos/200" alt="" />
+        </div>
+        <div class="media-body">
+          <h1>Lorem Ipsum Dolor Sit Amet</h1>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero corporis quia eos temporibus.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
