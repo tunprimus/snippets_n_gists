@@ -1,0 +1,124 @@
+<!-- Animating from “display: block” to “display: none” - https://www.impressivewebs.com/animate-display-block-none/ -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animating from “display: block” to “display: none”</title>
+  <style>
+    /* Section 1 & 2 */
+
+    .h2 {
+      text-align: center;
+    }
+
+    .section1__box,
+    .section2__box {
+      background-color: goldenrod;
+      width: 300px;
+      height: 300px;
+      margin: 30px auto;
+      transition: all 1s linear;
+      display: block;
+    }
+
+    .section2__box {
+      background-color: maroon;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .visuallyhidden {
+      opacity: 0;
+    }
+
+    .button {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .code {
+      color: firebrick;
+    }
+  </style>
+</head>
+<body>
+  <!-- 1st section -->
+  <section class="section1">
+    <h2 class=" h2 section1__h2">Animating from <code class="code section1__code">display:block</code> to <code class="code section1__code">display:none</code></h2>
+    <div id="section1__box" class="section1__box"></div>
+
+    <button class="button section1_btn">TOGGLE VISIBILITY</button>
+  </section>
+  <br><hr><br>
+  <!-- 2nd section -->
+  <section class="section2">
+    <h2 class=" h2 section2__h2">Animating from <code class="code section2__code">display:none</code> to <code class="code section2__code">display:block</code></h2>
+    <div id="section2__box" class="section2__box visuallyhidden hidden"></div>
+
+    <button class="button section2_btn">TOGGLE VISIBILITY</button>
+  </section>
+
+  <!-- JavaScript Here -->
+  <script>
+    /* For box 1 */
+    let box1 = document.getElementById('section1__box');
+    let btn1 = document.querySelectorAll('button')[0];
+
+    btn1.addEventListener('click', function () {
+      if (box1.classList.contains('hidden')) {
+        box1.classList.remove('hidden');
+        setTimeout(function () {
+          box1.classList.remove('visuallyhidden');
+        }, 20);
+      } else {
+        box1.classList.add('visuallyhidden');
+        box1.addEventListener('transitionend', function (evt) {
+          box1.classList.add('hidden');
+        }, {
+          capture: false,
+          once: true,
+          passive: false,
+        });
+      }
+    }, false);
+    /* Here’s a summary of what the code does when the box is visible:
+
+      Add the visuallyhidden class, which will animate it until it disappears.
+      At the same time that class is added, a single event handler is added using the options object in the addEventListener() method (a new feature with decent browser support), which tells the browser to wait for the transitionend event to occur once, then it stops looking.
+      The transitionend event fires when the opacity is done animating, and when this occurs the element is set to display: block.
+
+      Because you can’t detect a transitionend event on the display property, you have to use a different method for when the box is invisible:
+
+      First remove the hidden class, making it display: block while it’s still visually hidden.
+      While this is occurring, the script has executed a delay using setTimeout(), after which the opacity begins to animate.
+
+      The delay is very small (20 milliseconds), but because display: block occurs instantly, you don’t need much of a delay at all, just enough to allow the element to take its full place on the page before animating the opacity.
+    */
+  
+    /* For box 2 */
+    let box2 = document.getElementById('section2__box');
+    let btn2 = document.querySelectorAll('button')[1];
+
+    btn2.addEventListener('click', function () {
+      if (box2.classList.contains('hidden')) {
+        box2.classList.remove('hidden');
+        setTimeout(function () {
+          box2.classList.remove('visuallyhidden');
+        }, 20);
+      } else {
+        box2.classList.add('visuallyhidden');
+        box2.addEventListener('transitionend', function (evt) {
+          box2.classList.add('hidden');
+        }, {
+          capture: false,
+          once: true,
+          passive: false,
+        });
+      }
+    }, false);
+  </script>
+</body>
+</html>
