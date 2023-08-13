@@ -1,15 +1,8 @@
 /* This is a master CSS for me to use across projects. */
 
-/*
- * >>> From https://9elements.com/css-rule-order/css.pdf
- * 
-	
-	
-*/
-
-/* -------------------- */
-/* VARIABLES AND RESET */
-/* -------------------- */
+/* -------------------------------------- */
+/*        VARIABLES AND RESETS            */
+/* -------------------------------------- */
 
 /* -------------- */
 /* Root variables */
@@ -166,6 +159,7 @@
     /* Colour themes */
 	/* >>> Building a colour scheme. https://web.dev/building-a-colour-scheme/
 	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-colour-theming/ */
+
 	--theme-colour-HSL: hsl(...);
 	--theme-colour-h: ...;
 	--theme-colour-s: ...%;
@@ -206,6 +200,7 @@
 	--alpha-07: 0.70;
 	--alpha-03: 0.33;
 	--alpha-02: 0.20;
+
 	/* box-shadow: X-offset Y-offset Blur-size Colour*/
 	--box-shadow1: calc(var(--shadow-start) / 2) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-07));
 
@@ -248,15 +243,18 @@
 	Where   XX = min_viewport / 100
 	        YY = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
 	           = 100 * font_size_difference / viewport_difference
-					  dZZ = Minimum font-size stated in REM
+					ZZ = Minimum font-size stated in REM
 
 	Equivalent in longhand
 	font-size = calc(min_font_size_in_REM + (max_font_size - min_font_size) * ((100vw - min_viewport_including_unit) / (max_viewport - min_viewport)))     */
+
 	--custom-font-size-6: calc(1rem + (32 - 16) * ((100vw - 320px) / (2560 - 320)));
+
 	--min-font-size: 16;
   --max-font-size: 32;
   --min-viewport-width: 320;
   --max-viewport-width: 2560;
+
   --custom-font-size-7: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
 	min-height: 0vw;
 	
@@ -269,7 +267,7 @@
 	--major-second: 1.125;
 	--minor-second: 1.067;
 
-	--font-scale-ratio: var(/**/);
+	--font-scale-ratio: var(/**/); /* input one of the above */
 	/* >>> Modular scale: https://every-layout.dev/rudiments/modular-scale/ */
 	--fs-5: calc(var(--fs-4) / var(--font-scale-ratio));
 	--fs-4: calc(var(--fs-3) / var(--font-scale-ratio));
@@ -284,9 +282,12 @@
 	--fs5: calc(var(--fs4) * var(--font-scale-ratio));
 	/*-- End of fonts --*/
 
+	/* Column size */
 	--grid-min: 20ch;
 	--flex-min: 35rem;
 	--pancake-min: var(--grid-min);
+	--max-number-of-column: 4;
+	--breakpoint-size: 480;
 
 	/* >>> Contextual Spacing For Intrinsic Web Design: https://moderncss.dev/contextual-spacing-for-intrinsic-web-design/ */
 	/* Paddings, Margins, Gaps */
@@ -311,6 +312,7 @@
 
 	--border-radius-value: 0.4rem;
 	--border-radius-circle-value: 50%;
+	--border-radius-elliptic-value: 25%;
 
 	tab-size: 4;
 	color-scheme: light dark;
@@ -319,9 +321,9 @@
 /*-- End of root variables --*/
 
 
-/* ------ */
-/* Resets */
-/* ------ */
+/* -------------------------------------- */
+/*              RESETS                    */
+/* -------------------------------------- */
 *,
 *::before,
 *::after {
@@ -521,11 +523,22 @@ progress {
 
 /*-- End of Resets --*/
 
-/*---------*/
-/* CLASSES */
-/*---------*/
+/* -------------------------------------- */
+/*              CLASSES                   */
+/* -------------------------------------- */
 
-.container {
+.fab-four,
+.container-fab-four {
+	display: inline-block;
+	vertical-align: top;
+	min-width: calc(100% / var(--max-number-of-column)); /* value to use above breakpoint */
+	width: calc(((var(--breakpoint-size) * 1px) - 100%) * var(--breakpoint-size));
+	max-width: 100%; /* value to use below breakpoint */
+	padding: 0.25rem;
+	box-sizing: border-box;
+}
+
+.container-min {
 	width: min(100vw - 3rem, var(--container-max, 80ch));
 	margin-inline: auto;
 }
@@ -591,6 +604,26 @@ progress {
 	font: inherit;
 }
 
+.h1 {
+	font-size: var(--fs5);
+}
+
+.h2 {
+	font-size: var(--fs4);
+}
+
+.h3 {
+	font-size: var(--fs3);
+}
+
+.h4 {
+	font-size: var(--fs2);
+}
+
+.h5 {
+	font-size: var(--fs1);
+}
+
 .hr {
 	overflow: visible;
 	padding: 0;
@@ -639,6 +672,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 /* Buttons */
 .button {
+	--btn-HSL: var(...);
 	--btn-h: var(...);
 	--btn-sat: var(...);
 	--btn-light: var(...);
@@ -667,7 +701,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	cursor: pointer;
 	color: inherit;
 	background: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
-	background-color: inherit;
+	/* background-color: inherit; */
 	outline: solid transparent;
 	font-size: inherit;
 	font-family: inherit;
@@ -703,8 +737,13 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button:active {
 	color: inherit;
-	transform: translateY(1px);
+	transform: translateY(8px);
 	filter: saturate(150%);
+}
+
+.button[disabled] {
+	background-color: var(--dual-theme-grey);
+	cursor: not-allowed;
 }
 
 .button__icon {
@@ -917,11 +956,30 @@ a::after, .link::after {
 
 
 /* To hide */
-.hidden-all {
+.hide-all {
 	display: none;
 }
 
-.offscreen, .sr-only, .visually-hidden {
+.opacify {
+	opacity: 0;
+	pointer-events: none;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	position: absolute;
+}
+
+.visually-hidden {
+	visibility: hidden;
+	pointer-events: none;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.off-screen, .sr-only {
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -935,15 +993,23 @@ a::after, .link::after {
 	white-space: nowrap;
 }
 
+.scale-to-none {
+	transform: scale(0);
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
 /*-- End of classes --*/
 
 
 
 
 
-/* ------------- */
-/* Media Queries */
-/* ------------- */
+/* -------------------------------------- */
+/*              MEDIA QUERIES             */
+/* -------------------------------------- */
 /* Tablet portrait only */
 @media (min-width: 600px) and (max-width: 899px) {}
 /* Tablet landscape only */
