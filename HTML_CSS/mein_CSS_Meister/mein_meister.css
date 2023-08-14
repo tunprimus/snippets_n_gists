@@ -462,6 +462,14 @@ button {
 	cursor: pointer;
 }
 
+button[disabled] {
+	background-color: inherit;
+	background-color: var(--dual-theme-grey);
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
 p, li, h1, h2, h3, h4, h5, h6 {
 	overflow-wrap: break-word;
 	-webkit-hyphens: auto;
@@ -678,6 +686,8 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	--btn-light: var(...);
 	--border-light: calc(var(--btn-light) * 0.7);
 	--border-alpha: calc((var(--btn-light) - var(--border-threshold)) * 10);
+	--btn-background-colour: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
+	--btn-border-colour: hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
 	display: inline-block;
 	display: inline-flex;
 	align-items: center;
@@ -689,7 +699,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	transition: all 0.4s ease-in-out;
 	margin: 2px 0;
 	border: 2px solid transparent;
-	border: 0.2em solid hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
+	border: 0.2em solid var(--btn-border-colour);
 	-webkit-border-radius: 0.4rem;
 	-moz-border-radius: 0.4rem;
 	border-radius: var(--border-radius-value);
@@ -700,8 +710,8 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	padding: 0.25em 0.75em;
 	cursor: pointer;
 	color: inherit;
-	background: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
 	/* background-color: inherit; */
+	background-color: var(--btn-background-colour);
 	outline: solid transparent;
 	font-size: inherit;
 	font-family: inherit;
@@ -730,6 +740,8 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 .button:hover {
 	color: inherit;
 	border-color: inherit;
+	border-color: currentColor;
+	background-color: white;
 	background-color: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 0.80));
 	opacity: 0.5;
 }
@@ -743,7 +755,9 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button[disabled] {
 	background-color: var(--dual-theme-grey);
+	opacity: 0.5;
 	cursor: not-allowed;
+	pointer-events: none;
 }
 
 .button__icon {
@@ -970,7 +984,7 @@ a::after, .link::after {
 	position: absolute;
 }
 
-.visually-hidden {
+.invisible {
 	visibility: hidden;
 	pointer-events: none;
 	-webkit-transition: all 0.4s ease-in-out;
@@ -979,7 +993,7 @@ a::after, .link::after {
 	transition: all 0.4s ease-in-out;
 }
 
-.off-screen, .sr-only {
+.off-screen, .sr-only, .visually-hidden {
 	position: absolute;
 	width: 1px;
 	height: 1px;
