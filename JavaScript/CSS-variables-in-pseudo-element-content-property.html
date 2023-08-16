@@ -1,0 +1,102 @@
+<!-- CSS Variables (custom properties) in Pseudo-element "content" Property +++>>> https://stackoverflow.com/questions/40164169/css-variables-custom-properties-in-pseudo-element-content-property -->
+
+<!--
+  CSS custom properties with integer values can be displayed in a pseudo-element's content property via a CSS counter.
+
+  div {
+    --variable: 123;
+  }
+  span:after {
+    counter-reset: variable var(--variable);
+    content: counter(variable);
+  }
+  div>The variable is <span></span>.</div>
+  .coordinates:before {
+    counter-reset: x var(--x) y var(--y);
+    content: 'The coordinates are (' counter(x) ', ' counter(y) ').';
+  <div class="coordinates" style="--x: 1; --y: 2"></div>
+
+  Original Answer
+
+  Got it to work using a hack involving CSS Counters. Enjoy.
+  div::after {
+  counter-reset: mouse-x var(--mouse-x, 245) mouse-y var(--mouse-y, 245);
+  content: counter(mouse-x) " / " counter(mouse-y);
+}
+}
+-->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Variables (custom properties) in Pseudo-element "content" Property</title>
+  <style type="text/css">
+    /* What is desired! */
+    div::after {
+      counter-reset: mouse-x var(--mouse-x, 245) mouse-y var(--mouse-y, 245);
+      /* counter-reset: mouse-x var(--mouse-x) mouse-y var(--mouse-y); */
+      content: counter(--mouse-x)" / " counter(--mouse-y);
+      /* content: var(--mouse-x)" / " var(--mouse-y); */
+    }
+
+    /* Setup and presentation styles */
+    div::before {
+      content: "mouse position"
+    }
+
+    div {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translate(calc(var(--mouse-x, 245) * 1px), calc(var(--mouse-y, 327) * 1px));
+      /* transform: translate(calc(var(--mouse-x) * 1px), calc(var(--mouse-y) * 1px)); */
+      width: 10em;
+      height: 10em;
+      background-color: #FF3B80;
+      color: #FFFFFF;
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 100%;
+      will-change: transform;
+    }
+
+    body {
+      margin: 2em;
+      font-family: sans-serif;
+    }
+
+    p {
+      max-width: 50%;
+      min-width: 25em;
+    }
+  </style>
+</head>
+<body>
+  <!-- test case: element with pseudo element -->
+  <div></div>
+
+  <!-- explanation (not test case) -->
+  <main>
+    <pre><code>div::after {
+      content: var(--mouse-x) ' / ' var(--mouse-y);
+    }</code></pre>
+    <h1>If this worked ...</h1>
+    <p>We should see something like this: <b><span class="x">245</span> / <span class="y">327</span></b> updating with the mousemove coordinates inside the pseudo <i>::after</i> element for the div.</p>
+  </main>
+
+  <!-- JavaScript Here -->
+  <script>
+    document.addEventListener('mousemove', (evt) => {
+      document.documentElement.style.setProperty('--mouse-x', evt.clientX);
+      document.documentElement.style.setProperty('--mouse-y', evt.clientY);
+
+      // Output for explanation text
+      document.querySelector('.x').innerHTML = evt.clientX;
+      document.querySelector('.y').innerHTML = evt.clientY;
+    });
+  </script>
+</body>
+</html>
