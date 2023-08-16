@@ -604,6 +604,20 @@ progress {
 	flex: 0 1 auto;
 }
 
+.flex-centre-h {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-centre-v {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .header {
 	font: inherit;
 }
@@ -729,6 +743,8 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button:visited {
 	font-weight: bold;
+	outline: 0.1em dotted var(--dual-theme-grey, #777777);
+	outline-offset: -2px;
 }
 
 .button:focus {
