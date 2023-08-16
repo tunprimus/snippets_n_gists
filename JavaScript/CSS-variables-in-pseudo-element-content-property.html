@@ -36,8 +36,7 @@
     div::after {
       counter-reset: mouse-x var(--mouse-x, 245) mouse-y var(--mouse-y, 245);
       /* counter-reset: mouse-x var(--mouse-x) mouse-y var(--mouse-y); */
-      content: counter(--mouse-x)" / " counter(--mouse-y);
-      /* content: var(--mouse-x)" / " var(--mouse-y); */
+      content: counter(mouse-x) " / " counter(mouse-y);
     }
 
     /* Setup and presentation styles */
@@ -90,8 +89,9 @@
   <!-- JavaScript Here -->
   <script>
     document.addEventListener('mousemove', (evt) => {
-      document.documentElement.style.setProperty('--mouse-x', evt.clientX);
-      document.documentElement.style.setProperty('--mouse-y', evt.clientY);
+      
+      document.documentElement.style.setProperty('--mouse-x', round(evt.clientX));
+      document.documentElement.style.setProperty('--mouse-y', round(evt.clientY));
 
       // Output for explanation text
       document.querySelector('.x').innerHTML = evt.clientX;
