@@ -968,7 +968,7 @@ a::after, .link::after {
 	bottom: 0.01em;
 	height: 0.15em;
 	width: 100%;
-	background: linear-gradient(110deg, var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
+	background: linear-gradient(to right, var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
 	background: linear-gradient(110deg, var(--twelve-colour-combo));
 	transition: height 0.25s cubic-bezier(.6,0,.4,1);
 }
