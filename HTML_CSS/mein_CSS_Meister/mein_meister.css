@@ -726,142 +726,10 @@ progress {
 	font-size: 12px;
 }
 
-/* https://htmlandcssguidebook.com/css/link-states/ */
-/* The best link order is default, visited, hover, focus, then active. You can remember this order using a handy mnemonic device: "Very Hungry Feline Acrobats".
-A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
-*/
-
-/* Buttons */
-.button {
-	--btn-HSL: var(...);
-	--btn-h: var(...);
-	--btn-sat: var(...);
-	--btn-light: var(...);
-	--border-threshold: 5%;
-	--border-light: calc(var(--btn-light) * 0.7);
-	--border-alpha: calc((var(--btn-light) - var(--border-threshold)) * 10);
-	--btn-background-colour: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
-	--btn-border-colour: hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
-	--btn-background-colour--hover: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 1.30));
-	display: inline-block;
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	align-self: flex-start;
-	-khtml-transition: all 0.4s ease-in-out;
-	-webkit-transition: all 0.4s ease-in-out;
-	-moz-transition: all 0.4s ease-in-out;
-	-ms-transition: all 0.4s ease-in-out;
-	-o-transition: all 0.4s ease-in-out;
-	transition: all 0.4s ease-in-out;
-	margin: 2px 0;
-	border: 2px solid transparent;
-	border: 0.2rem solid var(--btn-border-colour);
-	-webkit-border-radius: 0.4rem;
-	-moz-border-radius: 0.4rem;
-	border-radius: var(--border-radius-value--medium);
-	box-shadow: var(--box-shadow1);
-	min-width: 12ch;
-	min-height: 44px;
-	max-width: 75%;
-	padding: 0.25em 0.75em;
-	margin-left: var(--padding-responsive--medium);
-	margin-right: var(--padding-responsive--ex-small);
-	margin-top: var(--padding-responsive--ex-small);
-	cursor: pointer;
-	color: inherit;
-	background-color: inherit;
-	background-color: var(--btn-background-colour);
-	outline: solid transparent;
-	font-size: inherit;
-	font-family: inherit;
-	font-weight: inherit;
-	text-align: center;
-	text-decoration: none;
-	line-height: 1.1;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-o-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	vertical-align: middle;
-	white-space: nowrap;
-}
-
-.button--secondary {
-	/* sets the background color as a 60º rotated hue */
-	--btn-h: calc(var(--hue) + 60);
-}
-
-.button:visited {
-	font-weight: bold;
-	outline: 0.1em dotted var(--dual-theme-grey, #777777);
-	outline-offset: -2px;
-}
-
-.button:focus {
-	outline-style: solid;
-  outline-color: transparent;
-	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
-}
-
-.button:hover {
-	border: 0.01rem solid var(--theme-colour--complement);
-	-webkit-border-radius: var(--border-radius-value--large);
-	-moz-border-radius: var(--border-radius-value--large);
-	border-radius: var(--border-radius-value--large);
-	color: inherit;
-	outline-color: var(--dual-theme-grey);
-	outline-color: currentColor;
-	outline-color: var(--theme-colour--complement);
-	background-color: inherit;
-	background-color: var(--btn-background-colour--hover);
-}
-
-
-.button:active {
-	color: inherit;
-	transform: translateY(8px);
-	filter: saturate(150%);
-}
-
-.button[disabled] {
-	background-color: var(--dual-theme-grey);
-	opacity: 0.5;
-	cursor: not-allowed;
-	pointer-events: none;
-}
-
-.button__icon {
-	/* You may wish to have your icons appear larger or smaller in relation to the text */
-	width: 0.9em;
-	height: 0.9em;
-	fill: currentColor;
-	margin-right: 0.5em;
-}
-
-.button__icon--end {
-	margin-right: 0;
-  margin-left: 0.5em;
-}
-
-
-.icon-button {
-	width: 2.5rem;
-	height: 2.5rem;
-	padding: 0.35em;
-	border-radius: 50%;
-}
-
-.icon-button__icon {
-	width: 100%;
-  height: 100%;
-  fill: currentColor;
-}
-
 /* Inputs */
 
 .input {
+	min-height: 3.5rem;
 	font-size: 16px;
 	font-size: max(16px, 1em);
 	font-family: inherit;
@@ -934,7 +802,7 @@ input[type="radio"]::before,
 	border-radius: 50%;
 	transform: scale(0);
 	transition: 120ms transform ease-in-out;
-	box-shadow: inset 1em 1em var(--form-control-color);
+	box-shadow: inset 1em 1em var(--form-control-colour);
 	background-color: CanvasText;
 }
 
@@ -947,6 +815,150 @@ input[type="radio"]:focus,
 .input[type="radio"]:focus {
 	outline: max(2px, 0.15em) solid currentColor;
 	outline-offset: max(2px, 0.15em);
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
+	font-size: 3rem;
+}
+
+/* https://htmlandcssguidebook.com/css/link-states/ */
+/* The best link order is default, visited, hover, focus, then active. You can remember this order using a handy mnemonic device: "Very Hungry Feline Acrobats".
+A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
+*/
+
+/* Buttons */
+.button {
+	--btn-HSL: var(...);
+	--btn-h: var(...);
+	--btn-sat: var(...);
+	--btn-light: var(...);
+	--border-threshold: 5%;
+	--border-light: calc(var(--btn-light) * 0.7);
+	--border-alpha: calc((var(--btn-light) - var(--border-threshold)) * 10);
+	--btn-background-colour: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
+	--btn-border-colour: hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
+	--btn-background-colour--hover: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 1.30));
+	display: inline-block;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	align-self: flex-start;
+	-khtml-transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	margin: 2px 0;
+	border: 2px solid transparent;
+	border: 0.2rem solid var(--btn-border-colour);
+	-webkit-border-radius: 0.4rem;
+	-moz-border-radius: 0.4rem;
+	border-radius: var(--border-radius-value--medium);
+	box-shadow: var(--box-shadow1);
+	min-width: 12ch;
+	min-height: 44px;
+	min-height: 5ch;
+	max-width: 75%;
+	padding: 0.25em 0.75em;
+	margin-left: var(--padding-responsive--medium);
+	margin-right: var(--padding-responsive--ex-small);
+	margin-top: var(--padding-responsive--ex-small);
+	cursor: pointer;
+	color: inherit;
+	background-color: inherit;
+	background-color: var(--btn-background-colour);
+	outline: solid transparent;
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	text-align: center;
+	text-decoration: none;
+	line-height: 1.1;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.button--secondary {
+	/* sets the background color as a 60º rotated hue */
+	--btn-h: calc(var(--hue) + 60);
+}
+
+.button:visited {
+	font-weight: bold;
+	outline-color: currentColor;
+	-moz-outline: 0.01rem dotted var(--theme-colour--complement);
+	outline: 0.1em dotted var(--dual-theme-grey, #777777);
+	outline: 0.01rem dotted var(--theme-colour--complement);
+	outline-offset: -2px;
+	outline-offset: -0.5rem;
+	opacity: 0.5;
+}
+
+.button:focus {
+	outline-style: solid;
+  outline-color: transparent;
+	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
+}
+
+.button:hover {
+	border: 0.01rem solid var(--theme-colour--complement);
+	-webkit-border-radius: var(--border-radius-value--large);
+	-moz-border-radius: var(--border-radius-value--large);
+	border-radius: var(--border-radius-value--large);
+	color: inherit;
+	outline-color: var(--dual-theme-grey);
+	outline-color: currentColor;
+	outline-color: var(--theme-colour--complement);
+	background-color: inherit;
+	background-color: var(--btn-background-colour--hover);
+	font-weight: bold;
+}
+
+
+.button:active {
+	color: inherit;
+	transform: translateY(8px);
+	filter: saturate(150%);
+}
+
+.button[disabled] {
+	background-color: var(--dual-theme-grey);
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.button__icon {
+	/* You may wish to have your icons appear larger or smaller in relation to the text */
+	width: 0.9em;
+	height: 0.9em;
+	fill: currentColor;
+	margin-right: 0.5em;
+}
+
+.button__icon--end {
+	margin-right: 0;
+  margin-left: 0.5em;
+}
+
+
+.icon-button {
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0.35em;
+	border-radius: 50%;
+}
+
+.icon-button__icon {
+	width: 100%;
+  height: 100%;
+  fill: currentColor;
 }
 
 /* Links */
