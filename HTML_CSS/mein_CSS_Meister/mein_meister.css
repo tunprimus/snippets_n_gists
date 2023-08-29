@@ -1055,7 +1055,21 @@ a::after, .link::after {
 	transform: rotate(135deg) translate(-20%, 20%);
 }
 
+/* Messages & alert */
+.alert {
+	text-shadow: 0.2rem 0.2rem 0.4rem white, 0 0 0.5rem yellow, 0 0 0.2rem yellow;
+	background-color: linear-gradient(to right yellow, lightgrey, white, lightgrey, yellow);
+}
 
+.warning {
+	text-shadow: 0.2rem 0.2rem 0.4rem white, 0 0 0.5rem orange, 0 0 0.2rem orange;
+	background-color: linear-gradient(to right orange, lightgrey, white, lightgrey, orange);
+}
+
+.danger {
+	text-shadow: 0.2rem 0.2rem 0.4rem white, 0 0 0.5rem red, 0 0 0.2rem red;
+	background-color: linear-gradient(to right red, lightgrey, white, lightgrey, red);
+}
 
 /* To hide */
 .hide-all {
