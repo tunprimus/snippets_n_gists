@@ -1057,18 +1057,18 @@ a::after, .link::after {
 
 /* Messages & alert */
 .alert {
-	text-shadow: 0.2rem 0.2rem 0.4rem white, 0 0 0.5rem yellow, 0 0 0.2rem yellow;
-	background-color: linear-gradient(to right yellow, lightgrey, white, lightgrey, yellow);
+	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem gold, 0 0 0.2rem gold;
+	background-color: linear-gradient(to right gold, lightgrey, white, lightgrey, gold);
 }
 
 .warning {
-	text-shadow: 0.2rem 0.2rem 0.4rem white, 0 0 0.5rem orange, 0 0 0.2rem orange;
-	background-color: linear-gradient(to right orange, lightgrey, white, lightgrey, orange);
+	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem darkorange, 0 0 0.2rem darkorange;
+	background-color: linear-gradient(to right darkorange, lightgrey, white, lightgrey, darkorange);
 }
 
 .danger {
-	text-shadow: 0.2rem 0.2rem 0.4rem white, 0 0 0.5rem red, 0 0 0.2rem red;
-	background-color: linear-gradient(to right red, lightgrey, white, lightgrey, red);
+	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem darkred, 0 0 0.2rem darkred;
+	background-color: linear-gradient(to right darkred lightgrey, white, lightgrey, darkred);
 }
 
 /* To hide */
