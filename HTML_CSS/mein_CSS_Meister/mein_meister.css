@@ -190,10 +190,10 @@
 	--theme-colour--analogue2: hsl(calc(var(--theme-colour-h) + 60), var(--theme-colour-s), var(--theme-colour-l));
 	--theme-colour--analogue3: hsl(calc(var(--theme-colour-h) + 90), var(--theme-colour-s), var(--theme-colour-l));
 
-	--light-theme-accent1: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
-	--light-theme-accent2: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - calc(var(--golden-ratio) * var(--lighten-percentage))));
-	--dark-theme-accent1: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + calc(2 * var(--lighten-percentage))));
-	--dark-theme-accent1: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + calc(var(--golden-ratio) * var(--lighten-percentage))));
+	--accent-1-light-theme: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
+	--accent-2-light-theme: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - calc(var(--golden-ratio) * var(--lighten-percentage))));
+	--accent-1-dark-theme: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + calc(2 * var(--lighten-percentage))));
+	--accent-2-dark-theme: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + calc(var(--golden-ratio) * var(--lighten-percentage))));
 
 	--shadow-colour: hsl(var(--theme-colour-h), 60%, 50%);
 	--shadow-start: 1px;
@@ -983,6 +983,66 @@ a::after, .link::after {
 	background: linear-gradient(to right, var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
 	background: linear-gradient(110deg, var(--twelve-colour-combo));
 	transition: height 0.25s cubic-bezier(.6,0,.4,1);
+}
+
+/* Tables */
+.table {
+	min-width: 85%;
+	max-width: 100%;
+	background-color: var(--theme-colour--light);
+	margin: auto;
+	border: 0.25rem solid hsl(337, 86%, 47%);
+	border-radius: var(--border-radius-value--large);
+}
+
+.table__caption {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	background-color: var(--theme-colour--analogue1);
+	border-top-left-radius: var(--border-radius-value--medium);
+	border-top-right-radius: var(--border-radius-value--medium);
+	font-weight: bold;
+	font-size: var(--fs4);
+	text-align: left;
+}
+
+.table__header-group {
+	background-color: var(--theme-colour--dark);
+	font-size: var(--fs2);
+	text-transform: uppercase;
+	letter-spacing: 2%;
+	border-bottom: 0.25rem solid var(--theme-colour--complement);
+}
+
+.table__body {
+	box-shadow: var(--box-shadow1);
+	border-bottom-left-radius: var(--border-radius-value--medium);
+	border-bottom-right-radius: var(--border-radius-value--medium);
+}
+
+.table__footer {
+	padding: 0.25rem;
+	border-bottom-left-radius: var(--border-radius-value--medium);
+	border-bottom-right-radius: var(--border-radius-value--medium);
+}
+
+.table__row {
+	padding: var(--padding-responsive);
+}
+
+.table__row:nth-of-type(odd) {
+	background-color: var(--theme-colour--dark-l);
+}
+
+.table__heading {
+	max-width: 50%;
+	padding: 0.15rem;
+	word-break: break-word;
+}
+
+.table__cell {
+	padding-left: var(--padding-responsive);
+	padding-right: var(--padding-responsive);
 }
 
 /* Details / Accordion */
