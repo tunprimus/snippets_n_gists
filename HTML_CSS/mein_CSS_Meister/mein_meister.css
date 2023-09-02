@@ -1136,6 +1136,10 @@ a::after, .link::after {
 	display: none;
 }
 
+.cloak {
+	opacity: 0;
+}
+
 .opacify {
 	opacity: 0;
 	pointer-events: none;
