@@ -1,0 +1,24 @@
+/* Inspired by:
+  Testing JavaScript without a (third-party) framework +++>>> https://alexwlchan.net/2023/testing-javascript-without-a-framework/
+  Unit Test Your JavaScript Code Without a Framework +++>>> https://javascript.plainenglish.io/unit-test-front-end-javascript-code-without-a-framework-8f00c63eb7d4
+ */
+
+.test-result {
+  margin: 0;
+}
+
+.success {
+  color: green;
+}
+
+.failure {
+  color: red;
+}
+
+.success::before { 
+  content: '✔ ';
+}
+
+.failure::before { 
+  content: '✘ ';
+}
