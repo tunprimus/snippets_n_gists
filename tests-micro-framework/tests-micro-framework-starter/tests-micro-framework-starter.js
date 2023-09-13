@@ -11,6 +11,7 @@
  */
 
 function it(description, test_function) {
+  const attachResult = document.querySelector('#attach-result');
   const result = document.createElement('p');
   result.classList.add('test-result');
 
@@ -27,7 +28,7 @@ function it(description, test_function) {
     console.error(err);
   }
 
-  document.querySelector('#attach-result').appendChild(result);
+  attachResult.appendChild(result);
 }
 
 function assertEqual(expected, actual) {
