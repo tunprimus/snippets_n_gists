@@ -233,6 +233,26 @@
     /* Fonts */
 	--font-stack-title: Garamond, Georgia, Palatino, serif;
 	--font-stack-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Open Sans", "Helvetica Neue", Helvetica, Arial, Poppins, Verdana, Tahoma, sans-serif;
+	--sans-serif-fonts: Helvetica, "Gill sans", "Open Sans", "Helvetica Neue", sans-serif;
+	--slab-serif-fonts: Archer, "Museo Slab";
+	--serif-fonts: Garamond, Georgia, serif;
+	--monospace-fonts: Menlo, Monaco, Consolas, "Courier New", monospace;
+	--cursive-fonts: "Dancing Script", Lobster, "Lucida Console", cursive;
+	--decorative-fonts: "Freight Display", "Abril Fatface";
+
+	--serif-fonts-humanist: Garamond;
+	--serif-fonts-transitional: Baskerville;
+	--serif-fonts-modern: Didot;
+
+	--slab-serif-fonts-humanist:
+	--slab-serif-fonts-grotesque:
+	--slab-serif-fonts-geometric:
+
+	--sans-serif-fonts-humanist: "Lucida sans";
+	--sans-serif-fonts-grotesque: Acumin, "Aktiv Grotesk";
+	--sans-serif-fonts-geometric: Futura, Habana, Orbitron, Walkway, "Waukegan LDO", Arcus, Edelsans, Giro, Acid, Metrophobic, Code, "Singula Compressed", "Champagne & Limousines", Faucet, "LT Oksana", "Geometry Soft", "Digital Serial", Michroma, Ribbon, Raleway;
+
+	/* Font size calculations */
 	--custom-font-size-1: calc(1vw + 1vh + .5vmin);
 	--custom-font-size-2: calc(0.9rem + 1vw);
 	--custom-font-size-3: calc(15px + 0.390625vw);
@@ -258,6 +278,7 @@
   --custom-font-size-7: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
 	min-height: 0vw;
 	
+	/* General ratios */
 	--golden-ratio: 1.618;
 	--perfect-fifth: 1.500;
 	--augmented-fourth: 1.414;
