@@ -231,26 +231,26 @@
 
 
     /* Fonts */
-	--font-stack-title: Garamond, Georgia, Palatino, serif;
-	--font-stack-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Open Sans", "Helvetica Neue", Helvetica, Arial, Poppins, Verdana, Tahoma, sans-serif;
-	--sans-serif-fonts: Helvetica, "Gill sans", "Open Sans", "Helvetica Neue", sans-serif;
-	--slab-serif-fonts: Archer, "Museo Slab";
-	--serif-fonts: Garamond, Georgia, serif;
-	--monospace-fonts: Menlo, Monaco, Consolas, "Courier New", monospace;
-	--cursive-fonts: "Dancing Script", Lobster, "Lucida Console", cursive;
-	--decorative-fonts: "Freight Display", "Abril Fatface";
+	--font-stack-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, SFProDisplay-Regular, Inter, "Fira Sans", "Open Sans", "Droid Sans", "Nimbus Sans", "DejaVu Sans", "Helvetica Neue", Helvetica, Arial, Poppins, Verdana, Tahoma, Arimo, sans-serif;
 
-	--serif-fonts-humanist: Garamond;
-	--serif-fonts-transitional: Baskerville;
-	--serif-fonts-modern: Didot;
+	--sans-serif-fonts: "Open Sans", "Fira Sans", "Franklin Gothic", "Proxima Nova", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", "Liberation Sans", "Nimbus Sans L", Helvetica, "Gill sans", "Helvetica Neue", "DejaVu Sans", Arimo, Roboto, Arial, sans-serif;
+	--slab-serif-fonts: Archer, "Museo Slab", "Nexa Rust", "Emilio 20", ChunkFive, "Fancy Pants NF", "Minya Nouvelle", "Vanilla Whale", "Ferro Rosso", "Varsity Team", "Octin Sports", Aleo, Euphorigenic, Edmunds, "Soccer League", Bullpen, Romantiques, Merriweather, Marlboro, "Catharsis Requiem", Ewert, "Josefin Slab", Graduate, Staubach, Holtzschue, "Bree Serif", "Tanglewood Tales NF", Bevan, Duality, "Glass Antiqua", Arvo, "Latin Modern Roman", Typodermic, Sanchez, Andada, "Kelmscott Roman NF", "Anonymous Pro", "Alfa Slab One", "Our Gang NF";
+	--serif-fonts: Garamond, Georgia, "Liberation Serif", Tinos, "Noto Serif", "Lucida Bright", "Lucida Fax", Palatino, "Palatino Linotype", Palladio, "URW Palladio", "PT Serif", Caladea, "DejaVu Serif", "Times New Roman", serif;
+	--monospace-fonts: "Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, Cousine, "Lucida Console", "Courier New", monospace;
+	--cursive-fonts: "Dancing Script", Lobster, "Young Baroque", Mistral, "Brush Script MT", "Brush Script Std", "Lucida Calligraphy", "Lucida Handwriting", "Apple Chancery", "Brush Script MT Italic", "Ink Free", "Segoe Script", "Nautilus Pompilius", cursive;
+	--decorative-fonts: "Freight Display", "Abril Fatface", Papyrus, Herculanum, "Party LET", "Curlz MT", Harrington, fantasy;
 
-	--slab-serif-fonts-humanist:
-	--slab-serif-fonts-grotesque:
-	--slab-serif-fonts-geometric:
+	--serif-fonts-humanist: Garamond, "PT Serif Regular", "Archistico Normal", "EB Garamond Regular", "Humanistic Medium", "Flanker Griffo Regular", "Simonetta Regular", "Inria Serif Regular", "Monterchi Serif Extrabold", "Rosarivo Regular", "Radcliffe Display Heavy", "Benne Regular", "Asul Regular", "Kaya Medium", "Sextan Roman";
+	--serif-fonts-transitional: Baskerville, "Times New Roman", Oxford, "SD Georgia Light", "Aviatica Classic Serif", "Media Times", Deleplace, Tonic, "Romans Rexamples Font Duo";
+	--serif-fonts-modern: Didot, Bodoni, Maginia, "Greetings Regular", "Libra Serif Modern";
 
-	--sans-serif-fonts-humanist: "Lucida sans";
-	--sans-serif-fonts-grotesque: Acumin, "Aktiv Grotesk";
-	--sans-serif-fonts-geometric: Futura, Habana, Orbitron, Walkway, "Waukegan LDO", Arcus, Edelsans, Giro, Acid, Metrophobic, Code, "Singula Compressed", "Champagne & Limousines", Faucet, "LT Oksana", "Geometry Soft", "Digital Serial", Michroma, Ribbon, Raleway;
+	--slab-serif-fonts-humanist: "Flamenco Regular", "Tarif Arabic Extrabold", "Noticia Text Regular", "Humanist Slabserif 712 BT";
+	--slab-serif-fonts-grotesque: "IBM Plex Serif", "Amazing Grotesk", Lathena;
+	--slab-serif-fonts-geometric: "Geometric Slabserif 703", "Octin Sports", Arvo, Kingsmen, "Kelly Slab", "Typo GeoSlab Thin Demo", "Slabs Thin", Marhaban, "Coltan Gea", "Old School", Kolligio, Monaline, Nortune, "Space Power Demo", Polaris, Baxley, "Black Jack", Bongola;
+
+	--sans-serif-fonts-humanist: "Lucida sans", "Open Sans", Lato, Aller, Codec, "PT Sans", "Droid Sans", "Open Sans Condensed", "Noto Sans", Cantarell, "Latin Modern Sans", "Tenor Sans", Cabin, Pigiarniq, Allerta, Belleza, "Telex ht", "Alegreya Sans SC", "Titillium Web";
+	--sans-serif-fonts-grotesque: Acumin, "Aktiv Grotesk", "Hanken Grotesk", "CC Accidenz Grotesk", Panton, "Typo Grotesk", "Body Grotesque", "Watchword Demo", "Carrois Gothic SC", Numans, Romen, "Standerd Free", "Benetti Grotesk Free";
+	--sans-serif-fonts-geometric: Futura, Habana, Orbitron, Walkway, "Waukegan LDO", Arcus, Edelsans, Giro, Acid, Metrophobic, Code, "Singula Compressed", "Champagne & Limousines", Faucet, "LT Oksana", "Geometry Soft", "Digital Serial", Michroma, Ribbon, Raleway, Montserrat, Metropolis, Coolvetica, Exo, "Antipasto Pro", "League Spartan";
 
 	/* Font size calculations */
 	--custom-font-size-1: calc(1vw + 1vh + .5vmin);
