@@ -25,6 +25,7 @@ for (let i = 0; i < SIMULATIONS; i++) {
   counts[randomItem]++;
 }
 
+
 // Result presentation
 const proportions = {
   a: counts.a / SIMULATIONS,
@@ -40,3 +41,11 @@ const proportions = {
 };
 // console.log(proportions);
 console.table(proportions);
+
+
+let proportions2 = [];
+for (const prop in counts) {
+  const collector = `${prop}: ${counts[prop] / SIMULATIONS}`;
+  proportions2.push(collector);
+}
+console.table(proportions2);
