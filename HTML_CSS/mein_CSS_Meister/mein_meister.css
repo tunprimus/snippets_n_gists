@@ -1146,6 +1146,22 @@ a::after, .link::after {
 	transform: rotate(135deg) translate(-20%, 20%);
 }
 
+/* CSS: Workaround to backdrop-filter? #+++>>> https://stackoverflow.com/questions/38145368/css-workaround-to-backdrop-filter */
+/* slightly transparent fallback */
+.backdrop-blur {
+  background-color: rgba(255, 255, 255, .9);
+}
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .backdrop-blur {
+    background-color: rgba(255, 255, 255, .5);
+    -webkit-backdrop-filter: blur(2em);
+    backdrop-filter: blur(2em);
+  }
+}
+
+
 /* Messages & alert */
 .alert {
 	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem gold, 0 0 0.2rem gold;
