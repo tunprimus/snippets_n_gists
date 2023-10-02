@@ -1,0 +1,64 @@
+<!-- A Fun Look at How to Calculate the Value of Pi #+++>>> https://www.kirupa.com/hodgepodge/fun_look_calculating_pi.htm -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Fun Look at How to Calculate the Value of Pi</title>
+</head>
+<body>
+  <!-- JavaScript Here -->
+  <script>
+    const SMALL_BOUND = 100;
+    const LARGE_BOUND = 1000000;
+    let total = 0;
+    let total2 = 0;
+    let final = 0;
+    let final2 = 0;
+
+    // Archimedes polygon approximation method - 250BC
+    function calculatePI () {
+      let lower = 223 / 71;
+      let upper = 22 / 7;
+
+      console.log(lower + ': lower bound!');
+      console.log(Math.PI + ': value for Math.PI!');
+      console.log(upper + ': upper bound!');
+    }
+    calculatePI();
+
+    // Gregory-Leibniz infinite series - 1676
+    function calculatePI2 () {
+      for (let i = 0; i < LARGE_BOUND; i++) {
+        let numerator = Math.pow(-1, i);
+        let denominator = ((2 * i) + 1);
+
+        total += (numerator / denominator);
+      }
+      final = 4 * total;
+
+      console.log('Value of PI we calculated is: ' + final);
+      console.log('Value for Math.PI is: ' + Math.PI);
+      console.log('Difference is: ' + Math.abs(final - Math.PI));
+    }
+    calculatePI2();
+
+    // Bailey-Borwein-Plouffe (aka BBP) Formula - 1995
+    function calculatePI3 () {
+      for (let n = 0; n < SMALL_BOUND; n++) {
+        let scale = (1 / Math.pow(16, n));
+        let inner = (4 / (8 * n + 1)) - (2 / (8 * n + 4)) - (1 / (8 * n + 5)) - (1 / (8 * n + 6));
+
+        let iteration = scale * inner;
+        final2 += iteration;
+      }
+
+      console.log('Value of PI we calculated is: ' + final2);
+      console.log('Value for Math.PI is: ' + Math.PI);
+      console.log('Difference is: ' + Math.abs(final2 - Math.PI));
+    }
+    calculatePI3();
+  </script>
+</body>
+</html>
