@@ -97,11 +97,21 @@
     generateButtonElement.addEventListener('click', generateContent, false);
 
     function generateContent(evt) {
+      // Empty the container elements to prevent size > desired number
+      /* Works only from Firefox 78, Chrome 86 and Safari 14
+      containerOneElement.replaceChildren();
+      containerTwoElement.replaceChildren();
+      */
+
+      containerOneElement.innerHTML = '';
+      containerTwoElement.innerHTML = '';
+
       const FACTOR = 10000;
       const EMOJIS_LENGTH = emojis.length;
       let htmlToAdd = '';
       let numberOfItems = 1000;
       let fragment = new DocumentFragment();
+
 
       // InnerHTML Approach
       for (let i = 0; i < numberOfItems; i++) {
