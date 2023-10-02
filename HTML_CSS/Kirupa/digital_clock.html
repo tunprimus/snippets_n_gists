@@ -1,0 +1,49 @@
+<!-- Creating a Sweet Digital Clock -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Clock</title>
+  <style type="text/css">
+    body {
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      place-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background-color: #EEEEEE;
+    }
+    .timer-field {
+      font-size: 4.5rem;
+      font-family: "Courier New", monospace;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 53%, #CFBFF7 53%, #CFBFF7 100%);
+      padding: 0 1.25rem;
+    }
+  </style>
+</head>
+<body>
+  <p class="timer-field" id="timerField">12:10:45 AM</p>
+
+  <!-- JavaScript Here -->
+  <script>
+    let timerPlace = document.querySelector('#timer-field');
+
+    function timer() {
+      let date = new Date();
+
+      let seconds = date.getSeconds();
+      let minutes = date.getMinutes();
+      let hours = date.getHours();
+
+      timerField.textContent = `${hours}:${minutes}:${seconds}`;
+
+      requestAnimationFrame(timer);
+    }
+    timer();
+  </script>
+</body>
+</html>
