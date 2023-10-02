@@ -30,7 +30,8 @@
 
   <!-- JavaScript Here -->
   <script>
-    let timerPlace = document.querySelector('#timer-field');
+    let timerPlace = document.querySelector('#timerField');
+    let morningOrEvening = '';
 
     function timer() {
       let date = new Date();
@@ -39,7 +40,23 @@
       let minutes = date.getMinutes();
       let hours = date.getHours();
 
-      timerField.textContent = `${hours}:${minutes}:${seconds}`;
+      // Is it AM or PM?
+      if (hours >= 12) {
+        morningOrEvening = 'PM';
+      } else {
+        morningOrEvening = 'AM';
+      }
+
+      // Normalise to the 12 hour clock
+      if (hours > 12) {
+        hours -= 12;
+      }
+
+      // Ensure seconds and minutes values are two digits
+      let paddedSeconds = String(seconds).padStart(2, '0');
+      let paddedMinutes = String(minutes).padStart(2, '0');
+
+      timerField.textContent = `${hours}:${paddedMinutes}:${paddedSeconds} ${morningOrEvening}`;
 
       requestAnimationFrame(timer);
     }
