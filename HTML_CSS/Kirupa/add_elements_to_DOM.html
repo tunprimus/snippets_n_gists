@@ -101,6 +101,7 @@
       const EMOJIS_LENGTH = emojis.length;
       let htmlToAdd = '';
       let numberOfItems = 1000;
+      let fragment = new DocumentFragment();
 
       // InnerHTML Approach
       for (let i = 0; i < numberOfItems; i++) {
@@ -110,6 +111,23 @@
         htmlToAdd += `<div class="item"><p class="item__paragraph">${emoji} ${num}</p></div>`;
       }
       containerOneElement.innerHTML = htmlToAdd;
+
+      // DocumentFragment Approach
+      for (let i = 0; i < numberOfItems; i++) {
+        let num2 = Math.random() * FACTOR;
+        let emoji2 = emojis[Math.floor(Math.random() * EMOJIS_LENGTH)];
+
+        let divElement = document.createElement('div');
+        divElement.classList.add('item');
+
+        let pElement = document.createElement('p');
+        divElement.classList.add('item__paragraph');
+        pElement.innerText = `${num2} ${emoji2}`;
+
+        divElement.appendChild(pElement);
+        fragment.appendChild(divElement);
+      }
+      containerTwoElement.appendChild(fragment);
     }
   </script>
 </body>
