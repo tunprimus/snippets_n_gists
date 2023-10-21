@@ -670,6 +670,58 @@ progress {
 	align-items: center;
 }
 
+/* Create a responsive grid layout with no media queries using CSS Grid | https://archive.hankchizljaw.com/wrote/create-a-responsive-grid-layout-with-no-media-queries-using-css-grid/ */
+
+.auto-grid {
+	--auto-grid-min-size: 12rem;
+}
+
+.auto-grid > * {
+	max-width: 65ch;
+}
+
+.auto-grid > * + * {
+	margin-top: 1rem;
+}
+
+@supports (display: grid) {
+	.auto-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+		grid-gap: 1rem;
+	}
+
+	.auto-grid > * {
+		max-width: unset;
+	}
+	
+	.auto-grid > * + * {
+		margin-top: unset;
+	}
+}
+
+/* Responsive CSS Layouts without Media Queries | https://www.sitepoint.com/responsive-css-layout-grids-without-media-queries/ */
+
+.resp-layout-grid {
+	--layout-min: 30ch;
+	
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-min)), 1fr));
+	grid-gap: 1rem;
+	gap: 1rem;
+}
+
+.resp-flexbox-layout {
+	--layout-min: 30ch;
+
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.resp-flexbox-layout > * {
+	flex: 1 1 var(--layout-min);
+}
+
 .header {
 	font: inherit;
 }
