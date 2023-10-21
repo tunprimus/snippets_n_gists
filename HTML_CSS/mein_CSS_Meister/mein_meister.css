@@ -606,8 +606,6 @@ progress {
 .container-flexbox-albatross {
 	display: flex;
 	flex-wrap: wrap;
-	/* --margin: 1rem;
-	--modifier: calc(40rem - 100%); */
 	margin: calc(var(--flexbox-albatross-margin) * -1);
 }
 
@@ -689,6 +687,7 @@ progress {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
 		grid-gap: 1rem;
+		gap: 1rem;
 	}
 
 	.auto-grid > * {
