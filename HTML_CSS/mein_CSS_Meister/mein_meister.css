@@ -398,6 +398,13 @@ body {
 	color: var(--theme-text-colour);
 }
 
+h1,
+h2,
+h3,
+h4 {
+	text-wrap: balance;
+}
+
 p {
 	max-width: 65ch;
 }
@@ -408,6 +415,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 }
 
 ol, ul {
+	list-style: none;
+	list-style-position: unset;
+}
+
+ol[role="list"],
+ul[role="list"] {
 	list-style: none;
 	list-style-position: unset;
 }
@@ -426,6 +439,7 @@ a:active {
 
 a:not([class]) {
 	text-decoration-skip-ink: auto;
+	color: currentColor;
 }
 
 audio, img, picture, video, iframe, canvas, object, embed, svg  {
@@ -520,6 +534,10 @@ textarea {
 	resize: vertical;
 }
 
+textarea:not([rows]) {
+	min-height: 10rem;
+}
+
 details summary {
 	cursor: pointer;
 }
@@ -570,6 +588,10 @@ progress {
 
 :is(a, button, input, textarea, summary):focus:not(:focus-visible) {
   outline: none;
+}
+
+:target {
+	scroll-margin-block: 5ex;
 }
 
 /* For frameworks */
