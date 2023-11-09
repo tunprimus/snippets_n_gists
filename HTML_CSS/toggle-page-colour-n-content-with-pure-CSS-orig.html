@@ -4,9 +4,90 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Toggle a Page’s Colour and Content With Pure CSS</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -webkit-transition: all 1s ease;
+      transition: all 1s ease;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    /* Wrapper */
+    .main {
+      padding: 20px;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Headline */
+    h2 {
+      text-align: center;
+      text-transform: uppercase;
+      font: 70px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    h2::after {
+      content: " On ";
+    }
+
+    .features {
+      width: 940px;
+      margin: 0 auto 30px auto;
+    }
+
+    .features p {
+      width: 33.33%;
+      float: left;
+      padding: 0 20px;
+      font: 13px/1.5 Helvetica, Arial, sans-serif;
+    }
+
+    .last {
+      padding-right: 0;
+    }
+
+    .features::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Big photo */
+    .headerimage {
+      height: 400px;
+      width: 900px;
+      margin: 0 auto;
+      background: url(http://lorempixum.com/900/400/city/3);
+    }
+  </style>
 </head>
 <body>
-  
+  <div class="main">
+    <h2>Lights</h2>
+    <div class="features">
+      <p>Die der mit was fühlt wohl gedränge der, die manche sie meinem mit stunden. Einer euch halbverklungnen geneigt was, es.</p>
+      <p>Visit to seek fathers sight from visit old mine steel. Mother childe sad vaunted will olden childe, day wassailers none.</p>
+      <p>Las osos de tierra dando que, el es vuelve bala arcos, manteles perfil olvidando de viva la del dando. Que.</p>
+    </div>
+    <div class="headerimage"></div>
+  </div>
 </body>
 </html>
