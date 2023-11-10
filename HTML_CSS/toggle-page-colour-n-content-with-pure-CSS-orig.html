@@ -77,9 +77,35 @@
       margin: 0 auto;
       background: url(http://lorempixum.com/900/400/city/3);
     }
+
+    /* Light switch */
+    label {
+      display: block;
+      height: 25px;
+      width: 100px;
+      background-color: #EEEEEE;
+      text-align: center;
+      font: 14px/25px Helvetica, Arial, sans-serif;
+      margin: 20px 0;
+      position: fixed;
+    }
+
+    label:hover {
+      background-color: #DDCA7E;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+
+    input#lightswitch {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
   </style>
 </head>
 <body>
+  <label for="lightswitch">Light Switch</label>
+  <input type="checkbox" name="lightswitch" id="lightswitch">
   <div class="main">
     <h2>Lights</h2>
     <div class="features">
@@ -87,7 +113,10 @@
       <p>Visit to seek fathers sight from visit old mine steel. Mother childe sad vaunted will olden childe, day wassailers none.</p>
       <p>Las osos de tierra dando que, el es vuelve bala arcos, manteles perfil olvidando de viva la del dando. Que.</p>
     </div>
+    <!-- End of features -->
+
     <div class="headerimage"></div>
   </div>
+  <!-- End of main -->
 </body>
 </html>
