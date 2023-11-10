@@ -101,6 +101,28 @@
       top: -9999px;
       left: -9999px;
     }
+
+    /* Switched off */
+    input#lightswitch:checked + .main {
+      background-color: #222222;
+    }
+
+    input#lightswitch:checked + .main h2 {
+      color: #DDCA7E;
+    }
+
+    input#lightswitch:checked + .main h2::after {
+      content: " Off";
+    }
+
+    input#lightswitch:checked + .main p {
+      color: #AAAAAA;
+    }
+
+    input#lightswitch:checked + .main > .headerimage {
+      background: url(http://lorempixum.com/900/400/city/4);
+      border: 8px solid #FFFFFF;
+    }
   </style>
 </head>
 <body>
