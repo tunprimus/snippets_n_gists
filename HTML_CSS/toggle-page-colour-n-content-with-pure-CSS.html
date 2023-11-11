@@ -45,6 +45,10 @@
       position: fixed;
     }
 
+    .light-switch__label::after {
+      content: "LIGHT";
+    }
+
     .light-switch__label:hover {
       background-color: #DDCA7E;
       color: #FFFFFF;
@@ -62,13 +66,17 @@
       color: #AAAAAA;
     }
 
+    .light-switch__input:checked + .light-switch__label::after {
+      content: "DARK";
+    }
+
     .light-switch__input:checked + .container * {
       color: #AAAAAA;
     }
   </style>
 </head>
 <body>
-  <label for="light-switch" class="light-switch__label">Light</label>
+  <label for="light-switch" class="light-switch__label"></label>
   <input type="checkbox" name="light-switch" id="light-switch" class="light-switch light-switch__input">
   <div class="container">
     <header class="header">
