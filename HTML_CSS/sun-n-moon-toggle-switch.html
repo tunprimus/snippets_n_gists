@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sun and Moon Toggle Switch</title>
+  <style>
+    * {
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      background-color: #ffffff;
+    }
+
+    #toggle-checkbox {
+      display: none;
+    }
+
+    .label {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 0;
+      left: 0;
+      width: 7.25rem;
+      height: 3.5rem;
+      margin: 0 auto;
+      background-color: #77b5fe;
+      border-radius: 3.5rem;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      overflow: hidden;
+    }
+
+    #star {
+      position: absolute;
+      top: 0.8125rem;
+      left: 0.8125rem;
+      width: 1.875rem;
+      height: 1.875rem;
+      background-color: #fafd0f;
+      transform: scale(1);
+      border-radius: 50%;
+      transition: top 0.3s ease, left 0.3s ease, background-color 0.3s ease;
+      z-index: 1;
+    }
+
+    #star-1 {
+      position: relative;
+    }
+
+    #star-2 {
+      position: absolute;
+      transform: rotateZ(36deg);
+    }
+
+    .star {
+      top: -0.8rem;
+      left: 0rem;
+      font-size: 2.8125rem;
+      line-height: 1.75;
+      color: #fafd0f;
+      transition: color 0.3s ease;
+    }
+
+    #moon {
+      position: absolute;
+      bottom: -3.25rem;
+      right: 0.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: #ffffff;
+      border-radius: 50%;
+      transition: bottom 0.3s ease;
+    }
+
+    #moon::before {
+      content: "";
+      top: -0.75rem;
+      left: 1.0625rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: #03a9f4;
+      transition: background-color 0.3s ease;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <input type="checkbox" name="toggle-checkbox" id="toggle-checkbox" class="toggle-checkbox">
+    <label for="toggle-checkbox" class="label">
+      <div class="star star-1" id="star-1"><span class="star-icaon">&#x2B50;</span></div>
+      <div class="star star-2" id="star-2"><span class="star-icaon">&#x2B50;</span></div>
+      <div class="moon" id="moon"></div>
+    </label>
+  </main>
+</body>
+</html>
