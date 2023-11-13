@@ -1,0 +1,101 @@
+<!-- Modified from Responsive Drop-Down Menu In Pure CSS (NO Javascript) | https://code-boxx.com/simple-css-drop-down-menu/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Responsive Drop-Down Menu In Pure CSS (NO Javascript)</title>
+  <style>
+    .ddmenu {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .ddsub {
+      position: static;
+      margin-top: 10px;
+    }
+
+    .ddmenu__link,
+    .ddmenu,
+    .ddgroup {
+      padding: 15px;
+      color: white;
+      text-decoration: none;
+      background-color: #585858;
+    }
+
+    .ddmenu__link:hover,
+    .ddmenu:hover,
+    .ddgroup:hover {
+      color: #ffe945;
+      background-color: #3a3a3a;
+      cursor: pointer;
+    }
+
+    .ddmenu .ddgroup {
+      position: relative;
+    }
+
+    .ddsub {
+      width: 100%;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      display: none;
+    }
+
+    .ddsub__link {
+      display: block;
+      box-sizing: border-box;
+    }
+
+    .ddgroup:hover .ddsub {
+      display: block;
+    }
+
+    /* (D) DROPDOWN ARROW */
+    .ddgroup::after {
+      content: "\27A4";
+      position: absolute;
+      top: 13px;
+      right: 10;
+      transition: transform 0.2s;
+    }
+
+    .ddgroup:hover::after {
+      transform: rotate(90deg);
+    }
+
+    @media screen and (min-width: 640px) {
+      .ddmenu {
+        flex-wrap: nowrap;
+      }
+
+      .ddmenu__link,
+      .ddmenu,
+      .ddgroup {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="ddmenu" id="ddmenu">
+    <!-- (A) "NORMAL ITEMS" -->
+    <a href="#" class="ddmenu__link">Menu A</a>
+    <a href="#" class="ddmenu__link">Menu B</a>
+    <a href="#" class="ddmenu__link">Menu C</a>
+
+    <!-- (B) DROPDOWN GROUP -->
+    <div class="ddgroup">
+      Menu D
+      <div class="ddsub">
+        <a href="#" class="ddsub__link">Menu A</a>
+        <a href="#" class="ddsub__link">Menu B</a>
+      </div>
+    </div>
+  </nav>
+</body>
+</html>
