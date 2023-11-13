@@ -1,0 +1,99 @@
+<!-- Modified from 3 Steps Simple Responsive Hamburger Menu In Pure CSS | https://code-boxx.com/simple-responsive-pure-css-hamburger-menu/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>3 Steps Simple Responsive Hamburger Menu In Pure CSS</title>
+  <style>
+    /* [ON SMALL SCREENS] */
+    /* (A) BREAK INTO VERTICAL MENU */
+    .hamitem {
+      box-sizing: border-box;
+      display: block;
+      width: 100%;
+      border-top: 1px solid #333333;
+    }
+
+    /* (B) SHOW HAMBURGER ICON */
+    .hamburger-label {
+      display: inline-block;
+      position: absolute;
+      top: 0.1rem;
+      right: 0.1rem;
+      color: white;
+      background-color: #a02620;
+      font-style: normal;
+      font-size: 1.2rem;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .hamburger-input {
+      position: absolute;
+      top: 0;
+      left: -100%;
+    }
+
+    /* (C) TOGGLE SHOW/HIDE MENU */
+    .hamitems {
+      display: none;
+    }
+
+    .hamburger-input:checked ~ .hamitems {
+      display: block;
+      margin-top: 2.5rem;
+    }
+
+    /* [ON BIG SCREENS] */
+    @media screen and (min-width: 768px) {
+      /* (A) WRAPPER */
+      .hamnav {
+        width: 100%;
+        background-color: #000000;
+      }
+
+      /* (B) HORIZONTAL MENU ITEMS */
+      .hamitems {
+        display: flex;
+      }
+
+      .hamitem {
+        flex-grow: 1;
+        flex-basis: 0;
+        padding: 10px;
+        color: white;
+        text-decoration: none;
+        text-align: center;
+      }
+
+      .hamitem:hover {
+        background-color: #af0d0d;
+      }
+
+      /* (C) HIDE HAMBURGER */
+      .hamburger-label,
+      .hamburger {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- (A) MENU WRAPPER -->
+  <nav id="hamnav" class="hamnav">
+    <!-- (B) THE HAMBURGER -->
+    <label for="hamburger" class="hamburger-label">&#9776;</label>
+    <input type="checkbox" name="hamburger" id="hamburger" class="hamburger hamburger-input">
+
+    <!-- (C) MENU ITEMS -->
+    <div id="hamitems" class="hamitems">
+      <a href="a.html" class="hamitem" id="hamitem-1">First</a>
+      <a href="b.html" class="hamitem" id="hamitem-2">Second</a>
+      <a href="c.html" class="hamitem" id="hamitem-3">Third</a>
+      <a href="d.html" class="hamitem" id="hamitem-4">Fourth</a>
+    </div>
+  </nav>
+</body>
+</html>
