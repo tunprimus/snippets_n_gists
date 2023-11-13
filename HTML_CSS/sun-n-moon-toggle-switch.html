@@ -92,6 +92,29 @@
       background-color: #03a9f4;
       transition: background-color 0.3s ease;
     }
+
+    #toggle-checkbox:checked + .label {
+      background-color: #000000;
+    }
+
+    #toggle-checkbox:checked + .label #star {
+      top: 0.1875rem;
+      left: 4rem;
+      transform: scale(0.3);
+      background-color: yellow;
+    }
+
+    #toggle-checkbox:checked + .label .star {
+      color: yellow;
+    }
+
+    #toggle-checkbox:checked + .label #moon {
+      bottom: 0.5rem;
+    }
+
+    #toggle-checkbox:checked + .label #moon::before {
+      background-color: #000000;
+    }
   </style>
 </head>
 <body>
