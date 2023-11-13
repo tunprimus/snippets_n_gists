@@ -1,0 +1,117 @@
+<!-- Modified from Responsive Collapsible Tree Menu In HTML CSS | https://code-boxx.com/css-collapsible-tree-menu/ -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Responsive Collapsible Tree Menu In HTML CSS</title>
+  <style>
+    /* (A) LIST TO MENU */
+    .tree,
+    .section__group {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .tree {
+      background-color: #fbfbfb;
+      border: 1px solid #d2d2d2;
+    }
+
+    .tree__item,
+    .section {
+      border-bottom: 1px solid #d2d2d2;
+      padding: 15px 10px;
+    }
+
+    .section:last-child {
+      border: 0;
+    }
+
+    /* (B) SUB-SECTIONS */
+    /* (B1) TOGGLE SHOW/HIDE */
+    .section__group {
+      display: none;
+    }
+
+    .section__input:checked ~ .section__group {
+      display: block;
+    }
+
+    /* (B2) HIDE CHECKBOX */
+    .section__input[type="checkbox"] {
+      display: none;
+    }
+
+    /* (B3) ADD EXPAND/COLLAPSE ICON */
+    .section {
+      position: relative;
+      padding-left: 35px !important;
+    }
+
+    .section__label::after {
+      content: "\0002B";
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10px;
+      text-align: center;
+      font-size: 30px;
+      color: #ff0000;
+      transition: all 0.5s;
+    }
+
+    .section__input:checked ~ .section__label::after {
+      color: #23c37a;
+      transform: rotate(45deg);
+    }
+
+    /* (B4) SUB-SECTION ITEMS */
+    .section__group {
+      margin-top: 10px;
+    }
+
+    .section__item {
+      color: #d43d3d;
+    }
+  </style>
+</head>
+<body>
+  <ul class="tree">
+    <!-- (A) "NORMAL" ITEMS -->
+    <li class="tree__item">Item A</li>
+    <li class="tree__item">Item B</li>
+
+    <!-- (B) SECTION -->
+    <li class="section">
+      <input type="checkbox" name="" id="groupA" class="section__input">
+      <label for="groupA" class="section__label">Group A</label>
+      <ul class="section__group">
+        <li class="section__item">Group A Item 1</li>
+        <li class="section__item">Group A Item 2</li>
+      </ul>
+    </li>
+
+    <!-- (C) SECTION WITH SUB-SECTION -->
+    <li class="section">
+      <input type="checkbox" name="" id="groupB" class="section__input">
+      <label for="groupB" class="section__label">Group B</label>
+      <ul class="section__group">
+        <li class="section__item">Group B Item 1</li>
+        <li class="section__item">Group B Item 2</li>
+        <!-- SUB-SECTION -->
+        <li class="section">
+          <input type="checkbox" name="" id="groupC" class="section__input">
+          <label for="groupC" class="section__label">Group C</label>
+          <ul class="section__group">
+            <li class="section__item">Group C Item 1</li>
+            <li class="section__item">Group C Item 2</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</body>
+</html>
