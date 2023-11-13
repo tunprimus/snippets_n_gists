@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Collapsible Menu</title>
+  <style>
+    .burger {
+      display: inline-block;
+      border: 0;
+      background-color: none;
+      outline: none;
+      padding: 0;
+      cursor: pointer;
+      border-bottom: 0.25rem solid currentColor;
+      -webkit-transition: border-bottom 1s ease-in-out;
+      transition: border-bottom 1s ease-in-out;
+    }
+
+    .burger::-moz-focus-inner {
+      border: 0;
+      padding: 0;
+    }
+
+    .burger::before {
+      content: "\2630";
+      display: block;
+      border-bottom: 0.25rem solid currentColor;
+      width: 100%;
+      margin-bottom: 0.3125rem;
+      -webkit-transition: border-bottom 0.5s ease-in-out;
+      transition: border-bottom 0.5s ease-in-out;
+    }
+
+    .burger::after {
+      content: "\2630";
+      display: block;
+      border-bottom: 0.25rem solid currentColor;
+      width: 100%;
+      margin-bottom: 0.3125rem;
+      -webkit-transition: border-bottom 0.5s ease-in-out;
+      transition: border-bottom 0.5s ease-in-out;
+    }
+
+    .burger-check {
+      display: none;
+    }
+
+    .burger-check ~ .burger {
+      border-bottom: 0.25rem solid transparent;
+      -webkit-transition: border-bottom 0.8s ease-in-out;
+      transition: border-bottom 0.8s ease-in-out;
+    }
+
+    .burger-check ~ .burger::before {
+      -webkit-transform: rotate(-405deg) translateY(0.0625rem) translateX(-0.1875rem);
+      transform: rotate(-405deg) translateY(0.0625rem) translateX(-0.1875rem);
+      -webkit-transition: border-bottom 0.5s ease-in-out;
+      transition: border-bottom 0.5s ease-in-out;
+    }
+
+    .burger-check ~ .burger::after {
+      -webkit-transform: rotate(405deg) translateY(-0.25rem) translateX(-0.3125rem);
+      transform: rotate(405deg) translateY(-0.25rem) translateX(-0.3125rem);
+      -webkit-transition: border-bottom 0.5s ease-in-out;
+      transition: border-bottom 0.5s ease-in-out;
+    }
+
+    .navigation {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.5s ease-in-out;
+    }
+
+    .burger-check:checked ~ .navigation {
+      max-height: 31.25rem;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      list-style: none;
+      font-size: 1.5625rem;
+      padding: 0.3125rem 0
+    }
+
+    li a:hover {
+      border: 0.125rem solid currentColor;
+      border-radius: 1rem;
+      padding: 0.25rem 0.75rem;
+    }
+
+    body {
+      background-color: floralwhite;
+      font-family: "Libre Baskerville", serif;
+      font-style: italic;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    a {
+      color: inherit;
+    }
+  </style>
+</head>
+<body>
+  <input class="burger-check" id="burger-check" type="checkbox" class="burger-check">
+  <label for="burger-check" class="burger"></label>
+  <nav id="navigation" class="navigation">
+    <ul class="navigation__group">
+      <li class="navigation__list"><a href="#" class="navigation__link">Home</a></li>
+      <li class="navigation__list"><a href="#" class="navigation__link">Stuff</a></li>
+      <li class="navigation__list"><a href="#" class="navigation__link">Other stuff</a></li>
+      <li class="navigation__list"><a href="#" class="navigation__link">Cats</a></li>
+    </ul>
+  </nav>
+</body>
+</html>
