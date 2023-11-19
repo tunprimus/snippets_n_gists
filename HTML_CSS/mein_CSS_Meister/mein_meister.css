@@ -374,7 +374,10 @@
 	vertical-align: inherit;
 }
 
+/* CSS Height That Works in Both Modern and Legacy Browsers | https://stackoverflow.com/a/65836306 */
 html {
+	height: 100%; /* Fallback CSS for IE 4-6 and older browsers. Note: Without this setting, body below cannot achieve 100% height. */
+	height: 100vh; /* Overrides 100% height in modern HTML5 browsers and uses the viewport's height. Only works in modern HTML5 browsers */
   font-size: var(--custom-font-size-N);
 	scroll-behavior: smooth;
 	text-rendering: optimizeLegibility;
@@ -383,13 +386,12 @@ html {
   text-size-adjust: 100%;
 }
 
-html, body {
-	height: 100%;
-	min-height: 100%;
-}
-
 body {
-	min-height: 100vh;
+	height: auto; /* Allows content to grow beyond the page without overflow */
+	width: auto; /* Allows content to grow beyond the page without overflow */
+	min-height: 100%; /* Starts web page with 100% height. Fallback for IE 4-6 and older browsers */
+	min-height: 100vh; /* Starts web page with 100% height. Uses the viewport's height. Only works in modern HTML5 browsers */
+	overflow-y: scroll; /* Optional: Adds an empty scrollbar to the right margin in case content grows vertically, creating a scrollbar.  Allows for better width calculations, as the browser pre-calculates width before scrollbar appears, avoiding page content shifting.*/
 	font-family: var(--font-stack-body);
 	line-height: var(--golden-ratio);
 	line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
@@ -448,6 +450,11 @@ audio, img, picture, video, iframe, canvas, object, embed, svg  {
 	height: auto;
 	border-style: none;
 	/* vertical-align: middle; */
+}
+
+img {
+	width: auto\9;
+	width: inherit; /* This makes auto-resizing with max-width 100% and height auto work in IE8 */
 }
 
 audio:not([controls]) {
