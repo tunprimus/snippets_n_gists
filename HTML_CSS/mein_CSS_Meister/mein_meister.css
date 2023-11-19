@@ -455,6 +455,7 @@ audio, img, picture, video, iframe, canvas, object, embed, svg  {
 img {
 	width: auto\9;
 	width: inherit; /* This makes auto-resizing with max-width 100% and height auto work in IE8 */
+	max-height: 100%;
 }
 
 audio:not([controls]) {
