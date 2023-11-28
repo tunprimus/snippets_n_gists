@@ -1,6 +1,11 @@
 // @ts-check
 
 /**
+ * @author Angelos Chalaris
+ * @link https://www.30secondsofcode.org/js/s/add-remove-event-listener/
+ */
+
+/**
  * 
  * @param {Node} elem - The node to add event listeners to
  * @param {string} event - The event to add to the node
