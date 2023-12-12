@@ -9,6 +9,8 @@
 /* -------------- */
 :root {
 	/* Preferred colours variables */
+	--alizarin-crimson: #4E1500;
+	--alizarin-crimson: hsl(16, 100%, 15%);
 	--amethyst: #9966CC;
 	--amethyst: hsl(270, 50%, 60%);
 	--aqua-blue: #0AFFFF;
@@ -19,12 +21,16 @@
 	--beryl: hsl(174, 77%, 63%);
 	--blue: #0000FF;
 	--blue: hsl(240, 100%, 50%);
+	--bright-red: #DB0000;
+	--bright-red: hsl(0, 100%, 43%);
 	--bronze: #CD7F32;
 	--bronze: hsl(30, 61%, 50%);
 	--butter: #FFFFD2;
 	--butter: hsl(60, 100%, 91%);
 	--carbuncle: #943241;
 	--carbuncle: hsl(351, 49%, 39%);
+	--cadmium-yellow: #FFEC00;
+	--cadmium-yellow: hsl(56, 100%, 50%);
 	--chalcedony: #7784B8;
 	--chalcedony: hsl(228, 31%, 59%);
 	--charcoal: #101820;
@@ -37,6 +43,8 @@
 	--cocoa-brown: hsl(17, 13%, 10%);
 	--darkblue: #00008B;
 	--darkblue: hsl(240, 100%, 27%);
+	--dark-sienna: #5F2E1F;
+	--dark-sienna: hsl(14, 51%, 25%);
 	--darkslategrey: #2F4F4F;
 	--darkslategrey: hsl(180, 25%, 25%);
 	--dimgrey: #696969;
@@ -57,6 +65,8 @@
 	--grey: hsl(0, 0%, 50%);
 	--hotpink: #FF69B4;
 	--hotpink: hsl(330, 100%, 71%);
+	--indian-yellow: #FFB800;
+	--indian-yellow: hsl(43, 100%, 50%);
 	--indigo: #4B0082;
 	--indigo: hsl(275, 100%, 25%);
 	--ivory: #FFFFF0;
@@ -71,6 +81,8 @@
 	--light-olive: hsl(63, 33%, 86%);
 	--linen: #FAF0E6;
 	--linen: hsl(31, 68%, 94%);
+	--midnight-black: #000000;
+	--midnight-black: hsl(0, 0%, 0%);
 	--midnightblue: #191970;
 	--midnightblue: hsl(240, 64%, 27%);
 	--navy: #000080;
@@ -95,12 +107,20 @@
 	--orange: hsl(39, 100%, 50%);
 	--pearl: #EAE0C8;
 	--pearl: hsl(42, 45%, 85%);
+	--phthalo-blue: #0C0040;
+	--phthalo-blue: hsl(251, 100%, 13%);
+	--phthalo-green: #102E3C;
+	--phthalo-green: hsl(199, 58%, 15%);
+	--prussian-blue: #021E44;
+	--prussian-blue: hsl(215, 94%, 14%);
 	--purple: #800080;
 	--purple: hsl(300, 100%, 25%);
 	--red: #FF0000;
 	--red: hsl(0, 100%, 50%);
 	--ruby: #E0115F;
 	--ruby: hsl(337, 86%, 47%);
+	--sap-green: #0A3410;
+	--sap-green: hsl(129, 68%, 12%);
 	--sapphire: #0F52BA;
 	--sapphire: hsl(216, 85%, 39%);
 	--sardius: #87210D;
@@ -143,14 +163,20 @@
 	--solarised-white: hsl(46, 42%, 88%);
 	--solarised-yellow: #B58900;
 	--solarised-yellow: hsl(45, 100%, 35%);
+	--titanium-white: #FFFFFF;
+	--titanium-white: hsl(0, 0%, 100%);
 	--topaz: #FFC87C;
 	--topaz: hsl(35, 100%, 74%);
+	--van-dyke-brown: #221B15;
+	--van-dyke-brown: hsl(28, 24%, 11%);
 	--violet: #EE82EE;
 	--violet: hsl(300, 76%, 72%);
 	--white: #FFFFFF;
 	--white: hsl(0, 0%, 100%);
 	--yellow: #FFFF00;
 	--yellow: hsl(60, 100%, 50%);
+	--yellow-ochre: #c79b00;
+	--yellow-ochre: hsl(47, 100%, 39%);
 
 	/* Extending rainbow-like colours to 12 */
 	--twelve-colour-combo: var(var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
