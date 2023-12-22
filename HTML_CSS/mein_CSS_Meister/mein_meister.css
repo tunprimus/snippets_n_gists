@@ -404,7 +404,8 @@
 html {
 	height: 100%; /* Fallback CSS for IE 4-6 and older browsers. Note: Without this setting, body below cannot achieve 100% height. */
 	height: 100vh; /* Overrides 100% height in modern HTML5 browsers and uses the viewport's height. Only works in modern HTML5 browsers */
-  font-size: var(--custom-font-size-N);
+  font-size: calc(15px + 0.390625vw);
+	font-size: var(--custom-font-size-N);
 	scroll-behavior: smooth;
 	text-rendering: optimizeLegibility;
 	-webkit-text-size-adjust: 100%;
@@ -424,6 +425,10 @@ body {
 	line-height: calc(3px + 2.5ex + 3px);
 	-webkit-font-smoothing: antialiased;
 	color: var(--theme-text-colour);
+}
+
+* + * {
+	margin-top: 1.618rem;
 }
 
 h1,
@@ -724,6 +729,9 @@ progress {
 	align-items: center;
 }
 
+/* End container queries */
+
+
 /* Create a responsive grid layout with no media queries using CSS Grid | https://archive.hankchizljaw.com/wrote/create-a-responsive-grid-layout-with-no-media-queries-using-css-grid/ */
 
 .auto-grid {
@@ -755,6 +763,9 @@ progress {
 	}
 }
 
+/* End create a responsive grid layout with no media queries using CSS grid */
+
+
 /* Responsive CSS Layouts without Media Queries | https://www.sitepoint.com/responsive-css-layout-grids-without-media-queries/ */
 
 .resp-layout-grid {
@@ -776,6 +787,57 @@ progress {
 .resp-flexbox-layout > * {
 	flex: 1 1 var(--layout-min);
 }
+
+/* End responsive CSS layouts without media queries  */
+
+
+/* Easiest Flexbox Grid  */
+.flexbox-grid-main,
+.flexbox-grid-container,
+.flexbox-grid-wrapper {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.flexbox-grid-row {
+	display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.flexbox-grid-column {
+	flex-basis: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	.flexbox-grid-row {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+
+	.flexbox-grid-column {
+		flex: 1;
+	}
+
+	.flexbox-grid-column--pct-20 {
+		flex: 2;
+	}
+
+	.flexbox-grid-column--pct-25 {
+		flex: 2.5;
+	}
+
+	.flexbox-grid-column--pct-55 {
+		flex: 5.5;
+	}
+
+	.flexbox-grid-column--pct-75 {
+		flex: 7.5;
+	}
+}
+
+/* End easiest flexbox grid  */
 
 .header {
 	font: inherit;
