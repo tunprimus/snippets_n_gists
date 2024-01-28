@@ -528,6 +528,15 @@ input[type="button"] {
 	cursor: pointer;
 }
 
+[type="button"],
+[type="reset"],
+[type="submit"],
+[type="image"],
+[type="checkbox"],
+[type="radio"] {
+	cursor: pointer;
+}
+
 input[type="text"],
 input[type="number"],
 select,
