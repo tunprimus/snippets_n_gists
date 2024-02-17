@@ -9,6 +9,8 @@
 /* -------------- */
 :root {
 	/* Preferred colours variables */
+	--agate-grey: #AFB1A9;
+	--agate-grey: hsl(75, 5%, 68%);
 	--alizarin-crimson: #4E1500;
 	--alizarin-crimson: hsl(16, 100%, 15%);
 	--amethyst: #9966CC;
@@ -21,6 +23,8 @@
 	--beryl: hsl(174, 77%, 63%);
 	--blue: #0000FF;
 	--blue: hsl(240, 100%, 50%);
+	--brass: #B5A642;
+	--brass: hsl(52, 47%, 48%);
 	--bright-red: #DB0000;
 	--bright-red: hsl(0, 100%, 43%);
 	--bronze: #CD7F32;
@@ -79,6 +83,8 @@
 	--jasper: hsl(8, 61%, 53%);
 	--light-olive: #E7E8D1;
 	--light-olive: hsl(63, 33%, 86%);
+	--ligure: #26619C;
+	--ligure: hsl(210, 61%, 38%);
 	--linen: #FAF0E6;
 	--linen: hsl(31, 68%, 94%);
 	--midnight-black: #000000;
@@ -101,6 +107,8 @@
 	--off-white-6: hsl(0, 0%, 99%);
 	--off-white-7: #E0E0E0;
 	--off-white-7: hsl(0, 0%, 88%);
+	--olive: #808000;
+	--olive: hsl(60, 100%, 25%);
 	--onyx: #0F0F0F;
 	--onyx: hsl(0, 0%, 6%);
 	--orange: #FFA500;
