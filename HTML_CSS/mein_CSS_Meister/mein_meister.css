@@ -455,11 +455,22 @@ p {
 }
 
 /* HTML5 blocks - needed in older browsers */
-article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section {
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
 	display: block;
 }
 
-ol, ul {
+ol,
+ul {
 	list-style: none;
 	list-style-position: unset;
 }
@@ -506,7 +517,15 @@ a:not([class]) {
 	color: currentColor;
 }
 
-audio, img, picture, video, iframe, canvas, object, embed, svg  {
+audio,
+img,
+picture,
+video,
+iframe,
+canvas,
+object,
+embed,
+svg  {
 	display: block;
 	max-width: 100%;
 	height: auto;
@@ -528,7 +547,11 @@ svg {
 	overflow: hidden;
 }
 
-button, input, optgroup, select, textarea {
+button,
+input,
+optgroup,
+select,
+textarea {
 	font: inherit;
 	font-size: 100%;
 	vertical-align: middle;
@@ -591,14 +614,22 @@ button[disabled] {
 	pointer-events: none;
 }
 
-p, li, h1, h2, h3, h4, h5, h6 {
+p,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	overflow-wrap: break-word;
 	-webkit-hyphens: auto;
 	hyphens: auto;
 	font-weight: 400;
 }
 
-sup, sub {
+sup,
+sub {
 	line-height: 0;
 }
 
