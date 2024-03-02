@@ -346,25 +346,26 @@
 
 	/* >>> Contextual Spacing For Intrinsic Web Design: https://moderncss.dev/contextual-spacing-for-intrinsic-web-design/ */
 	/* Paddings, Margins, Gaps */
-	--padding-sm: clamp(1rem, 3%, 1.5rem);
-	--padding-md: clamp(1.5rem, 6%, 3rem);
-	--padding-lg: clamp(3rem, 12%, 6rem);
+	--padding-S: clamp(1rem, 3%, 1.5rem);
+	--padding-M: clamp(1.5rem, 6%, 3rem);
+	--padding-L: clamp(3rem, 12%, 6rem);
 	/* https://matthewjamestaylor.com/responsive-padding */
-	--responsive-space--ex-large: calc(12px + 1.5625vw);
-  --responsive-space--large: calc(12px + 1.5625vw);
-  --responsive-space: calc(8px + 1.5625vw);
-	--responsive-space--medium: calc(6px + 1.5625vw);
-	--responsive-space--small: calc(4px + 1.5625vw);
-	--responsive-space--ex-small: calc(2px + 1.5625vw);
-	--responsive-space--tiny: calc(0.1px + 0.5625vw);
+	--responsive-space--XXL: calc(48px + 1.5625vw);
+	--responsive-space--XL: calc(32px + 1.5625vw);
+  --responsive-space--L: calc(24px + 1.5625vw);
+  --responsive-space: calc(16px + 1.5625vw);
+	--responsive-space--M: calc(8px + 1.5625vw);
+	--responsive-space--S: calc(4px + 1.5625vw);
+	--responsive-space--XS: calc(2px + 1.5625vw);
+	--responsive-space--XXS: calc(0.1px + 0.5625vw);
 
-	--margin-sm: min(2rem, 4vh);
-	--margin-md: min(4rem, 8vh);
-	--margin-lg: min(8rem, 16vh);
+	--margin-S: min(2rem, 4vh);
+	--margin-M: min(4rem, 8vh);
+	--margin-L: min(8rem, 16vh);
 
-	--layout-gap-sm: clamp(1rem, 3vmax, 1.5rem);
-	--layout-gap-md: clamp(1.5rem, 6vmax, 3rem);
-	--layout-gap-lg: clamp(3rem, 8vmax, 4rem);
+	--layout-gap-S: clamp(1rem, 3vmax, 1.5rem);
+	--layout-gap-M: clamp(1.5rem, 6vmax, 3rem);
+	--layout-gap-L: clamp(3rem, 8vmax, 4rem);
 
 	--flexbox-albatross-margin: 1rem;
 	--flexbox-albatross-container-size: 40rem;
@@ -372,8 +373,8 @@
 	/*-- End of paddings, margins and gaps --*/
 
 	--border-radius-value: 0.4rem;
-	--border-radius-value--large: 1.2rem;
-	--border-radius-value--medium: 0.8rem;
+	--border-radius-value--L: 1.2rem;
+	--border-radius-value--M: 0.8rem;
 	--border-radius-circle-value: 50%;
 	--border-radius-elliptic-value: 25%;
 
@@ -393,9 +394,9 @@
   -webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-  margin: 0;
+  /* margin: 0;
   padding: 0;
-	border: 0;
+	border: 0; */
 	background-repeat: no-repeat;
   max-width: 100%;
   overflow-x: hidden;
@@ -432,6 +433,8 @@ body {
 	line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
 	line-height: calc(3px + 2.5ex + 3px);
 	-webkit-font-smoothing: antialiased;
+	margin: var(--responsive-space--M);
+	padding: var(--responsive-space--M);
 	color: var(--theme-text-colour);
 }
 
@@ -444,6 +447,7 @@ h2,
 h3,
 h4 {
 	text-wrap: balance;
+	word-wrap: break-word;
 }
 
 p {
@@ -467,6 +471,24 @@ ul[role="list"] {
 }
 
 a,
+button,
+input,
+select,
+textarea,
+label,
+summary {
+	touch-action: manipulation;
+}
+
+/**
+ * @workaround Remove focus from tabindex="-1" elements which are only script focusable
+ * @link https://code.google.com/p/chromium/issues/detail?id=37721
+ */
+[tabindex="-1"]:focus {
+	outline: none;
+}
+
+a,
 a:link,
 a:visited,
 a:focus,
@@ -476,6 +498,7 @@ a:active {
 	color: inherit;
 	display: inline-block;
 	background-color: transparent;
+	word-wrap: break-word;
 }
 
 a:not([class]) {
@@ -488,7 +511,6 @@ audio, img, picture, video, iframe, canvas, object, embed, svg  {
 	max-width: 100%;
 	height: auto;
 	border-style: none;
-	/* vertical-align: middle; */
 }
 
 img {
@@ -584,6 +606,8 @@ table {
 	border-color: inherit;
 	border-collapse: collapse;
 	text-indent: 0;
+	max-width: 100%;
+	margin-bottom: var(--responsive-space--M);
 }
 
 textarea {
@@ -600,6 +624,18 @@ details summary {
 
 hr {
 	color: inherit;
+}
+
+code {
+	word-wrap: break-word;
+}
+
+pre {
+	display: block;
+	overflow: auto;
+	tab-size: 4;
+	white-space: pre-wrap;
+	word-break: break-all;
 }
 
 progress {
@@ -662,6 +698,10 @@ progress {
 /*              CLASSES                   */
 /* -------------------------------------- */
 
+/**
+ * @section Layout Placement
+ * Styling for different layout placement.
+ */
 .fab-four,
 .container-fab-four {
 	display: inline-block;
@@ -808,7 +848,10 @@ progress {
 /* End responsive CSS layouts without media queries  */
 
 
-/* Easiest Flexbox Grid  */
+/**
+ * @section Easiest Flexbox Grid
+ * Styling for easiest flexbox grid.
+ */
 .flexbox-grid-main,
 .flexbox-grid-container,
 .flexbox-grid-wrapper {
@@ -857,8 +900,10 @@ progress {
 /* End easiest flexbox grid  */
 
 
-/* Stacking Index */
-
+/**
+ * @section Stacking Index
+ * Styling for stacking indices.
+ */
 .stack-index-neg-10 {
 	z-index: -10;
 }
@@ -929,37 +974,47 @@ progress {
 	font: inherit;
 }
 
+
+/**
+ * @section Headings
+ * Styling for headings.
+ */
 .h1 {
 	font-size: var(--fs5);
 	font-weight: bold;
-	padding-top: var(--padding-responsive);
-	padding-bottom: var(--padding-responsive);
+	padding-top: var(--responsive-space);
+	padding-bottom: var(--responsive-space);
 }
 
 .h2 {
 	font-size: var(--fs4);
-	padding-top: var(--padding-responsive);
-	padding-bottom: var(--padding-responsive);
+	padding-top: var(--responsive-space);
+	padding-bottom: var(--responsive-space);
 }
 
 .h3 {
 	font-size: var(--fs3);
-	padding-top: var(--padding-responsive--medium);
-	padding-bottom: var(--padding-responsive--ex-small);
+	padding-top: var(--responsive-space--M);
+	padding-bottom: var(--responsive-space--XXS);
 }
 
 .h4 {
 	font-size: var(--fs2);
-	padding-top: var(--padding-responsive--medium);
-	padding-bottom: var(--padding-responsive--ex-small);
+	padding-top: var(--responsive-space--M);
+	padding-bottom: var(--responsive-space--XS);
 }
 
 .h5 {
 	font-size: var(--fs1);
-	padding-top: var(--padding-responsive--small);
-	padding-bottom: var(--padding-responsive--ex-small);
+	padding-top: var(--responsive-space--S);
+	padding-bottom: var(--responsive-space--XS);
 }
 
+
+/**
+ * @section Horizontal rule
+ * Styling for horizontal rule.
+ */
 .hr {
 	overflow: visible;
 	padding: 0;
@@ -978,6 +1033,11 @@ progress {
 	padding: 0 0.25rem;
 }
 
+
+/**
+ * @section Images
+ * Styling for images.
+ */
 .image {
 	display: block;
 	font-family: sans-serif;
@@ -1007,12 +1067,15 @@ progress {
 	letter-spacing: 0.1em;
 	margin-left: auto;
 	margin-right: auto;
-	margin-bottom: var(--padding-responsive);
+	margin-bottom: var(--responsive-space);
 	overflow: hidden;
 }
 
-/* Inputs */
 
+/**
+ * @section Inputs
+ * Styling for inputs.
+ */
 .input {
 	min-height: 3.5rem;
 	font-size: 16px;
@@ -1111,7 +1174,11 @@ input[type="radio"]:focus,
 A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 */
 
-/* Buttons */
+
+/**
+ * @section Buttons
+ * Styling for buttons.
+ */
 .button {
 	--btn-HSL: var(...);
 	--btn-h: var(...);
@@ -1139,16 +1206,16 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	border: 0.2rem solid var(--btn-border-colour);
 	-webkit-border-radius: 0.4rem;
 	-moz-border-radius: 0.4rem;
-	border-radius: var(--border-radius-value--medium);
+	border-radius: var(--border-radius-value--M);
 	box-shadow: var(--box-shadow1);
 	min-width: 12ch;
 	min-height: 44px;
 	min-height: 5ch;
 	max-width: 75%;
 	padding: 0.25em 0.75em;
-	margin-left: var(--padding-responsive--medium);
-	margin-right: var(--padding-responsive--ex-small);
-	margin-top: var(--padding-responsive--ex-small);
+	margin-left: var(--responsive-space--M);
+	margin-right: var(--responsive-space--XS);
+	margin-top: var(--responsive-space--XS);
 	cursor: pointer;
 	color: inherit;
 	background-color: inherit;
@@ -1246,7 +1313,11 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
   fill: currentColor;
 }
 
-/* Links */
+
+/**
+ * @section Links
+ * Styling for links.
+ */
 a, .link,
 a:link, .link:link,
 a:visited, .link:visited,
@@ -1270,22 +1341,26 @@ a::after, .link::after {
 	transition: height 0.25s cubic-bezier(.6,0,.4,1);
 }
 
-/* Tables */
+
+/**
+ * @section Tables
+ * Styling for tables.
+ */
 .table {
 	min-width: 85%;
 	max-width: 100%;
 	background-color: var(--theme-colour--light);
 	margin: auto;
 	border: 0.25rem solid hsl(337, 86%, 47%);
-	border-radius: var(--border-radius-value--large);
+	border-radius: var(--border-radius-value--L);
 }
 
 .table__caption {
 	padding-left: 1rem;
 	padding-right: 1rem;
 	background-color: var(--theme-colour--analogue1);
-	border-top-left-radius: var(--border-radius-value--medium);
-	border-top-right-radius: var(--border-radius-value--medium);
+	border-top-left-radius: var(--border-radius-value--M);
+	border-top-right-radius: var(--border-radius-value--M);
 	font-weight: bold;
 	font-size: var(--fs4);
 	text-align: left;
@@ -1301,14 +1376,14 @@ a::after, .link::after {
 
 .table__body {
 	box-shadow: var(--box-shadow1);
-	border-bottom-left-radius: var(--border-radius-value--medium);
-	border-bottom-right-radius: var(--border-radius-value--medium);
+	border-bottom-left-radius: var(--border-radius-value--M);
+	border-bottom-right-radius: var(--border-radius-value--M);
 }
 
 .table__footer {
 	padding: 0.25rem;
-	border-bottom-left-radius: var(--border-radius-value--medium);
-	border-bottom-right-radius: var(--border-radius-value--medium);
+	border-bottom-left-radius: var(--border-radius-value--M);
+	border-bottom-right-radius: var(--border-radius-value--M);
 }
 
 .table__row {
@@ -1330,7 +1405,11 @@ a::after, .link::after {
 	padding-right: var(--padding-responsive);
 }
 
-/* Details / Accordion */
+
+/**
+ * @section Details and Accordion
+ * Styling for details and accordion.
+ */
 .details .summary {
 	cursor: pointer;
 }
@@ -1387,7 +1466,7 @@ a::after, .link::after {
 .details[open] {
 	border-left: solid 0.1rem var(--accordion-border-colour);
 	border-right: solid 0.1rem var(--accordion-border-colour);
-	background: var(--colourPrimary--light-d);
+	background-color: var(--theme-colour--light-d);
 }
 
 .details[open] > :last-child {
@@ -1416,7 +1495,11 @@ a::after, .link::after {
 }
 
 
-/* Messages & alert */
+
+/**
+ * @section Messages amd Alerts
+ * Styling for messages and alerts.
+ */
 .alert {
 	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem gold, 0 0 0.2rem gold;
 	background-color: linear-gradient(to right gold, lightgrey, white, lightgrey, gold);
@@ -1432,7 +1515,11 @@ a::after, .link::after {
 	background-color: linear-gradient(to right darkred lightgrey, white, lightgrey, darkred);
 }
 
-/* To hide */
+
+/**
+ * @section Hidden Utilities
+ * Styling for hiding components.
+ */
 .hide-all {
 	display: none;
 }
@@ -1472,6 +1559,25 @@ a::after, .link::after {
 	clip-path: inset(50%);
 	overflow: hidden;
 	white-space: nowrap;
+}
+
+/*
+ * Extends the .visually hidden class to allow the element to be focusable when navigated to via the keyboard
+ * @link https://www.drupal.org/node/897638
+ */
+.off-screen.focusable:active,
+.off-screen.focusable:focus,
+.sr-only.focusable:active,
+.sr-only.focusable:focus,
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	white-space: inherit;
+	width: auto;
 }
 
 .scale-to-none {
@@ -1525,10 +1631,102 @@ a::after, .link::after {
 	*,
 	*::before,
 	*::after {
-		animation-duration: 0.01ms;
-		animation-iteration-count: 1;
-		transition-duration: 0.01ms;
-		scroll-behavior: auto;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+
+/**
+ * @section Print
+ * Styling for printed content. Adapted from HTML5BP.
+ * @link http://html5boilerplate.com
+ */
+@media print {
+	/**
+	 * Universal selector.
+	 * Reset all content to transparent background, black colour, and remove box and text shadows.
+	 */
+	* {
+		background: transparent !important;
+		color: #000000 !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	/**
+	 * Specifies page margin
+	 */
+	@page {
+		margin: 0.5cm;
+	}
+	/**
+	 * Underline all links
+	 */
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
+
+	/**
+	 * Show URL after links
+	 */
+	a[href]:after {
+		content: " (" attr(href) ")";
+	}
+
+	/**
+	 * Don't show URL for internal links
+	 */
+	a[href^="#"]:after {
+		content: "";
+	}
+
+	/**
+	 * Specifies the minimum number of lines to print at the top and bottom of a page.
+	 */
+	p,
+	h1,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	/**
+	 * Avoid inserting a page break after headers
+	 */
+	h1,
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
+
+	/**
+	 * Change border colour on blockquotes and preformatted text.
+	 * Avoid page breaks inside the content
+	 */
+	pre,
+	blockquote {
+		border-color: #999999;
+		page-break-inside: avoid;
+	}
+
+	/**
+	 * Displayed as a table header row group
+	 */
+	thead {
+		display: table-header-group;
+	}
+
+	/**
+	 * Avoid inserting a page break inside table rows and images
+	 */
+	tr,
+	img {
+		page-break-inside: avoid;
 	}
 }
 
