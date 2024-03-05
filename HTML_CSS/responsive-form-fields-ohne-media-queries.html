@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Responsive Form Layout Without Media Queries</title>
+	<style>
+		input {
+			border-radius: 0.25rem;
+		}
+
+		.form {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.form > .form__input {
+			flex: 1 1 10ch;
+			margin: 0.5rem;
+		}
+
+		.form > [type="email"] {
+			flex: 3 1 30ch;
+		}
+		
+		.form__input--submit {
+			background-color: magenta;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<form action="" class="form">
+		<input class="form__input form__input--text" type="text" name="" id="" placeholder="Name">
+		<input class="form__input form__input--email" type="email" name="" id="" placeholder="Email">
+		<input class="form__input form__input--submit" type="submit" value="Subscribe">
+	</form>
+</body>
+</html>
