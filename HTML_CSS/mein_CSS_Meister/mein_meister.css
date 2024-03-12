@@ -597,6 +597,19 @@ textarea {
 	font-size: 16px;
 }
 
+/**
+* What is Cross-Browser Compatibility? How to Build Websites that Work Everywhere
+* @link https://www.freecodecamp.org/news/what-is-cross-browser-compatibility/
+*/
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #909090;
+  opacity: 1; /* Firefox */
+}
+
+input.studentid:-ms-input-placeholder { /* Microsoft Edge */
+  color: #909090;
+}
+
 button {
 	border: none;
 	border-radius: 0.8rem;
@@ -671,6 +684,19 @@ pre {
 
 progress {
 	vertical-align: baseline;
+}
+
+/* For Chrome, Firefox, and Edge */
+.customised-scrollbar {
+	scrollbar-width: thin;
+	scrollbar-color: #c0c0c0 #f0f0f0;
+}
+
+/* For Safari */
+.mostly-customised-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 8px;
+  background-color: #aaa; /* or add it to the track */
 }
 
 ::-webkit-inner-spin-button,
