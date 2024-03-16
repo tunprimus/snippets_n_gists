@@ -252,8 +252,6 @@
 	--text-grey50: hsl(0, 0%, 50%);
 	--text-grey75: hsl(0, 0%, 75%);
 
-	--accordion-border-colour: var(--input-border);
-
 	/* Inputs colours */
 	--input-border: var(--text-grey50);
 	--input-focus-h: 245;
@@ -261,10 +259,14 @@
 	--input-focus-l: 42%;
 	/*-- End of inputs colours --*/
 
+	--accordion-border-colour: var(--input-border);
+
 	/*-- End of colour themes  --*/
 
-
-    /* Fonts */
+	/**
+	 * @section Fonts
+	 * Fonts groups.
+	 */
 	--font-stack-body: system-ui, -apple-system, BlinkMacSystemFont, ̈́"Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, SFProDisplay-Regular, Inter, "Fira Sans", "Open Sans", "Droid Sans", "Nimbus Sans", "DejaVu Sans", "Helvetica Neue", Helvetica, Arial, Poppins, Verdana, Tahoma, Arimo, sans-serif;
 
 	--sans-serif-fonts: "Open Sans", "Fira Sans", "Franklin Gothic", "Proxima Nova", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", "Liberation Sans", "Nimbus Sans L", Helvetica, "Gill sans", "Helvetica Neue", "DejaVu Sans", Arimo, Roboto, Arial, sans-serif;
@@ -378,7 +380,7 @@
 	--border-radius-circle-value: 50%;
 	--border-radius-elliptic-value: 25%;
 
-	tab-size: 4;
+	tab-size: 4 !important;
 	color-scheme: light dark;
 }
 
@@ -394,9 +396,6 @@
   -webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-  /* margin: 0;
-  padding: 0;
-	border: 0; */
 	background-repeat: no-repeat;
   max-width: 100%;
   overflow-x: hidden;
@@ -778,13 +777,13 @@ progress {
 	margin-inline: auto;
 }
 
-.container-flexbox-albatross {
+.flexbox-albatross {
 	display: flex;
 	flex-wrap: wrap;
 	margin: calc(var(--flexbox-albatross-margin) * -1);
 }
 
-.container-flexbox-albatross > * {
+.flexbox-albatross > * {
 	flex-grow: 1;
 	flex-basis: calc(var(--flexbox-albatross-modifier) * 999);
 	margin: var(--flexbox-albatross-margin);
@@ -1559,17 +1558,17 @@ a::after, .link::after {
  */
 .alert {
 	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem gold, 0 0 0.2rem gold;
-	background-color: linear-gradient(to right gold, lightgrey, white, lightgrey, gold);
+	background: linear-gradient(to right gold, lightgrey, white, lightgrey, gold);
 }
 
 .warning {
 	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem darkorange, 0 0 0.2rem darkorange;
-	background-color: linear-gradient(to right darkorange, lightgrey, white, lightgrey, darkorange);
+	background: linear-gradient(to right darkorange, lightgrey, white, lightgrey, darkorange);
 }
 
 .danger {
 	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem darkred, 0 0 0.2rem darkred;
-	background-color: linear-gradient(to right darkred lightgrey, white, lightgrey, darkred);
+	background: linear-gradient(to right darkred lightgrey, white, lightgrey, darkred);
 }
 
 
