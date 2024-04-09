@@ -1288,6 +1288,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	-o-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	touch-action: manipulation;
 	vertical-align: middle;
 	white-space: nowrap;
 }
@@ -1312,6 +1313,11 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 	outline-style: solid;
   outline-color: transparent;
 	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
+}
+
+.button:focus-visible {
+	outline: 0.125rem solid transparent;
+	outline-offset: 0.125rem;
 }
 
 .button:hover {
