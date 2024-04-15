@@ -1,6 +1,13 @@
 //@ts-check
 
-
+/**
+ * @description Get useful input values with formDataMap()
+ * @author Dan Cătălin Burzo
+ * @link https://danburzo.ro/formdatamap/
+ * 
+ * @param {HTMLFormElement} form 
+ * @param {HTMLFormElement} submitter
+ */
 function formDataMap(form, submitter) {
 	const excludedTags = ['FIELDSET', 'OBJECT', 'OUTPUT',];
 	const excludedTypes = ['button', 'reset', 'image',];
