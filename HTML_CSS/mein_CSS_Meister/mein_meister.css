@@ -498,6 +498,16 @@ summary {
 	outline: none;
 }
 
+/**
+ * Make underline position and width constant regardless of text size and weight.
+		(0.0625rem = 1px underline for 16px root font size)
+ * @link https://danburzo.ro/snippets/css-reset/
+*/
+a {
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: max(1px, 0.0625rem);
+}
+
 a,
 a:link,
 a:visited,
@@ -651,6 +661,12 @@ table {
 	text-indent: 0;
 	max-width: 100%;
 	margin-bottom: var(--responsive-space--M);
+}
+
+th,
+td {
+	text-align: start;
+	vertical-align: top;
 }
 
 textarea {
