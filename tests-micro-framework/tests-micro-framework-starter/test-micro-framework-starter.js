@@ -7,18 +7,18 @@
 /**
  * test function
  * @param {string} description
- * @param {function} test_function
+ * @param {function} functionToTest
  */
 
-function it(description, test_function) {
+function it(description, functionToTest) {
   const attachResult = document.querySelector('#attach-result');
   const result = document.createElement('p');
   result.classList.add('test-result');
 
   try {
-    test_function();
+    functionToTest();
     result.classList.add('success');
-    result.textContent = description;
+    result.innerHTML = description;
     console.log('\x1b[32m%s\x1b[0m', '\u2714 ' + description);
   } catch (err) {
     result.classList.add('failure');
@@ -29,6 +29,7 @@ function it(description, test_function) {
   }
 
   attachResult.appendChild(result);
+  document.body.appendChild(result);
 }
 
 function assertEqual(expected, actual) {
