@@ -29,14 +29,17 @@ function it(description, functionToTest) {
   }
 
   attachResult.appendChild(result);
-  document.body.appendChild(result);
+  // document.body.appendChild(result);
 }
 
-function assertEqual(expected, actual) {
-  if (expected === actual || (typeof expected === 'object' && typeof actual === 'object' && expected.length === actual.length && expected.every((element, index) => element === actual[index]))) {
+/**
+ * Callback functions to use in the `it` function above
+ */
+function assertEqual(output, expected) {
+  if (output === expected || (typeof output === 'object' && typeof expected === 'object' && output.length === expected.length && output.every((element, index) => element === expected[index]))) {
     return;
   } else {
-    throw new Error(`${expected} != ${actual}`);
+    throw new Error(`${output} != ${expected}`);
   }
 }
 
@@ -54,7 +57,38 @@ function assert(isTrue) {
   }
 }
 
-/* Demo */
+/**
+ * Demo
+ * @example
+ * it('should fail', function() {
+ *  assert(1 !== 1);
+ * });
+ * 
+ * it('should pass', function() {
+ *  assert(1 === 1);
+ * });
+ */
+
 it('should fail', function() {
   assert(1 !== 1);
+});
+
+it('should pass', function() {
+  assert(1 === 1);
+});
+
+it('should fail', function() {
+  assertTrue(1 !== 1);
+});
+
+it('should pass', function() {
+  assertTrue(1 === 1);
+});
+
+it('should fail', function() {
+  assertFalse(1 === 1);
+});
+
+it('should pass', function() {
+  assertFalse(1 !== 1);
 });

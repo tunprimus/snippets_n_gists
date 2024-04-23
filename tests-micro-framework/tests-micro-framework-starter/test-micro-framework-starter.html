@@ -1,4 +1,4 @@
-<!-- Inspired by:
+<!-- Adapted from:
   Testing JavaScript without a (third-party) framework +++>>> https://alexwlchan.net/2023/testing-javascript-without-a-framework/
   Unit Test Your JavaScript Code Without a Framework +++>>> https://javascript.plainenglish.io/unit-test-front-end-javascript-code-without-a-framework-8f00c63eb7d4 -->
 <!DOCTYPE html>
@@ -7,11 +7,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Test: No Framework, No Config</title>
-  <link rel="stylesheet" href="test-micro-framework-starter.css">
+  <link rel="stylesheet" href="./test-micro-framework-starter.css">
   <!-- Add code to test below -->
-  <script src="code-to-test.js" defer></script>
+  <script src="./code-to-test.js" defer></script>
   <!-- Add code to test above -->
-  <script src="test-micro-framework-starter.js" defer></script>
+  <script src="./test-micro-framework-starter.js" defer></script>
 </head>
 <body>
   <div class="attach-result" id="attach-result"></div>
@@ -19,7 +19,10 @@
   <!-- JavaScript Here -->
   <script>
     /**
-     * Write the test cases here
+     * Write the test cases here calling the `it` function
+     * with a string description as the first argument
+     * and an anonymous callback function wrapper as the second argument - 
+     * in order to call assertEqual, assertTrue, or assertFalse
      */
   </script>
 </body>
