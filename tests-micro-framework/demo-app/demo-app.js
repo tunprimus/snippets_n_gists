@@ -13,7 +13,7 @@
   // Test DOM
   document.addEventListener('submit', function(event) {
     event.preventDefault();
-    var elements = document.querySelector('#aform').elements;
+    var elements = document.querySelector('#a-form').elements;
     var todoItem = elements['todo-input'].value;
 
     var todoList = document.querySelector('#todo-list');

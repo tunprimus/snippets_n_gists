@@ -51,6 +51,10 @@ function assertFalse(value) {
   assertEqual(value, false);
 }
 
+/**
+ * 
+ * @param {condition} isTrue 
+ */
 function assert(isTrue) {
   if (!isTrue) {
     throw new Error();
