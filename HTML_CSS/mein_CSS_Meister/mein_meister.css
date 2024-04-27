@@ -704,14 +704,14 @@ progress {
 /* For Chrome, Firefox, and Edge */
 .customised-scrollbar {
 	scrollbar-width: thin;
-	scrollbar-color: #c0c0c0 #f0f0f0;
+	scrollbar-color: #C0C0C0 #F0F0F0;
 }
 
 /* For Safari */
 .mostly-customised-scrollbar::-webkit-scrollbar {
 	width: 5px;
 	height: 8px;
-	background-color: #aaa; /* or add it to the track */
+	background-color: #AAAAAA; /* or add it to the track */
 }
 
 ::-webkit-inner-spin-button,
