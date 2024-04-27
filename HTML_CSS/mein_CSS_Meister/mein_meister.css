@@ -190,7 +190,7 @@
 	--twelve-colour-combo: var(var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
 	/*-- End of preferred colours --*/
 	
-    /* Colour themes */
+	/* Colour themes */
 	/* >>> Building a colour scheme. https://web.dev/building-a-colour-scheme/
 	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-colour-theming/ */
 
@@ -297,8 +297,8 @@
 	/* https://websemantics.uk/tools/responsive-font-calculator/
 	font-size  = calc(ZZ + ((1vw - XX) * YY))
 	Where   XX = min_viewport / 100
-	        YY = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
-	           = 100 * font_size_difference / viewport_difference
+					YY = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
+						 = 100 * font_size_difference / viewport_difference
 					ZZ = Minimum font-size stated in REM
 
 	Equivalent in longhand
@@ -307,11 +307,11 @@
 	--custom-font-size-6: calc(1rem + (32 - 16) * ((100vw - 320px) / (2560 - 320)));
 
 	--min-font-size: 16;
-  --max-font-size: 32;
-  --min-viewport-width: 320;
-  --max-viewport-width: 2560;
+	--max-font-size: 32;
+	--min-viewport-width: 320;
+	--max-viewport-width: 2560;
 
-  --custom-font-size-7: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
+	--custom-font-size-7: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
 	min-height: 0vw;
 	
 	/* General ratios */
@@ -354,8 +354,8 @@
 	/* https://matthewjamestaylor.com/responsive-padding */
 	--responsive-space--XXL: calc(48px + 1.5625vw);
 	--responsive-space--XL: calc(32px + 1.5625vw);
-  --responsive-space--L: calc(24px + 1.5625vw);
-  --responsive-space: calc(16px + 1.5625vw);
+	--responsive-space--L: calc(24px + 1.5625vw);
+	--responsive-space: calc(16px + 1.5625vw);
 	--responsive-space--M: calc(8px + 1.5625vw);
 	--responsive-space--S: calc(4px + 1.5625vw);
 	--responsive-space--XS: calc(2px + 1.5625vw);
@@ -393,13 +393,13 @@
 *,
 *::before,
 *::after {
-  -webkit-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	background-repeat: no-repeat;
-  max-width: 100%;
-  overflow-x: hidden;
-  position: relative;
+	max-width: 100%;
+	overflow-x: hidden;
+	position: relative;
 }
 
 *::before,
@@ -412,13 +412,13 @@
 html {
 	height: 100%; /* Fallback CSS for IE 4-6 and older browsers. Note: Without this setting, body below cannot achieve 100% height. */
 	height: 100vh; /* Overrides 100% height in modern HTML5 browsers and uses the viewport's height. Only works in modern HTML5 browsers */
-  font-size: calc(15px + 0.390625vw);
+	font-size: calc(15px + 0.390625vw);
 	font-size: var(--custom-font-size-N);
 	scroll-behavior: smooth;
 	text-rendering: optimizeLegibility;
 	-webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	text-size-adjust: 100%;
 }
 
 body {
@@ -611,12 +611,12 @@ textarea {
 * @link https://www.freecodecamp.org/news/what-is-cross-browser-compatibility/
 */
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #909090;
-  opacity: 1; /* Firefox */
+	color: #909090;
+	opacity: 1; /* Firefox */
 }
 
 input.studentid:-ms-input-placeholder { /* Microsoft Edge */
-  color: #909090;
+	color: #909090;
 }
 
 button {
@@ -709,9 +709,9 @@ progress {
 
 /* For Safari */
 .mostly-customised-scrollbar::-webkit-scrollbar {
-  width: 5px;
-  height: 8px;
-  background-color: #aaa; /* or add it to the track */
+	width: 5px;
+	height: 8px;
+	background-color: #aaa; /* or add it to the track */
 }
 
 ::-webkit-inner-spin-button,
@@ -735,23 +735,23 @@ progress {
 }
 
 :is(a, button, input, textarea, summary) {
-  --outline-size: max(2px, 0.08em);
-  --outline-style: solid;
-  --outline-color: currentColor;
+	--outline-size: max(2px, 0.08em);
+	--outline-style: solid;
+	--outline-color: currentColor;
 }
 
 :is(a, button, input, textarea, summary):focus {
-  outline: var(--outline-size) var(--outline-style) var(--outline-color);
-  outline-offset: var(--outline-offset, var(--outline-size));
+	outline: var(--outline-size) var(--outline-style) var(--outline-color);
+	outline-offset: var(--outline-offset, var(--outline-size));
 }
 
 :is(a, button, input, textarea, summary):focus-visible {
-  outline: var(--outline-size) var(--outline-style) var(--outline-color);
-  outline-offset: var(--outline-offset, var(--outline-size));
+	outline: var(--outline-size) var(--outline-style) var(--outline-color);
+	outline-offset: var(--outline-offset, var(--outline-size));
 }
 
 :is(a, button, input, textarea, summary):focus:not(:focus-visible) {
-  outline: none;
+	outline: none;
 }
 
 :target {
@@ -933,8 +933,8 @@ progress {
 
 .flexbox-grid-row {
 	display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .flexbox-grid-column {
@@ -1327,7 +1327,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button:focus {
 	outline-style: solid;
-  outline-color: transparent;
+	outline-color: transparent;
 	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
 }
 
@@ -1374,7 +1374,7 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .button__icon--end {
 	margin-right: 0;
-  margin-left: 0.5em;
+	margin-left: 0.5em;
 }
 
 
@@ -1387,8 +1387,8 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 
 .icon-button__icon {
 	width: 100%;
-  height: 100%;
-  fill: currentColor;
+	height: 100%;
+	fill: currentColor;
 }
 
 
@@ -1404,7 +1404,7 @@ a:hover, .link:hover,
 a:active, .link:active {
 	position: relative;
 	padding: 0.35rem;
-  padding-bottom: 0.01rem;
+	padding-bottom: 0.01rem;
 }
 
 a::after, .link::after {
@@ -1560,16 +1560,16 @@ a::after, .link::after {
 /* CSS: Workaround to backdrop-filter? #+++>>> https://stackoverflow.com/questions/38145368/css-workaround-to-backdrop-filter */
 /* slightly transparent fallback */
 .backdrop-blur {
-  background-color: rgba(255, 255, 255, .9);
+	background-color: rgba(255, 255, 255, .9);
 }
 
 /* if backdrop support: very transparent and blurred */
 @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
-  .backdrop-blur {
-    background-color: rgba(255, 255, 255, .5);
-    -webkit-backdrop-filter: blur(2em);
-    backdrop-filter: blur(2em);
-  }
+	.backdrop-blur {
+		background-color: rgba(255, 255, 255, .5);
+		-webkit-backdrop-filter: blur(2em);
+		backdrop-filter: blur(2em);
+	}
 }
 
 
