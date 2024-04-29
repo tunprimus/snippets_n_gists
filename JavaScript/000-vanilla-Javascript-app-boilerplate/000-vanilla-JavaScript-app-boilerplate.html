@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vanilla JavaScript App Boilerplate</title>
+	<style>
+		.hidden,
+		[hidden] {
+			display: none !important;
+		}
+	</style>
+	<script src="./000-vanilla-JavaScript-app-boilerplate.js" defer></script>
+</head>
+<body>
+	<div class="body-container-wrapper">
+		<section id="view-loading" class="section view">Loading...</section>
+
+		<section id="view-failure" class="section view hidden">Failed to load!</section>
+
+		<section id="view-needs-login" class="section view hidden">
+			<form action="" id="login-form" class="form login-form"></form>
+		</section>
+
+		<section id="view-ready" class="section view hidden">
+			<h1 class="h1 section__title">Welcome to the app</h1>
+			<p class="p section__text">You have <span id="message-count" class="span message-count section__span">0 messages</span></p>
+		</section>
+	</div>
+</body>
+</html>
