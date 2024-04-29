@@ -397,6 +397,7 @@
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	background-repeat: no-repeat;
+	min-width: 0;
 	max-width: 100%;
 	overflow-x: hidden;
 	position: relative;
@@ -406,6 +407,11 @@
 *::after {
 	text-decoration: inherit;
 	vertical-align: inherit;
+}
+
+.hidden,
+[hidden] {
+	display: none !important;
 }
 
 /* CSS Height That Works in Both Modern and Legacy Browsers | https://stackoverflow.com/a/65836306 */
@@ -419,6 +425,7 @@ html {
 	-webkit-text-size-adjust: 100%;
 	-moz-text-size-adjust: 100%;
 	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -545,6 +552,7 @@ img {
 	width: auto\9;
 	width: inherit; /* This makes auto-resizing with max-width 100% and height auto work in IE8 */
 	max-height: 100%;
+	max-width: 100%;
 }
 
 audio:not([controls]) {
@@ -556,6 +564,12 @@ svg {
 	overflow: hidden;
 }
 
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
 button,
 input,
 optgroup,
@@ -564,6 +578,15 @@ textarea {
 	font: inherit;
 	font-size: 100%;
 	vertical-align: middle;
+}
+
+input,
+textarea {
+	-o-user-select: auto;
+	-ms-user-select: auto;
+	-moz-user-select: auto;
+	-webkit-user-select: auto;
+	user-select: auto;
 }
 
 button,
@@ -577,6 +600,14 @@ button,
 [type="submit"] {
 	-webkit-appearance: button;
 	appearance: button;
+	cursor: pointer;
+}
+
+button:disabled,
+[type="button"]:disabled,
+[type="reset"]:disabled,
+[type="submit"]:disabled {
+	cursor: default;
 }
 
 input:focus,
@@ -604,6 +635,11 @@ input[type="number"],
 select,
 textarea {
 	font-size: 16px;
+}
+
+[type="number"] {
+	-moz-appearance: textfield;
+	appearance: textfield;
 }
 
 /**
@@ -650,9 +686,24 @@ h6 {
 	font-weight: 400;
 }
 
+small {
+	font-size: 80%;
+}
+
 sup,
 sub {
+	font-size: 75%;
 	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+sup {
+	top: -0.5em;
 }
 
 table {
@@ -663,25 +714,49 @@ table {
 	margin-bottom: var(--responsive-space--M);
 }
 
+caption {
+	text-align: left;
+}
+
 th,
 td {
 	text-align: start;
 	vertical-align: top;
 }
 
+th {
+	font-weight: bold;
+}
+
 textarea {
 	resize: vertical;
+	white-space: revert;
 }
 
 textarea:not([rows]) {
 	min-height: 10rem;
 }
 
+details {
+	display: block;
+}
+
 details summary {
 	cursor: pointer;
 }
 
+summary {
+	display: list-item;
+}
+
 hr {
+	display: block;
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+	border-top-width: 0.0625rem;
+	margin: 0;
+	clear: both;
 	color: inherit;
 }
 
@@ -690,15 +765,35 @@ code {
 }
 
 pre {
+	font-family: monospace, monospace;
+	font-size: inherit;
 	display: block;
 	overflow: auto;
 	tab-size: 4;
 	white-space: pre-wrap;
 	word-break: break-all;
 }
+code,
+kbd,
+samp {
+	font-family: monospace, monospace;
+	font-size: inherit;
+}
 
 progress {
 	vertical-align: baseline;
+}
+
+:-moz-focusring {
+	outline: auto;
+}
+
+select:disabled {
+	opacity: inherit;
+}
+
+[contenteditable]:focus {
+	outline: auto;
 }
 
 /* For Chrome, Firefox, and Edge */
@@ -1666,6 +1761,16 @@ a::after, .link::after {
 	transition: all 0.4s ease-in-out;
 }
 
+.clearfix::before,
+.clearfix::after {
+	content: "";
+	display: table;
+}
+
+.clearfix::after {
+	clear: both;
+}
+
 /*-- End of classes --*/
 
 
@@ -1756,9 +1861,17 @@ a::after, .link::after {
 	}
 
 	/**
-	 * Don't show URL for internal links
+	 * Show title after abbreviations
 	 */
-	a[href^="#"]:after {
+	abbr[title]:after {
+		content: " (" attr(title) ")";
+	}
+
+	/**
+	 * Don't show URL for internal links or fragments
+	 */
+	a[href^="#"]:after,
+	a[href^="javascript:"]:after {
 		content: "";
 	}
 
@@ -1786,6 +1899,10 @@ a::after, .link::after {
 	 * Change border colour on blockquotes and preformatted text.
 	 * Avoid page breaks inside the content
 	 */
+	pre {
+		white-space: pre-wrap !important;
+	}
+	
 	pre,
 	blockquote {
 		border-color: #999999;
