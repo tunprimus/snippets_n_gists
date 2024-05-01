@@ -236,11 +236,11 @@
 	--alpha-02: 0.20;
 
 	/* box-shadow: X-offset Y-offset Blur-size Colour*/
-	--box-shadow1: calc(var(--shadow-start) / 2) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-07));
+	--box-shadow1: calc((var(--shadow-start) / 2) (var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), var(--alpha-07));
 
-	--box-shadow2: var(--shadow-start) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-03)), calc(var(--shadow-start) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) hsla(var(--shadow-colour) / var(--alpha-03));
+	--box-shadow2: var(--shadow-start) calc((var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), var(--alpha-03)), calc((var(--shadow-start) * 2) (var(--shadow-start) * var(--golden-ratio) * 2) (var(--shadow-start) * var(--golden-ratio) * 2)) hsla(var(--shadow-colour), var(--alpha-03));
 
-	--box-shadow3: var(--shadow-start) calc(var(--shadow-start) * var(--golden-ratio)) calc(var(--shadow-start) * var(--golden-ratio)) hsla(var(--shadow-colour) / var(--alpha-02)), calc(var(--shadow-start) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) calc(var(--shadow-start) * var(--golden-ratio) * 2) hsla(var(--shadow-colour) / var(--alpha-02)), calc(var(--shadow-start) * 4) calc(var(--shadow-start) * var(--golden-ratio) * 4) calc(var(--shadow-start) * var(--golden-ratio) * 4) hsla(var(--shadow-colour) / var(--alpha-02));
+	--box-shadow3: var(--shadow-start) calc((var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), var(--alpha-02)), calc((var(--shadow-start) * 2) (var(--shadow-start) * var(--golden-ratio) * 2) (var(--shadow-start) * var(--golden-ratio) * 2)) hsla(var(--shadow-colour), var(--alpha-02)), calc((var(--shadow-start) * 4) (var(--shadow-start) * var(--golden-ratio) * 4) (var(--shadow-start) * var(--golden-ratio) * 4)) hsla(var(--shadow-colour), var(--alpha-02));
 
 	/**-- Change contrastThreshold to 50% when L value of colour equals 50% --**/
 	--contrast-threshold: 60%;
