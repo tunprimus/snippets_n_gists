@@ -311,7 +311,7 @@
 	--min-viewport-width: 320;
 	--max-viewport-width: 2560;
 
-	--custom-font-size-7: calc((1px * var(--min-font-size)) + ((var(--max-font-size) - var(--min-font-size))) * ((100vw - (1px * (var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
+	--custom-font-size-7: calc((1px * var(--min-font-size)) + (((var(--max-font-size) - var(--min-font-size)) * (100vw - (1px * var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
 	min-height: 0vw;
 	
 	/* General ratios */
