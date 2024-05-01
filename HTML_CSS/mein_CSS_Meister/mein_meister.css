@@ -225,9 +225,9 @@
 	--theme-colour--analogue3: hsl(calc(var(--theme-colour-h) + 90), var(--theme-colour-s), var(--theme-colour-l));
 
 	--accent-1-light-theme: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
-	--accent-2-light-theme: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - calc(var(--golden-ratio) * var(--lighten-percentage))));
-	--accent-1-dark-theme: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + calc(2 * var(--lighten-percentage))));
-	--accent-2-dark-theme: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + calc(var(--golden-ratio) * var(--lighten-percentage))));
+	--accent-2-light-theme: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - (var(--golden-ratio) * var(--lighten-percentage))));
+	--accent-1-dark-theme: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + (2 * var(--lighten-percentage))));
+	--accent-2-dark-theme: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + (var(--golden-ratio) * var(--lighten-percentage))));
 
 	--shadow-colour: hsl(var(--theme-colour-h), 60%, 50%);
 	--shadow-start: 1px;
