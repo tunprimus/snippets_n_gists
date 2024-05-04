@@ -48,4 +48,43 @@ function hexToRgb(hex) {
 	);
 }
 
+/**
+ * @description Convert RGB colour code to HSL with optional number array or string output
+ * @example console.log(rgbToHsl(45, 23, 11)); // [ 21, 61, 11 ]
+ * console.log(rgbToHsl(139, 0, 0)); // [ 0, 37, 27 ]
+ * console.log(rgbToHsl(85, 107, 47)); // [ 82, 39, 30 ]
+ * console.log(rgbToHsl(45, 23, 11, true)); // hsl(21, 61%, 11%)
+ * console.log(rgbToHsl(139, 0, 0, true)); // hsl(0, 37%, 27%)
+ * console.log(rgbToHsl(85, 107, 47, true)); // hsl(82, 39%, 30%)
+ * @param {number} r 
+ * @param {number} g 
+ * @param {number} b 
+ * @param {boolean} [strOutput=false] 
+ * @returns {string | number[]}
+ */
+function rgbToHsl (r, g, b, strOutput = false) {
+	r /= 255;
+	g /= 255;
+	b /= 255;
+
+	const lig = Math.max(r, g, b);
+	const sat = lig - Math.min(r, g, b);
+	const hue = sat 
+		? lig === r
+			? (g - b) / sat
+			: lig === g
+			? 2 + (b - r) / sat
+			: 4 + (r - g) / sat
+		: 0;
+	
+	const tempArray = [
+		60 * hue < 0 ? 60 * hue + 360 : 60 * hue, 
+		100 * (sat ? (lig <= 0.5 ? sat / (2 * lig - sat) : sat / (2 - (2 * lig - sat))) : 0), 
+		(100 * (2 * lig - sat)) / 2,
+	];
+	
+	let result = tempArray.map(val => Math.round(val));
+	
+	return strOutput ? `hsl(${result[0]}, ${result[1] + '%'}, ${result[2] + '%'})` : result;
+}
 
