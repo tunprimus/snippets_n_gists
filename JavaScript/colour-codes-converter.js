@@ -117,5 +117,4 @@ function hslToRgb(hue, sat, lig, strOutput = false) {
 	return strOutput ? `rgb(${result[0]}, ${result[1]}, ${result[2]})` : result;
 }
 
-console.log(hslToRgb(13, 100, 11));
-console.log(hslToRgb(13, 100, 11, true));
+export { rgbToHex, hexToRgb, rgbToHsl, hslToRgb };
