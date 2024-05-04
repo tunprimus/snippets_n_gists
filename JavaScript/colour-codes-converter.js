@@ -1,6 +1,11 @@
 //@ts-check
 
 /**
+ * Adapted from 30 Seconds of Code
+ * @link https://www.30secondsofcode.org/js/s/rgb-hex-hsl-hsb-color-format-conversion
+ */
+
+/**
  * @description Convert RGB colour code to hex string using the << bitwise left-shift operator
  * @example console.log(rgbToHex(255, 165, 1)); // #FFA501
  * @param {number} r 
@@ -60,7 +65,7 @@ function hexToRgb(hex) {
  * @param {number} g 
  * @param {number} b 
  * @param {boolean} [strOutput=false] 
- * @returns {string | number[]}
+ * @returns {number[] | string}
  */
 function rgbToHsl (r, g, b, strOutput = false) {
 	r /= 255;
@@ -88,3 +93,29 @@ function rgbToHsl (r, g, b, strOutput = false) {
 	return strOutput ? `hsl(${result[0]}, ${result[1] + '%'}, ${result[2] + '%'})` : result;
 }
 
+/**
+ * @description Convert HSL to RGB with optional number array or string output
+ * @example console.log(hslToRgb(13, 100, 11)); // [ 56, 12, 0 ]
+ * console.log(hslToRgb(13, 100, 11, true)); // rgb(56, 12, 0)
+ * @param {number} hue 
+ * @param {number} sat 
+ * @param {number} lig 
+ * @param {boolean} [strOutput=false] 
+ * @returns {number[] | string}
+ */
+function hslToRgb(hue, sat, lig, strOutput = false) {
+	sat /= 100;
+	lig /= 100;
+	const k = n => (n + hue / 30) % 12;
+	const a = sat * Math.min(lig, 1 - lig);
+	const f = n => lig - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+
+	let tempArray = [255 * f(0), 255 * f(8), 255 * f(4)];
+
+	let result = tempArray.map(val => Math.round(val));
+
+	return strOutput ? `rgb(${result[0]}, ${result[1]}, ${result[2]})` : result;
+}
+
+console.log(hslToRgb(13, 100, 11));
+console.log(hslToRgb(13, 100, 11, true));
