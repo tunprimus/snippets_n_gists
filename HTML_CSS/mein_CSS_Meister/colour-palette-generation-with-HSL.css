@@ -80,4 +80,52 @@
 	--switch: calc((var(--lig) - var(--contrast-threshold)) * -100);
 	--theme-text-colour: hsl(0, 0%, var(--switch));
 	--accessible-colour-rgb: calc(((((var(--red) * 299) + (var(--green) * 587) + (var(--blue) * 114)) / 1000) - 128) * -1000);
+
+	/** */
+	--theme-colour: hsl(var(--hue), var(--sat), var(--lig));
+
+	--theme-colour--complement: hsl(var(--hue-cpl), var(--sat), var(--lig));
+	--theme-colour--complement-split1: hsl(var(--hue-split-cpl-1), var(--sat), var(--lig));
+	--theme-colour--complement-split2: hsl(var(--hue-split-cpl-2), var(--sat), var(--lig));
+	--theme-colour--triad1: hsl(var(--hue-triad-1), var(--sat), var(--lig));
+	--theme-colour--triad2: hsl(var(--hue-triad-2), var(--sat), var(--lig));
+	--theme-colour--tetrad1: hsl(var(--hue-tetrad-1), var(--sat), var(--lig));
+	--theme-colour--tetrad2: hsl(var(--hue-tetrad-2), var(--sat), var(--lig));
+	--theme-colour--tetrad3: hsl(var(--hue-tetrad-3), var(--sat), var(--lig));
+	--theme-colour--analogue1: hsl(var(--hue-analog-1), var(--sat), var(--lig));
+	--theme-colour--analogue2: hsl(var(--hue-analog-2), var(--sat), var(--lig));
+	--theme-colour--analogue3: hsl(var(--hue-analog-3), var(--sat), var(--lig));
+
+	--theme-colour--tint10: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-10)));
+	--theme-colour--tint20: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-20)));
+	--theme-colour--tint25: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-25)));
+	--theme-colour--tint30: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-30)));
+	--theme-colour--tint40: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-40)));
+	--theme-colour--tint50: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-50)));
+	--theme-colour--tint60: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-60)));
+	--theme-colour--tint70: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-70)));
+	--theme-colour--tint80: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-80)));
+	--theme-colour--tint90: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-90)));
+
+	--theme-colour--shade10: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-10)));
+	--theme-colour--shade20: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-20)));
+	--theme-colour--shade25: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-25)));
+	--theme-colour--shade30: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-30)));
+	--theme-colour--shade40: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-40)));
+	--theme-colour--shade50: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-50)));
+	--theme-colour--shade60: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-60)));
+	--theme-colour--shade70: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-70)));
+	--theme-colour--shade80: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-80)));
+	--theme-colour--shade90: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-90)));
+
+	--theme-colour--tone10: hsl(var(--hue), calc(var(--sat) + var(--scale-10)), var(--lig));
+	--theme-colour--tone20: hsl(var(--hue), calc(var(--sat) + var(--scale-20)), var(--lig));
+	--theme-colour--tone25: hsl(var(--hue), calc(var(--sat) + var(--scale-25)), var(--lig));
+	--theme-colour--tone30: hsl(var(--hue), calc(var(--sat) + var(--scale-30)), var(--lig));
+	--theme-colour--tone40: hsl(var(--hue), calc(var(--sat) + var(--scale-40)), var(--lig));
+	--theme-colour--tone50: hsl(var(--hue), calc(var(--sat) + var(--scale-50)), var(--lig));
+	--theme-colour--tone60: hsl(var(--hue), calc(var(--sat) + var(--scale-60)), var(--lig));
+	--theme-colour--tone70: hsl(var(--hue), calc(var(--sat) + var(--scale-70)), var(--lig));
+	--theme-colour--tone80: hsl(var(--hue), calc(var(--sat) + var(--scale-80)), var(--lig));
+	--theme-colour--tone90: hsl(var(--hue), calc(var(--sat) + var(--scale-90)), var(--lig));
 }
