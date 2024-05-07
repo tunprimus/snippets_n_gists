@@ -279,8 +279,8 @@
 	/*-- End of preferred colours --*/
 	
 	/* Colour themes */
-	/* >>> Building a colour scheme. https://web.dev/building-a-colour-scheme/
-	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-colour-theming/ */
+	/* >>> Building a colour scheme. https://web.dev/building-a-color-scheme/
+	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-color-theming/ */
 
 	--theme-colour-HSL: hsl(...);
 	--theme-colour-h: ...;

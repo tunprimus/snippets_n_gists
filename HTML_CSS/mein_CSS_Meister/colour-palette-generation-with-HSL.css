@@ -1,0 +1,83 @@
+:root {
+	--hue: ...;
+	--sat: ...%;
+	--lig: ...%;
+	--red: ...;
+	--green: ...;
+	--blue: ...;
+	/**
+	* Jewel tone safe saturation between 73 - 83
+	*/
+	--sat-73: 73%;
+	--sat-74: 74%;
+	--sat-75: 75%;
+	--sat-76: 76%;
+	--sat-77: 77%;
+	--sat-78: 78%;
+	--sat-79: 79%;
+	--sat-80: 80%;
+	--sat-81: 81%;
+	--sat-82: 82%;
+	--sat-83: 83%;
+
+	/**
+	* Jewel tone safe brightness/lightness between 56 - 76
+	*/
+	--lig-56: 56%;
+	--lig-57: 57%;
+	--lig-58: 58%;
+	--lig-59: 59%;
+	--lig-60: 60%;
+	--lig-61: 61%;
+	--lig-62: 62%;
+	--lig-63: 63%;
+	--lig-64: 64%;
+	--lig-65: 65%;
+	--lig-66: 66%;
+	--lig-67: 67%;
+	--lig-68: 68%;
+	--lig-69: 69%;
+	--lig-70: 70%;
+	--lig-71: 71%;
+	--lig-72: 72%;
+	--lig-73: 73%;
+	--lig-74: 74%;
+	--lig-75: 75%;
+	--lig-76: 76%;
+
+	/** Monochromatic scaling safe values are between 25% to 60% */
+	--scale-10: 10%;
+	--scale-20: 20%;
+	--scale-25: 25%;
+	--scale-30: 30%;
+	--scale-40: 40%;
+	--scale-50: 50%;
+	--scale-60: 60%;
+	--scale-70: 70%;
+	--scale-80: 80%;
+	--scale-90: 90%;
+
+	--colour-wheel-range: 360;
+
+	--hue-cpl: calc((var(--hue) + 180) - var(--colour-wheel-range));
+
+	--hue-split-cpl-1: calc((var(--hue) + 150) - var(--colour-wheel-range));
+	--hue-split-cpl-2: calc((var(--hue) + 210) - var(--colour-wheel-range));
+
+	--hue-triad-1: calc((var(--hue) + 120) - var(--colour-wheel-range));
+	--hue-triad-2: calc((var(--hue) + 240) - var(--colour-wheel-range));
+
+	--hue-tetrad-1: calc((var(--hue) + 90) - var(--colour-wheel-range));
+	--hue-tetrad-2: calc((var(--hue) + 180) - var(--colour-wheel-range));
+	--hue-tetrad-3: calc((var(--hue) + 270) - var(--colour-wheel-range));
+
+	--hue-analog-1: calc((var(--hue) + 30) - var(--colour-wheel-range));
+	--hue-analog-2: calc((var(--hue) + 60) - var(--colour-wheel-range));
+	--hue-analog-3: calc((var(--hue) + 90) - var(--colour-wheel-range));
+
+	/**-- Change contrastThreshold to 50% when L value of colour equals 50% --**/
+	--contrast-threshold: 60%;
+	--switch: calc((var(--lig) - var(--contrast-threshold)) * -100);
+	--theme-text-colour: hsl(0, 0%, var(--switch));
+	--accessible-colour-rgb: calc(((((var(--red) * 299) + (var(--green) * 587) + (var(--blue) * 114)) / 1000) - 128) * -1000);
+}
