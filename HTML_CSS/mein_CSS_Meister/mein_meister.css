@@ -283,41 +283,41 @@
 	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-color-theming/ */
 
 	--theme-colour-HSL: hsl(...);
-	--theme-colour-h: ...;
-	--theme-colour-s: ...%;
-	--theme-colour-l: ...%;
+	--hue: ...;
+	--sat: ...%;
+	--lig: ...%;
 
-	--theme-colour: hsl(var(--theme-colour-h), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour: hsl(var(--hue), var(--sat), var(--lig));
 	--lighten-percentage: 20%;
 	--darken-percentage: 15%;
 
 	--theme-colour-background: var(--theme-colour);
-	--theme-colour--light: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + var(--lighten-percentage)));
-	--theme-colour--light-l: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + var(--lighten-percentage)));
-	--theme-colour--light-d: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) + var(--lighten-percentage)));
+	--theme-colour--light: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--lighten-percentage)));
+	--theme-colour--light-l: hsl(var(--hue), calc(var(--sat) + var(--lighten-percentage)), calc(var(--lig) + var(--lighten-percentage)));
+	--theme-colour--light-d: hsl(var(--hue), calc(var(--sat) - var(--darken-percentage)), calc(var(--lig) + var(--lighten-percentage)));
 
-	--theme-colour--dark: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
-	--theme-colour--dark-l: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) - var(--darken-percentage)));
-	--theme-colour--dark-d: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - var(--darken-percentage)));
+	--theme-colour--dark: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--darken-percentage)));
+	--theme-colour--dark-l: hsl(var(--hue), calc(var(--sat) + var(--lighten-percentage)), calc(var(--lig) - var(--darken-percentage)));
+	--theme-colour--dark-d: hsl(var(--hue), calc(var(--sat) - var(--darken-percentage)), calc(var(--lig) - var(--darken-percentage)));
 
-	--theme-colour--complement: hsl(calc(var(--theme-colour-h) + 180), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--complement--split1: hsl(calc(var(--theme-colour-h) + 150), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--complement--split2: hsl(calc(var(--theme-colour-h) + 210), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--triad1: hsl(calc(var(--theme-colour-h) + 120), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--triad2: hsl(calc(var(--theme-colour-h) + 240), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--tetrad1: hsl(calc(var(--theme-colour-h) + 90), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--tetrad2: hsl(calc(var(--theme-colour-h) + 180), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--tetrad3: hsl(calc(var(--theme-colour-h) + 270), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--analogue1: hsl(calc(var(--theme-colour-h) + 30), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--analogue2: hsl(calc(var(--theme-colour-h) + 60), var(--theme-colour-s), var(--theme-colour-l));
-	--theme-colour--analogue3: hsl(calc(var(--theme-colour-h) + 90), var(--theme-colour-s), var(--theme-colour-l));
+	--theme-colour--complement: hsl(calc(var(--hue) + 180), var(--sat), var(--lig));
+	--theme-colour--complement--split1: hsl(calc(var(--hue) + 150), var(--sat), var(--lig));
+	--theme-colour--complement--split2: hsl(calc(var(--hue) + 210), var(--sat), var(--lig));
+	--theme-colour--triad1: hsl(calc(var(--hue) + 120), var(--sat), var(--lig));
+	--theme-colour--triad2: hsl(calc(var(--hue) + 240), var(--sat), var(--lig));
+	--theme-colour--tetrad1: hsl(calc(var(--hue) + 90), var(--sat), var(--lig));
+	--theme-colour--tetrad2: hsl(calc(var(--hue) + 180), var(--sat), var(--lig));
+	--theme-colour--tetrad3: hsl(calc(var(--hue) + 270), var(--sat), var(--lig));
+	--theme-colour--analogue1: hsl(calc(var(--hue) + 30), var(--sat), var(--lig));
+	--theme-colour--analogue2: hsl(calc(var(--hue) + 60), var(--sat), var(--lig));
+	--theme-colour--analogue3: hsl(calc(var(--hue) + 90), var(--sat), var(--lig));
 
-	--accent-1-light-theme: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) - var(--darken-percentage)));
-	--accent-2-light-theme: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) - var(--darken-percentage)), calc(var(--theme-colour-l) - (var(--golden-ratio) * var(--lighten-percentage))));
-	--accent-1-dark-theme: hsl(var(--theme-colour-h), var(--theme-colour-s), calc(var(--theme-colour-l) + (2 * var(--lighten-percentage))));
-	--accent-2-dark-theme: hsl(var(--theme-colour-h), calc(var(--theme-colour-s) + var(--lighten-percentage)), calc(var(--theme-colour-l) + (var(--golden-ratio) * var(--lighten-percentage))));
+	--accent-1-light-theme: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--darken-percentage)));
+	--accent-2-light-theme: hsl(var(--hue), calc(var(--sat) - var(--darken-percentage)), calc(var(--lig) - (var(--golden-ratio) * var(--lighten-percentage))));
+	--accent-1-dark-theme: hsl(var(--hue), var(--sat), calc(var(--lig) + (2 * var(--lighten-percentage))));
+	--accent-2-dark-theme: hsl(var(--hue), calc(var(--sat) + var(--lighten-percentage)), calc(var(--lig) + (var(--golden-ratio) * var(--lighten-percentage))));
 
-	--shadow-colour: hsl(var(--theme-colour-h), 60%, 50%);
+	--shadow-colour: hsl(var(--hue), 60%, 50%);
 	--shadow-start: 1px;
 	--alpha-07: 0.70;
 	--alpha-03: 0.33;
@@ -338,7 +338,7 @@
 
 	/**-- Change contrastThreshold to 50% when L value of colour equals 50% --**/
 	--contrast-threshold: 60%;
-	--switch: calc((var(--theme-colour-l) - var(--contrast-threshold)) * -100);
+	--switch: calc((var(--lig) - var(--contrast-threshold)) * -100);
 	--theme-text-colour: hsl(0, 0%, var(--switch));
 	
 	--text-grey12: hsl(0, 0%, 12%);
