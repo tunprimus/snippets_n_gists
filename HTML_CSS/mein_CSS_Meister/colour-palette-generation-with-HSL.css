@@ -6,7 +6,7 @@
 	--green: ...;
 	--blue: ...;
 	/**
-	* Jewel tone safe saturation between 73 - 83
+	* Jewel palette safe saturation between 73 - 83
 	*/
 	--sat-73: 73%;
 	--sat-74: 74%;
@@ -21,7 +21,7 @@
 	--sat-83: 83%;
 
 	/**
-	* Jewel tone safe brightness/lightness between 56 - 76
+	* Jewel palette safe brightness/lightness between 56 - 76
 	*/
 	--lig-56: 56%;
 	--lig-57: 57%;
@@ -44,6 +44,50 @@
 	--lig-74: 74%;
 	--lig-75: 75%;
 	--lig-76: 76%;
+
+	/**
+	* Pastel palette safe saturation range
+	*/
+	--sat-lowest-for-low-end: 14%;
+	--sat-highest-for-low-end: 89%;
+	--sat-lowest-for-high-end: 21%;
+	--sat-highest-for-high-end: 96%;
+
+	/**
+	* Earth palette safe saturation range
+	*/
+	--sat-earth-lowest: 26%;
+	--sat-earth-highest: 41%;
+
+	/**
+	* Earth palette safe brightness/lightness range
+	*/
+	--lig-earth-lowest: 36%;
+	--lig-earth-highest: 77%;
+
+	/**
+	* Neutral palette safe saturation range
+	*/
+	--sat-neutral-lowest: 1%;
+	--sat-neutral-highest: 4%;
+
+	/**
+	* Neutral palette safe brightness/lightness range
+	*/
+	--lig-neutral-lowest: 58%;
+	--lig-neutral-highest: 99%;
+
+	/**
+	* Fluorescent palette safe saturation range
+	*/
+	--sat-fluorescent-lowest: 63%;
+	--sat-fluorescent-highest: 100%;
+
+	/**
+	* Fluorescent palette safe brightness/lightness range
+	*/
+	--lig-fluorescent-lowest: 82%;
+	--lig-fluorescent-highest: 100%;
 
 	/** Monochromatic scaling safe values are between 25% to 60% */
 	--scale-10: 10%;
