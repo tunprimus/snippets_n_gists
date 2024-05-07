@@ -442,9 +442,11 @@
 
 	/* >>> Contextual Spacing For Intrinsic Web Design: https://moderncss.dev/contextual-spacing-for-intrinsic-web-design/ */
 	/* Paddings, Margins, Gaps */
+	--padding-XS: clamp(0.5rem, 1.5%, 0.75rem);
 	--padding-S: clamp(1rem, 3%, 1.5rem);
 	--padding-M: clamp(1.5rem, 6%, 3rem);
 	--padding-L: clamp(3rem, 12%, 6rem);
+	--padding-XL: clamp(6rem, 24%, 12rem);
 	/* https://matthewjamestaylor.com/responsive-padding */
 	--responsive-space--XXL: calc(48px + 1.5625vw);
 	--responsive-space--XL: calc(32px + 1.5625vw);
@@ -455,22 +457,27 @@
 	--responsive-space--XS: calc(2px + 1.5625vw);
 	--responsive-space--XXS: calc(0.1px + 0.5625vw);
 
+	--margin-XS: min(1rem, 2vh);
 	--margin-S: min(2rem, 4vh);
 	--margin-M: min(4rem, 8vh);
 	--margin-L: min(8rem, 16vh);
+	--margin-XL: min(16rem, 32vh);
 
+	--layout-gap-XS: clamp(0.5rem, 1.5vmax, 0.75rem);
 	--layout-gap-S: clamp(1rem, 3vmax, 1.5rem);
 	--layout-gap-M: clamp(1.5rem, 6vmax, 3rem);
 	--layout-gap-L: clamp(3rem, 8vmax, 4rem);
+	--layout-gap-XL: clamp(6rem, 16vmax, 8rem);
 
 	--flexbox-albatross-margin: 1rem;
 	--flexbox-albatross-container-size: 40rem;
 	--flexbox-albatross-modifier: calc(var(--flexbox-albatross-container-size) - 100%);
 	/*-- End of paddings, margins and gaps --*/
 
+	--border-radius-value--S: 0.2rem;
 	--border-radius-value: 0.4rem;
-	--border-radius-value--L: 1.2rem;
 	--border-radius-value--M: 0.8rem;
+	--border-radius-value--L: 1.2rem;
 	--border-radius-circle-value: 50%;
 	--border-radius-elliptic-value: 25%;
 
