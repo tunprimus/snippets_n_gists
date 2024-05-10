@@ -1827,14 +1827,14 @@ a::after, .link::after {
 }
 
 .details {
-	border: solid 0.1rem var(--accordion-border-colour);
+	border: 0.1rem solid var(--accordion-border-colour);
 	border-radius: var(--border-radius-value);
 	box-shadow: var(--box-shadow1);
 }
 
 .details > .summary {
 	list-style: none;
-	border: solid 0.1rem var(--accordion-border-colour);
+	border: 0.1rem solid var(--accordion-border-colour);
 	border-radius: var(--border-radius-value);
 	font-size: var(--fs0);
 	font-style: normal;
@@ -1850,9 +1850,10 @@ a::after, .link::after {
 	display: inline-block;
 	width: 0.4rem;
 	height: 0.4rem;
-	border: solid 0.1rem var(--accordion-border-colour);
+	border: 0.1rem solid var(--accordion-border-colour);
 	border-left-color: transparent;
 	border-bottom-color: transparent;
+	margin-left: 0.3rem;
 	margin-right: 0.6rem;
 	transform: rotate(-45deg) translate(-20%, 20%);
 	transition: transform 0.3s;
@@ -1866,19 +1867,19 @@ a::after, .link::after {
 
 
 .details[open] > :not(.summary) {
-	border-left: solid 0.1rem var(--accordion-border-colour);
-	border-right: solid 0.1rem var(--accordion-border-colour);
+	border-left: 0.1rem solid var(--accordion-border-colour);
+	border-right: 0.1rem solid var(--accordion-border-colour);
 }
 
 
 .details[open] {
-	border-left: solid 0.1rem var(--accordion-border-colour);
-	border-right: solid 0.1rem var(--accordion-border-colour);
+	border-left: 0.1rem solid var(--accordion-border-colour);
+	border-right: 0.1rem solid var(--accordion-border-colour);
 	background-color: var(--theme-colour--light-d);
 }
 
 .details[open] > :last-child {
-	border-bottom: solid 0.1rem var(--accordion-border-colour);
+	border-bottom: 0.1rem solid var(--accordion-border-colour);
 	border-bottom-left-radius: 0.5rem;
 	border-bottom-right-radius: 0.5rem;
 }
