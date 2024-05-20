@@ -1,4 +1,9 @@
 //@ts-check
+/**
+ * @description Filter a nested object recursively
+ * @author  Dave Cohen
+ * @link https://www.scraggo.com/recursive-filter-function/
+ */
 
 function log(item) {
 	console.log(JSON.stringify(item));
