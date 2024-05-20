@@ -613,6 +613,7 @@
 	--border-radius-circle-value: 50%;
 	--border-radius-elliptic-value: 25%;
 
+	-moz-tab-size: 4 !important;
 	tab-size: 4 !important;
 	color-scheme: light dark;
 }
@@ -831,6 +832,7 @@ button,
 [type="button"],
 [type="reset"],
 [type="submit"] {
+	-moz-appearance: button;
 	-webkit-appearance: button;
 	appearance: button;
 	cursor: pointer;
@@ -1050,6 +1052,7 @@ select:disabled {
 }
 
 [type="search"] {
+	-moz-appearance: textfield;
 	-webkit-appearance: textfield;
 	appearance: textfield;
 	outline-offset: -2px;
@@ -1529,6 +1532,7 @@ textarea.input {
 
 input[type="radio"],
 .input[type="radio"] {
+	-moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
 	background-color: var(--off-white);
