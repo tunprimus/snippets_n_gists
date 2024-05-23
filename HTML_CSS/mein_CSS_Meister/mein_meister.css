@@ -667,7 +667,7 @@ body {
 	width: auto; /* Allows content to grow beyond the page without overflow */
 	min-height: 100%; /* Starts web page with 100% height. Fallback for IE 4-6 and older browsers */
 	min-height: 100vh; /* Starts web page with 100% height. Uses the viewport's height. Only works in modern HTML5 browsers */
-	/* overflow-y: scroll; */ /* Optional: Adds an empty scrollbar to the right margin in case content grows vertically, creating a scrollbar.  Allows for better width calculations, as the browser pre-calculates width before scrollbar appears, avoiding page content shifting.*/
+	/** overflow-y: scroll; */ /* Optional: Adds an empty scrollbar to the right margin in case content grows vertically, creating a scrollbar.  Allows for better width calculations, as the browser pre-calculates width before scrollbar appears, avoiding page content shifting.*/
 	font-family: var(--font-stack-body);
 	line-height: var(--golden-ratio);
 	line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
@@ -678,6 +678,9 @@ body {
 	color: var(--theme-text-colour);
 }
 
+/**
+* Only use if margin and padding have been reset to 0
+*/
 * + * {
 	margin-top: 1.618rem;
 }
@@ -1000,7 +1003,7 @@ code {
 }
 
 pre {
-	font-family: monospace, monospace;
+	font-family: monospace;
 	font-size: inherit;
 	display: block;
 	overflow: auto;
@@ -1011,7 +1014,7 @@ pre {
 code,
 kbd,
 samp {
-	font-family: monospace, monospace;
+	font-family: monospace;
 	font-size: inherit;
 }
 
@@ -1916,17 +1919,17 @@ a::after, .link::after {
  */
 .alert {
 	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem gold, 0 0 0.2rem gold;
-	background: linear-gradient(to right gold, lightgrey, white, lightgrey, gold);
+	background: linear-gradient(to right, gold, lightgrey, white, lightgrey, gold);
 }
 
 .warning {
 	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem darkorange, 0 0 0.2rem darkorange;
-	background: linear-gradient(to right darkorange, lightgrey, white, lightgrey, darkorange);
+	background: linear-gradient(to right, darkorange, lightgrey, white, lightgrey, darkorange);
 }
 
 .danger {
 	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem darkred, 0 0 0.2rem darkred;
-	background: linear-gradient(to right darkred lightgrey, white, lightgrey, darkred);
+	background: linear-gradient(to right, darkred lightgrey, white, lightgrey, darkred);
 }
 
 
@@ -2022,13 +2025,13 @@ a::after, .link::after {
 /*              MEDIA QUERIES             */
 /* -------------------------------------- */
 /* Tablet portrait only */
-@media (min-width: 600px) and (max-width: 899px) {}
+@media (min-width: 600px) and (max-width: 899px) {/**...*/}
 /* Tablet landscape only */
-@media (min-width: 900px) and (max-width: 1199px) {}
+@media (min-width: 900px) and (max-width: 1199px) {/**...*/}
 /* Desktop only */
-@media (min-width: 1200px) and (max-width: 1799px) {}
+@media (min-width: 1200px) and (max-width: 1799px) {/**...*/}
 /* Big desktop upwards */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {/**...*/}
 
 /* Prevent scaling beyond this breakpoint */
 @media (min-width: 2560px) {
