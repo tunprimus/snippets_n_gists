@@ -438,16 +438,16 @@
 	--theme-colour--shade80: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-80)));
 	--theme-colour--shade90: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-90)));
 
-	--theme-colour--tone10: hsl(var(--hue), calc(var(--sat) + var(--scale-10)), var(--lig));
-	--theme-colour--tone20: hsl(var(--hue), calc(var(--sat) + var(--scale-20)), var(--lig));
-	--theme-colour--tone25: hsl(var(--hue), calc(var(--sat) + var(--scale-25)), var(--lig));
-	--theme-colour--tone30: hsl(var(--hue), calc(var(--sat) + var(--scale-30)), var(--lig));
-	--theme-colour--tone40: hsl(var(--hue), calc(var(--sat) + var(--scale-40)), var(--lig));
-	--theme-colour--tone50: hsl(var(--hue), calc(var(--sat) + var(--scale-50)), var(--lig));
-	--theme-colour--tone60: hsl(var(--hue), calc(var(--sat) + var(--scale-60)), var(--lig));
-	--theme-colour--tone70: hsl(var(--hue), calc(var(--sat) + var(--scale-70)), var(--lig));
-	--theme-colour--tone80: hsl(var(--hue), calc(var(--sat) + var(--scale-80)), var(--lig));
-	--theme-colour--tone90: hsl(var(--hue), calc(var(--sat) + var(--scale-90)), var(--lig));
+	--theme-colour--tone10: hsl(var(--hue), var(--scale-10), var(--lig));
+	--theme-colour--tone20: hsl(var(--hue), var(--scale-20), var(--lig));
+	--theme-colour--tone25: hsl(var(--hue), var(--scale-25), var(--lig));
+	--theme-colour--tone30: hsl(var(--hue), var(--scale-30), var(--lig));
+	--theme-colour--tone40: hsl(var(--hue), var(--scale-40), var(--lig));
+	--theme-colour--tone50: hsl(var(--hue), var(--scale-50), var(--lig));
+	--theme-colour--tone60: hsl(var(--hue), var(--scale-60), var(--lig));
+	--theme-colour--tone70: hsl(var(--hue), var(--scale-70), var(--lig));
+	--theme-colour--tone80: hsl(var(--hue), var(--scale-80), var(--lig));
+	--theme-colour--tone90: hsl(var(--hue), var(--scale-90), var(--lig));
 
 	--accent-1-light-theme: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--darken-percentage)));
 	--accent-2-light-theme: hsl(var(--hue), calc(var(--sat) - var(--darken-percentage)), calc(var(--lig) - (var(--golden-ratio) * var(--lighten-percentage))));
