@@ -1,0 +1,191 @@
+<!-- maven -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CSS attr() with Custom Properties</title>
+	<style>
+		:root {
+			--responsive-space--XS: calc(2px + 1.5625vw);
+			--responsive-space--XXS: calc(0.1px + 0.5625vw);
+		}
+
+		html,
+		body {
+			height: 100%;
+		}
+
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+		}
+
+		.button {
+			display: inline-block;
+			margin: 2rem;
+			border: 0.0625rem solid black;
+			background-color: white;
+			font-size: 1.125rem;
+			position: relative;
+		}
+
+		.button::before {
+			content: "";
+			position: absolute;
+			border-top: calc(var(--tooltip-top) * -1) solid black;
+			border-bottom: calc(var(--tooltip-bottom) * -1) solid black;
+			border-left: 0.625rem solid transparent;
+			border-right: 0.625rem solid transparent;
+			top: calc((var(--tooltip-top, auto) - 100%) + 1.25rem);
+			bottom: calc((var(--tooltip-bottom, auto) - 100%) + 1.5rem);
+			transform: translateX(-50%);
+		}
+
+		.button::after {
+			position: absolute;
+			content: var(--tooltip-string);
+			padding: 0.5rem 0.85rem;
+			background-color: black;
+			color: var(--tooltip-colour);
+			font-size: var(--tooltip-font-size);
+			top: calc(var(--tooltip-top, auto) - 100% - 1.25rem);
+			bottom: calc(var(--tooltip-bottom, auto) - 100% - 1.25rem);
+			border-radius: 0.1875rem;
+			white-space: nowrap;
+			transform: translateX(-50%);
+		}
+
+		/**
+		 * @section Inputs
+		 * Styling for inputs.
+		 */
+		.input {
+			min-height: 1.5rem;
+			font-size: 1rem;
+			font-size: max(16px, 1em);
+			font-family: inherit;
+			padding: 0.25em 0.5em;
+			background-color: var(--solarised-white);
+			border: 0.125rem solid var(--input-border);
+			border-radius: var(--border-radius-value);
+		}
+
+		.input:focus {
+			border-color: hsl(var(--input-focus-h), var(--input-focus-s), var(--input-focus-l));
+			box-shadow: 0 0 0 0.1875rem hsla(var(--input-focus-h), var(--input-focus-s), calc(var(--input-focus-l) + 40%), 0.8);
+			outline: 3px solid transparent;
+		}
+
+		.input:hover {
+			outline: 0.1rem solid var(--theme-colour--complement--split2);
+		}
+
+		.input[disabled] {
+			--input-border: var(--text-grey25);
+			background-color: var(--text-grey75);
+			cursor: not-allowed;
+		}
+
+		input[type="radio"] {
+			position: absolute;
+			top: auto;
+			overflow: hidden;
+			clip: rect(0.0625rem, 0.0625rem, 0.0625rem, 0.0625rem);
+			clip: rect(0 0 0 0);
+			width: 0.0625rem;
+			height: 0.0625rem;
+			padding: 0;
+			border: 0;
+			white-space: nowrap;
+			-webkit-clip-path: inset(50%);
+			clip-path: inset(50%);
+		}
+
+		input[type="radio"] + label {
+			content: "";
+			display: inline-block;
+			/** margin: -2px; */
+			padding: 0.25rem 0.5rem;
+			margin-bottom: 0;
+			font-size: 1rem;
+			line-height: 1.15;
+			color: #333333;
+			text-align: center;
+			text-shadow: 0 0.0625rem 0.0625rem rgba(255,255,255,0.75);
+			vertical-align: middle;
+			cursor: pointer;
+			background-color: #F5F5F5;
+			background-image: -o-linear-gradient(top,#FFFFFF,#E6E6E6);
+			background-image: -moz-linear-gradient(top,#FFFFFF,#E6E6E6);
+			background-image: -webkit-linear-gradient(top,#FFFFFF,#E6E6E6);
+			background-image: linear-gradient(to bottom,#FFFFFF,#E6E6E6);
+			background-repeat: repeat-x;
+			border: 0.0625rem solid #CCCCCC;
+			border-color: #E6E6E6 #E6E6E6 #BFBFBF;
+			border-color: rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);
+			border-bottom-color: #B3B3B3;
+			filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF',endColorstr='#FFE6E6E6',GradientType=0);
+			filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+			-webkit-box-shadow: inset 0 0.0625rem 0 rgba(255,255,255,0.2),0 0.0625rem 0.125rem rgba(0,0,0,0.05);
+			-moz-box-shadow: inset 0 0.0625rem 0 rgba(255,255,255,0.2),0 0.0625rem 0.125rem rgba(0,0,0,0.05);
+			box-shadow: inset 0 0.0625rem 0 rgba(255,255,255,0.2),0 0.0625rem 0.125rem rgba(0,0,0,0.05);
+			transition: all 0.1s ease-out;
+		}
+
+		input[type="radio"]:checked + label {
+			background-image: none;
+			outline: 0;
+			-webkit-box-shadow: inset 0 0.125rem 0.25rem rgba(0,0,0,0.15),0 0.0625rem 0.125rem rgba(0,0,0,0.05);
+			-moz-box-shadow: inset 0 0.125rem 0.25rem rgba(0,0,0,0.15),0 0.0625rem 0.125rem rgba(0,0,0,0.05);
+			box-shadow: inset 0 0.125rem 0.25rem rgba(0,0,0,0.15),0 0.0625rem 0.125rem rgba(0,0,0,0.05);
+			background-color:#E0E0E0;
+		}
+
+		.radio__label {
+			margin: var(--responsive-space--XXS);
+			border-radius: var(--responsive-space--XS);
+			position: relative;
+		}
+
+		input[type="radio"] + label::after {
+			position: absolute;
+			top: 0;
+			right: 0;
+			content: "";
+			padding: 0.75rem;
+			background-color: var(--radio-colour);
+			font-size: 1rem;
+			line-height: 1.15;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body>
+	<button type="button" class="button button-1" style="
+		--tooltip-string: 'Ug. Tooltips.';
+		--tooltip-colour: #F06D06;
+		--tooltip-font-size: 11px;
+		--tooltip-top: -10px;
+		">1st Button</button>
+
+	<button type="button" class="button button-2" style="
+		--tooltip-string: 'So tricky.';
+		--tooltip-colour: lightblue;
+		--tooltip-font-size: 16px;
+		--tooltip-top: -15px;
+		">2nd Button</button>
+
+	<button type="button" class="button button-3" style="
+		--tooltip-string: 'So tricky.';
+		--tooltip-colour: hsl(270, 50%, 60%);
+		--tooltip-font-size: 1.25rem;
+		--tooltip-top: -20px;
+		">3rd Button</button>
+
+	<input type="radio" name="colour-scheme-default" id="radio-bright-red" class="input radio__input radio-bright-red" value="hsl(0, 100%, 43%)" data-name-colour="bright-red">
+	<label for="radio-bright-red" class="label radio__label" data-name-colour="bright-red" style="--radio-colour: hsl(0, 100%, 43%);">bright-red</label>
+</body>
+</html>
