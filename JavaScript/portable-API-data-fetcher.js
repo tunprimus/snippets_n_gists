@@ -50,27 +50,23 @@ async function getAndTransformApiJsonData(apiEndpoint) {
  *
  * @param {string} apiURI - The URI of the API to fetch the data from.
  * @return {Promise<Array<Object>>} A Promise that resolves to an array of transformed objects.
+ * @example async function renderTodos() {
+			let todos = await getApiData('/todos');
+			let app = document.getElementById('app');
+			// @ts-ignore
+			app.innerHTML = `
+				<ul>
+					${todos.map((todo) => {
+						return `<li>${todo}</li>`;
+					}).join('')}
+				</ul>
+			`;
+		}
  */
 async function getApiData(apiURI) {
 	let data = await getAndTransformApiJsonData(apiURI);
 	return data;
 }
 
-/**
- * Renders the todos on the page by fetching them from the API and updating the DOM.
- *
- * @return {Promise<void>} A promise that resolves when the todos are rendered.
- */
-async function renderTodos() {
-	let todos = await getApiData('/todos' || updatedData);
-	let app = document.getElementById('app');
-	app.innerHTML = `
-		<ul>
-			${todos.map((todo) => {
-				return `<li>${todo}</li>`;
-			}).join('')}
-		</ul>
-	`;
-}
 
 export { getAndTransformApiJsonData, getApiData };
