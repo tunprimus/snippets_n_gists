@@ -126,6 +126,9 @@
 	--linen: hsl(31, 68%, 94%);
 	--linen: #FAF0E6;
 	--linen: rgb(250, 240, 229);
+	--mauveine: hsl(295, 97%, 31%);
+	--mauveine: #8D029B;
+	--mauveine: rgb(141, 2, 155);
 	--midnight-black: hsl(0, 0%, 0%);
 	--midnight-black: #000000;
 	--midnight-black: rgb(0, 0, 0);
@@ -258,6 +261,9 @@
 	--topaz: hsl(35, 100%, 74%);
 	--topaz: #FFC87C;
 	--topaz: rgb(255, 200, 122);
+	--tyrian-purple: hsl(325, 96%, 20%);
+	--tyrian-purple: #66023C;
+	--tyrian-purple: rgb(102, 2, 60);
 	--van-dyke-brown: hsl(28, 24%, 11%);
 	--van-dyke-brown: #221B15;
 	--van-dyke-brown: rgb(35, 28, 21);
