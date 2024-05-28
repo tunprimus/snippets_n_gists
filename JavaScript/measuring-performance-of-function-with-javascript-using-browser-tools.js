@@ -12,6 +12,13 @@
  * @param {Function} toMeasure
  * @param {number} repeatTimes
  * @returns {object}
+ * @example // Using Old Benchmark
+ *  var TimesToBeExecuted = 10;
+    var TaskToBeExecuted = function() {
+      // A task that you want to measure
+    };
+    var TestResult = new TimeBenchmark(TaskToBeExecuted, TimesToBeExecuted);
+    console.log(TestResult);
  */
 function TimeBenchmark(toMeasure, repeatTimes) {
   if (typeof(repeatTimes) !== 'number') {
@@ -19,35 +26,34 @@ function TimeBenchmark(toMeasure, repeatTimes) {
   }
 
   if (typeof(toMeasure) === 'function') {
-    var start_time = new Date().getTime();
+    var startTime = new Date().getTime();
     for (var i = 0; i < repeatTimes; i++) {
+      // @ts-ignore
       toMeasure.call();
     }
-    var end_time = new Date().getTime();
+    var endTime = new Date().getTime();
   }
 
   return {
-    start: start_time,
-    end: end_time,
-    estimatedMilliseconds: end_time - start_time,
+    start: startTime,
+    end: endTime,
+    estimatedMilliseconds: endTime - startTime,
   };
 }
 
-/*
-// Using Old Benchmark
-var TimesToBeExecuted = 10;
-var TaskToBeExecuted = function() {
-  // A task that you want to measure
-};
-var TestResult = new TimeBenchmark(TaskToBeExecuted, TimesToBeExecuted);
-console.log(TestResult);
-*/
 
 /**
  * 
  * @param {Function} toMeasure 
  * @param {number} repeatTimes 
  * @returns {object}
+ * @example // Using Standard Benchmark
+    var TimesToBeExecuted = 10;
+    var TaskToBeExecuted = function() {
+      // A task that you want to measure
+    };
+    var TestResult = new StandardBenchmark(TaskToBeExecuted, TimesToBeExecuted);
+    console.log(TestResult);
  */
 function StandardBenchmark(toMeasure, repeatTimes) {
   if (typeof(repeatTimes) !== 'number') {
@@ -55,32 +61,24 @@ function StandardBenchmark(toMeasure, repeatTimes) {
   }
 
   if (typeof(toMeasure) === 'function') {
-    var start_status = performance.now();
-    var total_taken = 0;
+    var startStatus = performance.now();
+    var totalTaken = 0;
     for (var i = 0; i < repeatTimes; i++) {
       var startTimeSubtask = performance.now();
+      // @ts-ignore
       toMeasure.call();
       var endTimeSubtask = performance.now();
-      total_taken += (endTimeSubtask - startTimeSubtask);
+      totalTaken += (endTimeSubtask - startTimeSubtask);
     }
-    var final_status = performance.now();
+    var finalStatus = performance.now();
   }
 
   return {
-    totalMilliseconds: (final_status - start_status),
-    averageMillisecondsPerTask: total_taken / repeatTimes,
+    totalMilliseconds: (finalStatus - startStatus),
+    averageMillisecondsPerTask: totalTaken / repeatTimes,
   };
 }
 
-/*
-// Using Standard Benchmark
-var TimesToBeExecuted = 10;
-var TaskToBeExecuted = function() {
-  // A task that you want to measure
-};
-var TestResult = new StandardBenchmark(TaskToBeExecuted, TimesToBeExecuted);
-console.log(TestResult);
-*/
 
 /**
  * 
@@ -101,6 +99,7 @@ function ConsoleTimeBenchmark(toMeasure, identifierName, repeatTimes) {
   if (typeof(toMeasure) === 'function') {
     console.time(identifierName);
     for (var i = 0; i < repeatTimes; i++) {
+      // @ts-ignore
       toMeasure.call();
     }
     console.timeEnd(identifierName);
@@ -133,6 +132,7 @@ async function UserTimingBenchmark(toMeasure, identifierName, repeatTimes) {
   if (typeof(toMeasure) === 'function') {
     performance.mark(startMarker);
     for (var i = 0; i < repeatTimes; i++) {
+      // @ts-ignore
       await toMeasure.call();
     }
     performance.mark(endMarker);
@@ -145,3 +145,5 @@ async function UserTimingBenchmark(toMeasure, identifierName, repeatTimes) {
   console.log(marks, measurements);
   return measurements;
 }
+
+export { TimeBenchmark, StandardBenchmark, ConsoleTimeBenchmark, UserTimingBenchmark };
