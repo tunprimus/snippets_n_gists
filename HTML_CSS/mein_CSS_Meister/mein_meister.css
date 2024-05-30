@@ -586,14 +586,16 @@
 	--padding-L: clamp(3rem, 12%, 6rem);
 	--padding-XL: clamp(6rem, 24%, 12rem);
 	/* https://matthewjamestaylor.com/responsive-padding */
-	--responsive-space--XXL: calc(48px + 1.5625vw);
+	--responsive-space--XXXL: calc(48px + 1.5625vw);
+	--responsive-space--XXL: calc(40px + 1.5625vw);
 	--responsive-space--XL: calc(32px + 1.5625vw);
 	--responsive-space--L: calc(24px + 1.5625vw);
-	--responsive-space: calc(16px + 1.5625vw);
-	--responsive-space--M: calc(8px + 1.5625vw);
+	--responsive-space--M: calc(16px + 1.5625vw);
+	--responsive-space: calc(8px + 1.5625vw);
 	--responsive-space--S: calc(4px + 1.5625vw);
 	--responsive-space--XS: calc(2px + 1.5625vw);
-	--responsive-space--XXS: calc(0.1px + 0.5625vw);
+	--responsive-space--XXS: calc(1px + 0.5625vw);
+	--responsive-space--XXXS: calc(0.5px + 0.5625vw);
 
 	--margin-XS: min(1rem, 2vh);
 	--margin-S: min(2rem, 4vh);
