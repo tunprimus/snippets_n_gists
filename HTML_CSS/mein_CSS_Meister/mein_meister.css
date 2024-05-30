@@ -454,6 +454,16 @@
 	--accent-1-dark-theme: hsl(var(--hue), var(--sat), calc(var(--lig) + (2 * var(--lighten-percentage))));
 	--accent-2-dark-theme: hsl(var(--hue), calc(var(--sat) + var(--lighten-percentage)), calc(var(--lig) + (var(--golden-ratio) * var(--lighten-percentage))));
 
+	/* General ratios */
+	--golden-ratio: 1.618;
+	--perfect-fifth: 1.500;
+	--augmented-fourth: 1.414;
+	--perfect-fourth: 1.333;
+	--major-third: 1.250;
+	--minor-third: 1.200;
+	--major-second: 1.125;
+	--minor-second: 1.067;
+
 	--shadow-colour: hsl(var(--hue), 60%, 50%);
 	--shadow-start: 1px;
 	--alpha-07: 0.70;
@@ -545,16 +555,6 @@
 
 	--custom-font-size-7: calc((1px * var(--min-font-size)) + (((var(--max-font-size) - var(--min-font-size)) * (100vw - (1px * var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
 	min-height: 0vw;
-	
-	/* General ratios */
-	--golden-ratio: 1.618;
-	--perfect-fifth: 1.500;
-	--augmented-fourth: 1.414;
-	--perfect-fourth: 1.333;
-	--major-third: 1.250;
-	--minor-third: 1.200;
-	--major-second: 1.125;
-	--minor-second: 1.067;
 
 	--font-scale-ratio: var(/**/); /* input one of the above */
 	/* >>> Modular scale: https://every-layout.dev/rudiments/modular-scale/ */
