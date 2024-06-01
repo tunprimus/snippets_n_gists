@@ -32,10 +32,12 @@ export function countdown(nodeName, allottedTime) {
 	 */
 	function updateTimer() {
 		timeLeft = endTime - Date.now();
+
 		if (timeLeft <= 0) {
 			clearInterval(element.timer);
 			return;
 		}
+
 		hours = Math.floor(timeLeft / 3600000);
 		minutes = Math.floor((timeLeft - hours * 3600000) / 60000);
 		seconds = Math.floor((timeLeft - hours * 3600000 - minutes * 60000) / 1000);
@@ -44,6 +46,7 @@ export function countdown(nodeName, allottedTime) {
 
 	element = document.querySelector(nodeName);
 	endTime = Date.now() + allottedTime;
+	
 	updateTimer();
 	element.timer = setInterval(updateTimer, 1000);
 }
