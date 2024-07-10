@@ -902,7 +902,7 @@ input.studentid:-ms-input-placeholder { /* Microsoft Edge */
 }
 
 button {
-	border: none;
+	border: transparent;
 	border-radius: 0.8rem;
 	font-family: inherit;
 	color: inherit;
@@ -1671,8 +1671,8 @@ A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
 }
 
 .button:focus {
-	outline-style: solid;
-	outline-color: transparent;
+	outline: 0.125rem solid transparent;
+	outline-offset: 0.125rem;
 	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
 }
 
