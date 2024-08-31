@@ -57,6 +57,7 @@ function* generatorPrimesMap() {
 
 /**
  * Prime number 
+ * @description Modified from https://benmccormick.org/2017/11/27/190000.html
  * @example console.log(generatePrime(1000));
  * console.log(generatePrime(1000, true));
  * @param {number} numOfPrimes 
