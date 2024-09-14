@@ -9,7 +9,7 @@ def fast_parse(python_class, parse_function, data_to_parse, number_of_workers = 
     """
     Util function to split any data set to the number of workers, then return results using any given parsing function.
 
-    NOte that when using dicts, the index of the key will be passed to the function object too, so that needs to be handled.
+    Note that when using dicts, the index of the key will be passed to the function object too, so that needs to be handled.
         :param python_class: Instantiated class object which contains the parse function
         :param parse_function: Function to parse data, can either be a list or a dict
         :param data_to_parse: Data to be parsed.
@@ -19,7 +19,7 @@ def fast_parse(python_class, parse_function, data_to_parse, number_of_workers = 
     """
     try:
         function_object = getattr(python_class, parse_function)
-    except AttributeError as e:
+    except AttributeError as err:
         logger.error(f"{python_class} does not have {parse_function}")
         return
     else:
@@ -42,3 +42,7 @@ def fast_parse(python_class, parse_function, data_to_parse, number_of_workers = 
                 finally:
                     results.append(data)
             return results
+
+
+if __name__ == "__main__":
+    main()

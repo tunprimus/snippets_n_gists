@@ -23,3 +23,7 @@ def _fib(n):
 
 print(fibonacci(10))
 print(fibonacci(100))
+
+
+if __name__ == "__main__":
+    main()

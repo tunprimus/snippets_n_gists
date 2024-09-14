@@ -1,6 +1,7 @@
 # Frequently Used Unicode Emojis (Not in Zeal Yet)
 
 ## Chess Pieces
+
 white chess king U+2654
 black chess king U+265A
 white chess queen U+2655

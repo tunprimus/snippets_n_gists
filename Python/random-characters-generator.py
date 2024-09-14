@@ -21,4 +21,6 @@ def gen_random_chars(length = 16, alphabet = True, num = True, special = True):
         all_chars = str_alphabets + str_nums + str_special_chars
     return "".join((random.SystemRandom.choices(all_chars, k = length)))
 
-main()
+
+if __name__ == "__main__":
+    main()
