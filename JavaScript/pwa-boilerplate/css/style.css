@@ -1,0 +1,2180 @@
+/* This is a master CSS for me to use across projects. */
+
+/* -------------------------------------- */
+/*        VARIABLES AND RESETS            */
+/* -------------------------------------- */
+
+/* -------------- */
+/* Root variables */
+/* -------------- */
+:root {
+	/* Preferred colours variables */
+	--agate-grey: hsl(75, 5%, 68%);
+	--agate-grey: #AFB1A9;
+	--agate-grey: rgb(175, 177, 169);
+	--alizarin-crimson: hsl(16, 100%, 15%);
+	--alizarin-crimson: #4E1500;
+	--alizarin-crimson: rgb(77, 20, 0);
+	--amethyst: hsl(270, 50%, 60%);
+	--amethyst: #9966CC;
+	--amethyst: rgb(153, 102, 204);
+	--aqua-blue: hsl(180, 100%, 52%);
+	--aqua-blue: #0AFFFF;
+	--aqua-blue: rgb(10, 255, 255);
+	--beige: hsl(60, 56%, 91%);
+	--beige: #F5F5DC;
+	--beige: rgb(245, 245, 219);
+	--beryl: hsl(174, 77%, 63%);
+	--beryl: #56E9DB;
+	--beryl: rgb(88, 233, 219);
+	--blue: hsl(240, 100%, 50%);
+	--blue: #0000FF;
+	--blue: rgb(0, 0, 255);
+	--brass: hsl(52, 47%, 48%);
+	--brass: #B5A642;
+	--brass: rgb(180, 165, 65);
+	--bright-red: hsl(0, 100%, 43%);
+	--bright-red: #DB0000;
+	--bright-red: rgb(219, 0, 0);
+	--bronze: hsl(30, 61%, 50%);
+	--bronze: #CD7F32;
+	--bronze: rgb(205, 128, 50);
+	--butter: hsl(60, 100%, 91%);
+	--butter: #FFFFD2;
+	--butter: rgb(255, 255, 209);
+	--carbuncle: hsl(351, 49%, 39%);
+	--carbuncle: #943241;
+	--carbuncle: rgb(148, 51, 65);
+	--cadmium-yellow: hsl(56, 100%, 50%);
+	--cadmium-yellow: #FFEC00;
+	--cadmium-yellow: rgb(255, 238, 0);
+	--chalcedony: hsl(228, 31%, 59%);
+	--chalcedony: #7784B8;
+	--chalcedony: rgb(118, 131, 183);
+	--charcoal: hsl(210, 35%, 9%);
+	--charcoal: #101820;
+	--charcoal: rgb(15, 23, 31);
+	--chrysolite: hsl(74, 54%, 27%);
+	--chrysolite: #5A6C20;
+	--chrysolite: rgb(89, 106, 32);
+	--chrysoprasus: hsl(159, 97%, 26%);
+	--chrysoprasus: #028255;
+	--chrysoprasus: rgb(2, 131, 86);
+	--cocoa-brown: hsl(17, 13%, 10%);
+	--cocoa-brown: #1E1917;
+	--cocoa-brown: rgb(29, 24, 22);
+	--darkblue: hsl(240, 100%, 27%);
+	--darkblue: #00008B;
+	--darkblue: rgb(0, 0, 138);
+	--dark-sienna: hsl(14, 51%, 25%);
+	--dark-sienna: #5F2E1F;
+	--dark-sienna: rgb(96, 46, 31);
+	--darkslategrey: hsl(180, 25%, 25%);
+	--darkslategrey: #2F4F4F;
+	--darkslategrey: rgb(48, 80, 80);
+	--dimgrey: hsl(0, 0%, 41%);
+	--dimgrey: #696969;
+	--dimgrey: rgb(105, 105, 105);
+	--dual-theme-grey: hsl(0, 0%, 47%);
+	--dual-theme-grey: #777777;
+	--dual-theme-grey: rgb(120, 120, 120);
+	--ebony: hsl(16, 10%, 21%);
+	--ebony: #3C3431;
+	--ebony: rgb(59, 51, 48);
+	--emerald-variant: hsl(151, 100%, 21%);
+	--emerald-variant: #006B37;
+	--emerald-variant: rgb(0, 107, 55);
+	--emerald: hsl(140,52%,55%);
+	--emerald: #50C878;
+	--emerald: rgb(81, 200, 120);
+	--gold: hsl(51, 100%, 50%);
+	--gold: #FFD700;
+	--gold: rgb(255, 217, 0);
+	--green: hsl(120, 100%, 50%);
+	--green: #00FF00;
+	--green: rgb(0, 255, 0);
+	--grey: hsl(0, 0%, 50%);
+	--grey: #808080;
+	--grey: rgb(128, 128, 128);
+	--hotpink: hsl(330, 100%, 71%);
+	--hotpink: #FF69B4;
+	--hotpink: rgb(255, 107, 181);
+	--indian-yellow: hsl(43, 100%, 50%);
+	--indian-yellow: #FFB800;
+	--indian-yellow: rgb(255, 183, 0);
+	--indigo: hsl(275, 100%, 25%);
+	--indigo: #4B0082;
+	--indigo: rgb(74, 0, 128);
+	--ivory: hsl(60, 100%, 97%);
+	--ivory: #FFFFF0;
+	--ivory: rgb(255, 255, 240);
+	--jacinth: hsl(13, 100%, 51%);
+	--jacinth: #FF3A03;
+	--jacinth: rgb(255, 59, 5);
+	--jasper-modern: hsl(359, 66%, 54%);
+	--jasper-modern: #D73B3E;
+	--jasper-modern: rgb(215, 60, 63);
+	--jasper: hsl(8, 61%, 53%);
+	--jasper: #D05340;
+	--jasper: rgb(208, 82, 62);
+	--light-olive: hsl(63, 33%, 86%);
+	--light-olive: #E7E8D1;
+	--light-olive: rgb(230, 231, 208);
+	--ligure: hsl(210, 61%, 38%);
+	--ligure: #26619C;
+	--ligure: rgb(38, 97, 156);
+	--linen: hsl(31, 68%, 94%);
+	--linen: #FAF0E6;
+	--linen: rgb(250, 240, 229);
+	--mauveine: hsl(295, 97%, 31%);
+	--mauveine: #8D029B;
+	--mauveine: rgb(141, 2, 155);
+	--midnight-black: hsl(0, 0%, 0%);
+	--midnight-black: #000000;
+	--midnight-black: rgb(0, 0, 0);
+	--midnightblue: hsl(240, 64%, 27%);
+	--midnightblue: #191970;
+	--midnightblue: rgb(25, 25, 113);
+	--navy: hsl(240, 100%, 25%);
+	--navy: #000080;
+	--navy: rgb(0, 0, 128);
+	--off-white-1: hsl(0, 0%, 97%);
+	--off-white-1: #F7F7F7;
+	--off-white-1: rgb(247, 247, 247);
+	--off-white-2: hsl(0, 0%, 98%);
+	--off-white-2: #FAFAFA;
+	--off-white-2: rgb(250, 250, 250);
+	--off-white-3: hsl(0, 0%, 95%);
+	--off-white-3: #F2F2F2;
+	--off-white-3: rgb(242, 242, 242);
+	--off-white-4: hsl(30, 8%, 95%);
+	--off-white-4: #F3F2F1;
+	--off-white-4: rgb(243, 242, 241);
+	--off-white-5: hsl(210, 25%, 98%);
+	--off-white-5: #F9FAFB;
+	--off-white-5: rgb(249, 250, 251);
+	--off-white-6: hsl(0, 0%, 99%);
+	--off-white-6: #FCFCFC;
+	--off-white-6: rgb(252, 252, 252);
+	--off-white-7: hsl(0, 0%, 88%);
+	--off-white-7: #E0E0E0;
+	--off-white-7: rgb(224, 224, 224);
+	--olive: hsl(60, 100%, 25%);
+	--olive: #808000;
+	--olive: rgb(128, 128, 0);
+	--onyx: hsl(0, 0%, 6%);
+	--onyx: #0F0F0F;
+	--onyx: rgb(15, 15, 15);
+	--orange: hsl(39, 100%, 50%);
+	--orange: #FFA500;
+	--orange: rgb(255, 166, 0);
+	--pearl: hsl(42, 45%, 85%);
+	--pearl: #EAE0C8;
+	--pearl: rgb(234, 224, 200);
+	--phthalo-blue: hsl(251, 100%, 13%);
+	--phthalo-blue: #0C0040;
+	--phthalo-blue: rgb(12, 0, 66);
+	--phthalo-green: hsl(199, 58%, 15%);
+	--phthalo-green: #102E3C;
+	--phthalo-green: rgb(16, 46, 60);
+	--prussian-blue: hsl(215, 94%, 14%);
+	--prussian-blue: #021E44;
+	--prussian-blue: rgb(2, 30, 69);
+	--purple: hsl(300, 100%, 25%);
+	--purple: #800080;
+	--purple: rgb(128, 0, 128);
+	--red: hsl(0, 100%, 50%);
+	--red: #FF0000;
+	--red: rgb(255, 0, 0);
+	--ruby: hsl(337, 86%, 47%);
+	--ruby: #E0115F;
+	--ruby: rgb(223, 17, 96);
+	--sap-green: hsl(129, 68%, 12%);
+	--sap-green: #0A3410;
+	--sap-green: rgb(10, 51, 16);
+	--sapphire: hsl(216, 85%, 39%);
+	--sapphire: #0F52BA;
+	--sapphire: rgb(15, 83, 184);
+	--sardius: hsl(10, 82%, 29%);
+	--sardius: #87210D;
+	--sardius: rgb(135, 34, 13);
+	--sardonyx: hsl(1, 75%, 57%);
+	--sardonyx: #E4433F;
+	--sardonyx: rgb(228, 66, 63);
+	--scarlet: hsl(8, 100%, 50%);
+	--scarlet: #FF2400;
+	--scarlet: rgb(255, 34, 0);
+	--silver: hsl(0, 0%, 75%);
+	--silver: #C0C0C0;
+	--silver: rgb(191, 191, 191);
+	--solarised-black: hsl(214, 88%, 24%);
+	--solarised-black: #073672;
+	--solarised-black: rgb(7, 54, 115);
+	--solarised-blue: hsl(205, 69%, 49%);
+	--solarised-blue: #268BD2;
+	--solarised-blue: rgb(39, 139, 211);
+	--solarised-brblack: hsl(192, 100%, 11%);
+	--solarised-brblack: #002B36;
+	--solarised-brblack: rgb(0, 45, 56);
+	--solarised-brblue: hsl(186, 8%, 55%);
+	--solarised-brblue: #839496;
+	--solarised-brblue: rgb(131, 148, 149);
+	--solarised-brcyan: hsl(180, 7%, 60%);
+	--solarised-brcyan: #93A1A1;
+	--solarised-brcyan: rgb(146, 160, 160);
+	--solarised-brgreen: hsl(194, 14%, 40%);
+	--solarised-brgreen: #586E75;
+	--solarised-brgreen: rgb(88, 110, 116);
+	--solarised-brmagenta: hsl(237, 43%, 60%);
+	--solarised-brmagenta: #6C71C4;
+	--solarised-brmagenta: rgb(109, 114, 197);
+	--solarised-brred: hsl(18, 80%, 44%);
+	--solarised-brred: #CB4B16;
+	--solarised-brred: rgb(202, 76, 22);
+	--solarised-brwhite: hsl(44, 87%, 94%);
+	--solarised-brwhite: #FDF6E3;
+	--solarised-brwhite: rgb(253, 246, 226);
+	--solarised-bryellow: hsl(196, 13%, 45%);
+	--solarised-bryellow: #657B83;
+	--solarised-bryellow: rgb(100, 122, 130);
+	--solarised-cyan: hsl(175, 59%, 40%);
+	--solarised-cyan: #2AA198;
+	--solarised-cyan: rgb(42, 162, 152);
+	--solarised-green: hsl(68, 100%, 30%);
+	--solarised-green: #859900;
+	--solarised-green: rgb(133, 153, 0);
+	--solarised-magenta: hsl(331, 64%, 52%);
+	--solarised-magenta: #D33682;
+	--solarised-magenta: rgb(211, 54, 130);
+	--solarised-red: hsl(1, 71%, 52%);
+	--solarised-red: #DC322F;
+	--solarised-red: rgb(220, 49, 46);
+	--solarised-white: hsl(46, 42%, 88%);
+	--solarised-white: #EEE8D5;
+	--solarised-white: rgb(237, 231, 212);
+	--solarised-yellow: hsl(45, 100%, 35%);
+	--solarised-yellow: #B58900;
+	--solarised-yellow: rgb(179, 134, 0);
+	--titanium-white: hsl(0, 0%, 100%);
+	--titanium-white: #FFFFFF;
+	--titanium-white: rgb(255, 255, 255);
+	--topaz: hsl(35, 100%, 74%);
+	--topaz: #FFC87C;
+	--topaz: rgb(255, 200, 122);
+	--tyrian-purple: hsl(325, 96%, 20%);
+	--tyrian-purple: #66023C;
+	--tyrian-purple: rgb(102, 2, 60);
+	--van-dyke-brown: hsl(28, 24%, 11%);
+	--van-dyke-brown: #221B15;
+	--van-dyke-brown: rgb(35, 28, 21);
+	--violet: hsl(300, 76%, 72%);
+	--violet: #EE82EE;
+	--violet: rgb(238, 129, 238);
+	--white: hsl(0, 0%, 100%);
+	--white: #FFFFFF;
+	--white: rgb(255, 255, 255);
+	--yellow: hsl(60, 100%, 50%);
+	--yellow: #FFFF00;
+	--yellow: rgb(255, 255, 0);
+	--yellow-ochre: hsl(47, 100%, 39%);
+	--yellow-ochre: #c79b00;
+	--yellow-ochre: rgb(199, 156, 0);
+
+	/* Extending rainbow-like colours to 12 */
+	--twelve-colour-combo: var(var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
+	/*-- End of preferred colours --*/
+	
+	/* Colour themes */
+	/* >>> Building a colour scheme. https://web.dev/building-a-color-scheme/
+	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-color-theming/ */
+
+	--theme-colour-HSL: hsl(...);
+	--hue: ...;
+	--sat: ...%;
+	--lig: ...%;
+	--red: ...;
+	--green: ...;
+	--blue: ...;
+	/**
+	* Jewel palette safe saturation between 73 - 83
+	*/
+	--sat-73: 73%;
+	--sat-74: 74%;
+	--sat-75: 75%;
+	--sat-76: 76%;
+	--sat-77: 77%;
+	--sat-78: 78%;
+	--sat-79: 79%;
+	--sat-80: 80%;
+	--sat-81: 81%;
+	--sat-82: 82%;
+	--sat-83: 83%;
+
+	/**
+	* Jewel palette safe brightness/lightness between 56 - 76
+	*/
+	--lig-56: 56%;
+	--lig-57: 57%;
+	--lig-58: 58%;
+	--lig-59: 59%;
+	--lig-60: 60%;
+	--lig-61: 61%;
+	--lig-62: 62%;
+	--lig-63: 63%;
+	--lig-64: 64%;
+	--lig-65: 65%;
+	--lig-66: 66%;
+	--lig-67: 67%;
+	--lig-68: 68%;
+	--lig-69: 69%;
+	--lig-70: 70%;
+	--lig-71: 71%;
+	--lig-72: 72%;
+	--lig-73: 73%;
+	--lig-74: 74%;
+	--lig-75: 75%;
+	--lig-76: 76%;
+
+	/**
+	* Pastel palette safe saturation range
+	*/
+	--sat-lowest-for-low-end: 14%;
+	--sat-highest-for-low-end: 89%;
+	--sat-lowest-for-high-end: 21%;
+	--sat-highest-for-high-end: 96%;
+
+	/**
+	* Earth palette safe saturation range
+	*/
+	--sat-earth-lowest: 26%;
+	--sat-earth-highest: 41%;
+
+	/**
+	* Earth palette safe brightness/lightness range
+	*/
+	--lig-earth-lowest: 36%;
+	--lig-earth-highest: 77%;
+
+	/**
+	* Neutral palette safe saturation range
+	*/
+	--sat-neutral-lowest: 1%;
+	--sat-neutral-highest: 4%;
+
+	/**
+	* Neutral palette safe brightness/lightness range
+	*/
+	--lig-neutral-lowest: 58%;
+	--lig-neutral-highest: 99%;
+
+	/**
+	* Fluorescent palette safe saturation range
+	*/
+	--sat-fluorescent-lowest: 63%;
+	--sat-fluorescent-highest: 100%;
+
+	/**
+	* Fluorescent palette safe brightness/lightness range
+	*/
+	--lig-fluorescent-lowest: 82%;
+	--lig-fluorescent-highest: 100%;
+
+	/** Monochromatic scaling safe values are between 25% to 60% */
+	--scale-10: 10%;
+	--scale-20: 20%;
+	--scale-25: 25%;
+	--scale-30: 30%;
+	--scale-40: 40%;
+	--scale-50: 50%;
+	--scale-60: 60%;
+	--scale-70: 70%;
+	--scale-80: 80%;
+	--scale-90: 90%;
+
+	--theme-colour: hsl(var(--hue), var(--sat), var(--lig));
+	--lighten-percentage: 20%;
+	--darken-percentage: 15%;
+
+	--theme-colour-background: var(--theme-colour);
+	--theme-colour--light: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--lighten-percentage)));
+	--theme-colour--light-l: hsl(var(--hue), calc(var(--sat) + var(--lighten-percentage)), calc(var(--lig) + var(--lighten-percentage)));
+	--theme-colour--light-d: hsl(var(--hue), calc(var(--sat) - var(--darken-percentage)), calc(var(--lig) + var(--lighten-percentage)));
+
+	--theme-colour--dark: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--darken-percentage)));
+	--theme-colour--dark-l: hsl(var(--hue), calc(var(--sat) + var(--lighten-percentage)), calc(var(--lig) - var(--darken-percentage)));
+	--theme-colour--dark-d: hsl(var(--hue), calc(var(--sat) - var(--darken-percentage)), calc(var(--lig) - var(--darken-percentage)));
+
+	--theme-colour--complement: hsl(calc(var(--hue) + 180), var(--sat), var(--lig));
+	--theme-colour--complement--split1: hsl(calc(var(--hue) + 150), var(--sat), var(--lig));
+	--theme-colour--complement--split2: hsl(calc(var(--hue) + 210), var(--sat), var(--lig));
+	--theme-colour--triad1: hsl(calc(var(--hue) + 120), var(--sat), var(--lig));
+	--theme-colour--triad2: hsl(calc(var(--hue) + 240), var(--sat), var(--lig));
+	--theme-colour--tetrad1: hsl(calc(var(--hue) + 90), var(--sat), var(--lig));
+	--theme-colour--tetrad2: hsl(calc(var(--hue) + 180), var(--sat), var(--lig));
+	--theme-colour--tetrad3: hsl(calc(var(--hue) + 270), var(--sat), var(--lig));
+	--theme-colour--analogue1: hsl(calc(var(--hue) + 30), var(--sat), var(--lig));
+	--theme-colour--analogue2: hsl(calc(var(--hue) + 60), var(--sat), var(--lig));
+	--theme-colour--analogue3: hsl(calc(var(--hue) + 90), var(--sat), var(--lig));
+
+	--theme-colour--tint10: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-10)));
+	--theme-colour--tint20: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-20)));
+	--theme-colour--tint25: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-25)));
+	--theme-colour--tint30: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-30)));
+	--theme-colour--tint40: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-40)));
+	--theme-colour--tint50: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-50)));
+	--theme-colour--tint60: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-60)));
+	--theme-colour--tint70: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-70)));
+	--theme-colour--tint80: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-80)));
+	--theme-colour--tint90: hsl(var(--hue), var(--sat), calc(var(--lig) + var(--scale-90)));
+
+	--theme-colour--shade10: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-10)));
+	--theme-colour--shade20: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-20)));
+	--theme-colour--shade25: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-25)));
+	--theme-colour--shade30: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-30)));
+	--theme-colour--shade40: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-40)));
+	--theme-colour--shade50: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-50)));
+	--theme-colour--shade60: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-60)));
+	--theme-colour--shade70: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-70)));
+	--theme-colour--shade80: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-80)));
+	--theme-colour--shade90: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--scale-90)));
+
+	--theme-colour--tone10: hsl(var(--hue), var(--scale-10), var(--lig));
+	--theme-colour--tone20: hsl(var(--hue), var(--scale-20), var(--lig));
+	--theme-colour--tone25: hsl(var(--hue), var(--scale-25), var(--lig));
+	--theme-colour--tone30: hsl(var(--hue), var(--scale-30), var(--lig));
+	--theme-colour--tone40: hsl(var(--hue), var(--scale-40), var(--lig));
+	--theme-colour--tone50: hsl(var(--hue), var(--scale-50), var(--lig));
+	--theme-colour--tone60: hsl(var(--hue), var(--scale-60), var(--lig));
+	--theme-colour--tone70: hsl(var(--hue), var(--scale-70), var(--lig));
+	--theme-colour--tone80: hsl(var(--hue), var(--scale-80), var(--lig));
+	--theme-colour--tone90: hsl(var(--hue), var(--scale-90), var(--lig));
+
+	--accent-1-light-theme: hsl(var(--hue), var(--sat), calc(var(--lig) - var(--darken-percentage)));
+	--accent-2-light-theme: hsl(var(--hue), calc(var(--sat) - var(--darken-percentage)), calc(var(--lig) - (var(--golden-ratio) * var(--lighten-percentage))));
+	--accent-1-dark-theme: hsl(var(--hue), var(--sat), calc(var(--lig) + (2 * var(--lighten-percentage))));
+	--accent-2-dark-theme: hsl(var(--hue), calc(var(--sat) + var(--lighten-percentage)), calc(var(--lig) + (var(--golden-ratio) * var(--lighten-percentage))));
+
+	/* General ratios */
+	--golden-ratio: 1.618;
+	--perfect-fifth: 1.500;
+	--augmented-fourth: 1.414;
+	--perfect-fourth: 1.333;
+	--major-third: 1.250;
+	--minor-third: 1.200;
+	--major-second: 1.125;
+	--minor-second: 1.067;
+
+	--shadow-colour: hsl(var(--hue), 60%, 50%);
+	--shadow-start: 1px;
+	--alpha-07: 0.70;
+	--alpha-03: 0.33;
+	--alpha-02: 0.20;
+
+	/* box-shadow: X-offset Y-offset Blur-size Colour*/
+	--box-shadow1: calc((var(--shadow-start) / 2) (var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), var(--alpha-07));
+	
+	--box-shadow1--animate: calc((var(--shadow-start) / 2) (var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), calc(var(--alpha-07) / 2));
+
+	--box-shadow2: var(--shadow-start) calc((var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), var(--alpha-03)), calc((var(--shadow-start) * 2) (var(--shadow-start) * var(--golden-ratio) * 2) (var(--shadow-start) * var(--golden-ratio) * 2)) hsla(var(--shadow-colour), var(--alpha-03));
+
+	--box-shadow2--animate: var(--shadow-start) calc((var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), calc(var(--alpha-03) / 2)), calc((var(--shadow-start) * 2) (var(--shadow-start) * var(--golden-ratio) * 2) (var(--shadow-start) * var(--golden-ratio) * 2)) hsla(var(--shadow-colour), calc(var(--alpha-03) / 2));
+
+	--box-shadow3: var(--shadow-start) calc((var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), var(--alpha-02)), calc((var(--shadow-start) * 2) (var(--shadow-start) * var(--golden-ratio) * 2) (var(--shadow-start) * var(--golden-ratio) * 2)) hsla(var(--shadow-colour), var(--alpha-02)), calc((var(--shadow-start) * 4) (var(--shadow-start) * var(--golden-ratio) * 4) (var(--shadow-start) * var(--golden-ratio) * 4)) hsla(var(--shadow-colour), var(--alpha-02));
+
+	--box-shadow3--animate: var(--shadow-start) calc((var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), calc(var(--alpha-02) / 2)), calc((var(--shadow-start) * 2) (var(--shadow-start) * var(--golden-ratio) * 2) (var(--shadow-start) * var(--golden-ratio) * 2)) hsla(var(--shadow-colour), calc(var(--alpha-02) / 2)), calc((var(--shadow-start) * 4) (var(--shadow-start) * var(--golden-ratio) * 4) (var(--shadow-start) * var(--golden-ratio) * 4)) hsla(var(--shadow-colour), calc(var(--alpha-02) / 2));
+
+	/**-- Change contrastThreshold to 50% when L value of colour equals 50% --**/
+	--contrast-threshold: 60%;
+	--switch: calc((var(--lig) - var(--contrast-threshold)) * -100);
+	--theme-text-colour: hsl(0, 0%, var(--switch));
+	--accessible-colour-rgb: calc(((((var(--red) * 299) + (var(--green) * 587) + (var(--blue) * 114)) / 1000) - 128) * -1000);
+	
+	--text-grey12: hsl(0, 0%, 12%);
+	--text-grey25: hsl(0, 0%, 25%);
+	--text-grey50: hsl(0, 0%, 50%);
+	--text-grey75: hsl(0, 0%, 75%);
+
+	/* Inputs colours */
+	--input-border: var(--text-grey50);
+	--input-focus-h: 245;
+	--input-focus-s: 100%;
+	--input-focus-l: 42%;
+	/*-- End of inputs colours --*/
+
+	--accordion-border-colour: var(--input-border);
+
+	/*-- End of colour themes  --*/
+
+	/**
+	 * @section Fonts
+	 * Fonts groups.
+	 */
+	--font-stack-body: system-ui, -apple-system, BlinkMacSystemFont, ̈́"Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, SFProDisplay-Regular, Inter, "Fira Sans", "Open Sans", "Droid Sans", "Nimbus Sans", "DejaVu Sans", "Helvetica Neue", Helvetica, Arial, Poppins, Verdana, Tahoma, Arimo, sans-serif;
+
+	--sans-serif-fonts: "Open Sans", "Fira Sans", "Franklin Gothic", "Proxima Nova", "Lucida Sans", "Lucida Sans Unicode", "Trebuchet MS", "Liberation Sans", "Nimbus Sans L", Helvetica, "Gill sans", "Helvetica Neue", "DejaVu Sans", Arimo, Roboto, Arial, sans-serif;
+	--slab-serif-fonts: Archer, "Museo Slab", "Nexa Rust", "Emilio 20", ChunkFive, "Fancy Pants NF", "Minya Nouvelle", "Vanilla Whale", "Ferro Rosso", "Varsity Team", "Octin Sports", Aleo, Euphorigenic, Edmunds, "Soccer League", Bullpen, Romantiques, Merriweather, Marlboro, "Catharsis Requiem", Ewert, "Josefin Slab", Graduate, Staubach, Holtzschue, "Bree Serif", "Tanglewood Tales NF", Bevan, Duality, "Glass Antiqua", Arvo, "Latin Modern Roman", Typodermic, Sanchez, Andada, "Kelmscott Roman NF", "Anonymous Pro", "Alfa Slab One", "Our Gang NF";
+	--serif-fonts: Garamond, Georgia, "Liberation Serif", Tinos, "Noto Serif", "Lucida Bright", "Lucida Fax", Palatino, "Palatino Linotype", Palladio, "URW Palladio", "PT Serif", Caladea, "DejaVu Serif", "Times New Roman", serif;
+	--monospace-fonts: "Fira Mono", "DejaVu Sans Mono", Menlo, Consolas, "Liberation Mono", Monaco, Cousine, "Lucida Console", "Courier New", monospace;
+	--cursive-fonts: "Dancing Script", Lobster, "Young Baroque", Mistral, "Brush Script MT", "Brush Script Std", "Lucida Calligraphy", "Lucida Handwriting", "Apple Chancery", "Brush Script MT Italic", "Ink Free", "Segoe Script", "Nautilus Pompilius", cursive;
+	--decorative-fonts: "Freight Display", "Abril Fatface", Papyrus, Herculanum, "Party LET", "Curlz MT", Harrington, Rosewood, "Mythos STD", Boilerplate, fantasy;
+
+	--serif-fonts-humanist: Garamond, "PT Serif Regular", "Archistico Normal", "EB Garamond Regular", "Humanistic Medium", "Flanker Griffo Regular", "Simonetta Regular", "Inria Serif Regular", "Monterchi Serif Extrabold", "Rosarivo Regular", "Radcliffe Display Heavy", "Benne Regular", "Asul Regular", "Kaya Medium", "Sextan Roman";
+	--serif-fonts-transitional: Baskerville, "Libre Baskerville", "Times New Roman", Oxford, "SD Georgia Light", "Aviatica Classic Serif", "Media Times", Deleplace, Tonic, "Romans Rexamples Font Duo";
+	--serif-fonts-modern: Didot, Bodoni, Maginia, "Greetings Regular", "Libra Serif Modern";
+
+	--slab-serif-fonts-humanist: "Flamenco Regular", "Tarif Arabic Extrabold", "Noticia Text Regular", "Humanist Slabserif 712 BT";
+	--slab-serif-fonts-grotesque: "IBM Plex Serif", "Amazing Grotesk", Lathena;
+	--slab-serif-fonts-geometric: "Geometric Slabserif 703", "Octin Sports", Arvo, Kingsmen, "Kelly Slab", "Typo GeoSlab Thin Demo", "Slabs Thin", Marhaban, "Coltan Gea", "Old School", Kolligio, Monaline, Nortune, "Space Power Demo", Polaris, Baxley, "Black Jack", Bongola;
+
+	--sans-serif-fonts-humanist: "Lucida sans", "Open Sans", Lato, Aller, Codec, "PT Sans", "Droid Sans", "Open Sans Condensed", "Noto Sans", Cantarell, "Latin Modern Sans", "Tenor Sans", Cabin, Pigiarniq, Allerta, Belleza, "Telex ht", "Alegreya Sans SC", "Titillium Web";
+	--sans-serif-fonts-grotesque: Acumin, "Aktiv Grotesk", "Hanken Grotesk", "CC Accidenz Grotesk", Panton, "Typo Grotesk", "Body Grotesque", "Watchword Demo", "Carrois Gothic SC", Numans, Romen, "Standerd Free", "Benetti Grotesk Free";
+	--sans-serif-fonts-geometric: Futura, Habana, Orbitron, Walkway, "Waukegan LDO", Arcus, Edelsans, Giro, Acid, Metrophobic, Code, "Singula Compressed", "Champagne & Limousines", Faucet, "LT Oksana", "Geometry Soft", "Digital Serial", Michroma, Ribbon, Raleway, Montserrat, Metropolis, Coolvetica, Exo, "Antipasto Pro", "League Spartan";
+
+	/* Font size calculations */
+	--custom-font-size-1: calc(1vw + 1vh + .5vmin);
+	--custom-font-size-2: calc(0.9rem + 1vw);
+	--custom-font-size-3: calc(15px + 0.390625vw);
+	--custom-font-size-4: calc(1rem + ((1vw - 3px) * 0.6173));
+	--custom-font-size-5: calc(1rem + (1.5 - 1) * ((100vw - 21rem) / (35 - 21)));
+	/* https://websemantics.uk/tools/responsive-font-calculator/
+	font-size  = calc(ZZ + ((1vw - XX) * YY))
+	Where   XX = min_viewport / 100
+					YY = 100 * (max_font_size - min_font_size) / (max_viewport - min_viewport)
+						 = 100 * font_size_difference / viewport_difference
+					ZZ = Minimum font-size stated in REM
+
+	Equivalent in longhand
+	font-size = calc(min_font_size_in_REM + (max_font_size - min_font_size) * ((100vw - min_viewport_including_unit) / (max_viewport - min_viewport)))     */
+
+	--custom-font-size-6: calc(1rem + (32 - 16) * ((100vw - 320px) / (2560 - 320)));
+
+	--min-font-size: 16;
+	--max-font-size: 32;
+	--min-viewport-width: 320;
+	--max-viewport-width: 2560;
+
+	--custom-font-size-7: calc((1px * var(--min-font-size)) + (((var(--max-font-size) - var(--min-font-size)) * (100vw - (1px * var(--min-viewport-width)))) / (var(--max-viewport-width) - var(--min-viewport-width))));
+	min-height: 0vw;
+
+	--font-scale-ratio: var(/**/); /* input one of the above */
+	/* >>> Modular scale: https://every-layout.dev/rudiments/modular-scale/ */
+	--fs-5: calc(var(--fs-4) / var(--font-scale-ratio));
+	--fs-4: calc(var(--fs-3) / var(--font-scale-ratio));
+	--fs-3: calc(var(--fs-2) / var(--font-scale-ratio));
+	--fs-2: calc(var(--fs-1) / var(--font-scale-ratio));
+	--fs-1: calc(var(--fs0) / var(--font-scale-ratio));
+	--fs0: var(--custom-font-size-N);
+	--fs1: calc(var(--fs0) * var(--font-scale-ratio));
+	--fs2: calc(var(--fs1) * var(--font-scale-ratio));
+	--fs3: calc(var(--fs2) * var(--font-scale-ratio));
+	--fs4: calc(var(--fs3) * var(--font-scale-ratio));
+	--fs5: calc(var(--fs4) * var(--font-scale-ratio));
+	/*-- End of fonts --*/
+
+	/* Column size */
+	--grid-min: 20ch;
+	--flex-min: 35rem;
+	--pancake-min: var(--grid-min);
+	--max-number-of-column: 4;
+	--breakpoint-size: 480;
+
+	/* >>> Contextual Spacing For Intrinsic Web Design: https://moderncss.dev/contextual-spacing-for-intrinsic-web-design/ */
+	/* Paddings, Margins, Gaps */
+	--padding-XS: clamp(0.5rem, 1.5%, 0.75rem);
+	--padding-S: clamp(1rem, 3%, 1.5rem);
+	--padding-M: clamp(1.5rem, 6%, 3rem);
+	--padding-L: clamp(3rem, 12%, 6rem);
+	--padding-XL: clamp(6rem, 24%, 12rem);
+	/* https://matthewjamestaylor.com/responsive-padding */
+	--responsive-space--XXXL: calc(48px + 1.5625vw);
+	--responsive-space--XXL: calc(40px + 1.5625vw);
+	--responsive-space--XL: calc(32px + 1.5625vw);
+	--responsive-space--L: calc(24px + 1.5625vw);
+	--responsive-space--M: calc(16px + 1.5625vw);
+	--responsive-space: calc(8px + 1.5625vw);
+	--responsive-space--S: calc(4px + 1.5625vw);
+	--responsive-space--XS: calc(2px + 1.5625vw);
+	--responsive-space--XXS: calc(1px + 0.5625vw);
+	--responsive-space--XXXS: calc(0.5px + 0.5625vw);
+
+	--margin-XS: min(1rem, 2vh);
+	--margin-S: min(2rem, 4vh);
+	--margin-M: min(4rem, 8vh);
+	--margin-L: min(8rem, 16vh);
+	--margin-XL: min(16rem, 32vh);
+
+	--layout-gap-XS: clamp(0.5rem, 1.5vmax, 0.75rem);
+	--layout-gap-S: clamp(1rem, 3vmax, 1.5rem);
+	--layout-gap-M: clamp(1.5rem, 6vmax, 3rem);
+	--layout-gap-L: clamp(3rem, 8vmax, 4rem);
+	--layout-gap-XL: clamp(6rem, 16vmax, 8rem);
+
+	--flexbox-albatross-margin: 1rem;
+	--flexbox-albatross-container-size: 40rem;
+	--flexbox-albatross-modifier: calc(var(--flexbox-albatross-container-size) - 100%);
+	/*-- End of paddings, margins and gaps --*/
+
+	--border-radius-value--S: 0.2rem;
+	--border-radius-value: 0.4rem;
+	--border-radius-value--M: 0.8rem;
+	--border-radius-value--L: 1.2rem;
+	--border-radius-circle-value: 50%;
+	--border-radius-elliptic-value: 25%;
+
+	-moz-tab-size: 4 !important;
+	tab-size: 4 !important;
+	color-scheme: light dark;
+}
+
+/*-- End of root variables --*/
+
+
+/* -------------------------------------- */
+/*              RESETS                    */
+/* -------------------------------------- */
+*,
+*::before,
+*::after {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	background-repeat: no-repeat;
+	min-width: 0;
+	max-width: 100%;
+	overflow-x: hidden;
+	position: relative;
+}
+
+*::before,
+*::after {
+	text-decoration: inherit;
+	vertical-align: inherit;
+}
+
+.hidden,
+[hidden] {
+	display: none !important;
+}
+
+/* CSS Height That Works in Both Modern and Legacy Browsers | https://stackoverflow.com/a/65836306 */
+html {
+	height: 100%; /* Fallback CSS for IE 4-6 and older browsers. Note: Without this setting, body below cannot achieve 100% height. */
+	height: 100vh; /* Overrides 100% height in modern HTML5 browsers and uses the viewport's height. Only works in modern HTML5 browsers */
+	font-size: calc(15px + 0.390625vw);
+	font-size: var(--custom-font-size-N);
+	scroll-behavior: smooth;
+	text-rendering: optimizeLegibility;
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	-webkit-tap-highlight-color: transparent;
+}
+
+body {
+	height: auto; /* Allows content to grow beyond the page without overflow */
+	width: auto; /* Allows content to grow beyond the page without overflow */
+	min-height: 100%; /* Starts web page with 100% height. Fallback for IE 4-6 and older browsers */
+	min-height: 100vh; /* Starts web page with 100% height. Uses the viewport's height. Only works in modern HTML5 browsers */
+	/** overflow-y: scroll; */ /* Optional: Adds an empty scrollbar to the right margin in case content grows vertically, creating a scrollbar.  Allows for better width calculations, as the browser pre-calculates width before scrollbar appears, avoiding page content shifting.*/
+	font-family: var(--font-stack-body);
+	line-height: var(--golden-ratio);
+	line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
+	line-height: calc(3px + 2.5ex + 3px);
+	-webkit-font-smoothing: antialiased;
+	margin: var(--responsive-space--M);
+	padding: var(--responsive-space--M);
+	color: var(--theme-text-colour);
+}
+
+/**
+* Only use if margin and padding have been reset to 0
+*/
+* + * {
+	margin-top: 1.618rem;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	text-wrap: balance;
+	word-wrap: break-word;
+}
+
+p {
+	max-width: 65ch;
+}
+
+/* HTML5 blocks - needed in older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section {
+	display: block;
+}
+
+ol,
+ul {
+	list-style: none;
+	list-style-position: unset;
+}
+
+ol[role="list"],
+ul[role="list"] {
+	list-style: none;
+	list-style-position: unset;
+}
+
+a,
+button,
+input,
+select,
+textarea,
+label,
+summary {
+	touch-action: manipulation;
+}
+
+/**
+ * @workaround Remove focus from tabindex="-1" elements which are only script focusable
+ * @link https://code.google.com/p/chromium/issues/detail?id=37721
+ */
+[tabindex="-1"]:focus {
+	outline: none;
+}
+
+/**
+ * Make underline position and width constant regardless of text size and weight.
+		(0.0625rem = 1px underline for 16px root font size)
+ * @link https://danburzo.ro/snippets/css-reset/
+*/
+a {
+	text-underline-offset: 0.15em;
+	text-decoration-thickness: max(1px, 0.0625rem);
+}
+
+a,
+a:link,
+a:visited,
+a:focus,
+a:hover,
+a:active {
+	text-decoration: inherit;
+	color: inherit;
+	display: inline-block;
+	background-color: transparent;
+	word-wrap: break-word;
+}
+
+a:not([class]) {
+	text-decoration-skip-ink: auto;
+	color: currentColor;
+}
+
+audio,
+img,
+picture,
+video,
+iframe,
+canvas,
+object,
+embed,
+svg  {
+	display: block;
+	max-width: 100%;
+	height: auto;
+	border-style: none;
+}
+
+img {
+	width: auto\9;
+	width: inherit; /* This makes auto-resizing with max-width 100% and height auto work in IE8 */
+	max-height: 100%;
+	max-width: 100%;
+}
+
+audio:not([controls]) {
+	display: none;
+}
+
+svg {
+	fill: currentColor;
+	overflow: hidden;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	font: inherit;
+	font-size: 100%;
+	vertical-align: middle;
+}
+
+input,
+textarea {
+	-o-user-select: auto;
+	-ms-user-select: auto;
+	-moz-user-select: auto;
+	-webkit-user-select: auto;
+	user-select: auto;
+}
+
+button,
+select {
+	text-transform: none;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+	-moz-appearance: button;
+	-webkit-appearance: button;
+	appearance: button;
+	cursor: pointer;
+}
+
+button:disabled,
+[type="button"]:disabled,
+[type="reset"]:disabled,
+[type="submit"]:disabled {
+	cursor: default;
+}
+
+input:focus,
+button:focus,
+textarea:focus,
+select:focus {
+	outline: none;
+}
+
+input[type="button"] {
+	cursor: pointer;
+}
+
+[type="button"],
+[type="reset"],
+[type="submit"],
+[type="image"],
+[type="checkbox"],
+[type="radio"] {
+	cursor: pointer;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+	font-size: 16px;
+}
+
+[type="number"] {
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
+
+/**
+* What is Cross-Browser Compatibility? How to Build Websites that Work Everywhere
+* @link https://www.freecodecamp.org/news/what-is-cross-browser-compatibility/
+*/
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+	color: #909090;
+	opacity: 1; /* Firefox */
+}
+
+input.studentid:-ms-input-placeholder { /* Microsoft Edge */
+	color: #909090;
+}
+
+button {
+	border: transparent;
+	border-radius: 0.8rem;
+	font-family: inherit;
+	color: inherit;
+	background-color: transparent;
+	cursor: pointer;
+}
+
+button[disabled] {
+	background-color: inherit;
+	background-color: var(--dual-theme-grey);
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+p,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+	font-weight: 400;
+}
+
+small {
+	font-size: 80%;
+}
+
+sup,
+sub {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sub {
+	bottom: -0.25em;
+}
+
+sup {
+	top: -0.5em;
+}
+
+table {
+	border-color: inherit;
+	border-collapse: collapse;
+	text-indent: 0;
+	max-width: 100%;
+	margin-bottom: var(--responsive-space--M);
+}
+
+caption {
+	text-align: left;
+}
+
+th,
+td {
+	text-align: start;
+	vertical-align: top;
+}
+
+th {
+	font-weight: bold;
+}
+
+textarea {
+	resize: vertical;
+	white-space: revert;
+}
+
+textarea:not([rows]) {
+	min-height: 10rem;
+}
+
+details {
+	display: block;
+}
+
+details summary {
+	cursor: pointer;
+}
+
+summary {
+	display: list-item;
+}
+
+hr {
+	display: block;
+	box-sizing: content-box;
+	height: 0;
+	overflow: visible;
+	border-top-width: 0.0625rem;
+	margin: 0;
+	clear: both;
+	color: inherit;
+}
+
+code {
+	word-wrap: break-word;
+}
+
+pre {
+	font-family: monospace;
+	font-size: inherit;
+	display: block;
+	overflow: auto;
+	tab-size: 4;
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+code,
+kbd,
+samp {
+	font-family: monospace;
+	font-size: inherit;
+}
+
+progress {
+	vertical-align: baseline;
+}
+
+:-moz-focusring {
+	outline: auto;
+}
+
+select:disabled {
+	opacity: inherit;
+}
+
+[contenteditable]:focus {
+	outline: auto;
+}
+
+/* For Chrome, Firefox, and Edge */
+.customised-scrollbar {
+	-webkit-scrollbar: thin;
+	scrollbar-width: thin;
+	-webkit-scrollbar-color: #C0C0C0 #F0F0F0;
+	scrollbar-color: #C0C0C0 #F0F0F0;
+}
+
+/* For Safari */
+.mostly-customised-scrollbar::-webkit-scrollbar {
+	width: 5px;
+	height: 8px;
+	background-color: #AAAAAA; /* or add it to the track */
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+	height: auto;
+}
+
+[type="search"] {
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
+	appearance: textfield;
+	outline-offset: -2px;
+}
+
+::-webkit-search-decoration {
+	-webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+	-webkit-appearance: button;
+	font: inherit;
+}
+
+:is(a, button, input, textarea, summary) {
+	--outline-size: max(2px, 0.08em);
+	--outline-style: solid;
+	--outline-color: currentColor;
+}
+
+:is(a, button, input, textarea, summary):focus {
+	outline: var(--outline-size) var(--outline-style) var(--outline-color);
+	outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+:is(a, button, input, textarea, summary):focus-visible {
+	outline: var(--outline-size) var(--outline-style) var(--outline-color);
+	outline-offset: var(--outline-offset, var(--outline-size));
+}
+
+:is(a, button, input, textarea, summary):focus:not(:focus-visible) {
+	outline: none;
+}
+
+:target {
+	scroll-margin-block: 5ex;
+}
+
+/* For frameworks */
+#root,
+#__next {
+	isolation: isolate;
+}
+
+/*-- End of Resets --*/
+
+/* -------------------------------------- */
+/*              CLASSES                   */
+/* -------------------------------------- */
+
+/**
+ * @section Layout Placement
+ * Styling for different layout placement.
+ */
+.fab-four,
+.container-fab-four {
+	display: inline-block;
+	vertical-align: top;
+	min-width: calc(100% / var(--max-number-of-column)); /* value to use above breakpoint */
+	width: calc(((var(--breakpoint-size) * 1px) - 100%) * var(--breakpoint-size));
+	max-width: 100%; /* value to use below breakpoint */
+	margin: 0.5rem;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0.25rem;
+	box-sizing: border-box;
+}
+
+.container-min {
+	width: min(100vw - 3rem, var(--container-max, 80ch));
+	margin-inline: auto;
+}
+
+.flexbox-albatross {
+	display: flex;
+	flex-wrap: wrap;
+	margin: calc(var(--flexbox-albatross-margin) * -1);
+}
+
+.flexbox-albatross > * {
+	flex-grow: 1;
+	flex-basis: calc(var(--flexbox-albatross-modifier) * 999);
+	margin: var(--flexbox-albatross-margin);
+}
+
+/* Container queries */
+/* >>> Container Query Solutions with CSS Grid and Flexbox: https://moderncss.dev/container-query-solutions-with-css-grid-and-flexbox/ */
+.grid {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(var(--grid-min), 1fr));
+}
+
+.flex {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 1rem -0.5rem;
+}
+
+.flex > * {
+	flex-grow: 1;
+	flex-basis: calc((var(--flex-min) - 100%) * 999);
+	margin: 0.5rem;
+}
+
+.flex > *.flex--auto {
+	flex: 0 1 auto;
+}
+
+.flex-pancake {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 1rem -0.5rem;
+}
+
+.flex-pancake > * {
+	flex: 1 1 var(--pancake-min);
+	margin: 0.5rem;
+}
+
+.flex-pancake > *.flex--auto {
+	flex: 0 1 auto;
+}
+
+.flex-centre-h {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-centre-v {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+/* End container queries */
+
+
+/* Create a responsive grid layout with no media queries using CSS Grid | https://archive.hankchizljaw.com/wrote/create-a-responsive-grid-layout-with-no-media-queries-using-css-grid/ */
+
+.auto-grid {
+	--auto-grid-min-size: 12rem;
+}
+
+.auto-grid > * {
+	max-width: 65ch;
+}
+
+.auto-grid > * + * {
+	margin-top: 1rem;
+}
+
+@supports (display: grid) {
+	.auto-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(var(--auto-grid-min-size), 1fr));
+		grid-gap: 1rem;
+		gap: 1rem;
+	}
+
+	.auto-grid > * {
+		max-width: unset;
+	}
+	
+	.auto-grid > * + * {
+		margin-top: unset;
+	}
+}
+
+/* End create a responsive grid layout with no media queries using CSS grid */
+
+
+/* Responsive CSS Layouts without Media Queries | https://www.sitepoint.com/responsive-css-layout-grids-without-media-queries/ */
+
+.resp-layout-grid {
+	--layout-min: 30ch;
+	
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-min)), 1fr));
+	grid-gap: 1rem;
+	gap: 1rem;
+}
+
+.resp-flexbox-layout {
+	--layout-min: 30ch;
+
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.resp-flexbox-layout > * {
+	flex: 1 1 var(--layout-min);
+}
+
+/* End responsive CSS layouts without media queries  */
+
+
+/**
+ * @section Easiest Flexbox Grid
+ * Styling for easiest flexbox grid.
+ */
+.flexbox-grid-main,
+.flexbox-grid-container,
+.flexbox-grid-wrapper {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.flexbox-grid-row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.flexbox-grid-column {
+	flex-basis: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	.flexbox-grid-row {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+
+	.flexbox-grid-column {
+		flex: 1;
+	}
+
+	.flexbox-grid-column--pct-20 {
+		flex: 2;
+	}
+
+	.flexbox-grid-column--pct-25 {
+		flex: 2.5;
+	}
+
+	.flexbox-grid-column--pct-55 {
+		flex: 5.5;
+	}
+
+	.flexbox-grid-column--pct-75 {
+		flex: 7.5;
+	}
+}
+
+/* End easiest flexbox grid  */
+
+
+/**
+ * @section Stacking Index
+ * Styling for stacking indices.
+ */
+.stack-index-neg-10 {
+	z-index: -10;
+}
+
+.stack-index-neg-5 {
+	z-index: -5;
+}
+
+.stack-index-1 {
+	z-index: 1;
+}
+
+.stack-index-2 {
+	z-index: 2;
+}
+
+.stack-index-3 {
+	z-index: 3;
+}
+
+.stack-index-4 {
+	z-index: 4;
+}
+
+.stack-index-5 {
+	z-index: 5;
+}
+
+.stack-index-neg-grp-1 {
+	z-index: -5;
+}
+
+.stack-index-neg-grp-2 {
+	z-index: -10;
+}
+
+.stack-index-neg-grp-3 {
+	z-index: -15;
+}
+
+.stack-index-neg-grp-4 {
+	z-index: -20;
+}
+
+.stack-index-grp-1 {
+	z-index: 5;
+}
+
+.stack-index-grp-2 {
+	z-index: 10;
+}
+
+.stack-index-grp-3 {
+	z-index: 15;
+}
+
+.stack-index-grp-4 {
+	z-index: 20;
+}
+
+/* End stacking index */
+
+.header {
+	font: inherit;
+}
+
+.content {
+	font: inherit;
+}
+
+
+/**
+ * @section Headings
+ * Styling for headings.
+ */
+.h1 {
+	font-size: var(--fs5);
+	font-weight: bold;
+	padding-top: var(--responsive-space);
+	padding-bottom: var(--responsive-space);
+}
+
+.h2 {
+	font-size: var(--fs4);
+	padding-top: var(--responsive-space);
+	padding-bottom: var(--responsive-space);
+}
+
+.h3 {
+	font-size: var(--fs3);
+	padding-top: var(--responsive-space--M);
+	padding-bottom: var(--responsive-space--XXS);
+}
+
+.h4 {
+	font-size: var(--fs2);
+	padding-top: var(--responsive-space--M);
+	padding-bottom: var(--responsive-space--XS);
+}
+
+.h5 {
+	font-size: var(--fs1);
+	padding-top: var(--responsive-space--S);
+	padding-bottom: var(--responsive-space--XS);
+}
+
+
+/**
+ * @section Horizontal rule
+ * Styling for horizontal rule.
+ */
+.hr {
+	overflow: visible;
+	padding: 0;
+	margin: 1rem auto;
+	border: none;
+	border-top: 1px solid transparent;
+	text-align: center;
+	width: 80%;
+}
+
+.hr::after {
+	content:" \00A7 ";
+	display: inline-block;
+	position: relative;
+	top: -0.75rem;
+	padding: 0 0.25rem;
+}
+
+
+/**
+ * @section Images
+ * Styling for images.
+ */
+.image {
+	display: block;
+	font-family: sans-serif;
+	font-weight: 300;
+	height: auto;
+	line-height: 1.1;
+	position: relative;
+	text-align: center;
+	width: 100%;
+}
+
+.image::before {
+	content: "Sorry, this image is unavailable.";
+	display: block;
+	margin-bottom: 8px;
+}
+
+.image::after {
+	content: "(url: " attr(src) ")";
+	display: block;
+	font-size: 12px;
+}
+
+.image__attribution {
+	font-size: 0.5rem;
+	line-height: 0.9;
+	letter-spacing: 0.1em;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: var(--responsive-space);
+	overflow: hidden;
+}
+
+
+/**
+ * @section Inputs
+ * Styling for inputs.
+ */
+.input {
+	min-height: 3.5rem;
+	font-size: 16px;
+	font-size: max(16px, 1em);
+	font-family: inherit;
+	padding: 0.25em 0.5em;
+	background-color: var(--solarised-white);
+	border: 2px solid var(--input-border);
+	border-radius: var(--border-radius-value);
+}
+
+.input:focus {
+	border-color: hsl(var(--input-focus-h), var(--input-focus-s), var(--input-focus-l));
+	box-shadow: 0 0 0 3px hsla(var(--input-focus-h), var(--input-focus-s), calc(var(--input-focus-l) + 40%), 0.8);
+	outline: 3px solid transparent;
+}
+
+.input:hover {
+	outline: 0.1rem solid var(--theme-colour--complement--split2);
+}
+
+.input:not(textarea) {
+	line-height: 1;
+	height: 2.25rem;
+}
+
+input[type=file],
+.input[type=file] {
+	font-size: 0.9em;
+	padding-top: 0.35rem;
+}
+
+.textarea.input,
+textarea.input {
+	resize: vertical;
+}
+
+.input[readonly] {
+	border-style: dotted;
+	cursor: not-allowed;
+	color: var(--text-grey25);
+}
+
+.input[disabled] {
+	--input-border: var(--text-grey25);
+	background-color: var(--text-grey75);
+	cursor: not-allowed;
+}
+
+input[type="radio"],
+.input[type="radio"] {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	appearance: none;
+	background-color: var(--off-white);
+	margin: 0;
+	font: inherit;
+	color: currentColor;
+	width: 1.15em;
+	height: 1.15em;
+	border: 0.15em solid currentColor;
+	border-radius: 50%;
+	transform: translateY(-0.075em);
+	display: grid;
+	place-content: center;
+}
+
+input[type="radio"]::before,
+.input[type="radio"]::before {
+	content: "";
+	width: 0.65em;
+	height: 0.65em;
+	border-radius: 50%;
+	transform: scale(0);
+	transition: 120ms transform ease-in-out;
+	box-shadow: inset 1em 1em var(--form-control-colour);
+	background-color: CanvasText;
+}
+
+input[type="radio"]:checked::before,
+.input[type="radio"]:checked::before {
+	transform: scale(1);
+}
+
+input[type="radio"]:focus,
+.input[type="radio"]:focus {
+	outline: max(2px, 0.15em) solid currentColor;
+	outline-offset: max(2px, 0.15em);
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
+	font-size: 3rem;
+}
+
+/* https://htmlandcssguidebook.com/css/link-states/ */
+/* The best link order is default, visited, hover, focus, then active. You can remember this order using a handy mnemonic device: "Very Hungry Feline Acrobats".
+A mnemonic like LoVe Fears HAte: L(ink)oV(isted)e F(ocus)ears H(over)A(ctive)te.
+*/
+
+
+/**
+ * @section Buttons
+ * Styling for buttons.
+ */
+.button {
+	--btn-HSL: var(...);
+	--btn-h: var(...);
+	--btn-sat: var(...);
+	--btn-light: var(...);
+	--border-threshold: 5%;
+	--border-light: calc(var(--btn-light) * 0.7);
+	--border-alpha: calc((var(--btn-light) - var(--border-threshold)) * 10);
+	--btn-background-colour: hsl(var(--btn-h), var(--btn-sat), var(--btn-light));
+	--btn-border-colour: hsla(var(--btn-h), var(--btn-sat), var(--border-light), var(--border-alpha));
+	--btn-background-colour--hover: hsl(var(--btn-h), var(--btn-sat), calc(var(--btn-light) * 1.30));
+	display: inline-block;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	align-self: flex-start;
+	-khtml-transition: all 0.4s ease-in-out;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-ms-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	margin: 2px 0;
+	border: 2px solid transparent;
+	border: 0.2rem solid var(--btn-border-colour);
+	-webkit-border-radius: 0.4rem;
+	-moz-border-radius: 0.4rem;
+	border-radius: var(--border-radius-value--M);
+	box-shadow: var(--box-shadow1);
+	min-width: 12ch;
+	min-height: 44px;
+	min-height: 5ch;
+	max-width: 75%;
+	padding: 0.25em 0.75em;
+	margin-left: var(--responsive-space--M);
+	margin-right: var(--responsive-space--XS);
+	margin-top: var(--responsive-space--XS);
+	cursor: pointer;
+	color: inherit;
+	background-color: inherit;
+	background-color: var(--btn-background-colour);
+	outline: solid transparent;
+	font-size: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	text-align: center;
+	text-decoration: none;
+	line-height: 1.1;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	touch-action: manipulation;
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.button--secondary {
+	/* sets the background color as a 60º rotated hue */
+	--btn-h: calc(var(--hue) + 60);
+}
+
+.button:visited {
+	font-weight: bold;
+	outline-color: currentColor;
+	-moz-outline: 0.01rem dotted var(--theme-colour--complement);
+	outline: 0.1em dotted var(--dual-theme-grey, #777777);
+	outline: 0.01rem dotted var(--theme-colour--complement);
+	outline-offset: -2px;
+	outline-offset: -0.5rem;
+	opacity: 0.5;
+}
+
+.button:focus {
+	outline: 0.125rem solid transparent;
+	outline-offset: 0.125rem;
+	box-shadow: 0 0 0 1px inherit, 0 0 0 3px inherit;
+}
+
+.button:focus-visible {
+	outline: 0.125rem solid transparent;
+	outline-offset: 0.125rem;
+}
+
+.button:hover {
+	border: 0.01rem solid var(--theme-colour--complement);
+	-webkit-border-radius: var(--border-radius-value--large);
+	-moz-border-radius: var(--border-radius-value--large);
+	border-radius: var(--border-radius-value--large);
+	color: inherit;
+	outline-color: var(--dual-theme-grey);
+	outline-color: currentColor;
+	outline-color: var(--theme-colour--complement);
+	background-color: inherit;
+	background-color: var(--btn-background-colour--hover);
+	font-weight: bold;
+}
+
+
+.button:active {
+	color: inherit;
+	transform: translateY(8px);
+	filter: saturate(150%);
+}
+
+.button[disabled] {
+	background-color: var(--dual-theme-grey);
+	opacity: 0.5;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.button__icon {
+	/* You may wish to have your icons appear larger or smaller in relation to the text */
+	width: 0.9em;
+	height: 0.9em;
+	fill: currentColor;
+	margin-right: 0.5em;
+}
+
+.button__icon--end {
+	margin-right: 0;
+	margin-left: 0.5em;
+}
+
+
+.icon-button {
+	width: 2.5rem;
+	height: 2.5rem;
+	padding: 0.35em;
+	border-radius: 50%;
+}
+
+.icon-button__icon {
+	width: 100%;
+	height: 100%;
+	fill: currentColor;
+}
+
+
+/**
+ * @section Links
+ * Styling for links.
+ */
+a, .link,
+a:link, .link:link,
+a:visited, .link:visited,
+a:focus, .link:focus,
+a:hover, .link:hover,
+a:active, .link:active {
+	position: relative;
+	padding: 0.35rem;
+	padding-bottom: 0.01rem;
+}
+
+a::after, .link::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: 0.01em;
+	height: 0.15em;
+	width: 100%;
+	background: linear-gradient(to right, var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
+	background: linear-gradient(110deg, var(--twelve-colour-combo));
+	transition: height 0.25s cubic-bezier(.6,0,.4,1);
+}
+
+
+/**
+ * @section Tables
+ * Styling for tables.
+ */
+.table {
+	min-width: 85%;
+	max-width: 100%;
+	background-color: var(--theme-colour--light);
+	margin: auto;
+	border: 0.25rem solid hsl(337, 86%, 47%);
+	border-radius: var(--border-radius-value--L);
+}
+
+.table__caption {
+	padding-left: 1rem;
+	padding-right: 1rem;
+	background-color: var(--theme-colour--analogue1);
+	border-top-left-radius: var(--border-radius-value--M);
+	border-top-right-radius: var(--border-radius-value--M);
+	font-weight: bold;
+	font-size: var(--fs4);
+	text-align: left;
+}
+
+.table__header-group {
+	background-color: var(--theme-colour--dark);
+	font-size: var(--fs2);
+	text-transform: uppercase;
+	letter-spacing: 2%;
+	border-bottom: 0.25rem solid var(--theme-colour--complement);
+}
+
+.table__body {
+	box-shadow: var(--box-shadow1);
+	border-bottom-left-radius: var(--border-radius-value--M);
+	border-bottom-right-radius: var(--border-radius-value--M);
+}
+
+.table__footer {
+	padding: 0.25rem;
+	border-bottom-left-radius: var(--border-radius-value--M);
+	border-bottom-right-radius: var(--border-radius-value--M);
+}
+
+.table__row {
+	padding: var(--padding-responsive);
+}
+
+.table__row:nth-of-type(odd) {
+	background-color: var(--theme-colour--dark-l);
+}
+
+.table__heading {
+	max-width: 50%;
+	padding: 0.15rem;
+	word-break: break-word;
+}
+
+.table__cell {
+	padding-left: var(--padding-responsive);
+	padding-right: var(--padding-responsive);
+}
+
+
+/**
+ * @section Details and Accordion
+ * Styling for details and accordion.
+ */
+.details .summary {
+	cursor: pointer;
+}
+
+.details > .summary::-webkit-details-marker {
+	display: none;
+}
+
+.details {
+	border: 0.1rem solid var(--accordion-border-colour);
+	border-radius: calc(var(--border-radius-value) + var(--responsive-space--XXS)); /* https://twitter.com/lilykonings/status/1567317037126680576/photo/1 */
+	box-shadow: var(--box-shadow1);
+	padding: var(--responsive-space--XXS);
+}
+
+.details > .summary {
+	list-style: none;
+	border: 0.1rem solid var(--accordion-border-colour);
+	border-radius: var(--border-radius-value);
+	font-size: var(--fs0);
+	font-style: normal;
+	font-weight: 500;
+}
+
+.details > .summary:focus {
+	outline: none;
+}
+
+.details > .summary::before {
+	content: "";
+	display: inline-block;
+	width: 0.4rem;
+	height: 0.4rem;
+	border: 0.1rem solid var(--accordion-border-colour);
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+	margin-left: 0.3rem;
+	margin-right: 0.6rem;
+	transform: rotate(-45deg) translate(-20%, 20%);
+	transition: transform 0.3s;
+}
+
+.details[open] > .summary {
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	border-bottom-width: thin;
+}
+
+
+.details[open] > :not(.summary) {
+	border-left: 0.1rem solid var(--accordion-border-colour);
+	border-right: 0.1rem solid var(--accordion-border-colour);
+}
+
+
+.details[open] {
+	border-left: 0.1rem solid var(--accordion-border-colour);
+	border-right: 0.1rem solid var(--accordion-border-colour);
+	background-color: var(--theme-colour--light-d);
+}
+
+.details[open] > :last-child {
+	border-bottom: 0.1rem solid var(--accordion-border-colour);
+	border-bottom-left-radius: 0.5rem;
+	border-bottom-right-radius: 0.5rem;
+}
+
+.details[open] > .summary::before {
+	transform: rotate(135deg) translate(-20%, 20%);
+}
+
+/* CSS: Workaround to backdrop-filter? #+++>>> https://stackoverflow.com/questions/38145368/css-workaround-to-backdrop-filter */
+/* slightly transparent fallback */
+.backdrop-blur {
+	background-color: rgba(255, 255, 255, .9);
+}
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+	.backdrop-blur {
+		background-color: rgba(255, 255, 255, .5);
+		-webkit-backdrop-filter: blur(2em);
+		backdrop-filter: blur(2em);
+	}
+}
+
+
+
+/**
+ * @section Messages amd Alerts
+ * Styling for messages and alerts.
+ */
+.alert {
+	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem gold, 0 0 0.2rem gold;
+	background: linear-gradient(to right, gold, lightgrey, white, lightgrey, gold);
+}
+
+.warning {
+	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem darkorange, 0 0 0.2rem darkorange;
+	background: linear-gradient(to right, darkorange, lightgrey, white, lightgrey, darkorange);
+}
+
+.danger {
+	text-shadow: 0.1rem 0.1rem 0.1rem var(--dual-theme-grey, #777777), 0 0 0.25rem darkred, 0 0 0.2rem darkred;
+	background: linear-gradient(to right, darkred lightgrey, white, lightgrey, darkred);
+}
+
+
+/**
+ * @section Hidden Utilities
+ * Styling for hiding components.
+ */
+.hide-all {
+	display: none;
+}
+
+.cloak {
+	opacity: 0;
+}
+
+.opacify {
+	opacity: 0;
+	pointer-events: none;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+	position: absolute;
+}
+
+.invisible {
+	visibility: hidden;
+	pointer-events: none;
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.off-screen, .sr-only, .visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+	-webkit-clip-path: inset(50%);
+	clip-path: inset(50%);
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+/*
+ * Extends the .visually hidden class to allow the element to be focusable when navigated to via the keyboard
+ * @link https://www.drupal.org/node/897638
+ */
+.off-screen.focusable:active,
+.off-screen.focusable:focus,
+.sr-only.focusable:active,
+.sr-only.focusable:focus,
+.visually-hidden.focusable:active,
+.visually-hidden.focusable:focus {
+	clip: auto;
+	height: auto;
+	margin: 0;
+	overflow: visible;
+	position: static;
+	white-space: inherit;
+	width: auto;
+}
+
+.scale-to-none {
+	transform: scale(0);
+	-webkit-transition: all 0.4s ease-in-out;
+	-moz-transition: all 0.4s ease-in-out;
+	-o-transition: all 0.4s ease-in-out;
+	transition: all 0.4s ease-in-out;
+}
+
+.clearfix::before,
+.clearfix::after {
+	content: "";
+	display: table;
+}
+
+.clearfix::after {
+	clear: both;
+}
+
+/*-- End of classes --*/
+
+
+
+
+
+/* -------------------------------------- */
+/*              MEDIA QUERIES             */
+/* -------------------------------------- */
+/* Tablet portrait only */
+@media (min-width: 600px) and (max-width: 899px) {/**...*/}
+/* Tablet landscape only */
+@media (min-width: 900px) and (max-width: 1199px) {/**...*/}
+/* Desktop only */
+@media (min-width: 1200px) and (max-width: 1799px) {/**...*/}
+/* Big desktop upwards */
+@media (min-width: 1200px) {/**...*/}
+
+/* Prevent scaling beyond this breakpoint */
+@media (min-width: 2560px) {
+	:root {
+		font-size: 32px;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--cocoa-brown: #1E1917;
+		--cocoa-brown: hsl(17, 13%, 10%);
+	}
+	html, body {
+		background-color: var(--cocoa-brown);
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+
+/**
+ * @section Print
+ * Styling for printed content. Adapted from HTML5BP.
+ * @link http://html5boilerplate.com
+ */
+@media print {
+	/**
+	 * Universal selector.
+	 * Reset all content to transparent background, black colour, and remove box and text shadows.
+	 */
+	* {
+		background: transparent !important;
+		color: #000000 !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
+
+	/**
+	 * Specifies page margin
+	 */
+	@page {
+		margin: 0.5cm;
+	}
+	/**
+	 * Underline all links
+	 */
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
+
+	/**
+	 * Show URL after links
+	 */
+	a[href]:after {
+		content: " (" attr(href) ")";
+	}
+
+	/**
+	 * Show title after abbreviations
+	 */
+	abbr[title]:after {
+		content: " (" attr(title) ")";
+	}
+
+	/**
+	 * Don't show URL for internal links or fragments
+	 */
+	a[href^="#"]:after,
+	a[href^="javascript:"]:after {
+		content: "";
+	}
+
+	/**
+	 * Specifies the minimum number of lines to print at the top and bottom of a page.
+	 */
+	p,
+	h1,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
+
+	/**
+	 * Avoid inserting a page break after headers
+	 */
+	h1,
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
+
+	/**
+	 * Change border colour on blockquotes and preformatted text.
+	 * Avoid page breaks inside the content
+	 */
+	pre {
+		white-space: pre-wrap !important;
+	}
+	
+	pre,
+	blockquote {
+		border-color: #999999;
+		page-break-inside: avoid;
+	}
+
+	/**
+	 * Displayed as a table header row group
+	 */
+	thead {
+		display: table-header-group;
+	}
+
+	/**
+	 * Avoid inserting a page break inside table rows and images
+	 */
+	tr,
+	img {
+		page-break-inside: avoid;
+	}
+}
+
+/*-- End of Media Queries --*/
