@@ -1,8 +1,9 @@
 //@ts-check
 'use strict';
 
-const STATIC_CACHE_NAME = 'site-static-v2';
-const DYNAMIC_CACHE_NAME = 'site-dynamic-v1';
+const RESOURCE_VERSION = '1';
+const STATIC_CACHE_NAME = `PWA-name-static-v${RESOURCE_VERSION}`;
+const DYNAMIC_CACHE_NAME = `PWA-name-dynamic-v${RESOURCE_VERSION}`;
 const ONLINE_URL = 'https://www.example.com';
 
 const ASSETS_TO_CACHE = [
@@ -11,9 +12,12 @@ const ASSETS_TO_CACHE = [
 	'./js/main.js',
 	'./js/utils/utils.js',
 	'./css/style.css',
-	'./pages/404.html',
 	'./pages/offline.html',
 ];
+
+const ASSETS_TO_CACHE_WITH_VERSIONS = ASSETS_TO_CACHE.map(function(path) {
+	return `${path}?v=${RESOURCE_VERSION}`;
+})
 
 /**
  * This function will limit the cache size to the given size.
@@ -21,8 +25,8 @@ const ASSETS_TO_CACHE = [
  * @param {number} size - The maximum size of the cache.
  */
 function limitCacheSize(name, size) {
-	caches.open(name).then((cache) => {
-		cache.keys().then(keys => {
+	return caches.open(name).then(function(cache) {
+		return cache.keys().then(keys => {
 			if(keys.length > size){
 				cache.delete(keys[0]).then(limitCacheSize(name, size));
 			}
@@ -35,14 +39,18 @@ function limitCacheSize(name, size) {
  * Install service worker
  * @param {*} evt
  */
-self.addEventListener('install', evt => {
-	// console.log('service worker has been installed');
+self.addEventListener('install', function(evt) {
+	 // Perform install step:  loading each required file into cache
 	evt.waitUntil(
 		caches.open(STATIC_CACHE_NAME)
-			.then((cache) => {
+			.then(function(cache) {
+				// Add all offline dependencies to the cache
 				console.log('caching shell assets');
-				cache.addAll(ASSETS_TO_CACHE)
-		}).then(() => self.skipWaiting())
+				return cache.addAll(ASSETS_TO_CACHE_WITH_VERSIONS);
+		}).then(function() {
+			// At this point everything has been cached
+			return self.skipWaiting();
+		})
 	);
 });
 
@@ -51,14 +59,14 @@ self.addEventListener('install', evt => {
  * Activate event
  * @param {*} evt
  */
-self.addEventListener('activate', (evt) => {
-	// console.log('service worker has been activated');
-	evt.waitUntil(
-		caches.keys().then(keys => {
-			// console.log(keys);
+self.addEventListener('activate', function(evt) {
+	return evt.waitUntil(
+		caches.keys().then(function(keys) {
 			return Promise.all(keys
 				.filter(key => key !== STATIC_CACHE_NAME && key !== DYNAMIC_CACHE_NAME)
 				.map(key => caches.delete(key)));
+		}).then(function() {
+			return self.clients.claim()
 		})
 	);
 });
@@ -68,18 +76,18 @@ self.addEventListener('activate', (evt) => {
  * Fetch event
  * @param {*} evt
  */
-self.addEventListener('fetch', (evt) => {
+self.addEventListener('fetch', function(evt) {
 	if (evt.request.url.indexOf(ONLINE_URL) === -1) {
-		evt.respondWith(
-			caches.match(evt.request).then(cacheRes => {
-				return cacheRes || fetch(evt.request).then((fetchRes) => {
-					return caches.open(DYNAMIC_CACHE_NAME).then(cache => {
+		return evt.respondWith(
+			caches.match(evt.request).then(function(cacheRes) {
+				return cacheRes || fetch(evt.request).then(function(fetchRes) {
+					return caches.open(DYNAMIC_CACHE_NAME).then(function(cache) {
 						cache.put(evt.request.url, fetchRes.clone());
 						limitCacheSize(DYNAMIC_CACHE_NAME, 15);
 						return fetchRes;
 					});
 				});
-			}).catch(() => {
+			}).catch(function() {
 				if (evt.request.url.indexOf('.html') > -1) {
 					return caches.match('./pages/fallback.html');
 				}
