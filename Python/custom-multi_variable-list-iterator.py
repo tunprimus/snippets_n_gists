@@ -83,7 +83,3 @@ class CustomListIterator:
             raise StopIteration
         self.index += self.num_var
         return tuple((buffer + self.num_var * [None])[:self.num_var])
-
-test_list02 = [12, 22, 32, 42, 52, 62, 72, 82]
-for a, b in CustomListIterator(test_list02, 2):
-    print(f"a: {a}, b: {b}")
