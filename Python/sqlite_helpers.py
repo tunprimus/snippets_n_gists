@@ -1,6 +1,15 @@
 import sqlite3
 import time
 from os.path import realpath as realpath
+try:
+    from ulid import ULID
+except ImportError:
+    print("ulid module not found! Install with `pip3 install python-ulid[pydantic]` ")
+
+
+def generate_ulid():
+    ulid_obj = ULID().generate()
+    return ulid_obj
 
 
 def explain_query(search_name, path_to_db):
