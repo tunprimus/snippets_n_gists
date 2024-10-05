@@ -45,115 +45,41 @@
 			word-wrap: break-word;
 		}
 
-		.rsp-thead {
-			display: none;
-		}
-
-		.rsp-table,
-		.rsp-tbody,
-		.tr,
-		.td {
-			display: block;
-			width: 100%;
-		}
-
-		.tr {
-			margin-bottom: 0.938rem;
-		}
-
-		.rsp-tbody__td {
-			text-align: right;
-			padding-left: 50%;
-			position: relative;
-		}
-
-		.rsp-tbody__td::before {
-			content: attr(data-label);
-			position: absolute;
-			left: 0;
-			width: 50%;
-      padding-left: 0.938rem;
-      font-weight: 600;
-      font-size: 0.875rem;
-      text-align: left;
-		}
-
-		@media (min-width: 768px) {
-			.rsp-table-container {
-				padding: 0 10%;
-				margin: 2.5rem auto 0 auto;
-			}
-
-			.rsp-table-container__heading {
-				font-size: 2.0rem;
-				text-align: center;
-				color: #F1F1F1;
-				margin-bottom: 2.5rem;
-			}
-
+		@media screen and (max-width: 768px) {
 			.rsp-thead {
-				display: initial;
-				background-color: #EE2828;
+				display: none;
 			}
 
 			.rsp-table,
 			.rsp-tbody,
 			.tr,
 			.td {
-				display: initial;
+				display: block;
+				width: 100%;
 			}
 
 			.tr {
-				margin-bottom: initial;
+				margin-bottom: 0.938rem;
 			}
 
 			.rsp-tbody__td {
-				text-align: initial;
-				padding-left: initial;
-				position: initial;
+				text-align: right;
+				padding-left: 50%;
+				position: relative;
 			}
 
 			.rsp-tbody__td::before {
-				content: initial;
-				position: initial;
-				left: initial;
-				width: initial;
-				padding-left: initial;
-				font-weight: initial;
-				font-size: initial;
-				text-align: initial;
-			}
-
-			.rsp-table {
-				display: table;
-				max-width: 100%;
-				border-color: inherit;
-				border-collapse: collapse;
-				text-indent: 0;
-			}
-
-			.rsp-thead__th {
-				font-size: 0.875rem;
+				content: attr(data-label);
+				position: absolute;
+				left: 0;
+				width: 50%;
+				padding-left: 0.938rem;
 				font-weight: 600;
-				letter-spacing: 0.02rem;
-				color: #FFFFFF;
-				opacity: 1;
-				padding: 0.75rem;
-				vertical-align: top;
-				border: 0.0625rem solid #DEE2E6;
-			}
-
-			.rsp-thead__td {
 				font-size: 0.875rem;
-				font-weight: normal;
-				letter-spacing: 0.02rem;
-				color: #FFFFFF;
-				background-color: #3C3F44;
-				padding: 0.5rem;
-				text-align: center;
-				border: 0.0625rem solid #DEE2E6;
+				text-align: left;
 			}
 		}
+
 	</style>
 </head>
 <body class="body">
@@ -165,12 +91,12 @@
 				<tr class="tr rsp-thead__tr">
 					<!-- IMPORTANT: Number of `th` must correspond to number of `td` -->
 					<!-- IMPORTANT: Value of `th` must correspond to data-label of `td` -->
-					<th class="rsp-thead__th rsp-thead__th-01">{{column 01}}</th>
-					<th class="rsp-thead__th rsp-thead__th-02">{{column 02}}</th>
-					<th class="rsp-thead__th rsp-thead__th-03">{{column 03}}</th>
-					<th class="rsp-thead__th rsp-thead__th-04">{{column 04}}</th>
-					<th class="rsp-thead__th rsp-thead__th-05">{{column 05}}</th>
-					<th class="rsp-thead__th rsp-thead__th-06">{{link-cl #}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-01">{{column 01}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-02">{{column 02}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-03">{{column 03}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-04">{{column 04}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-05">{{column 05}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-06">{{link-cl #}}</th>
 				</tr>
 			</thead>
 
