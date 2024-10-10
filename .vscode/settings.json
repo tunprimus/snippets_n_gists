@@ -79,6 +79,7 @@
         "ctive",
         "d'Ivoire",
         "datetime",
+        "figsize",
         "idiv",
         "isted",
         "jacinth",
@@ -87,7 +88,9 @@
         "ligure",
         "loadarff",
         "luminare",
+        "ncols",
         "nofilter",
+        "nrows",
         "ocus",
         "offscreen",
         "phthalo",
@@ -97,7 +100,10 @@
         "sardius",
         "sardonyx",
         "studentid",
+        "suptitle",
         "tabindex",
+        "xlabel",
+        "ylabel",
         "Åland"
     ]
 }
