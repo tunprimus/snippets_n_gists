@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 def dynamic_subplot(data_to_use, categories_list, figsize=(16.18, 10), figure_title=None, xlabel_title=None, ylabel_title=None):
     length_data = len(data_to_use)
     length_categories = len(categories_list)
-    nrows = -int(-(length_data ** 1/2) // 1)
+    nrows = -int((-(length_data ** 1/2)) // 1)
     ncols = length_categories
 
     fig, axs = plt.subplots(nrows, ncols, figsize)
