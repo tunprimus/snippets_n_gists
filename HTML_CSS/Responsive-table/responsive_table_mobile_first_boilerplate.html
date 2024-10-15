@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Responsive Table Boilerplate</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			background-repeat: no-repeat;
+			min-width: 0;
+			max-width: 100%;
+			overflow-x: hidden;
+			position: relative;
+		}
+
+		*::before,
+		*::after {
+			text-decoration: inherit;
+			vertical-align: inherit;
+		}
+
+		.hidden,
+		[hidden] {
+			display: none !important;
+		}
+
+		.body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+			line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
+			line-height: calc(3px + 2.5ex + 3px);
+			-webkit-font-smoothing: antialiased;
+    }
+
+		h1,
+		h2,
+		h3,
+		h4 {
+			text-wrap: balance;
+			word-wrap: break-word;
+		}
+
+		.rsp-table {
+			border: 0;
+			border-collapse: collapse;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			table-layout: fixed;
+		}
+
+		.rsp-table-caption {
+			text-align: left;
+			font-size: 1.3rem;
+			margin: 0.5rem 0 0 0.75rem;
+		}
+
+		.rsp-thead {
+			display: none;
+		}
+
+		.tr {
+			display: block;
+			border: 0.0625rem solid #EEEEEE;
+			padding: 1rem 1rem 1rem 0.5rem;
+		}
+
+		.tr + .tr {
+			margin-top: 0.625rem;
+		}
+
+		.td {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			border-bottom: 0.0625rem solid #EEEEEE;
+			font-size: 0.8rem;
+			line-height: 1.35;
+		}
+
+		.td::before {
+			content: attr(data-label);
+			font-size: 0.9rem;
+			text-align: left;
+			font-weight: bold;
+			text-transform: uppercase;
+			max-width: 45%;
+			color: #545454;
+		}
+
+		.td + .td {
+			margin-top: 0.8rem;
+		}
+
+		.td:last-child {
+			border-bottom: 0;
+		}
+
+		@media screen and (min-width: 600px) {
+			.rsp-table-caption {
+				font-size: 1.5rem;
+			}
+
+			.rsp-thead {
+				display: table-header-group;
+			}
+
+			.tr {
+				display: table-row;
+				border: 0;
+			}
+
+			.th,
+			.td {
+				text-align: center;
+			}
+
+			.th {
+				font-size: 0.85rem;
+				text-transform: uppercase;
+			}
+
+			.td {
+				display: table-cell;
+			}
+
+			.td::before {
+				display: none;
+			}
+
+			.td:last-child {
+				border-bottom: 0.0625rem solid #EEEEEE;
+			}
+		}
+
+	</style>
+</head>
+<body class="body">
+	<section class="rsp-table-container">
+		<h1 class="rsp-table-container__heading">Table Container Heading</h1>
+		<table class="rsp-table">
+			<caption class="rsp-table-caption"></caption>
+			<!-- Table Head -->
+			<thead class="rsp-thead">
+				<tr class="tr rsp-thead__tr">
+					<!-- IMPORTANT: Number of `th` must correspond to number of `td` -->
+					<!-- IMPORTANT: Value of `th` must correspond to data-label of `td` -->
+					<th class="th rsp-thead__th rsp-thead__th-01">{{column 01}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-02">{{column 02}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-03">{{column 03}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-04">{{column 04}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-05">{{column 05}}</th>
+					<th class="th rsp-thead__th rsp-thead__th-06">{{link-cl #}}</th>
+				</tr>
+			</thead>
+
+			<!-- Table Body -->
+			<tbody class="rsp-tbody">
+				<!-- 1st row -->
+				<tr class="tr rsp-tbody__tr rsp-tbody__tr-01">
+					<td class="td rsp-tbody__td rsp-tbody__td-001" data-label="{{column 01}}">1 Jan 2024</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-002" data-label="{{column 02}}">Weekend go</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-003" data-label="{{column 03}}">Massive in</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-004" data-label="{{column 04}}">Sales move</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-005" data-label="{{column 05}}">Check now!</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-006" data-label="{{link-cl #}}"><a class="link" href="#">Buy It</a></td>
+				</tr>
+				<!-- 2nd row -->
+				<tr class="tr rsp-tbody__tr rsp-tbody__tr-02">
+					<td class="td rsp-tbody__td rsp-tbody__td-001" data-label="{{column 01}}">2 Feb 2024</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-002" data-label="{{column 02}}">Weekend go</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-003" data-label="{{column 03}}">Massive in</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-004" data-label="{{column 04}}">Sales move</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-005" data-label="{{column 05}}">Check now!</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-006" data-label="{{link-cl #}}"><a class="link" href="#">Try It</a></td>
+				</tr>
+				<!-- 3rd row -->
+				<tr class="tr rsp-tbody__tr rsp-tbody__tr-03">
+					<td class="td rsp-tbody__td rsp-tbody__td-001" data-label="{{column 01}}">3 Mar 2024</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-002" data-label="{{column 02}}">Weekend go</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-003" data-label="{{column 03}}">Massive in</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-004" data-label="{{column 04}}">Sales move</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-005" data-label="{{column 05}}">Check now!</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-006" data-label="{{link-cl #}}"><a class="link" href="#">Get It</a></td>
+				</tr>
+				<!-- 4th row -->
+				<tr class="tr rsp-tbody__tr rsp-tbody__tr-04">
+					<td class="td rsp-tbody__td rsp-tbody__td-001" data-label="{{column 01}}">4 Apr 2024</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-002" data-label="{{column 02}}">Weekend go</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-003" data-label="{{column 03}}">Massive in</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-004" data-label="{{column 04}}">Sales move</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-005" data-label="{{column 05}}">Check now!</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-006" data-label="{{link-cl #}}"><a class="link" href="#">Yes o!</a></td>
+				</tr>
+				<!-- 5th row -->
+				<tr class="tr rsp-tbody__tr rsp-tbody__tr-05">
+					<td class="td rsp-tbody__td rsp-tbody__td-001" data-label="{{column 01}}">5 May 2024</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-002" data-label="{{column 02}}">Weekend go</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-003" data-label="{{column 03}}">Massive in</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-004" data-label="{{column 04}}">Sales move</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-005" data-label="{{column 05}}">Check now!</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-006" data-label="{{link-cl #}}"><a class="link" href="#">Grab !</a></td>
+				</tr>
+				<!-- 6th row -->
+				<tr class="tr rsp-tbody__tr rsp-tbody__tr-06">
+					<td class="td rsp-tbody__td rsp-tbody__td-001" data-label="{{column 01}}">6 Jun 2024</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-002" data-label="{{column 02}}">Weekend go</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-003" data-label="{{column 03}}">Massive in</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-004" data-label="{{column 04}}">Sales move</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-005" data-label="{{column 05}}">Check now!</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-006" data-label="{{link-cl #}}"><a class="link" href="#">Pronto</a></td>
+				</tr>
+				<!-- 7th row -->
+				<tr class="tr rsp-tbody__tr rsp-tbody__tr-07">
+					<td class="td rsp-tbody__td rsp-tbody__td-001" data-label="{{column 01}}">7 Jul 2024</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-002" data-label="{{column 02}}">Weekend go</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-003" data-label="{{column 03}}">Massive in</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-004" data-label="{{column 04}}">Sales move</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-005" data-label="{{column 05}}">Check now!</td>
+					<td class="td rsp-tbody__td rsp-tbody__td-006" data-label="{{link-cl #}}"><a class="link" href="#">Sleek!</a></td>
+				</tr>
+			</tbody>
+
+			<!-- Table Footer -->
+			<tfoot class="rsp-tfoot">
+				<tr class="tr rsp-tfoot__tr"></tr>
+			</tfoot>
+		</table>
+	</section>
+</body>
+</html>
