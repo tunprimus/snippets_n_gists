@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mobile First Responsive Table-Cards</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			background-repeat: no-repeat;
+			min-width: 0;
+			max-width: 100%;
+			overflow-x: hidden;
+			position: relative;
+		}
+
+		*::before,
+		*::after {
+			text-decoration: inherit;
+			vertical-align: inherit;
+		}
+
+		.hidden,
+		[hidden] {
+			display: none !important;
+		}
+
+		.body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+			line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
+			line-height: calc(3px + 2.5ex + 3px);
+			-webkit-font-smoothing: antialiased;
+    }
+
+		h1,
+		h2,
+		h3,
+		h4 {
+			text-wrap: balance;
+			word-wrap: break-word;
+		}
+
+		.table {
+			border: 0;
+			border-collapse: collapse;
+			margin: 0;
+			padding: 0;
+			width: 100%;
+			table-layout: fixed;
+		}
+
+		.table-caption {
+			text-align: left;
+			font-size: 1.3rem;
+			margin: 0.5rem 0 0 0.75rem;
+		}
+
+		.thead {
+			display: none;
+		}
+
+		.tr {
+			display: block;
+			border: 0.0625rem solid #EEEEEE;
+			padding: 1rem 1rem 1rem 0.5rem;
+		}
+
+		.tr + .tr {
+			margin-top: 0.625rem;
+		}
+
+		.td {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			border-bottom: 0.0625rem solid #EEEEEE;
+			font-size: 0.8rem;
+			line-height: 1.35;
+		}
+
+		.td::before {
+			content: attr(data-label);
+			font-size: 0.9rem;
+			text-align: left;
+			font-weight: bold;
+			text-transform: uppercase;
+			max-width: 45%;
+			color: #545454;
+		}
+
+		.td + .td {
+			margin-top: 0.8rem;
+		}
+
+		.td:last-child {
+			border-bottom: 0;
+		}
+
+		@media screen and (min-width: 600px) {
+			.table-caption {
+				font-size: 1.5rem;
+			}
+
+			.thead {
+				display: table-header-group;
+			}
+
+			.tr {
+				display: table-row;
+				border: 0;
+			}
+
+			.th,
+			.td {
+				text-align: center;
+			}
+
+			.th {
+				font-size: 0.85rem;
+				text-transform: uppercase;
+			}
+
+			.td {
+				display: table-cell;
+			}
+
+			.td::before {
+				display: none;
+			}
+
+			.td:last-child {
+				border-bottom: 0.0625rem solid #EEEEEE;
+			}
+		}
+
+	</style>
+</head>
+<body class="body">
+	<table class="table">
+		<caption class="table-caption">Document Details</caption>
+		<thead class="thead">
+			<tr class="tr thead_tr">
+				<th class="th" scope="col">Cluster</th>
+				<th class="th" scope="col">Pending Approval</th>
+				<th class="th" scope="col">Pending Signature</th>
+				<th class="th" scope="col">Overdue</th>
+				<th class="th" scope="col">Complete</th>
+			</tr>
+		</thead>
+		<tbody class="tbody">
+			<!-- 1st Body row -->
+			<tr class="tr tbody_tr">
+				<td class="td" data-label="Cluster">Learning Complex 1</td>
+				<td class="td" data-label="Pending Approval">9</td>
+				<td class="td" data-label="Pending Signature">33</td>
+				<td class="td" data-label="Overdue">5</td>
+				<td class="td" data-label="Complete">55</td>
+			</tr>
+			<!-- 2nd Body row -->
+			<tr class="tr tbody_tr">
+				<td scope="row" class="td" data-label="Cluster">Learning Complex 2</td>
+				<td class="td" data-label="Pending Approval">21</td>
+				<td class="td" data-label="Pending Signature">33</td>
+				<td class="td" data-label="Overdue">2</td>
+				<td class="td" data-label="Complete">46</td>
+			</tr>
+			<!-- 3rd Body row -->
+			<tr class="tr tbody_tr">
+				<td scope="row" class="td" data-label="Cluster">Learning Complex 3</td>
+				<td class="td" data-label="Pending Approval">18</td>
+				<td class="td" data-label="Pending Signature">14</td>
+				<td class="td" data-label="Overdue">8</td>
+				<td class="td" data-label="Complete">54</td>
+			</tr>
+			<!-- 4th Body row -->
+			<tr class="tr tbody_tr">
+				<td scope="row" class="td" data-label="Cluster">Learning Complex 4</td>
+				<td class="td" data-label="Pending Approval">8</td>
+				<td class="td" data-label="Pending Signature">28</td>
+				<td class="td" data-label="Overdue">11</td>
+				<td class="td" data-label="Complete">19</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
