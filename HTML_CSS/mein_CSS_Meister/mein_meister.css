@@ -283,7 +283,7 @@
 	/* Extending rainbow-like colours to 12 */
 	--twelve-colour-combo: var(var(--jasper), var(--sapphire), var(--chalcedony), var(--emerald), var(--sardonyx), var(--sardius), var(--chrysolite), var(--beryl), var(--topaz), var(--chrysoprasus), var(--jacinth), var(--amethyst));
 	/*-- End of preferred colours --*/
-	
+
 	/* Colour themes */
 	/* >>> Building a colour scheme. https://web.dev/building-a-color-scheme/
 	>>> Calculating Colour: Dynamic Colour Theming with Pure CSS. https://una.im/css-color-theming/ */
@@ -472,7 +472,7 @@
 
 	/* box-shadow: X-offset Y-offset Blur-size Colour*/
 	--box-shadow1: calc((var(--shadow-start) / 2) (var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), var(--alpha-07));
-	
+
 	--box-shadow1--animate: calc((var(--shadow-start) / 2) (var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), calc(var(--alpha-07) / 2));
 
 	--box-shadow2: var(--shadow-start) calc((var(--shadow-start) * var(--golden-ratio)) (var(--shadow-start) * var(--golden-ratio))) hsla(var(--shadow-colour), var(--alpha-03)), calc((var(--shadow-start) * 2) (var(--shadow-start) * var(--golden-ratio) * 2) (var(--shadow-start) * var(--golden-ratio) * 2)) hsla(var(--shadow-colour), var(--alpha-03));
@@ -488,7 +488,7 @@
 	--switch: calc((var(--lig) - var(--contrast-threshold)) * -100);
 	--theme-text-colour: hsl(0, 0%, var(--switch));
 	--accessible-colour-rgb: calc(((((var(--red) * 299) + (var(--green) * 587) + (var(--blue) * 114)) / 1000) - 128) * -1000);
-	
+
 	--text-grey12: hsl(0, 0%, 12%);
 	--text-grey25: hsl(0, 0%, 25%);
 	--text-grey50: hsl(0, 0%, 50%);
@@ -678,6 +678,7 @@ body {
 	/** overflow-y: scroll; */ /* Optional: Adds an empty scrollbar to the right margin in case content grows vertically, creating a scrollbar.  Allows for better width calculations, as the browser pre-calculates width before scrollbar appears, avoiding page content shifting.*/
 	font-family: var(--font-stack-body);
 	line-height: var(--golden-ratio);
+	line-height: calc(1em + 0.5rem);
 	line-height: calc(1.618rem - (1.618 - 1.3) * ((100vw - 21rem) / (35 - 21)));
 	line-height: calc(3px + 2.5ex + 3px);
 	-webkit-font-smoothing: antialiased;
@@ -696,13 +697,23 @@ body {
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5,
+h6 {
 	text-wrap: balance;
+	overflow-wrap: break-word;
 	word-wrap: break-word;
+	-webkit-hyphens: auto;
+	hyphens: auto;
 }
 
 p {
 	max-width: 65ch;
+	text-wrap: pretty;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	-webkit-hyphens: auto;
+	hyphens: auto;
 }
 
 /* HTML5 blocks - needed in older browsers */
@@ -918,14 +929,7 @@ button[disabled] {
 	pointer-events: none;
 }
 
-p,
-li,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+li {
 	overflow-wrap: break-word;
 	-webkit-hyphens: auto;
 	hyphens: auto;
@@ -1019,6 +1023,7 @@ pre {
 	white-space: pre-wrap;
 	word-break: break-all;
 }
+
 code,
 kbd,
 samp {
@@ -1230,7 +1235,7 @@ select:disabled {
 	.auto-grid > * {
 		max-width: unset;
 	}
-	
+
 	.auto-grid > * + * {
 		margin-top: unset;
 	}
@@ -1243,7 +1248,7 @@ select:disabled {
 
 .resp-layout-grid {
 	--layout-min: 30ch;
-	
+
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--layout-min)), 1fr));
 	grid-gap: 1rem;
@@ -2154,7 +2159,7 @@ a::after, .link::after {
 	pre {
 		white-space: pre-wrap !important;
 	}
-	
+
 	pre,
 	blockquote {
 		border-color: #999999;
