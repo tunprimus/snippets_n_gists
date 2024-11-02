@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		html,
+		body {
+			background-color: #363642;
+			color: #2D2D36;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			padding: 1.3rem;
+		}
+
+		.toggle {
+			margin: 0 auto;
+			max-width: 25rem;
+		}
+
+		.toggle__label {
+			display: block;
+			margin: 0 auto 1rem;
+			padding: 1rem;
+			background-color: #FFFFFF;
+			box-shadow: 0 0.0625rem 0.125rem 0 rgba(153, 153, 153, 0.35);
+			border-radius: 0.25rem;
+			cursor: pointer;
+			font-size: 1rem;
+		}
+
+		.toggle__label::after {
+			color: #ED3E44;
+			content: "+";
+			float: right;
+			font-weight: bold;
+		}
+
+		.toggle__content {
+			font-family: monospace;
+			font-size: 1rem;
+			color: #B0B3C2;
+			margin-top: 0.75rem;
+			padding: 1rem;
+		}
+
+		.toggle__input {
+			display: none;
+		}
+
+		.toggle__input:not(checked) ~ .toggle__content {
+			display: none;
+		}
+
+		.toggle__input:checked ~ .toggle__content {
+			display: block;
+		}
+
+		.toggle__input:checked ~ .toggle__label::after {
+			content: "-";
+		}
+
+		.section--inline {
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+	</style>
+</head>
+<body>
+	<!-- 1st Section -->
+	<section class="section section-with-div-content">
+		<!-- 1st toggle div -->
+		<div class="toggle">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input" id="toggle__input01" value="selected">
+			<label for="toggle__input01" class="toggle__label">What was Beethoven's favourite fruit?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">BA-NA-NA-NA!</div>
+		</div>
+
+		<!-- 2nd toggle div -->
+		<div class="toggle">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input" id="toggle__input02" value="selected">
+			<label for="toggle__input02" class="toggle__label">Where did the general put his armies?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">Up his sleeves!</div>
+		</div>
+
+		<!-- 3rd toggle div -->
+		<div class="toggle">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input" id="toggle__input03" value="selected">
+			<label for="toggle__input03" class="toggle__label">What do you call a nosy pepper?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">Jalapeño business!</div>
+		</div>
+	</section>
+
+	<hr>
+
+	<!-- 2nd Section -->
+	<section class="section section-with-div-content">
+		<!-- 4th toggle div -->
+		<accordion-checkbox class="toggle">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input" id="toggle__input04" value="selected">
+			<label for="toggle__input04" class="toggle__label">What is the foundational grain of the web?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">H-T-M-L</div>
+		</accordion-checkbox>
+
+		<!-- 5th toggle div -->
+		<accordion-checkbox class="toggle">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input" id="toggle__input05" value="selected">
+			<label for="toggle__input05" class="toggle__label">What makes the web beautiful?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">Cascading Style Sheet (CSS)</div>
+		</accordion-checkbox>
+
+		<!-- 6th toggle div -->
+		<accordion-checkbox class="toggle">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input" id="toggle__input06" value="selected">
+			<label for="toggle__input06" class="toggle__label">What enables internet spying?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">JavaScript!</div>
+		</accordion-checkbox>
+	</section>
+
+	<hr>
+
+	<!-- 3rd Section -->
+	<section class="section section-with-div-content section--inline">
+		<!-- 7th toggle div -->
+		<accordion-checkbox class="toggle toggle--inline">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input toggle__input--inline" id="toggle__input07" value="selected">
+			<label for="toggle__input07" class="toggle__label toggle__label--inline">How to build any website?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">H-T-M-L first!</div>
+		</accordion-checkbox>
+
+		<!-- 8th toggle div -->
+		<accordion-checkbox class="toggle toggle--inline">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input toggle__input--inline" id="toggle__input08" value="selected">
+			<label for="toggle__input08" class="toggle__label toggle__label--inline">How to add functionality to any website?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">Use CSS next!</div>
+		</accordion-checkbox>
+
+		<!-- 9th toggle div -->
+		<accordion-checkbox class="toggle toggle--inline">
+			<!-- Checkbox toggle -->
+			<input type="checkbox" name="accordion-toggle" class="toggle__input toggle__input--inline" id="toggle__input09" value="selected">
+			<label for="toggle__input09" class="toggle__label toggle__label--inline">The most failure-prone aspect of web development?</label>
+
+			<!-- Content to toggle -->
+			<div role="toggle" class="toggle__content">JavaScript of course!</div>
+		</accordion-checkbox>
+	</section>
+</body>
+</html>
