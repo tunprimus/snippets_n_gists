@@ -86,6 +86,7 @@
         "fillna",
         "idiv",
         "isted",
+        "iterrows",
         "jacinth",
         "ksengine",
         "ksenginew",
