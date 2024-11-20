@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pure CSS Slider</title>
+	<style>
+		:root {
+			--responsive-space: calc(8px + 1.5625vw);
+		}
+		/* Change web component from inline display */
+		.web-component {
+			display: block;
+		}
+
+		.slider-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			background-image: linear-gradient(149deg, rgb(247, 0, 255) 0%, rgb(255, 145, 0) 100%);
+		}
+
+		.slider {
+			position: relative;
+			width: 100%;
+			max-width: 37.5rem;
+			height: 25rem;
+			margin: var(--responsive-space);
+			text-align: center;
+			border-radius: 1.25rem;
+			overflow: hidden;
+		}
+
+		.slides {
+			position: relative;
+			display: flex;
+			overflow-x: scroll;
+			scroll-behavior: smooth;
+			scroll-snap-type: x mandatory;
+		}
+
+		.slide:nth-of-type(even) {
+			background-color: rgb(250, 246, 212);
+		}
+
+		.slide {
+			box-sizing: border-box;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-shrink: 0;
+			width: 100%;
+			height: 25rem;
+			background-color: white;
+			transform-origin: center center;
+			transform: scale(1);
+			scroll-snap-align: center;
+		}
+
+		.slide__text {
+			font-family: sans-serif;
+			font-size: 2.5rem;
+			font-weight: bold;
+		}
+
+		.slide__anchor {
+			background: none;
+			border: none;
+		}
+
+		.slide__prev,
+		.slider::before {
+			left: 5%;
+			-webkit-transform: rotate(135deg);
+			transform: rotate(135deg);
+		}
+
+		.slide__next,
+		.slider::after {
+			right: 5%;
+			-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+		}
+
+		.slider::before,
+		.slider::after,
+		.slide__prev,
+		.slide__next {
+			box-sizing: border-box;
+			position: absolute;
+			top: 48%;
+			width: 2.188rem;
+			height: 2.188rem;
+			padding: 0.1875rem;
+			border: solid black;
+			border-width: 0 0.25rem 0.25rem 0;
+		}
+
+		.slider::before,
+		.slider::after {
+			content: "";
+			background: none;
+			z-index: 1;
+			pointer-events: none;
+		}
+
+		.slider__nav {
+			box-sizing: border-box;
+			position: absolute;
+			bottom: 5%;
+			left: 50%;
+			width: 12.5rem;
+			margin-left: -6.25rem;
+			text-align: center;
+		}
+
+		.slider__navlink {
+			display: inline-block;
+			width: 0.938rem;
+			height: 0.938rem;
+			margin: 0 0.625rem 0 0.625rem;
+			background-color: black;
+			border-radius: 50%;
+		}
+	</style>
+</head>
+<body class="body">
+	<!-- `slider-container` is just the element on your site that you want the slider to go in -->
+	<section class="section slider-container">
+		<!-- `slider` is like the ‘screen’, or the viewport that will display all your slides -->
+		<slider-component class="web-component slider slider-container__slider">
+			<!-- `slides` will hold your slides. This is the element that actually scrolls to give the slider effect -->
+			<slides-component class="web-component slides slider__slides">
+				<!-- Slide 001 -->
+				<div class="slide slides__slide" id="slide_001">
+					<span class="slide__text">1</span>
+					<a href="#slide_005" class="anchor slide__anchor slide__prev" title="Prev"></a>
+					<a href="#slide_002" class="anchor slide__anchor slide__next" title="Next"></a>
+				</div>
+				<!-- Slide 002 -->
+				<div class="slide slides__slide" id="slide_002">
+					<span class="slide__text">2</span>
+					<a href="#slide_001" class="anchor slide__anchor slide__prev" title="Prev"></a>
+					<a href="#slide_003" class="anchor slide__anchor slide__next" title="Next"></a>
+				</div>
+				<!-- Slide 003 -->
+				<div class="slide slides__slide" id="slide_003">
+					<span class="slide__text">3</span>
+					<a href="#slide_002" class="anchor slide__anchor slide__prev" title="Prev"></a>
+					<a href="#slide_004" class="anchor slide__anchor slide__next" title="Next"></a>
+				</div>
+				<!-- Slide 004 -->
+				<div class="slide slides__slide" id="slide_004">
+					<span class="slide__text">4</span>
+					<a href="#slide_003" class="anchor slide__anchor slide__prev" title="Prev"></a>
+					<a href="#slide_005" class="anchor slide__anchor slide__next" title="Next"></a>
+				</div>
+				<!-- Slide 005 -->
+				<div class="slide slides__slide" id="slide_005">
+					<span class="slide__text">5</span>
+					<a href="#slide_004" class="anchor slide__anchor slide__prev" title="Prev"></a>
+					<a href="#slide_001" class="anchor slide__anchor slide__next" title="Next"></a>
+				</div>
+				<!-- Breadcrumbs -->
+				<slider-breadcrumbs class="web-component slider__nav">
+					<a href="#slide_001" class="slider__navlink" title="Jump to slide 1"></a>
+					<a href="#slide_002" class="slider__navlink" title="Jump to slide 2"></a>
+					<a href="#slide_003" class="slider__navlink" title="Jump to slide 3"></a>
+					<a href="#slide_004" class="slider__navlink" title="Jump to slide 4"></a>
+					<a href="#slide_005" class="slider__navlink" title="Jump to slide 5"></a>
+				</slider-breadcrumbs>
+			</slides-component>
+		</slider-component>
+	</section>
+</body>
+</html>
