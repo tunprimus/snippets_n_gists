@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Exclusive Details Accordion</title>
+	<style>
+		*,
+		*::before,
+		*::after {
+			box-sizing: border-box;
+		}
+
+		.body {
+			min-height: 100vh;
+			min-height: 100dvh;
+			max-width: 800px;
+			margin: 0 auto;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		}
+
+		.header {
+			background-color: hsl(200, 100%, 90%);
+			padding: 1rem;
+			margin-bottom: 1rem;
+			margin-block-end: 1rem;
+		}
+
+		.h1 {
+			font-size: 1.4rem;
+		}
+
+		.accordion {
+			margin: 0.25rem;
+			outline: 0.0625rem solid hsl(195, 53%, 85%);
+		}
+
+		.details {
+			margin: 0;
+		}
+
+		.details__text {
+			margin: 0;
+			padding: 0.75rem 1.5rem;
+		}
+
+		.summary {
+			padding: 0.5rem;
+			background-color: hsl(195, 40%, 96%);
+			border-block: 0.0625rem solid hsl(195, 53%, 80%);
+			cursor: pointer;
+			transition: background-color 0.25s ease, color 0.25s ease;
+		}
+
+		.summary:hover {
+			background-color: hsl(195, 40%, 86%);
+		}
+
+		.summary:last-of-type {
+			border-bottom: 0.0625rem solid hsl(195, 53%, 85%);
+		}
+
+		.footer {
+			position: absolute;
+			bottom: 0;
+			transform: translate(100%, 0%);
+			margin: 0.25rem;
+			text-align: center;
+		}
+	</style>
+</head>
+<body class="body">
+	<header class="header">
+		<h1 class="h1 header__title">Frequently Asked Questions</h1>
+		<p class="p header__text">Got a burning question? You may find your answers here.</p>
+	</header>
+	<main class="main">
+		<section id="accordion" class="section accordion">
+			<!-- 1st details element -->
+			<details class="details details--01" name="faq-accordion">
+				<summary class="summary details__summary">Payment Options</summary>
+				<p class="p details__text">We offer convenient ways to pay - via the Service Centre, Direct Debit, BPAY<span>&#x00AE</span> or in person - whatever suits you best.</p>
+			</details>
+			<!-- 2nd details element -->
+			<details class="details details--01" name="faq-accordion">
+				<summary class="summary details__summary">Personalise your PIN</summary>
+				<p class="p details__text">In many countries, you may be required to enter your PIN. Please make sure that you have set one. You can select your own PIN by calling us with your registered phone number.</p>
+			</details>
+			<!-- 3rd details element -->
+			<details class="details details--03" name="faq-accordion">
+				<summary class="summary details__summary">How can I add an additional cardholder to my Platinum Mastercard</summary>
+				<p class="p details__text">To share your Platinum Mastercard with a family member or loved one, add an additional cardholder to your account via our online form or call our customer service number.</p>
+			</details>
+		</section>
+	</main>
+	<footer class="footer">
+		<!-- http://billpatrianakos.me/blog/2014/12/31/a-better-way-to-display-the-current-year-i -->
+		<p class="footer__copyright">&copy; Copyright 2024<script type="text/javascript">new Date().getFullYear() > 2024 && document.write("-" + new Date().getFullYear()); </script>, Tunprimus.</p>
+	</footer>
+</body>
+</html>
