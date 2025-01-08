@@ -716,6 +716,20 @@ p {
 	hyphens: auto;
 }
 
+h1:not([class]),
+h2:not([class]),
+h3:not([class]),
+h4:not([class]),
+h5:not([class]),
+h6:not([class]) {
+	margin-top: 0.75em;
+	margin-bottom: 0.75em;
+	margin-block: 0.75em;
+	line-height: 1.25;
+	text-wrap: balance;
+	letter-spacing: -0.05ch;
+}
+
 /* HTML5 blocks - needed in older browsers */
 article,
 aside,
@@ -800,6 +814,7 @@ embed,
 svg  {
 	display: block;
 	max-width: 100%;
+	max-inline-size: 100%;
 	height: auto;
 	border-style: none;
 }
@@ -809,6 +824,7 @@ img {
 	width: inherit; /* This makes auto-resizing with max-width 100% and height auto work in IE8 */
 	max-height: 100%;
 	max-width: 100%;
+	max-inline-size: 100%;
 }
 
 audio:not([controls]) {
@@ -833,7 +849,10 @@ select,
 textarea {
 	font: inherit;
 	font-size: 100%;
+	letter-spacing: inherit;
+	word-spacing: inherit;
 	vertical-align: middle;
+	color: currentColor;
 }
 
 input,
