@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pandas as pd
 from scipy.io import arff
 from os.path import realpath as realpath

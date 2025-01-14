@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #Faster Python APIs in Two Minutes
 #https://github.com/paul-armstrong-dev/faster-parser
 import concurrent.futures

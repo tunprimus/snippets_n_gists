@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Adapted from: Convert an Excel dataset into a SQL insert statement
 # https://dev.to/smuniraj/convert-excel-dataset-into-sql-insert-statement-38k4
 import pandas as pd

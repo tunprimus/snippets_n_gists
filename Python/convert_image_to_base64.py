@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Adapted from https://gist.github.com/Trigary/cfff35c6a4db11a35c82d168a218bafb
 # Usage
 # Embed images inside sample-document.md and save output to embedded.md:

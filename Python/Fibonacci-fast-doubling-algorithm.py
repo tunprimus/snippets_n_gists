@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # 
 # Fast doubling Fibonacci algorithm (Python)
 # by Project Nayuki, 2015. Public domain.

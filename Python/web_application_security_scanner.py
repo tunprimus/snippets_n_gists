@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # Modified from Building a Simple Web Application Security Scanner with Python: A Beginner's Guide https://www.freecodecamp.org/news/build-a-web-application-security-scanner-with-python/
 
 import requests

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """ Still non-functional """
 
 # Adapted and extended from

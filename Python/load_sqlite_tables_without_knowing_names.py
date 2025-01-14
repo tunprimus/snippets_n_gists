@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sqlite3
 from pandas import read_sql_query, read_sql_table
 from os.path import realpath as realpath

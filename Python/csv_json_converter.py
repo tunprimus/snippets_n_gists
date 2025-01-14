@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import json
 import csv
 from os.path import realpath as realpath
