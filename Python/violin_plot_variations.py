@@ -11,7 +11,7 @@ np.object = np.object_
 np.bool = np.bool_
 
 RANDOM_SEED = 42
-GOLDEN_RATIO = 1.618
+GOLDEN_RATIO = 1.618033989
 FIG_WIDTH = 30
 FIG_HEIGHT = FIG_WIDTH / GOLDEN_RATIO
 FIG_DPI = 72
