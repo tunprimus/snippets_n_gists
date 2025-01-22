@@ -20,3 +20,6 @@ def image_to_base64(image_file, output_file):
         image_string = '<p><img src="data:image/png;base64,' + image_string + '"></p>'
         image_result = open(output_file, "w")
         image_result.write(image_string)
+
+if __name__ == "__main__":
+    main()

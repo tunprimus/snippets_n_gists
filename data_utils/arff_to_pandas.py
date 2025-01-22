@@ -11,3 +11,6 @@ def load_arff(filepath):
     print(meta)
     print(df.head())
     return df
+
+if __name__ == "__main__":
+    main()
