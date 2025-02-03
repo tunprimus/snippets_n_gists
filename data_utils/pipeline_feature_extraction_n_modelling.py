@@ -5,9 +5,11 @@ from os.path import realpath as realpath
 
 from sklearn.model_selection import KFold
 from sklearn.model_selection import cross_val_score
-from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
-from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.pipeline import FeatureUnion
+from sklearn.linear_model import LogisticRegression
+from sklearn.decomposition import PCA
+from sklearn.feature_selection import SelectKBest
 
 np.float = np.float64
 np.int = np.int_
@@ -18,12 +20,15 @@ np.bool = np.bool_
 
 RANDOM_SEED = 42
 NUM_KFOLD_SPLITS = 13
+NUM_PCA_DIM = 3
+NUM_KBEST_VAL = 7
 
-def pipeline_standardise_model_data(path_to_csv, list_of_columns=None, target_column=None):
+def pipeline_feature_extraction_modelling(path_to_csv, list_of_columns=None, target_column=None):
     """
-    Function to load a CSV file, split the data into X and y, create a pipeline
-    to standardise the data, perform LDA and evaluate the pipeline using
-    cross-validation.
+    Function to load a CSV file, split the data into X and y, create a feature
+    union to apply PCA and SelectKBest, create a pipeline to apply logistic
+    regression, evaluate the pipeline using cross-validation and return the
+    evaluation results.
 
     Parameters
     ----------
@@ -52,10 +57,15 @@ def pipeline_standardise_model_data(path_to_csv, list_of_columns=None, target_co
     mask = arr_to_use.loc[target_column]
     X = arr_to_use[~mask]
     y = arr_to_use[mask]
+    #Create feature union
+    features = []
+    features.append(("pca", PCA(n_components=NUM_PCA_DIM)))
+    features.append(("select_best", SelectKBest(k=NUM_KBEST_VAL)))
+    feature_union = FeatureUnion(features)
     #Create pipeline
     estimators = []
-    estimators.append(("standardise", StandardScaler()))
-    estimators.append(("lda", LinearDiscriminantAnalysis()))
+    estimators.append(("feature_union", feature_union))
+    estimators.append(("logistic", LogisticRegression()))
     pipeline = Pipeline(estimators)
     #Evaluate pipeline
     kfold = KFold(n_splits=NUM_KFOLD_SPLITS, shuffle=True, random_state=RANDOM_SEED)
