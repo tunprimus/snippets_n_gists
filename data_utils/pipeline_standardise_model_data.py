@@ -48,10 +48,12 @@ def pipeline_standardise_model_data(path_to_csv, list_of_columns=None, target_co
     real_path_to_csv = realpath(path_to_csv)
     df = read_csv(real_path_to_csv, names=list_of_columns)
     arr_to_use = df.values
-    # X, y = arr_to_use[:, :-1], arr_to_use[:, -1]
-    mask = arr_to_use.loc[target_column]
-    X = arr_to_use[~mask]
-    y = arr_to_use[mask]
+    if target_column:
+        mask = arr_to_use.loc[target_column]
+        X = arr_to_use[~mask]
+        y = arr_to_use[mask]
+    else:
+        X, y = arr_to_use[:, :-1], arr_to_use[:, -1]
     #Create pipeline
     estimators = []
     estimators.append(("standardise", StandardScaler()))
