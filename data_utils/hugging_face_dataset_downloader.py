@@ -18,6 +18,8 @@ def get_hugging_face_dataset(target_name, path_to_save=None):
     dataset = load_dataset(target_name)
     if path_to_save is not None:
         real_path_to_save = realpath(path_to_save)
+    else:
+        real_path_to_save = realpath(".")
 
     for key, value in dataset.items():
         value.to_csv(real_path_to_save + f"/{key}.csv")
