@@ -19,6 +19,31 @@ LINSPACE_SAMPLE_VAL = 10
 np.random.seed(RANDOM_SEED)
 
 def bland_altman_plot_self(data01, data02, *args, **kwargs):
+    """
+    Bland-Altman Plot for comparing two sets of data.
+
+    Parameters
+    ----------
+    data01 : numpy array
+        The first set of data to compare.
+    data02 : numpy array
+        The second set of data to compare.
+    *args : tuple
+        Arguments to pass to matplotlib.pyplot.scatter.
+    **kwargs : dict
+        Keyword arguments to pass to matplotlib.pyplot.scatter.
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This function generates a Bland-Altman Plot, which is a statistical graphic
+    that is used to compare two sets of data. The x-axis represents the mean of
+    the two sets of data, and the y-axis represents the difference between the
+    two sets of data.
+    """
     for data in (data01, data02):
         if not isinstance(data, np.ndarray) or data is None or data.size == 0:
             raise ValueError("Data must be non-empty numpy arrays")
@@ -55,6 +80,39 @@ def bland_altman_plot_self(data01, data02, *args, **kwargs):
 
 
 def bland_altman_plot_plotly(data01, data02, data01_name="A", data02_name="B", subgroups=None, plotly_template=None, annotation_offset=0.05, plot_trendline=True, n_sd=CONFIDENCE_INTERVAL_VAL, *args, **kwargs):
+    """
+    Bland-Altman Plot for comparing two sets of data with optional trendline and standard deviation intervals.
+
+    Parameters
+    ----------
+    data01 : numpy array
+        The first set of data to compare.
+    data02 : numpy array
+        The second set of data to compare.
+    data01_name : str
+        Name of the first dataset.
+    data02_name : str
+        Name of the second dataset.
+    subgroups : list or numpy array
+        Optional list or numpy array of subgroups. If given, the points will be coloured according to the subgroups.
+    plotly_template : str
+        Optional plotly template to use.
+    annotation_offset : float
+        Offset for the annotations of the mean and standard deviation intervals.
+    plot_trendline : bool
+        Whether to plot a trendline.
+    n_sd : float
+        Number of standard deviations to show in the intervals.
+    *args : tuple
+        Arguments to pass to plotly.graph_objects.Scatter.
+    **kwargs : dict
+        Keyword arguments to pass to plotly.graph_objects.Scatter.
+
+    Returns
+    -------
+    plotly.graph_objects.Figure
+        The generated Bland-Altman Plot.
+    """
     for data in (data01, data02):
         if not isinstance(data, np.ndarray) or data is None or data.size == 0:
             raise ValueError("Data must be non-empty numpy arrays")
@@ -94,6 +152,31 @@ def bland_altman_plot_plotly(data01, data02, data01_name="A", data02_name="B", s
 
 
 def bland_altman_plot_statsmodels(data01, data02, *args, **kwargs):
+    """
+    Generates a Bland-Altman Plot using the statsmodels library.
+
+    Parameters
+    ----------
+    data01 : numpy array
+        The first set of data to compare.
+    data02 : numpy array
+        The second set of data to compare.
+    *args : tuple
+        Arguments to pass to matplotlib.pyplot.scatter.
+    **kwargs : dict
+        Keyword arguments to pass to matplotlib.pyplot.scatter.
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This function generates a Bland-Altman Plot, which is a statistical graphic
+    that is used to compare two sets of data. The x-axis represents the mean of
+    the two sets of data, and the y-axis represents the difference between the
+    two sets of data.
+    """
     for data in (data01, data02):
         if not isinstance(data, np.ndarray) or data is None or data.size == 0:
             raise ValueError("Data must be non-empty numpy arrays")
@@ -110,6 +193,27 @@ def bland_altman_plot_statsmodels(data01, data02, *args, **kwargs):
 
 
 def bland_altman_plot_pingouin(data01, data02):
+    """
+    Generates a Bland-Altman Plot using the pingouin library.
+
+    Parameters
+    ----------
+    data01 : numpy array
+        The first set of data to compare.
+    data02 : numpy array
+        The second set of data to compare.
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This function generates a Bland-Altman Plot, which is a statistical graphic
+    that is used to compare two sets of data. The x-axis represents the mean of
+    the two sets of data, and the y-axis represents the difference between the
+    two sets of data.
+    """
     for data in (data01, data02):
         if not isinstance(data, np.ndarray) or data is None or data.size == 0:
             raise ValueError("Data must be non-empty numpy arrays")
