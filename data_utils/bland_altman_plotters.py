@@ -7,7 +7,7 @@ import statsmodels.api as sm
 from scipy.stats import linregress
 from numpy.random import random
 
-CONFIDENCE_INTERVAL_VAL = 1.96
+SD_LIMIT = 1.96
 GOLDEN_RATIO = 1.618033989
 FIG_WIDTH = 30
 FIG_HEIGHT = FIG_WIDTH / GOLDEN_RATIO
@@ -59,19 +59,19 @@ def bland_altman_plot_self(data01, data02, *args, **kwargs):
     else:
         x_bar = np.mean([data01, data02], axis=0)
     diff = data01 - data02
-    md = np.nanmean(diff) if np.isnan(diff).any() else np.mean(diff)
-    sd = np.std(diff, axis=0)
-    conf_interv_low = md - (CONFIDENCE_INTERVAL_VAL * sd)
-    conf_interv_high = md + (CONFIDENCE_INTERVAL_VAL * sd)
+    mean_diff = np.nanmean(diff) if np.isnan(diff).any() else np.mean(diff)
+    sd_diff = np.std(diff, axis=0)
+    conf_interv_low = mean_diff - (SD_LIMIT * sd_diff)
+    conf_interv_high = mean_diff + (SD_LIMIT * sd_diff)
     x_out_plot = np.min(x_bar) + ((np.max(x_bar) - np.min(x_bar)) * 1.14)
     plt.scatter(x_bar, diff, *args, **kwargs)
-    plt.axhline(md, color="black", linestyle="-", linewidth=2)
-    plt.axhline(conf_interv_high, color="grey", linestyle="--", linewidth=1)
-    plt.axhline(conf_interv_low, color="grey", linestyle="--", linewidth=1)
+    plt.axhline(mean_diff, color="black", linestyle="-", linewidth=2)
+    plt.axhline(conf_interv_high, color="grey", linestyle="--", linewidth=1, c="orange", label=r"+ 1.96$\sigma$")
+    plt.axhline(conf_interv_low, color="grey", linestyle="--", linewidth=1, c="magenta", label=r"- 1.96$\sigma$")
     plt.title(r"$\mathbf{Bland-Altman}$" + " " + r"$\mathbf{Plot}$")
     plt.xlabel("Mean")
     plt.ylabel("Difference")
-    plt.ylim(md - (Y_LIM_OFFSET * sd), md + (Y_LIM_OFFSET * sd))
+    plt.ylim(mean_diff - (Y_LIM_OFFSET * sd_diff), mean_diff + (Y_LIM_OFFSET * sd_diff))
     plt.text(
         x_out_plot,
         conf_interv_low,
@@ -86,7 +86,7 @@ def bland_altman_plot_self(data01, data02, *args, **kwargs):
         ha="center",
         va="center",
     )
-    plt.text(x_out_plot, md, r"Mean:" + "\n" + "%.2f" % md, ha="center", va="center")
+    plt.text(x_out_plot, mean_diff, r"Mean:" + "\n" + "%.2f" % mean_diff, ha="center", va="center")
     plt.subplots_adjust(right=0.85)
     plt.show()
 
@@ -100,7 +100,7 @@ def bland_altman_plot_plotly(
     plotly_template=None,
     annotation_offset=0.05,
     plot_trendline=True,
-    n_sd=CONFIDENCE_INTERVAL_VAL,
+    n_sd=SD_LIMIT,
     *args,
     **kwargs,
 ):
@@ -151,8 +151,8 @@ def bland_altman_plot_plotly(
     else:
         x_bar = np.mean([data01, data02], axis=0)
     diff = data01 - data02
-    md = np.nanmean(diff) if np.isnan(diff).any() else np.mean(diff)
-    sd = np.std(diff, axis=0)
+    mean_diff = np.nanmean(diff) if np.isnan(diff).any() else np.mean(diff)
+    sd_diff = np.std(diff, axis=0)
     fig = go.Figure()
     if plot_trendline:
         slope, intercept, r_value, p_value, std_err = linregress(x_bar, diff)
@@ -188,20 +188,20 @@ def bland_altman_plot_plotly(
         type="line",
         xref="paper",
         x0=0,
-        y0=md,
+        y0=mean_diff,
         x1=1,
-        y1=md,
+        y1=mean_diff,
         line=dict(color="black", width=6, dash="dashdot"),
-        name=f"Mean {md:.2f}",
+        name=f"Mean {mean_diff:.2f}",
     )
     # borderless rectangle
     fig.add_shape(
         type="rect",
         xref="paper",
         x0=0,
-        y0=md - n_sd * sd,
+        y0=mean_diff - n_sd * sd_diff,
         x1=1,
-        y1=md + n_sd * sd,
+        y1=mean_diff + n_sd * sd_diff,
         line=dict(color="SeaGreen", width=2),
         fillcolor="LightSkyBlue",
         opacity=0.4,
@@ -216,10 +216,10 @@ def bland_altman_plot_plotly(
         annotations=[
             dict(
                 x=1,
-                y=md,
+                y=mean_diff,
                 xref="paper",
                 yref="y",
-                text=f"Mean {md:.2f}",
+                text=f"Mean {mean_diff:.2f}",
                 showarrow=True,
                 arrowhead=7,
                 ax=50,
@@ -227,7 +227,7 @@ def bland_altman_plot_plotly(
             ),
             dict(
                 x=1,
-                y=n_sd * sd + md + annotation_offset,
+                y=n_sd * sd_diff + mean_diff + annotation_offset,
                 xref="paper",
                 yref="y",
                 text=f"+{n_sd} SD",
@@ -238,7 +238,7 @@ def bland_altman_plot_plotly(
             ),
             dict(
                 x=1,
-                y=md - n_sd * sd + annotation_offset,
+                y=mean_diff - n_sd * sd_diff + annotation_offset,
                 xref="paper",
                 yref="y",
                 text=f"-{n_sd} SD",
@@ -249,10 +249,10 @@ def bland_altman_plot_plotly(
             ),
             dict(
                 x=1,
-                y=md + n_sd * sd - annotation_offset,
+                y=mean_diff + n_sd * sd_diff - annotation_offset,
                 xref="paper",
                 yref="y",
-                text=f"Mean {md:.2f}",
+                text=f"Mean {mean_diff:.2f}",
                 showarrow=False,
                 arrowhead=0,
                 ax=0,
@@ -260,10 +260,10 @@ def bland_altman_plot_plotly(
             ),
             dict(
                 x=1,
-                y=md - n_sd * sd - annotation_offset,
+                y=mean_diff - n_sd * sd_diff - annotation_offset,
                 xref="paper",
                 yref="y",
-                text=f"Mean {md:.2f}",
+                text=f"Mean {mean_diff:.2f}",
                 showarrow=False,
                 arrowhead=0,
                 ax=0,
@@ -272,6 +272,66 @@ def bland_altman_plot_plotly(
         ],
     )
     return fig
+
+
+def bland_altman_plot_josesho(data01, data02, sd_limit=SD_LIMIT, ax=None, scatter_kwds=None, mean_line_kwds=None, limit_lines_kwds=None):
+    for data in (data01, data02):
+        if not isinstance(data, np.ndarray) or data is None or data.size == 0:
+            raise ValueError("Data must be non-empty numpy arrays")
+    if data01.shape != data02.shape:
+        raise ValueError("Data must have the same shape")
+    if np.isnan(data01).any() or np.isnan(data02).any():
+        raise ValueError("Data cannot contain NaN values")
+    if sd_limit < 0:
+        raise ValueError(f"sd_limit {sd_limit} is less than 0")
+    data01 = np.asarray(data01)
+    data02 = np.asarray(data02)
+    if np.isnan(data01).any() or np.isnan(data02).any():
+        x_bar = np.nanmean([data01, data02], axis=0)
+    else:
+        x_bar = np.mean([data01, data02], axis=0)
+    diff = data01 - data02
+    mean_diff = np.nanmean(diff) if np.isnan(diff).any() else np.mean(diff)
+    sd_diff = np.std(diff, axis=0)
+    if ax is None:
+        ax = plt.gca()
+    scatter_kwds = scatter_kwds or {}
+    if "s" not in scatter_kwds:
+        scatter_kwds["s"] = 20
+    mean_line_kwds = mean_line_kwds or {}
+    limit_lines_kwds = limit_lines_kwds or {}
+    for kwds in [mean_line_kwds, limit_lines_kwds]:
+        if "color" not in kwds:
+            kwds["color"] = "grey"
+        if "linewidth" not in kwds:
+            kwds["linewidth"] = 1
+        if "linestyle" not in  mean_line_kwds:
+            kwds["linestyle"] = "--"
+        if "linestyle" not in limit_lines_kwds:
+            kwds["linestyle"] = ":"
+    ax.scatter(x_bar, diff, **scatter_kwds)
+    ax.axhline(mean_diff, **mean_line_kwds)
+    # Annotate mean line with mean difference
+    ax.annotate(f"{mean_diff:.2f}",  xy=(0.99, 0.5), horizontalalignment="right", verticalalignment="center", fontsize=14, xycoords="axes fraction")
+    if sd_limit > 0:
+        half_ylim = (1.5 * sd_limit) * sd_diff
+        ax.set_ylim(mean_diff - half_ylim, mean_diff + half_ylim)
+        limit_of_agreement = sd_limit * sd_diff
+        lower_limit = mean_diff - limit_of_agreement
+        upper_limit = mean_diff + limit_of_agreement
+        for j, lim in enumerate([lower_limit, upper_limit]):
+            ax.axhline(lim, **limit_lines_kwds)
+        ax.annotate(f"-SD{sd_limit}: {lower_limit:.2f}",  xy=(0.99, 0.07), horizontalalignment="right", verticalalignment="bottom", fontsize=14, xycoords="axes fraction")
+        ax.annotate(f"+SD{sd_limit}: {upper_limit:.2f}",  xy=(0.99, 0.92), horizontalalignment="right", fontsize=14, xycoords="axes fraction")
+    elif sd_limit == 0:
+        half_ylim = 3 * sd_diff
+        ax.set_ylim(mean_diff - half_ylim, mean_diff + half_ylim)
+    plt.title("Bland-Altman Plot", fontsize=18)
+    ax.set_ylabel("Difference", fontsize=15)
+    ax.set_xlabel("Means", fontsize=15)
+    ax.tick_params(labelsize=13)
+    plt.tight_layout()
+    return ax
 
 
 def bland_altman_plot_statsmodels(data01, data02, *args, **kwargs):
@@ -356,6 +416,7 @@ def bland_altman_plot_pingouin(data01, data02):
 
 
 bland_altman_plot_self(random(10), random(10))
+bland_altman_plot_josesho(random(10), random(10))
 bland_altman_plot_plotly(random(10), random(10))
 bland_altman_plot_statsmodels(random(10), random(10))
 bland_altman_plot_pingouin(random(10), random(10))
