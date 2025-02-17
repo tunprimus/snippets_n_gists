@@ -66,8 +66,22 @@ def bland_altman_plot_self(data01, data02, *args, **kwargs):
     x_out_plot = np.min(x_bar) + ((np.max(x_bar) - np.min(x_bar)) * 1.14)
     plt.scatter(x_bar, diff, *args, **kwargs)
     plt.axhline(mean_diff, color="black", linestyle="-", linewidth=2)
-    plt.axhline(conf_interv_high, color="grey", linestyle="--", linewidth=1, c="orange", label=r"+ 1.96$\sigma$")
-    plt.axhline(conf_interv_low, color="grey", linestyle="--", linewidth=1, c="magenta", label=r"- 1.96$\sigma$")
+    plt.axhline(
+        conf_interv_high,
+        color="grey",
+        linestyle="--",
+        linewidth=1,
+        c="orange",
+        label=r"+ 1.96$\sigma$",
+    )
+    plt.axhline(
+        conf_interv_low,
+        color="grey",
+        linestyle="--",
+        linewidth=1,
+        c="magenta",
+        label=r"- 1.96$\sigma$",
+    )
     plt.title(r"$\mathbf{Bland-Altman}$" + " " + r"$\mathbf{Plot}$")
     plt.xlabel("Mean")
     plt.ylabel("Difference")
@@ -86,7 +100,13 @@ def bland_altman_plot_self(data01, data02, *args, **kwargs):
         ha="center",
         va="center",
     )
-    plt.text(x_out_plot, mean_diff, r"Mean:" + "\n" + "%.2f" % mean_diff, ha="center", va="center")
+    plt.text(
+        x_out_plot,
+        mean_diff,
+        r"Mean:" + "\n" + "%.2f" % mean_diff,
+        ha="center",
+        va="center",
+    )
     plt.subplots_adjust(right=0.85)
     plt.show()
 
@@ -274,7 +294,15 @@ def bland_altman_plot_plotly(
     return fig
 
 
-def bland_altman_plot_josesho(data01, data02, sd_limit=SD_LIMIT, ax=None, scatter_kwds=None, mean_line_kwds=None, limit_lines_kwds=None):
+def bland_altman_plot_josesho(
+    data01,
+    data02,
+    sd_limit=SD_LIMIT,
+    ax=None,
+    scatter_kwds=None,
+    mean_line_kwds=None,
+    limit_lines_kwds=None,
+):
     for data in (data01, data02):
         if not isinstance(data, np.ndarray) or data is None or data.size == 0:
             raise ValueError("Data must be non-empty numpy arrays")
@@ -305,14 +333,21 @@ def bland_altman_plot_josesho(data01, data02, sd_limit=SD_LIMIT, ax=None, scatte
             kwds["color"] = "grey"
         if "linewidth" not in kwds:
             kwds["linewidth"] = 1
-        if "linestyle" not in  mean_line_kwds:
+        if "linestyle" not in mean_line_kwds:
             kwds["linestyle"] = "--"
         if "linestyle" not in limit_lines_kwds:
             kwds["linestyle"] = ":"
     ax.scatter(x_bar, diff, **scatter_kwds)
     ax.axhline(mean_diff, **mean_line_kwds)
     # Annotate mean line with mean difference
-    ax.annotate(f"{mean_diff:.2f}",  xy=(0.99, 0.5), horizontalalignment="right", verticalalignment="center", fontsize=14, xycoords="axes fraction")
+    ax.annotate(
+        f"{mean_diff:.2f}",
+        xy=(0.99, 0.5),
+        horizontalalignment="right",
+        verticalalignment="center",
+        fontsize=14,
+        xycoords="axes fraction",
+    )
     if sd_limit > 0:
         half_ylim = (1.5 * sd_limit) * sd_diff
         ax.set_ylim(mean_diff - half_ylim, mean_diff + half_ylim)
@@ -321,8 +356,21 @@ def bland_altman_plot_josesho(data01, data02, sd_limit=SD_LIMIT, ax=None, scatte
         upper_limit = mean_diff + limit_of_agreement
         for j, lim in enumerate([lower_limit, upper_limit]):
             ax.axhline(lim, **limit_lines_kwds)
-        ax.annotate(f"-SD{sd_limit}: {lower_limit:.2f}",  xy=(0.99, 0.07), horizontalalignment="right", verticalalignment="bottom", fontsize=14, xycoords="axes fraction")
-        ax.annotate(f"+SD{sd_limit}: {upper_limit:.2f}",  xy=(0.99, 0.92), horizontalalignment="right", fontsize=14, xycoords="axes fraction")
+        ax.annotate(
+            f"-SD{sd_limit}: {lower_limit:.2f}",
+            xy=(0.99, 0.07),
+            horizontalalignment="right",
+            verticalalignment="bottom",
+            fontsize=14,
+            xycoords="axes fraction",
+        )
+        ax.annotate(
+            f"+SD{sd_limit}: {upper_limit:.2f}",
+            xy=(0.99, 0.92),
+            horizontalalignment="right",
+            fontsize=14,
+            xycoords="axes fraction",
+        )
     elif sd_limit == 0:
         half_ylim = 3 * sd_diff
         ax.set_ylim(mean_diff - half_ylim, mean_diff + half_ylim)
