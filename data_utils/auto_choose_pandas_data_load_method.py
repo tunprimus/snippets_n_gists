@@ -10,9 +10,11 @@ from os.path import realpath as realpath
 from os.path import splitext as splitext
 from io import StringIO, BytesIO
 from fastavro import reader
+from scipy.io import arff
 from scipy.io import loadmat
 from google.cloud import bigquery
 
+# Monkey patching NumPy >= 1.24 in order to successfully import model from sklearn and other libraries
 np.float = np.float64
 np.int = np.int_
 np.object = np.object_
@@ -116,6 +118,11 @@ def generate_df_from_data_source(data_source,from_aws=False, aws_access_key=None
             return pd.read_csv(zip_ref.open(zip_ref.namelist()[0]))
     elif ext == "parquet":
         return pq.read_table(real_path_to_data_source).to_pandas()
+    elif ext == "arff":
+        arff_file = arff.loadarff(real_path_to_data_source)
+        #df, meta = pd.DataFrame(arff_file)
+        #return df
+        return pd.DataFrame(arff_file)[0]
     elif ext == "yaml" or ext == "yml":
         with open(real_path_to_data_source, "r") as f:
             return pd.json_normalize(yaml.safe_load(f))
