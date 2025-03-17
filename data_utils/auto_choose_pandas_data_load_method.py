@@ -4,12 +4,14 @@ import numpy as np
 import boto3
 import zipfile
 import pyarrow.parquet as pq
+import rpy2.robjects as ro
 import yaml
 import gspread
 from os.path import realpath as realpath
 from os.path import splitext as splitext
 from io import StringIO, BytesIO
 from fastavro import reader
+from rpy2.robjects import pandas2ri
 from scipy.io import arff
 from scipy.io import loadmat
 from google.cloud import bigquery
@@ -24,43 +26,54 @@ pd.set_option("mode.copy_on_write", True)
 
 def generate_df_from_data_source(data_source,from_aws=False, aws_access_key=None, aws_secret_key=None, aws_bucket_name=None, aws_file_key=None, from_googlesheet=False, path_to_googlesheet_cred=None, googlesheet_name=None, from_bigquery=False, path_to_bigquery_cred=None, bigquery_id=None, bigquery_dataset_id=None, bigquery_table_id=None):
     """
-    Automatically detect the type of the file and use the appropriate pandas method to create a DataFrame.
+    Generate a Pandas DataFrame from various data sources.
 
-    Parameters
-    ----------
-    data_source : str
-        The path to the data source file.
-    from_aws : bool, default False
-        Load the data from AWS S3.
-    aws_access_key : str, optional
-        The access key for AWS S3.
-    aws_secret_key : str, optional
-        The secret key for AWS S3.
-    aws_bucket_name : str, optional
-        The name of the AWS S3 bucket.
-    aws_file_key : str, optional
-        The key of the file in the AWS S3 bucket.
-    from_googlesheet : bool, default False
-        Load the data from Google Sheets.
-    path_to_googlesheet_cred : str, optional
-        The path to the Google Sheets credentials file.
-    googlesheet_name : str, optional
-        The name of the Google Sheets document.
-    from_bigquery : bool, default False
-        Load the data from Google BigQuery.
-    path_to_bigquery_cred : str, optional
-        The path to the Google BigQuery credentials file.
-    bigquery_id : str, optional
-        The ID of the BigQuery project.
-    bigquery_dataset_id : str, optional
-        The ID of the BigQuery dataset.
-    bigquery_table_id : str, optional
-        The ID of the BigQuery table.
+    This function supports reading data from local files with different extensions,
+    AWS S3, Google Sheets, and Google BigQuery. It automatically detects the
+    file type based on the file extension and uses the appropriate pandas
+    reader function to load the data into a DataFrame.
 
-    Returns
-    -------
-    df : pd.DataFrame
-        A DataFrame containing the data from the data source.
+    Parameters:
+    - data_source: str
+        Path to the data source file.
+    - from_aws: bool, optional
+        If True, load data from AWS S3.
+    - aws_access_key: str, optional
+        AWS access key for S3.
+    - aws_secret_key: str, optional
+        AWS secret key for S3.
+    - aws_bucket_name: str, optional
+        S3 bucket name.
+    - aws_file_key: str, optional
+        S3 file key.
+    - from_googlesheet: bool, optional
+        If True, load data from Google Sheets.
+    - path_to_googlesheet_cred: str, optional
+        Path to Google Sheets credentials.
+    - googlesheet_name: str, optional
+        Name of the Google Sheet.
+    - from_bigquery: bool, optional
+        If True, load data from Google BigQuery.
+    - path_to_bigquery_cred: str, optional
+        Path to BigQuery credentials.
+    - bigquery_id: str, optional
+        BigQuery project ID.
+    - bigquery_dataset_id: str, optional
+        BigQuery dataset ID.
+    - bigquery_table_id: str, optional
+        BigQuery table ID.
+
+    Returns:
+    - pd.DataFrame
+        A DataFrame containing the loaded data.
+
+    Raises:
+    - ValueError
+        If the file extension is unsupported.
+
+    Notes:
+    - The function uses different pandas functions to read different file types.
+    - AWS, Google Sheets, and BigQuery connections require appropriate credentials.
     """
     real_path_to_data_source = realpath(data_source)
     file_path_name, ext_buffer = splitext(real_path_to_data_source)
@@ -95,6 +108,12 @@ def generate_df_from_data_source(data_source,from_aws=False, aws_access_key=None
         return pd.read_spss(real_path_to_data_source)
     elif ext == "ods":
         return pd.read_ods(real_path_to_data_source)
+    elif ext == "RData" or ext == "rda":
+        pandas2ri.activate()
+        r_file = real_path_to_data_source
+        ro.r["load"](r_file)
+        r_df = ro.r["get"](r_file)
+        return pandas2ri.ri2py(r_df)
     elif ext == "jsonl":
         return pd.read_json(real_path_to_data_source, lines=True)
     elif ext == "orc":
