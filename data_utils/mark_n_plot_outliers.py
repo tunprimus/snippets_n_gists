@@ -137,7 +137,7 @@ def mark_outliers_univariate_chauvenet(dataset, col, chauvenet_cutoff=[2,3,4,5,6
         criterion = 1.0 / (chauvenet_cutoff * sample_size)
 
         # Consider the deviation for the data points.
-        deviation = abs(dataset[col] - x_bar) / std
+        deviation = np.abs(dataset[col] - x_bar) / std
 
         # Express the upper and lower bounds.
         low = -deviation / math.sqrt(C)
@@ -189,7 +189,7 @@ def mark_outliers_lof(dataset, col, num_neighbours=[5, 7, 13, 19, 23]):
     if not num_neighbours:
         num_neighbours = 20
     elif isinstance(num_neighbours, List) and len(num_neighbours) == 1:
-        lof = LocalOutlierFactor(n_neighbors=num_neighbours)
+        lof = LocalOutlierFactor(n_neighbors=num_neighbours[0])
         data = dataset[col]
         outliers = lof.fit_predict(data)
         X_scores = lof.negative_outlier_factor_
