@@ -183,9 +183,12 @@ def standardise_column_names(df, remove_punct=True):
             'column_with_hyphens_others',
             'too_many_spaces'], dtype='object')
     """
-    import pandas as pd
     import re
     import string
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
 
     translator = str.maketrans(string.punctuation, " "*len(string.punctuation))
     for c in df.columns:
@@ -262,6 +265,10 @@ def generate_df_from_data_source(data_source, from_aws=False, aws_access_key=Non
     import rpy2.robjects as ro
     import yaml
     import zipfile
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from fastavro import reader
     from google.cloud import bigquery
     from io import StringIO, BytesIO
@@ -270,10 +277,6 @@ def generate_df_from_data_source(data_source, from_aws=False, aws_access_key=Non
     from rpy2.robjects import pandas2ri
     from scipy.io import arff
     from scipy.io import loadmat
-    try:
-        import fireducks.pandas as pd
-    except ImportError:
-        import pandas as pd
 
     # Monkey patching NumPy >= 1.24 in order to successfully import model from sklearn and other libraries
     np.float = np.float64
@@ -350,8 +353,6 @@ def generate_df_from_data_source(data_source, from_aws=False, aws_access_key=Non
         return pq.read_table(real_path_to_data_source).to_pandas()
     elif ext == "arff":
         arff_file = arff.loadarff(real_path_to_data_source)
-        #df, meta = pd.DataFrame(arff_file)
-        #return df
         return pd.DataFrame(arff_file)[0]
     elif ext == "yaml" or ext == "yml":
         with open(real_path_to_data_source, "r") as f:
@@ -488,10 +489,6 @@ def univariate_stats(df):
                 "--",
             ]
             sns.countplot(data=df, x=col)
-        # print(f"Column: {col}")
-        # print("dtype", "count", "missing", "unique", "mode")
-        # print(dtype, count, missing, unique, mode)
-        # print()
         plt.show()
     try:
         return output_df.sort_values(by=["missing", "unique", "skew"], ascending=False)
@@ -525,8 +522,11 @@ def scatterplot(df, feature, label, num_dp=4, linecolour="darkorange"):
     None
     """
     import matplotlib.pyplot as plt
-    import pandas as pd
     import seaborn as sns
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from scipy import stats
 
     # Create the plot
@@ -596,8 +596,11 @@ def bar_chart(df, feature, label, num_dp=4, alpha=0.05, sig_ttest_only=True):
     None
     """
     import matplotlib.pyplot as plt
-    import pandas as pd
     import seaborn as sns
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from scipy import stats
 
     # Make sure that the feature is categorical and the label is numerical
@@ -683,8 +686,11 @@ def crosstab(df, feature, label, num_dp=4):
     """
     import matplotlib.pyplot as plt
     import numpy as np
-    import pandas as pd
     import seaborn as sns
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from scipy import stats
 
     contingency_table = pd.crosstab(df[feature], df[label])
@@ -732,8 +738,11 @@ def bivariate_stats(df, label, num_dp=4):
         A DataFrame containing the results of the bivariate statistics
     """
     import matplotlib.pyplot as plt
-    import pandas as pd
     import seaborn as sns
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from scipy import stats
 
     output_df = pd.DataFrame(
@@ -909,7 +918,10 @@ def basic_wrangling(
     df : pandas DataFrame
         The wrangled DataFrame.
     """
-    import pandas as pd
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
 
     try:
         df = standardise_column_names(df)
@@ -986,8 +998,11 @@ def can_convert_dataframe_to_datetime(
         Dictionary with column names as keys and boolean values indicating
         whether each column can be converted to datetime format, or list of boolean values.
     """
-    import pandas as pd
     import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from pandas.api.types import is_datetime64_any_dtype as is_datetime
 
     # Change message flag based on whether or not to return result
@@ -1061,9 +1076,12 @@ def batch_convert_to_datetime(
     df : pandas DataFrame
         DataFrame with converted datetime columns.
     """
-    import pandas as pd
     import numpy as np
     import sys
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from pandas.api.types import is_datetime64_any_dtype as is_datetime
 
     for col in df.columns[df.dtypes == "object"]:
@@ -1129,7 +1147,10 @@ def parse_column_as_date(
     df : pandas DataFrame
         DataFrame with parsed date features and additional extracted information.
     """
-    import pandas as pd
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from datetime import datetime as pydt
 
     all_cols = df.columns
@@ -1181,7 +1202,10 @@ def bin_categories(df, features=[], cutoff=0.05, replace_with="Other", messages=
     df : pandas DataFrame
         DataFrame with low count groups binned
     """
-    import pandas as pd
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
 
     for feat in features:
         if feat in df.columns:
@@ -1231,8 +1255,11 @@ def clean_outlier_per_column(
     df : pandas DataFrame
         DataFrame with outliers cleaned
     """
-    import pandas as pd
     import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from sklearn.experimental import enable_iterative_imputer
     from sklearn.impute import IterativeImputer
 
@@ -1360,13 +1387,15 @@ def clean_outlier_by_all_columns(
     df : pandas DataFrame
         DataFrame with outliers cleaned
     """
-    import fireducks.pandas as pd
     import joblib
     import matplotlib.pyplot as plt
     import numpy as np
-    # import pandas as pd
     import seaborn as sns
     import time
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from sklearn import preprocessing
     from sklearn.cluster import DBSCAN
 
@@ -1536,8 +1565,11 @@ def skew_correct(df, feature, max_power=103, messages=True):
     """
     import matplotlib.pyplot as plt
     import numpy as np
-    import pandas as pd
     import seaborn as sns
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
     from os.path import realpath as realpath
 
     # Monkey patching NumPy >= 1.24 in order to successfully import model from sklearn and other libraries
@@ -1682,7 +1714,10 @@ def missing_drop(
     df : pandas DataFrame
         DataFrame with columns and rows dropped
     """
-    import pandas as pd
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
 
     pd.set_option("mode.copy_on_write", True)
 
