@@ -493,7 +493,10 @@ def univariate_stats(df):
         # print(dtype, count, missing, unique, mode)
         # print()
         plt.show()
-    return output_df
+    try:
+        return output_df.sort_values(by=["missing", "unique", "skew"], ascending=False)
+    except Exception:
+        return output_df
 
 
 
