@@ -2,7 +2,7 @@
 import pandas as pd
 
 
-def split_stratified_into_train_validate_test(
+def split_into_three_train_validate_test(
     df_input,
     stratify_col_name="y",
     train_prop=0.74,
@@ -52,7 +52,7 @@ def split_stratified_into_train_validate_test(
     baz    100
     Name: label, dtype: int64
 
-    >>> df_train, df_validate, df_test = split_stratified_into_train_validate_test(df_input, stratify_col_name="y", train_prop=0.74, test_prop=0.13, validate_prop=0.13, random_state=42)
+    >>> df_train, df_validate, df_test = split_into_three_train_validate_test(df_input, stratify_col_name="y", train_prop=0.74, test_prop=0.13, validate_prop=0.13, random_state=42)
 
     >>> df_train.shape
     (740, 3)
@@ -147,7 +147,7 @@ if __name__ == "__main__":
         }
     )
 
-    df_train, df_validate, df_test = split_stratified_into_train_validate_test(
+    df_train, df_validate, df_test = split_into_three_train_validate_test(
         df,
         stratify_col_name="label",
         train_prop=0.74,

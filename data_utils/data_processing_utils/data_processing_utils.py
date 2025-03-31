@@ -402,11 +402,14 @@ def univariate_stats(df):
       DataFrame and columns contain the calculated statistics.
     """
     import matplotlib.pyplot as plt
+    import pandas as pd
     import seaborn as sns
-    try:
-        import fireducks.pandas as pd
-    except ImportError:
-        import pandas as pd
+    # Avoid below due to bug in Fireducks
+    # https://github.com/fireducks-dev/fireducks/issues/45
+    # try:
+    #     import fireducks.pandas as pd
+    # except ImportError:
+    #     import pandas as pd
 
     output_df = pd.DataFrame(
         columns=[
@@ -439,13 +442,13 @@ def univariate_stats(df):
         mode = df[col].mode()[0]
         if pd.api.types.is_numeric_dtype(df[col]):
             # Calculate metrics that apply only to numerical features
-            min = df[col].min()
+            min_ = df[col].min()
             lbn_2_5pct = df[col].quantile(0.025)
             q1 = df[col].quantile(0.25)
             median = df[col].median()
             q3 = df[col].quantile(0.75)
             ubn_97_5pct = df[col].quantile(0.975)
-            max = df[col].max()
+            max_ = df[col].max()
             mean = df[col].mean()
             std = df[col].std()
             skew = df[col].skew()
@@ -456,19 +459,20 @@ def univariate_stats(df):
                 missing,
                 unique,
                 mode,
-                min,
+                min_,
                 lbn_2_5pct,
                 q1,
                 median,
                 q3,
                 ubn_97_5pct,
-                max,
+                max_,
                 mean,
                 std,
                 skew,
                 kurt,
             ]
             sns.histplot(data=df, x=col)
+            sns.swarmplot(data=df, x=col)
         else:
             output_df.loc[col] = [
                 dtype,
@@ -530,7 +534,6 @@ def scatterplot(df, feature, label, num_dp=4, linecolour="darkorange"):
     from scipy import stats
 
     # Create the plot
-    # sns.scatterplot(x=df[feature], y=df[label])
     sns.regplot(x=df[feature], y=df[label], line_kws={"color": linecolour})
     # Calculate the regression line
     ## Normality satisfied
@@ -738,11 +741,14 @@ def bivariate_stats(df, label, num_dp=4):
         A DataFrame containing the results of the bivariate statistics
     """
     import matplotlib.pyplot as plt
+    import pandas as pd
     import seaborn as sns
-    try:
-        import fireducks.pandas as pd
-    except ImportError:
-        import pandas as pd
+    # Avoid below due to bug in Fireducks
+    # https://github.com/fireducks-dev/fireducks/issues/45
+    # try:
+    #     import fireducks.pandas as pd
+    # except ImportError:
+    #     import pandas as pd
     from scipy import stats
 
     output_df = pd.DataFrame(
@@ -877,6 +883,16 @@ def bivariate_stats(df, label, num_dp=4):
         return output_df.sort_values(by="p", ascending=True)
     except Exception:
         return output_df
+
+
+
+# ----------------------------------------------------------------------#
+# Functions to get multivariate statistics and plots from Pandas DataFrame #
+# ----------------------------------------------------------------------#
+
+
+
+
 
 
 

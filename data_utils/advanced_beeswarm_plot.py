@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn as sns
 
 # Define constants
 GOLDEN_RATIO = 1.618
@@ -37,6 +34,10 @@ def iqr_region_highlighter(data_to_use=None, median_line_colour="green", q_line_
     This function will generate 3 horizontal lines, one for Q1, one for the median, and one for Q3.
     It will also generate a filled region between Q1 and Q3, with the given colour and alpha value.
     """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import seaborn as sns
+    
     # generate the iqr boundary values
     q1 = np.percentile(data_to_use, 25)
     median_of_data = np.median(data_to_use)
