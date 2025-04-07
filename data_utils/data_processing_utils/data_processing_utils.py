@@ -21,7 +21,6 @@ FIG_DPI = 72
 ## Some Useful Functions
 ##*********************##
 
-
 def cpu_logical_cores_count():
     """
     Return the number of logical cores on the machine.
@@ -908,6 +907,7 @@ def bivariate_stats(df, label, num_dp=4):
 # Functions to get multivariate statistics and plots from Pandas DataFrame #
 # ----------------------------------------------------------------------#
 
+
 def plot_correlation_heatmap_with_matshow(df):
     """
     Plot the correlation heatmap of the given DataFrame using plt.matshow.
@@ -1029,9 +1029,23 @@ def k_nearest_neighbours(X_train, y_train, X_test, y_test, max_k, num_dp=4):
         knn_acc_scores_dict[f"{k}_neighbours"] = knn_score
 
     # Plot the scores on a line plot
-    plt.acc_plot([k for k in range(1, max_k + 1)], knn_scores_list, color="grey", marker="o", linewidth=0.73, markerfacecolor="red")
+    plt.acc_plot(
+        [k for k in range(1, max_k + 1)],
+        knn_scores_list,
+        color="grey",
+        marker="o",
+        linewidth=0.73,
+        markerfacecolor="red",
+    )
     for i in range(1, max_k + 1):
-        plt.acc_text(i, knn_scores_list[i - 1], f"   ({i}, {round(knn_scores_list[i - 1], num_dp)})", rotation=90, va="bottom", fontsize=8)
+        plt.acc_text(
+            i,
+            knn_scores_list[i - 1],
+            f"   ({i}, {round(knn_scores_list[i - 1], num_dp)})",
+            rotation=90,
+            va="bottom",
+            fontsize=8,
+        )
     plt.xticks([i for i in range(1, max_k + 2)])
     y_bottom, y_top = plt.ylim()
     plt.ylim(top=y_top * 1.05)
@@ -1041,9 +1055,15 @@ def k_nearest_neighbours(X_train, y_train, X_test, y_test, max_k, num_dp=4):
     return knn_acc_scores_list, knn_acc_scores_dict
 
 
-
 ## Support Vector Classification Function
-def support_vector_classification(X_train, y_train, X_test, y_test, kernels=["linear", "poly", "rbf", "sigmoid"], num_dp=4):
+def support_vector_classification(
+    X_train,
+    y_train,
+    X_test,
+    y_test,
+    kernels=["linear", "poly", "rbf", "sigmoid"],
+    num_dp=4,
+):
     """
     Evaluate Support Vector Classifier accuracy for different kernels.
 
@@ -1099,14 +1119,20 @@ def support_vector_classification(X_train, y_train, X_test, y_test, kernels=["li
     colours = rainbow(np.linspace(0, 1, max_k))
     plt.bar(kernels, svc_acc_scores_list, color=colours)
     for i in range(max_k):
-        plt.text(i, svc_acc_scores_list[i], f"{round(svc_acc_scores_list[i], num_dp)}", rotation=45, va="bottom", fontsize=10)
+        plt.text(
+            i,
+            svc_acc_scores_list[i],
+            f"{round(svc_acc_scores_list[i], num_dp)}",
+            rotation=45,
+            va="bottom",
+            fontsize=10,
+        )
     y_bottom, y_top = plt.ylim()
     plt.ylim(top=y_top * 1.13)
     plt.xlabel("Kernels")
     plt.ylabel("Accuracy Scores")
     plt.title("Support Vector Classifier Accuracy Scores for Different Kernels")
     return svc_acc_scores_list, svc_acc_scores_dict
-
 
 
 ## Decision Tree Classification Function
@@ -1148,28 +1174,52 @@ def decision_tree_classification(X_train, y_train, X_test, y_test, num_dp=4):
     max_k = len(X_train.columns)
 
     for k in range(1, max_k + 1):
-        dt_clf = DecisionTree(max_features=k, random_state=RANDOM_SEED if RANDOM_SEED else 42)
+        dt_clf = DecisionTree(
+            max_features=k, random_state=RANDOM_SEED if RANDOM_SEED else 42
+        )
         dt_clf.fit(X_train, y_train)
         dt_score = dt_clf.score(X_test, y_test)
         dt_acc_scores_list.append(dt_score)
         dt_acc_scores_dict[f"{k}_features"] = dt_score
 
     # Plot the scores on a line plot
-    plt.plot([k for k in range(1, max_k + 1)], dt_acc_scores_list, color="green", marker="o", linewidth=0.73, markerfacecolor="red")
+    plt.plot(
+        [k for k in range(1, max_k + 1)],
+        dt_acc_scores_list,
+        color="green",
+        marker="o",
+        linewidth=0.73,
+        markerfacecolor="red",
+    )
     for i in range(1, max_k + 1):
-        plt.text(i, dt_acc_scores_list[i - 1], f"   ({i}, {round(dt_acc_scores_list[i - 1], num_dp)})", rotation=90, va="bottom", fontsize=8)
+        plt.text(
+            i,
+            dt_acc_scores_list[i - 1],
+            f"   ({i}, {round(dt_acc_scores_list[i - 1], num_dp)})",
+            rotation=90,
+            va="bottom",
+            fontsize=8,
+        )
     plt.xticks([i for i in range(1, max_k + 2)])
     y_bottom, y_top = plt.ylim()
     plt.ylim(top=y_top * 1.05)
     plt.xlabel("Max Features")
     plt.ylabel("Accuracy Scores")
-    plt.title("Decision Tree Classifier Accuracy Scores for Different Number of Max Features")
+    plt.title(
+        "Decision Tree Classifier Accuracy Scores for Different Number of Max Features"
+    )
     return dt_acc_scores_list, dt_acc_scores_dict
 
 
-
 ## Random Forest Classification Function
-def random_forest_classification(X_train, y_train, X_test, y_test, estimators=[2, 3, 5, 7, 10, 13, 89, 100, 200, 233, 500, 1000, 1597], num_dp=4):
+def random_forest_classification(
+    X_train,
+    y_train,
+    X_test,
+    y_test,
+    estimators=[2, 3, 5, 7, 10, 13, 89, 100, 200, 233, 500, 1000, 1597],
+    num_dp=4,
+):
     """
     Evaluate Random Forest Classifier accuracy for different numbers of estimators.
 
@@ -1216,7 +1266,9 @@ def random_forest_classification(X_train, y_train, X_test, y_test, estimators=[2
     max_k = len(estimators)
 
     for k in estimators:
-        rf_clf = RandomForest(n_estimators=k, random_state=RANDOM_SEED if RANDOM_SEED else 42)
+        rf_clf = RandomForest(
+            n_estimators=k, random_state=RANDOM_SEED if RANDOM_SEED else 42
+        )
         rf_clf.fit(X_train, y_train)
         rf_score = rf_clf.score(X_test, y_test)
         rf_acc_scores_list.append(rf_score)
@@ -1226,19 +1278,40 @@ def random_forest_classification(X_train, y_train, X_test, y_test, estimators=[2
     colours = rainbow(np.linspace(0, 1, max_k))
     plt.bar([i for i in range(max_k)], rf_acc_scores_list, color=colours, width=0.37)
     for i in range(max_k):
-        plt.text(i, rf_acc_scores_list[i], f"{round(rf_acc_scores_list[i], num_dp)}", rotation=60, va="bottom", fontsize=10)
-    plt.xticks(ticks=[i for i in range(max_k)], labels=[str(estimator) for estimator in estimators], rotation=45)
+        plt.text(
+            i,
+            rf_acc_scores_list[i],
+            f"{round(rf_acc_scores_list[i], num_dp)}",
+            rotation=60,
+            va="bottom",
+            fontsize=10,
+        )
+    plt.xticks(
+        ticks=[i for i in range(max_k)],
+        labels=[str(estimator) for estimator in estimators],
+        rotation=45,
+    )
     y_bottom, y_top = plt.ylim()
     plt.ylim(top=y_top * 1.13)
     plt.xlabel("Number of Estimators")
     plt.ylabel("Accuracy Scores")
-    plt.title("Random Forest Classifier Accuracy Scores for Different Number of Estimators")
+    plt.title(
+        "Random Forest Classifier Accuracy Scores for Different Number of Estimators"
+    )
     return rf_acc_scores_list, rf_acc_scores_dict
 
 
-
 ## XGBoost Classification Function
-def xgboost_classification(X_train, y_train, X_test, y_test, X_val=None, y_val=None, max_num_estimators=103, num_dp=4):
+def xgboost_classification(
+    X_train,
+    y_train,
+    X_test,
+    y_test,
+    X_val=None,
+    y_val=None,
+    max_num_estimators=103,
+    num_dp=4,
+):
     """
     Evaluate XGBoost Classifier accuracy for different numbers of estimators.
 
@@ -1288,16 +1361,36 @@ def xgboost_classification(X_train, y_train, X_test, y_test, X_val=None, y_val=N
     max_depth = len(X_train.columns)
 
     for k in range(1, max_num_estimators + 1):
-        xgb_clf = XGBClassifier(n_estimators=k, objective="binary:logistic", tree_method="hist", eta=0.1, max_depth=max_depth, enable_categorical=True, seed=RANDOM_SEED if RANDOM_SEED else 42)
+        xgb_clf = XGBClassifier(
+            n_estimators=k,
+            objective="binary:logistic",
+            tree_method="hist",
+            eta=0.1,
+            max_depth=max_depth,
+            enable_categorical=True,
+            seed=RANDOM_SEED if RANDOM_SEED else 42,
+        )
         xgb_clf.fit(X_train, y_train, verbose=False)
         xgb_score = xgb_clf.score(X_test, y_test)
         xgb_acc_scores_list.append(xgb_score)
         xgb_acc_scores_dict[f"{k}_estimators"] = xgb_score
 
     # Plot the scores on a line plot
-    plt.plot([k for k in range(1, max_num_estimators + 1)], xgb_acc_scores_list, color="green", linewidth=0.73)
+    plt.plot(
+        [k for k in range(1, max_num_estimators + 1)],
+        xgb_acc_scores_list,
+        color="green",
+        linewidth=0.73,
+    )
     for i in range(0, max_num_estimators + 1, 10):
-        plt.text(i, xgb_acc_scores_list[i - 1], f"   ({i}, {round(xgb_acc_scores_list[i - 1], num_dp)})", rotation=90, va="bottom", fontsize=8)
+        plt.text(
+            i,
+            xgb_acc_scores_list[i - 1],
+            f"   ({i}, {round(xgb_acc_scores_list[i - 1], num_dp)})",
+            rotation=90,
+            va="bottom",
+            fontsize=8,
+        )
     plt.xticks([i for i in range(0, max_num_estimators + 2, 5)])
     y_bottom, y_top = plt.ylim()
     plt.ylim(top=y_top * 1.05)
@@ -1305,7 +1398,6 @@ def xgboost_classification(X_train, y_train, X_test, y_test, X_val=None, y_val=N
     plt.ylabel("Accuracy Scores")
     plt.title("XGBoost Classifier Accuracy Scores for Different Number of Estimators")
     return xgb_acc_scores_list, xgb_acc_scores_dict
-
 
 
 ## Naive Bayes Classification Function
@@ -1345,15 +1437,21 @@ def naive_bayes_classification(X_train, y_train, X_test, y_test, num_dp=4):
     except ImportError:
         import pandas as pd
     from matplotlib.cm import rainbow
-    from sklearn.naive_bayes import BernoulliNB, CategoricalNB, ComplementNB, GaussianNB, MultinomialNB
+    from sklearn.naive_bayes import (
+        BernoulliNB,
+        CategoricalNB,
+        ComplementNB,
+        GaussianNB,
+        MultinomialNB,
+    )
 
     nb_classifiers = {
-            "BernoulliNB": BernoulliNB(),
-            "CategoricalNB": CategoricalNB(),
-            "ComplementNB": ComplementNB(),
-            "GaussianNB": GaussianNB(),
-            "MultinomialNB": MultinomialNB(),
-        }
+        "BernoulliNB": BernoulliNB(),
+        "CategoricalNB": CategoricalNB(),
+        "ComplementNB": ComplementNB(),
+        "GaussianNB": GaussianNB(),
+        "MultinomialNB": MultinomialNB(),
+    }
 
     nb_acc_scores_list = []
     nb_acc_scores_dict = {}
@@ -1371,16 +1469,25 @@ def naive_bayes_classification(X_train, y_train, X_test, y_test, num_dp=4):
     colours = rainbow(np.linspace(0, 1, len(nb_classifiers)))
     plt.bar(nb_classifiers.keys(), nb_acc_scores_list, color=colours)
     for i in range(len(nb_classifiers)):
-        plt.text(i, nb_acc_scores_list[i], f"{round(nb_acc_scores_list[i], num_dp)}", rotation=45, va="bottom", fontsize=10)
-    plt.xticks(ticks=[i for i in range(len(nb_classifiers))], labels=nb_classifiers.keys(), rotation=45)
+        plt.text(
+            i,
+            nb_acc_scores_list[i],
+            f"{round(nb_acc_scores_list[i], num_dp)}",
+            rotation=45,
+            va="bottom",
+            fontsize=10,
+        )
+    plt.xticks(
+        ticks=[i for i in range(len(nb_classifiers))],
+        labels=nb_classifiers.keys(),
+        rotation=45,
+    )
     y_bottom, y_top = plt.ylim()
     plt.ylim(top=y_top * 1.13)
     plt.xlabel("Classifiers")
     plt.ylabel("Accuracy Scores")
     plt.title("Naive Bayes Classifier Accuracy Scores for Different Classifiers")
     return nb_acc_scores_list, nb_acc_scores_dict
-
-
 
 
 # ----------------------------------------------------------------------#
@@ -1391,6 +1498,7 @@ def naive_bayes_classification(X_train, y_train, X_test, y_test, num_dp=4):
 ##*********************##
 
 ### Eliminate Empty Columns, Columns with All Unique Values and Columns with Single Values
+
 
 def check_uniqueness(df):
     """
@@ -1514,6 +1622,7 @@ def basic_wrangling(
 
 
 ### Date and Time Management
+
 
 def can_convert_dataframe_to_datetime(
     df, col_list=[], return_result=True, messages=False
@@ -1722,6 +1831,7 @@ def parse_column_as_date(
 
 ### Bin Low Count Groups Values
 
+
 def bin_categories(df, features=[], cutoff=0.05, replace_with="Other", messages=True):
     """
     Bins low count groups values into one category
@@ -1770,6 +1880,7 @@ def bin_categories(df, features=[], cutoff=0.05, replace_with="Other", messages=
 ##*********************##
 
 ### Traditional One-at-a-time Methods
+
 
 def clean_outlier_per_column(
     df, features=[], skew_threshold=1, handle_outliers="remove", num_dp=4, messages=True
@@ -1894,6 +2005,7 @@ def clean_outlier_per_column(
 
 
 ### Newer All-at-once Methods Based on Clustering
+
 
 def clean_outlier_by_all_columns(
     df,
@@ -2045,7 +2157,7 @@ def clean_outlier_by_all_columns(
     outliers_per_eps_history["timestamp"] = pd.Timestamp.now()
     if messages:
         print(f"Optimal eps value: {round(eps, num_dp)}")
-        # print(f"History: {outliers_per_eps_history}")
+
         print(f"\nHistory:")
         for key01, val01 in outliers_per_eps_history.items():
             if not isinstance(val01, dict):
@@ -2078,12 +2190,13 @@ def clean_outlier_by_all_columns(
         plt.show()
     # Drop rows that are outliers
     df = df[df["outlier"] != -1]
-    # df.drop("outlier", axis="columns", inplace=True)
+
     return df
 
 
 ## Skewness
 ##*********************##
+
 
 def skew_correct(df, feature, max_power=103, messages=True):
     """
