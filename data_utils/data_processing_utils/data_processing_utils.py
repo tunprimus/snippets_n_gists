@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+from matplotlib import rcParams
+from matplotlib.cm import rainbow
 from auto_pip_finder import PipFinder
 from csv_importer import CsvImporter
 from dbscan_pp import DBSCANPP
@@ -1165,6 +1167,73 @@ def decision_tree_classification(X_train, y_train, X_test, y_test, num_dp=4):
     return dt_acc_scores_list, dt_acc_scores_dict
 
 
+
+## Random Forest Classification Function
+def random_forest_classification(X_train, y_train, X_test, y_test, estimators=[2, 3, 5, 7, 10, 13, 89, 100, 200, 233, 500, 1000, 1597], num_dp=4):
+    """
+    Evaluate Random Forest Classifier accuracy for different numbers of estimators.
+
+    Plots accuracy scores for each number of estimators in list `estimators` and returns the scores in list and dictionary forms.
+
+    Parameters
+    ----------
+    X_train : pandas.DataFrame or numpy.ndarray
+        Training data features.
+    y_train : pandas.Series or numpy.ndarray
+        Training data labels.
+    X_test : pandas.DataFrame or numpy.ndarray
+        Test data features.
+    y_test : pandas.Series or numpy.ndarray
+        Test data labels.
+    estimators : list of int, optional (default=[2, 3, 5, 7, 10, 13, 89, 100, 200, 233, 500, 1000, 1597])
+        List of numbers of estimators to test.
+    num_dp : int, optional (default=4)
+        Number of decimal places for displaying accuracy scores.
+
+    Returns
+    -------
+    tuple
+        A tuple containing:
+        - rf_acc_scores_list : list
+            List of accuracy scores for each number of estimators in list `estimators`.
+        - rf_acc_scores_dict : dict
+            Dictionary with number of estimators as keys and corresponding accuracy scores as values.
+    Examples
+    --------
+    random_forest_classification(X_train, y_train, X_test, y_test)
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+    from matplotlib.cm import rainbow
+    from sklearn.ensemble import RandomForestClassifier as RandomForest
+
+    rf_acc_scores_list = []
+    rf_acc_scores_dict = {}
+    max_k = len(estimators)
+
+    for k in estimators:
+        rf_clf = RandomForest(n_estimators=k, random_state=RANDOM_SEED if RANDOM_SEED else 42)
+        rf_clf.fit(X_train, y_train)
+        rf_score = rf_clf.score(X_test, y_test)
+        rf_acc_scores_list.append(rf_score)
+        rf_acc_scores_dict[f"{k}_estimators"] = rf_score
+
+    # Plot the scores on a barplot
+    colours = rainbow(np.linspace(0, 1, max_k))
+    plt.bar([i for i in range(max_k)], rf_acc_scores_list, color=colours, width=0.37)
+    for i in range(max_k):
+        plt.text(i, rf_acc_scores_list[i], f"{round(rf_acc_scores_list[i], num_dp)}", rotation=60, va="bottom", fontsize=10)
+    plt.xticks(ticks=[i for i in range(max_k)], labels=[str(estimator) for estimator in estimators], rotation=45)
+    y_bottom, y_top = plt.ylim()
+    plt.ylim(top=y_top * 1.13)
+    plt.xlabel("Number of Estimators")
+    plt.ylabel("Accuracy Scores")
+    plt.title("Random Forest Classifier Accuracy Scores for Different Number of Estimators")
+    return rf_acc_scores_list, rf_acc_scores_dict
 
 
 
