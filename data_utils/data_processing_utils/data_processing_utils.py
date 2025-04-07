@@ -1308,6 +1308,79 @@ def xgboost_classification(X_train, y_train, X_test, y_test, X_val=None, y_val=N
 
 
 
+## Naive Bayes Classification Function
+def naive_bayes_classification(X_train, y_train, X_test, y_test, num_dp=4):
+    """
+    Plots accuracy scores for different Naive Bayes classifiers.
+
+    Parameters
+    ----------
+    X_train : pandas.DataFrame or numpy.ndarray
+        Training data features.
+    y_train : pandas.Series or numpy.ndarray
+        Training data labels.
+    X_test : pandas.DataFrame or numpy.ndarray
+        Test data features.
+    y_test : pandas.Series or numpy.ndarray
+        Test data labels.
+    num_dp : int, optional (default=4)
+        Number of decimal places for displaying accuracy scores.
+
+    Returns
+    -------
+    tuple
+        A tuple containing:
+        - nb_acc_scores_list : list
+            List of accuracy scores for each classifier.
+        - nb_acc_scores_dict : dict
+            Dictionary with classifier names as keys and corresponding accuracy scores as values.
+    Examples
+    --------
+    naive_bayes_classification(X_train, y_train, X_test, y_test)
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+    from matplotlib.cm import rainbow
+    from sklearn.naive_bayes import BernoulliNB, CategoricalNB, ComplementNB, GaussianNB, MultinomialNB
+
+    nb_classifiers = {
+            "BernoulliNB": BernoulliNB(),
+            "CategoricalNB": CategoricalNB(),
+            "ComplementNB": ComplementNB(),
+            "GaussianNB": GaussianNB(),
+            "MultinomialNB": MultinomialNB(),
+        }
+
+    nb_acc_scores_list = []
+    nb_acc_scores_dict = {}
+
+    for name, nb_clf in nb_classifiers.items():
+        try:
+            nb_clf.fit(X_train, y_train)
+            nb_score = nb_clf.score(X_test, y_test)
+            nb_acc_scores_list.append(nb_score)
+            nb_acc_scores_dict[name] = nb_score
+        except ValueError:
+            continue
+
+    # Plot the scores on a barplot
+    colours = rainbow(np.linspace(0, 1, len(nb_classifiers)))
+    plt.bar(nb_classifiers.keys(), nb_acc_scores_list, color=colours)
+    for i in range(len(nb_classifiers)):
+        plt.text(i, nb_acc_scores_list[i], f"{round(nb_acc_scores_list[i], num_dp)}", rotation=45, va="bottom", fontsize=10)
+    plt.xticks(ticks=[i for i in range(len(nb_classifiers))], labels=nb_classifiers.keys(), rotation=45)
+    y_bottom, y_top = plt.ylim()
+    plt.ylim(top=y_top * 1.13)
+    plt.xlabel("Classifiers")
+    plt.ylabel("Accuracy Scores")
+    plt.title("Naive Bayes Classifier Accuracy Scores for Different Classifiers")
+    return nb_acc_scores_list, nb_acc_scores_dict
+
+
 
 
 # ----------------------------------------------------------------------#
