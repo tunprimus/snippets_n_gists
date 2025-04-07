@@ -1237,6 +1237,77 @@ def random_forest_classification(X_train, y_train, X_test, y_test, estimators=[2
 
 
 
+## XGBoost Classification Function
+def xgboost_classification(X_train, y_train, X_test, y_test, X_val=None, y_val=None, max_num_estimators=103, num_dp=4):
+    """
+    Evaluate XGBoost Classifier accuracy for different numbers of estimators.
+
+    Plots accuracy scores for each number of estimators in range 1 to `max_num_estimators` and returns the scores in list and dictionary forms.
+
+    Parameters
+    ----------
+    X_train : pandas.DataFrame or numpy.ndarray
+        Training data features.
+    y_train : pandas.Series or numpy.ndarray
+        Training data labels.
+    X_test : pandas.DataFrame or numpy.ndarray
+        Test data features.
+    y_test : pandas.Series or numpy.ndarray
+        Test data labels.
+    X_val : pandas.DataFrame or numpy.ndarray, optional (default=None)
+        Validation data features.
+    y_val : pandas.Series or numpy.ndarray, optional (default=None)
+        Validation data labels.
+    max_num_estimators : int, optional (default=103)
+        Maximum number of estimators to test.
+    num_dp : int, optional (default=4)
+        Number of decimal places for displaying accuracy scores.
+
+    Returns
+    -------
+    tuple
+        A tuple containing:
+        - xgb_acc_scores_list : list
+            List of accuracy scores for each number of estimators in range 1 to `max_num_estimators`.
+        - xgb_acc_scores_dict : dict
+            Dictionary with number of estimators as keys and corresponding accuracy scores as values.
+    Examples
+    --------
+    xgboost_classification(X_train, y_train, X_test, y_test)
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+    from xgboost import XGBClassifier
+
+    xgb_acc_scores_list = []
+    xgb_acc_scores_dict = {}
+    max_depth = len(X_train.columns)
+
+    for k in range(1, max_num_estimators + 1):
+        xgb_clf = XGBClassifier(n_estimators=k, objective="binary:logistic", tree_method="hist", eta=0.1, max_depth=max_depth, enable_categorical=True, seed=RANDOM_SEED if RANDOM_SEED else 42)
+        xgb_clf.fit(X_train, y_train, verbose=False)
+        xgb_score = xgb_clf.score(X_test, y_test)
+        xgb_acc_scores_list.append(xgb_score)
+        xgb_acc_scores_dict[f"{k}_estimators"] = xgb_score
+
+    # Plot the scores on a line plot
+    plt.plot([k for k in range(1, max_num_estimators + 1)], xgb_acc_scores_list, color="green", linewidth=0.73)
+    for i in range(0, max_num_estimators + 1, 10):
+        plt.text(i, xgb_acc_scores_list[i - 1], f"   ({i}, {round(xgb_acc_scores_list[i - 1], num_dp)})", rotation=90, va="bottom", fontsize=8)
+    plt.xticks([i for i in range(0, max_num_estimators + 2, 5)])
+    y_bottom, y_top = plt.ylim()
+    plt.ylim(top=y_top * 1.05)
+    plt.xlabel("Number of Estimators")
+    plt.ylabel("Accuracy Scores")
+    plt.title("XGBoost Classifier Accuracy Scores for Different Number of Estimators")
+    return xgb_acc_scores_list, xgb_acc_scores_dict
+
+
+
 
 
 # ----------------------------------------------------------------------#
