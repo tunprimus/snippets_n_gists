@@ -155,6 +155,7 @@ def cpu_logical_cores_count():
 
 LOGICAL_CORES = cpu_logical_cores_count()
 
+
 # Adapted from @georgerichardson -> https://gist.github.com/georgerichardson/db66b686b4369de9e7196a65df45fc37
 def standardise_column_names(df, remove_punct=True):
     """
@@ -190,7 +191,7 @@ def standardise_column_names(df, remove_punct=True):
     except ImportError:
         import pandas as pd
 
-    translator = str.maketrans(string.punctuation, " "*len(string.punctuation))
+    translator = str.maketrans(string.punctuation, " " * len(string.punctuation))
     for c in df.columns:
         c_mod = c.lower()
         if remove_punct:
@@ -203,11 +204,25 @@ def standardise_column_names(df, remove_punct=True):
     return df
 
 
-
 # ------------------------------------------------------------------#
 # Function to generate a Pandas DataFrame from various data sources #
 # ------------------------------------------------------------------#
-def generate_df_from_data_source(data_source, from_aws=False, aws_access_key=None, aws_secret_key=None, aws_bucket_name=None, aws_file_key=None, from_googlesheet=False, path_to_googlesheet_cred=None, googlesheet_name=None, from_bigquery=False, path_to_bigquery_cred=None, bigquery_id=None, bigquery_dataset_id=None, bigquery_table_id=None):
+def generate_df_from_data_source(
+    data_source,
+    from_aws=False,
+    aws_access_key=None,
+    aws_secret_key=None,
+    aws_bucket_name=None,
+    aws_file_key=None,
+    from_googlesheet=False,
+    path_to_googlesheet_cred=None,
+    googlesheet_name=None,
+    from_bigquery=False,
+    path_to_bigquery_cred=None,
+    bigquery_id=None,
+    bigquery_dataset_id=None,
+    bigquery_table_id=None,
+):
     """
     Generate a Pandas DataFrame from various data sources.
 
@@ -358,7 +373,9 @@ def generate_df_from_data_source(data_source, from_aws=False, aws_access_key=Non
         with open(real_path_to_data_source, "r") as f:
             return pd.json_normalize(yaml.safe_load(f))
     elif from_aws:
-        s3 = boto3.client("s3", aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_key)
+        s3 = boto3.client(
+            "s3", aws_access_key_id=aws_access_key, aws_secret_access_key=aws_secret_key
+        )
         obj = s3.get_object(Bucket=aws_bucket_name, Key=aws_file_key)
         return pd.read_csv(BytesIO(obj["Body"].read()))
     elif from_googlesheet:
@@ -366,7 +383,9 @@ def generate_df_from_data_source(data_source, from_aws=False, aws_access_key=Non
         worksheet = gc.open(googlesheet_name)
         return pd.DataFrame(worksheet.get_worksheet(0).get_all_records())
     elif from_bigquery:
-        client = bigquery.Client.from_service_account_json(realpath(path_to_bigquery_cred))
+        client = bigquery.Client.from_service_account_json(
+            realpath(path_to_bigquery_cred)
+        )
         query = f"SELECT * FROM {bigquery_id}.{bigquery_dataset_id}.{bigquery_table_id}"
         try:
             return client.query(query).to_dataframe()
@@ -375,7 +394,6 @@ def generate_df_from_data_source(data_source, from_aws=False, aws_access_key=Non
             return pd.read_gbq(query, dialect="standard", project_id=bigquery_id)
     else:
         raise ValueError(f"Unsupported file extension: {ext}")
-
 
 
 # ----------------------------------------------------------------------#
@@ -498,7 +516,6 @@ def univariate_stats(df):
         return output_df.sort_values(by=["missing", "unique", "skew"], ascending=False)
     except Exception:
         return output_df
-
 
 
 # ----------------------------------------------------------------------#
@@ -885,14 +902,141 @@ def bivariate_stats(df, label, num_dp=4):
         return output_df
 
 
-
 # ----------------------------------------------------------------------#
 # Functions to get multivariate statistics and plots from Pandas DataFrame #
 # ----------------------------------------------------------------------#
 
+def plot_correlation_heatmap_with_matshow(df):
+    """
+    Plot the correlation heatmap of the given DataFrame using plt.matshow.
+
+    Parameters
+    ----------
+    df : pandas.core.frame.DataFrame
+        The DataFrame to be plotted.
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This function will show a heatmap of the correlation between columns in the given DataFrame.
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+
+    plt.matshow(df.corr())
+    plt.yticks(np.arange(df.shape[1]), df.columns)
+    plt.xticks(np.arange(df.shape[1]), df.columns, rotation=90)
+    plt.colorbar()
+    plt.show()
 
 
+def plot_correlation_heatmap(df):
+    """
+    Plot the correlation heatmap of the given DataFrame using style.background_gradient.
 
+    Parameters
+    ----------
+    df : pandas.core.frame.DataFrame
+        The DataFrame to be plotted.
+
+    Returns
+    -------
+    pandas.io.formats.style.Styler
+        The styled DataFrame containing the correlation matrix.
+
+    Notes
+    -----
+    This function will show a heatmap of the correlation between columns in the given DataFrame.
+    """
+    import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+
+    corr = df.corr()
+    mask = np.zeros_like(corr, dtype=np.bool)
+    mask[np.triu_indices_from(mask)] = True
+    corr[mask] = np.nan
+    return (
+        corr.style.background_gradient(cmap="coolwarm", axis=None, vmin=-1, vmax=1)
+        .highlight_null(color="#F1F1F1")
+        .format(precision=2)
+    )
+
+
+## K Neighbours Classification Function
+def k_nearest_neighbours(X_train, y_train, X_test, y_test, max_k, num_dp=4):
+    """
+    Evaluate K-Nearest Neighbours classifier accuracy for different values of K.
+
+    Plots accuracy scores for K values ranging from 1 to max_k and returns the scores in list and dictionary forms.
+
+    Parameters
+    ----------
+    X_train : pandas.DataFrame or numpy.ndarray
+        Training data features.
+    y_train : pandas.Series or numpy.ndarray
+        Training data labels.
+    X_test : pandas.DataFrame or numpy.ndarray
+        Test data features.
+    y_test : pandas.Series or numpy.ndarray
+        Test data labels.
+    max_k : int
+        Maximum number of neighbours to test.
+    num_dp : int, optional (default=4)
+        Number of decimal places for displaying accuracy scores.
+
+    Returns
+    -------
+    tuple
+        A tuple containing:
+        - knn_acc_scores_list : list
+            List of accuracy scores for each K value.
+        - knn_acc_scores_dict : dict
+            Dictionary with K values as keys and corresponding accuracy scores as values.
+    Examples
+    --------
+    k_nearest_neighbours(X_train, y_train, X_test, y_test, 23)
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+    from sklearn.neighbors import KNeighborsClassifier as KNeighboursClassifier
+
+    knn_acc_scores_list = []
+    knn_acc_scores_dict = {}
+    if not max_k:
+        max_k = 7
+
+    for k in range(1, max_k + 1):
+        knn_clf = KNeighboursClassifier(n_neighbors=k)
+        knn_clf.fit(X_train, y_train)
+        knn_score = knn_clf.score(X_test, y_test)
+        knn_acc_scores_list.append(knn_score)
+        knn_acc_scores_dict[f"{k}_neighbours"] = knn_score
+
+    # Plot the scores on a line plot
+    plt.acc_plot([k for k in range(1, max_k + 1)], knn_scores_list, color="grey", marker="o", linewidth=0.73, markerfacecolor="red")
+    for i in range(1, max_k + 1):
+        plt.acc_text(i, knn_scores_list[i - 1], f"   ({i}, {round(knn_scores_list[i - 1], num_dp)})", rotation=90, va="bottom", fontsize=8)
+    plt.xticks([i for i in range(1, max_k + 2)])
+    y_bottom, y_top = plt.ylim()
+    plt.ylim(top=y_top * 1.05)
+    plt.xlabel("Number of Neighbours (K)")
+    plt.ylabel("Accuracy Scores")
+    plt.title("K Neighbours Classifier Accuracy Scores for Different K Values")
+    return knn_acc_scores_list, knn_acc_scores_dict
 
 
 
@@ -905,8 +1049,47 @@ def bivariate_stats(df, label, num_dp=4):
 
 ### Eliminate Empty Columns, Columns with All Unique Values and Columns with Single Values
 
+def check_uniqueness(df):
+    """
+    Check uniqueness of each column in a DataFrame.
+
+    Parameters
+    ----------
+    df : pandas.core.frame.DataFrame
+        The DataFrame to be checked.
+
+    Returns
+    -------
+    pandas.core.frame.DataFrame
+        A DataFrame with columns "column", "num_unique", and "counts".
+        "column" is the name of the column in the original DataFrame.
+        "num_unique" is the number of unique values in that column.
+        "counts" is a numpy array of the counts of each unique value in that column,
+        sorted by the unique value itself.
+    """
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+
+    df_buffer = pd.DataFrame(columns=["column", "num_unique", "counts"])
+    for col in df.columns:
+        df_buffer.loc[col] = [
+            col,
+            df[col].nunique(),
+            df[col].value_counts().sort_index().values,
+        ]
+    return df_buffer
+
+
 def basic_wrangling(
-    df, features=[], drop_duplicates=False, drop_duplicates_subset_name=None, missing_threshold=0.95, unique_threshold=0.95, messages=True
+    df,
+    features=[],
+    drop_duplicates=False,
+    drop_duplicates_subset_name=None,
+    missing_threshold=0.95,
+    unique_threshold=0.95,
+    messages=True,
 ):
     """
     Perform basic data wrangling on a DataFrame, including renaming columns,
@@ -941,7 +1124,7 @@ def basic_wrangling(
 
     try:
         df = standardise_column_names(df)
-    except:
+    except Exception:
         df.columns = df.columns.str.lower().str.strip().str.replace(" ", "_")
 
     if drop_duplicates:
@@ -1704,6 +1887,7 @@ def skew_correct(df, feature, max_power=103, messages=True):
 ## Missing Data
 ##*********************##
 
+
 def missing_drop(
     df, label="", features=[], row_threshold=0.90, col_threshold=0.50, messages=True
 ):
@@ -1810,3 +1994,37 @@ def missing_drop(
     return df
 
 
+def check_target_balance(df, target="target"):
+    """
+    Plot the bar chart of target classes count.
+
+    Parameters
+    ----------
+    df : pandas.core.frame.DataFrame
+        The DataFrame containing the target column.
+    target : str, default "target"
+        The name of the target column.
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    This function will show a bar chart of the target classes count.
+    The x-axis is the unique values of the target column and the y-axis is the count of each target class.
+    The bar colors are red for class 0 and green for class 1.
+    """
+    import matplotlib.pyplot as plt
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+
+    print(df[target].value_counts())
+    plt.bar(df[target].unique(), df[target].value_counts(), color=["red", "green"])
+    plt.xticks([0, 1])
+    plt.xlabel("Target Classes")
+    plt.ylabel("Count")
+    plt.title("Count of each Target Class")
+    plt.show()
