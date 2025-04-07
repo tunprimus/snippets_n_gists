@@ -1107,6 +1107,67 @@ def support_vector_classification(X_train, y_train, X_test, y_test, kernels=["li
 
 
 
+## Decision Tree Classification Function
+def decision_tree_classification(X_train, y_train, X_test, y_test, num_dp=4):
+    """
+    Plots accuracy scores for DecisionTreeClassifier when using different number of max features.
+
+    Parameters
+    ----------
+    X_train : pandas.DataFrame
+        The training data
+    y_train : pandas.Series or numpy.ndarray
+        The target values of the training data
+    X_test : pandas.DataFrame
+        The test data
+    y_test : pandas.Series or numpy.ndarray
+        The target values of the test data
+    num_dp : int, optional
+        The number of decimal places to round the accuracy scores to, by default 4
+
+    Returns
+    -------
+    tuple
+        A tuple containing a list of accuracy scores and a dictionary of accuracy scores where the keys are the number of max features used.
+    Examples
+    --------
+    decision_tree_classification(X_train, y_train, X_test, y_test)
+    """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    try:
+        import fireducks.pandas as pd
+    except ImportError:
+        import pandas as pd
+    from sklearn.tree import DecisionTreeClassifier as DecisionTree
+
+    dt_acc_scores_list = []
+    dt_acc_scores_dict = {}
+    max_k = len(X_train.columns)
+
+    for k in range(1, max_k + 1):
+        dt_clf = DecisionTree(max_features=k, random_state=RANDOM_SEED if RANDOM_SEED else 42)
+        dt_clf.fit(X_train, y_train)
+        dt_score = dt_clf.score(X_test, y_test)
+        dt_acc_scores_list.append(dt_score)
+        dt_acc_scores_dict[f"{k}_features"] = dt_score
+
+    # Plot the scores on a line plot
+    plt.plot([k for k in range(1, max_k + 1)], dt_acc_scores_list, color="green", marker="o", linewidth=0.73, markerfacecolor="red")
+    for i in range(1, max_k + 1):
+        plt.text(i, dt_acc_scores_list[i - 1], f"   ({i}, {round(dt_acc_scores_list[i - 1], num_dp)})", rotation=90, va="bottom", fontsize=8)
+    plt.xticks([i for i in range(1, max_k + 2)])
+    y_bottom, y_top = plt.ylim()
+    plt.ylim(top=y_top * 1.05)
+    plt.xlabel("Max Features")
+    plt.ylabel("Accuracy Scores")
+    plt.title("Decision Tree Classifier Accuracy Scores for Different Number of Max Features")
+    return dt_acc_scores_list, dt_acc_scores_dict
+
+
+
+
+
 
 
 # ----------------------------------------------------------------------#
