@@ -187,6 +187,7 @@ def random_forest_classification(
     from sklearn.metrics import (
         accuracy_score,
         classification_report,
+        ConfusionMatrixDisplay,
         confusion_matrix,
         f1_score,
         matthews_corrcoef,
@@ -213,6 +214,21 @@ def random_forest_classification(
         rf_scores_dict[f"{k}_estimators"]["matthews_corrcoef"] = rf_mcc
 
     if messages:
+        titles_options = [
+            ("RFC Confusion Matrix Without Normalisation", None),
+            ("Normalised RFC Confusion Matrix", "true"),
+        ]
+        for title, normalise in titles_options:
+            disp = ConfusionMatrixDisplay.from_estimator(
+                rf_clf,
+                X_test,
+                y_test,
+                cmap=plt.cm.Blues,
+                normalize=normalise,
+            )
+            print(title)
+            print(disp.confusion_matrix)
+        plt.show()
         print("All RFC Scores:")
         for key01, val01 in rf_scores_dict.items():
             if not isinstance(val01, dict):
@@ -308,6 +324,7 @@ def support_vector_classification(
     from sklearn.metrics import (
         accuracy_score,
         classification_report,
+        ConfusionMatrixDisplay,
         confusion_matrix,
         f1_score,
         matthews_corrcoef,
@@ -332,6 +349,21 @@ def support_vector_classification(
         svc_scores_dict[f"{kernels[k]}_kernel"]["matthews_corrcoef"] = svc_mcc
 
     if messages:
+        titles_options = [
+            ("SVC Confusion Matrix Without Normalisation", None),
+            ("Normalised SVC Confusion Matrix", "true"),
+        ]
+        for title, normalise in titles_options:
+            disp = ConfusionMatrixDisplay.from_estimator(
+                svc_clf,
+                X_test,
+                y_test,
+                cmap=plt.cm.Blues,
+                normalize=normalise,
+            )
+            print(title)
+            print(disp.confusion_matrix)
+        plt.show()
         print("All SVC Scores:")
         for key01, val01 in svc_scores_dict.items():
             if not isinstance(val01, dict):
@@ -436,6 +468,8 @@ def ensemble_classifier(
     base_rf_clf = RandomForest(random_state=RANDOM_SEED if RANDOM_SEED else 42)
 
     # Create base ensemble model using VotingClassifier
+    if messages:
+        print("Creating Base Ensemble Model...")
     base_ensemble_classifier = VotingClassifier(
         estimators=[("svm", base_svm_clf), ("random_forest", base_rf_clf)],
         voting="hard",
@@ -469,6 +503,8 @@ def ensemble_classifier(
         plt.show()
 
     # Using Halving-Grid Tuned Models
+    if messages:
+        print("Creating Halving-Grid Tuned Ensemble Model...")
     svm_param_grid = {
         "C": [0.1, 0.3, 0.5, 0.7, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
         "gamma": [0.1, 0.05, 0.01, 0.001],
@@ -481,10 +517,10 @@ def ensemble_classifier(
         "min_samples_leaf": [1, 2, 3, 4, 5, 7, 10, 11, 13, 17, 19, 23],
     }
 
-    halving_svm_clf = HalvingGridSearchCV(base_svm_clf, svm_param_grid, factor=2, cv=11)
+    halving_svm_clf = HalvingGridSearchCV(base_svm_clf, svm_param_grid, factor=2, aggressive_elimination=True, cv=3)
     halving_svm_clf.fit(X_train, y_train)
 
-    halving_rf_clf = HalvingGridSearchCV(base_rf_clf, rf_param_grid, factor=2, cv=11)
+    halving_rf_clf = HalvingGridSearchCV(base_rf_clf, rf_param_grid, factor=2, aggressive_elimination=True, cv=3)
     halving_rf_clf.fit(X_train, y_train)
 
     # Create halving-grid-search ensemble model using VotingClassifier
@@ -521,6 +557,8 @@ def ensemble_classifier(
         plt.show()
 
     # Using Optimised Ensemble Models
+    if messages:
+        print("Creating Optimised Ensemble Model...")
     ensemble_param_grid = {
         "svm__C": [0.1, 0.3, 0.5, 0.7, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
         "svm__gamma": [0.1, 0.05, 0.01, 0.001],
@@ -531,7 +569,7 @@ def ensemble_classifier(
     }
 
     ensemble_clf_halving_grid_search = HalvingGridSearchCV(
-        halving_ensemble_classifier, ensemble_param_grid, factor=2, cv=11
+        halving_ensemble_classifier, ensemble_param_grid, factor=2, aggressive_elimination=True, cv=3
     )
 
     # Train and assess prediction from the fine-tuned halving grid search ensemble model
@@ -575,7 +613,7 @@ def ensemble_classifier(
         ]
         for title, normalise in titles_options03:
             disp03 = ConfusionMatrixDisplay.from_estimator(
-                halving_ensemble_classifier,
+                ensemble_clf_halving_grid_search,
                 X_test,
                 y_test,
                 cmap=plt.cm.Blues,
