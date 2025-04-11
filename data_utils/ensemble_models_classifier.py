@@ -16,6 +16,7 @@ from sklearn.metrics import (
     matthews_corrcoef,
     precision_recall_fscore_support,
 )
+from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import HalvingGridSearchCV
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import PowerTransformer
@@ -138,52 +139,25 @@ def create_train_test(
 
 
 ## Random Forest Classification Function
-def random_forest_classification(
+def random_forest_classification_halving_search(
     X_train,
     y_train,
     X_test,
     y_test,
     estimators=[2, 3, 5, 7, 10, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 100, 151, 200, 233, 347, 500, 757, 1000, 1231, 1597, 1777, 2003, 2531, 3001, 3583,],
+    num_cv = 3,
     num_dp=4,
     messages=True,
 ):
-    """
-    Evaluate Random Forest Classifier accuracy for different numbers of estimators.
-
-    Plots accuracy scores for each number of estimators in list `estimators`
-    and returns the scores in a dictionary form.
-
-    Parameters
-    ----------
-    X_train : pandas.DataFrame or numpy.ndarray
-        Training data features.
-    y_train : pandas.Series or numpy.ndarray
-        Training data labels.
-    X_test : pandas.DataFrame or numpy.ndarray
-        Test data features.
-    y_test : pandas.Series or numpy.ndarray
-        Test data labels.
-    estimators : list of int, optional (default=[2, 3, 5, 7, 10, 13, 89, 100, 200, 233, 500, 1000, 1597])
-        List of numbers of estimators to test.
-    num_dp : int, optional (default=4)
-        Number of decimal places for displaying accuracy scores.
-    messages : bool, optional (default=False)
-        If True, prints detailed accuracy scores and plots a bar chart of scores.
-
-    Returns
-    -------
-    dict
-        Dictionary with number of estimators as keys and corresponding accuracy scores as values.
-    """
     import matplotlib.pyplot as plt
     import numpy as np
-
     try:
         import fireducks.pandas as pd
     except ImportError:
         import pandas as pd
     from matplotlib.cm import rainbow
     from sklearn.ensemble import RandomForestClassifier as RandomForest
+    from sklearn.experimental import enable_halving_search_cv
     from sklearn.metrics import (
         accuracy_score,
         classification_report,
@@ -193,6 +167,8 @@ def random_forest_classification(
         matthews_corrcoef,
         precision_recall_fscore_support,
     )
+    from sklearn.model_selection import cross_val_score
+    from sklearn.model_selection import HalvingGridSearchCV
 
     RANDOM_SEED = 42
     rf_scores_dict = {}
@@ -200,7 +176,7 @@ def random_forest_classification(
 
     for k in estimators:
         rf_clf = RandomForest(
-            n_estimators=k, random_state=RANDOM_SEED or 42
+            n_estimators=k, random_state=RANDOM_SEED or 42, class_weight="balanced"
         )
         rf_clf.fit(X_train, y_train)
         rf_pred = rf_clf.predict(X_test)
@@ -213,7 +189,24 @@ def random_forest_classification(
         rf_scores_dict[f"{k}_estimators"]["f1_score"] = rf_f1
         rf_scores_dict[f"{k}_estimators"]["acc_score"] = rf_acc
 
+    # Parameters for Halving-Grid Search
+    rf_param_grid = {
+        "n_estimators": [2, 3, 5, 7, 10, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 100, 151, 200, 233, 347, 500, 757, 1000, 1231, 1597, 1777, 2003, 2531, 3001, 3583,],
+        "max_depth": [None, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
+        "min_samples_leaf": [1, 2, 3, 4, 5, 7, 10, 11, 13, 17, 19, 23],
+    }
+
+    base_rf_clf = RandomForest(random_state=RANDOM_SEED or 42, class_weight="balanced")
+
+    halving_rf_clf = HalvingGridSearchCV(base_rf_clf, rf_param_grid, factor=3, aggressive_elimination=True, cv=num_cv, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3)
+    halving_rf_clf.fit(X_train, y_train)
+
+    rf_scores_dict["halving"] = {}
+    rf_scores_dict["halving"]["cv_scores"] = cross_val_score(halving_rf_clf, X_test, y_test)
+    rf_scores_dict["halving"]["rf_best_params"] = halving_rf_clf.best_params_
+
     if messages:
+        print("Best Halving Grid Search Parameters:", halving_rf_clf.best_params_)
         titles_options = [
             ("RFC Confusion Matrix Without Normalisation", None),
             ("Normalised RFC Confusion Matrix", "true"),
@@ -243,35 +236,12 @@ def random_forest_classification(
                     print(f"{key02}: {np.round(val02, num_dp)}")
                 print("*********************")
             print()
-        # Plot the scores on a barplot
-        # colours = rainbow(np.linspace(0, 1, max_k))
-        # plt.bar([i for i in range(max_k)], rf_acc_scores_list, color=colours, width=0.37)
-        # for i in range(max_k):
-        #     plt.text(
-        #         i,
-        #         rf_acc_scores_list[i],
-        #         f"{round(rf_acc_scores_list[i], num_dp)}",
-        #         rotation=60,
-        #         va="bottom",
-        #         fontsize=10,
-        #     )
-        # plt.xticks(
-        #     ticks=[i for i in range(max_k)],
-        #     labels=[str(estimator) for estimator in estimators],
-        #     rotation=45,
-        # )
-        # y_bottom, y_top = plt.ylim()
-        # plt.ylim(top=y_top * 1.13)
-        # plt.xlabel("Number of Estimators")
-        # plt.ylabel("Accuracy Scores")
-        # plt.title(
-        #     "Random Forest Classifier Accuracy Scores for Different Number of Estimators"
-        # )
-    return rf_scores_dict
+
+    return rf_scores_dict, halving_rf_clf
 
 
 ## Support Vector Classification Function
-def support_vector_classification(
+def support_vector_classification_halving_search(
     X_train,
     y_train,
     X_test,
@@ -280,40 +250,6 @@ def support_vector_classification(
     num_dp=4,
     messages=True,
 ):
-    """
-    Evaluate Support Vector Classifier accuracy scores for different kernels.
-
-    Plots accuracy scores for each kernel in list `kernels` and returns the scores in list and dictionary forms.
-
-    Parameters
-    ----------
-    X_train : pandas.DataFrame or numpy.ndarray
-        Training data features.
-    y_train : pandas.Series or numpy.ndarray
-        Training data labels.
-    X_test : pandas.DataFrame or numpy.ndarray
-        Test data features.
-    y_test : pandas.Series or numpy.ndarray
-        Test data labels.
-    kernels : list of str, optional (default=["linear", "poly", "rbf", "sigmoid",])
-        List of kernels to test.
-    num_dp : int, optional (default=4)
-        Number of decimal places for displaying accuracy scores.
-    messages : bool, optional (default=False)
-        Whether or not to print out the accuracy scores for each kernel.
-
-    Returns
-    -------
-    tuple
-        A tuple containing:
-        - svc_acc_scores_list : list
-            List of accuracy scores for each kernel in list `kernels`.
-        - svc_acc_scores_dict : dict
-            Dictionary with kernel names as keys and corresponding accuracy scores as values.
-    Examples
-    --------
-    support_vector_classification(X_train, y_train, X_test, y_test)
-    """
     import matplotlib.pyplot as plt
     import numpy as np
 
@@ -336,7 +272,7 @@ def support_vector_classification(
     max_k = len(kernels)
 
     for k in range(max_k):
-        svc_clf = SVC(kernel=kernels[k])
+        svc_clf = SVC(kernel=kernels[k], class_weight="balanced")
         svc_clf.fit(X_train, y_train)
         svc_pred = svc_clf.predict(X_test)
         svc_acc = accuracy_score(y_test, svc_pred)
@@ -348,7 +284,26 @@ def support_vector_classification(
         svc_scores_dict[f"{kernels[k]}_kernel"]["f1_score"] = svc_f1
         svc_scores_dict[f"{kernels[k]}_kernel"]["acc_score"] = svc_acc
 
+   # Parameters for Halving-Grid Search
+    svm_param_grid = {
+        "C": [0.1, 0.3, 0.5, 0.7, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
+        "gamma": [0.1, 0.05, 0.01, 0.001],
+        "kernel": ["linear", "poly", "rbf", "sigmoid",],
+    }
+
+    base_svm_clf = SVC(class_weight="balanced")
+
+    svc_scores_dict["halving"] = {}
+
+    halving_svm_clf = HalvingGridSearchCV(base_svm_clf, svm_param_grid, factor=3, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3)
+    halving_svm_clf.fit(X_train, y_train)
+
+    svc_scores_dict["halving"] = {}
+    svc_scores_dict["halving"]["cv_scores"] = cross_val_score(halving_svm_clf, X_test, y_test)
+    svc_scores_dict["halving"]["rf_best_params"] = halving_svm_clf.best_params_
+
     if messages:
+        print("Best Halving Grid Search Parameters:", halving_svm_clf.best_params_)
         titles_options = [
             ("SVC Confusion Matrix Without Normalisation", None),
             ("Normalised SVC Confusion Matrix", "true"),
@@ -378,24 +333,8 @@ def support_vector_classification(
                     print(f"{key02}: {np.round(val02, num_dp)}")
                 print("*********************")
             print()
-        # Plot the scores on a barplot
-        # colours = rainbow(np.linspace(0, 1, max_k))
-        # plt.bar(kernels, svc_acc_scores_list, color=colours)
-        # for i in range(max_k):
-        #     plt.text(
-        #         i,
-        #         svc_acc_scores_list[i],
-        #         f"{round(svc_acc_scores_list[i], num_dp)}",
-        #         rotation=45,
-        #         va="bottom",
-        #         fontsize=10,
-        #     )
-        # y_bottom, y_top = plt.ylim()
-        # plt.ylim(top=y_top * 1.13)
-        # plt.xlabel("Kernels")
-        # plt.ylabel("Accuracy Scores")
-        # plt.title("Support Vector Classifier Accuracy Scores for Different Kernels")
-    return svc_scores_dict
+
+    return svc_scores_dict, halving_svm_clf
 
 
 def ensemble_classifier(
@@ -464,15 +403,15 @@ def ensemble_classifier(
     # Using Base Models
 
     # Instantiate base models
-    base_svm_clf = SVC()
-    base_rf_clf = RandomForest(random_state=RANDOM_SEED or 42)
+    base_svm_clf = SVC(class_weight="balanced")
+    base_rf_clf = RandomForest(random_state=RANDOM_SEED or 42, class_weight="balanced")
 
     # Create base ensemble model using VotingClassifier
     if messages:
         print("Creating Base Ensemble Model...")
     base_ensemble_classifier = VotingClassifier(
         estimators=[("svm", base_svm_clf), ("random_forest", base_rf_clf)],
-        voting="hard",
+        voting="soft",
     )
     # Train the base ensemble model
     base_ensemble_classifier.fit(X_train, y_train)
@@ -506,28 +445,17 @@ def ensemble_classifier(
     # Using Halving-Grid Tuned Models
     if messages:
         print("Creating Halving-Grid Tuned Ensemble Model...")
-    svm_param_grid = {
-        "C": [0.1, 0.3, 0.5, 0.7, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
-        "gamma": [0.1, 0.05, 0.01, 0.001],
-        "kernel": ["linear", "poly", "rbf", "sigmoid",],
-    }
 
-    rf_param_grid = {
-        "n_estimators": [2, 3, 5, 7, 10, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 100, 151, 200, 233, 347, 500, 757, 1000, 1231, 1597, 1777, 2003, 2531, 3001, 3583,],
-        "max_depth": [None, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
-        "min_samples_leaf": [1, 2, 3, 4, 5, 7, 10, 11, 13, 17, 19, 23],
-    }
 
-    halving_svm_clf = HalvingGridSearchCV(base_svm_clf, svm_param_grid, factor=2, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3)
-    halving_svm_clf.fit(X_train, y_train)
 
-    halving_rf_clf = HalvingGridSearchCV(base_rf_clf, rf_param_grid, factor=2, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3)
-    halving_rf_clf.fit(X_train, y_train)
+    # Initialise record object for initial halving grid search outside ensemble
+    _, halving_svm_clf = support_vector_classification_halving_search(X_train, y_train, X_test, y_test)
+    _, halving_rf_clf = random_forest_classification_halving_search(X_train, y_train, X_test, y_test)
 
     # Create halving-grid-search ensemble model using VotingClassifier
     halving_ensemble_classifier = VotingClassifier(
-        estimators=[("svm", halving_svm_clf), ("random_forest", halving_rf_clf)],
-        voting="hard",
+        estimators=[("halving_svm", halving_svm_clf), ("halving_random_forest", halving_rf_clf)],
+        voting="soft",
     )
 
     # Train and assess prediction from the halving grid search ensemble model
@@ -536,14 +464,12 @@ def ensemble_classifier(
     halving_ensemble_acc = accuracy_score(y_test, halving_ensemble_pred)
     halving_ensemble_f1 = f1_score(y_test, halving_ensemble_pred, average="weighted")
     halving_ensemble_mcc = matthews_corrcoef(y_test, halving_ensemble_pred)
-    ensemble_scores_dict["halving"] = {}
+
     ensemble_scores_dict["halving"]["matthews_corrcoef"] = halving_ensemble_mcc
     ensemble_scores_dict["halving"]["f1_score"] = halving_ensemble_f1
     ensemble_scores_dict["halving"]["acc_score"] = halving_ensemble_acc
-    ensemble_scores_dict["halving"]["best_params"] = halving_ensemble_classifier.best_params_
     if messages:
         print(classification_report(y_test, halving_ensemble_pred, digits=num_dp))
-        print("Best Initial Halving Grid Search Parameters:", halving_ensemble_classifier.best_params_)
         titles_options02 = [
             ("Halving Confusion Matrix Without Normalisation", None),
             ("Normalised Halving Confusion Matrix", "true"),
@@ -573,7 +499,7 @@ def ensemble_classifier(
     }
 
     ensemble_clf_halving_grid_search = HalvingGridSearchCV(
-        halving_ensemble_classifier, ensemble_param_grid, factor=2, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3
+        halving_ensemble_classifier, ensemble_param_grid, factor=3, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3
     )
 
     # Train and assess prediction from the fine-tuned halving grid search ensemble model
@@ -596,7 +522,6 @@ def ensemble_classifier(
     ensemble_scores_dict["tuned"]["acc_score"] = ensemble_clf_halving_grid_search_acc
     if messages:
         print(classification_report(y_test, ensemble_clf_halving_grid_search_pred, digits=num_dp))
-        print("Final Tuned Ensemble Halving Grid Search Parameters:", ensemble_clf_halving_grid_search.best_params_)
         print("All Ensemble Scores:")
         for key01, val01 in ensemble_scores_dict.items():
             if not isinstance(val01, dict):
@@ -628,7 +553,7 @@ def ensemble_classifier(
         plt.show()
 
     # Return scores
-    return ensemble_scores_dict
+    return ensemble_scores_dict, ensemble_clf_halving_grid_search
 
 
 def main(path_to_data="../../Data_Science_Analytics/000_common_dataset/arrhythmia.csv"):
@@ -636,17 +561,9 @@ def main(path_to_data="../../Data_Science_Analytics/000_common_dataset/arrhythmi
     df = preprocess_dataframe(df, target="y")
     X_train, X_test, y_train, y_test = create_train_test(df)
 
-    # rf_scores_dict = random_forest_classification(X_train, y_train, X_test, y_test)
-    # svc_scores_dict = support_vector_classification(X_train, y_train, X_test, y_test)
-    ensemble_scores_dict = ensemble_classifier(X_train, y_train, X_test, y_test)
+    ensemble_scores_dict, _ = ensemble_classifier(X_train, y_train, X_test, y_test)
 
     # Print results
-    # print("Random Forest Scores")
-    # for k1, v1 in generator_nested_dict(rf_scores_dict):
-    #     print(f"{k1}: {v1}")
-    # print("\nSupport Vector Classification Scores")
-    # for k2, v2 in generator_nested_dict(svc_scores_dict):
-    #     print(f"{k2}: {v2}")
     print("\nEnsemble Scores")
     for k3, v3 in generator_nested_dict(ensemble_scores_dict):
         print(f"{k3}: {v3}")
