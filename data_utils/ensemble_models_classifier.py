@@ -257,6 +257,7 @@ def support_vector_classification_halving_search(
         import fireducks.pandas as pd
     except ImportError:
         import pandas as pd
+    from sklearn.experimental import enable_halving_search_cv
     from sklearn.metrics import (
         accuracy_score,
         classification_report,
@@ -266,6 +267,8 @@ def support_vector_classification_halving_search(
         matthews_corrcoef,
         precision_recall_fscore_support,
     )
+    from sklearn.model_selection import cross_val_score
+    from sklearn.model_selection import HalvingGridSearchCV
     from sklearn.svm import SVC
 
     svc_scores_dict = {}
