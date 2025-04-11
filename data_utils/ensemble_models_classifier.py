@@ -132,7 +132,7 @@ def create_train_test(
     X = df.drop("target", axis=1)
     y = df["target"]
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=test_prop, random_state=42
+        X, y, test_size=test_prop, random_state= RANDOM_SEED or 42
     )
     return X_train, X_test, y_train, y_test
 
@@ -200,7 +200,7 @@ def random_forest_classification(
 
     for k in estimators:
         rf_clf = RandomForest(
-            n_estimators=k, random_state=RANDOM_SEED if RANDOM_SEED else 42
+            n_estimators=k, random_state=RANDOM_SEED or 42
         )
         rf_clf.fit(X_train, y_train)
         rf_pred = rf_clf.predict(X_test)
@@ -209,9 +209,9 @@ def random_forest_classification(
         rf_mcc = matthews_corrcoef(y_test, rf_pred)
 
         rf_scores_dict[f"{k}_estimators"] = {}
-        rf_scores_dict[f"{k}_estimators"]["acc_score"] = rf_acc
-        rf_scores_dict[f"{k}_estimators"]["f1_score"] = rf_f1
         rf_scores_dict[f"{k}_estimators"]["matthews_corrcoef"] = rf_mcc
+        rf_scores_dict[f"{k}_estimators"]["f1_score"] = rf_f1
+        rf_scores_dict[f"{k}_estimators"]["acc_score"] = rf_acc
 
     if messages:
         titles_options = [
@@ -344,9 +344,9 @@ def support_vector_classification(
         svc_mcc = matthews_corrcoef(y_test, svc_pred)
 
         svc_scores_dict[f"{kernels[k]}_kernel"] = {}
-        svc_scores_dict[f"{kernels[k]}_kernel"]["acc_score"] = svc_acc
-        svc_scores_dict[f"{kernels[k]}_kernel"]["f1_score"] = svc_f1
         svc_scores_dict[f"{kernels[k]}_kernel"]["matthews_corrcoef"] = svc_mcc
+        svc_scores_dict[f"{kernels[k]}_kernel"]["f1_score"] = svc_f1
+        svc_scores_dict[f"{kernels[k]}_kernel"]["acc_score"] = svc_acc
 
     if messages:
         titles_options = [
@@ -465,7 +465,7 @@ def ensemble_classifier(
 
     # Instantiate base models
     base_svm_clf = SVC()
-    base_rf_clf = RandomForest(random_state=RANDOM_SEED if RANDOM_SEED else 42)
+    base_rf_clf = RandomForest(random_state=RANDOM_SEED or 42)
 
     # Create base ensemble model using VotingClassifier
     if messages:
@@ -482,10 +482,11 @@ def ensemble_classifier(
     base_ensemble_f1 = f1_score(y_test, base_ensemble_pred, average="weighted")
     base_ensemble_mcc = matthews_corrcoef(y_test, base_ensemble_pred)
     ensemble_scores_dict["base"] = {}
-    ensemble_scores_dict["base"]["acc_score"] = base_ensemble_acc
-    ensemble_scores_dict["base"]["f1_score"] = base_ensemble_f1
     ensemble_scores_dict["base"]["matthews_corrcoef"] = base_ensemble_mcc
+    ensemble_scores_dict["base"]["f1_score"] = base_ensemble_f1
+    ensemble_scores_dict["base"]["acc_score"] = base_ensemble_acc
     if messages:
+        print(classification_report(y_test, base_ensemble_pred, digits=num_dp))
         titles_options01 = [
             ("Base Confusion Matrix Without Normalisation", None),
             ("Normalised Base Confusion Matrix", "true"),
@@ -517,10 +518,10 @@ def ensemble_classifier(
         "min_samples_leaf": [1, 2, 3, 4, 5, 7, 10, 11, 13, 17, 19, 23],
     }
 
-    halving_svm_clf = HalvingGridSearchCV(base_svm_clf, svm_param_grid, factor=2, aggressive_elimination=True, cv=3)
+    halving_svm_clf = HalvingGridSearchCV(base_svm_clf, svm_param_grid, factor=2, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3)
     halving_svm_clf.fit(X_train, y_train)
 
-    halving_rf_clf = HalvingGridSearchCV(base_rf_clf, rf_param_grid, factor=2, aggressive_elimination=True, cv=3)
+    halving_rf_clf = HalvingGridSearchCV(base_rf_clf, rf_param_grid, factor=2, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3)
     halving_rf_clf.fit(X_train, y_train)
 
     # Create halving-grid-search ensemble model using VotingClassifier
@@ -531,15 +532,18 @@ def ensemble_classifier(
 
     # Train and assess prediction from the halving grid search ensemble model
     halving_ensemble_classifier.fit(X_train, y_train)
-    halving_ensemble_pred = base_ensemble_classifier.predict(X_test)
+    halving_ensemble_pred = halving_ensemble_classifier.predict(X_test)
     halving_ensemble_acc = accuracy_score(y_test, halving_ensemble_pred)
     halving_ensemble_f1 = f1_score(y_test, halving_ensemble_pred, average="weighted")
     halving_ensemble_mcc = matthews_corrcoef(y_test, halving_ensemble_pred)
     ensemble_scores_dict["halving"] = {}
-    ensemble_scores_dict["halving"]["acc_score"] = halving_ensemble_acc
-    ensemble_scores_dict["halving"]["f1_score"] = halving_ensemble_f1
     ensemble_scores_dict["halving"]["matthews_corrcoef"] = halving_ensemble_mcc
+    ensemble_scores_dict["halving"]["f1_score"] = halving_ensemble_f1
+    ensemble_scores_dict["halving"]["acc_score"] = halving_ensemble_acc
+    ensemble_scores_dict["halving"]["best_params"] = halving_ensemble_classifier.best_params_
     if messages:
+        print(classification_report(y_test, halving_ensemble_pred, digits=num_dp))
+        print("Best Initial Halving Grid Search Parameters:", halving_ensemble_classifier.best_params_)
         titles_options02 = [
             ("Halving Confusion Matrix Without Normalisation", None),
             ("Normalised Halving Confusion Matrix", "true"),
@@ -569,7 +573,7 @@ def ensemble_classifier(
     }
 
     ensemble_clf_halving_grid_search = HalvingGridSearchCV(
-        halving_ensemble_classifier, ensemble_param_grid, factor=2, aggressive_elimination=True, cv=3
+        halving_ensemble_classifier, ensemble_param_grid, factor=2, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3
     )
 
     # Train and assess prediction from the fine-tuned halving grid search ensemble model
@@ -587,12 +591,12 @@ def ensemble_classifier(
         y_test, ensemble_clf_halving_grid_search_pred
     )
     ensemble_scores_dict["tuned"] = {}
-    ensemble_scores_dict["tuned"]["acc_score"] = ensemble_clf_halving_grid_search_acc
+    ensemble_scores_dict["tuned"]["matthews_corrcoef"] = ensemble_clf_halving_grid_search_mcc
     ensemble_scores_dict["tuned"]["f1_score"] = ensemble_clf_halving_grid_search_f1
-    ensemble_scores_dict["tuned"][
-        "matthews_corrcoef"
-    ] = ensemble_clf_halving_grid_search_mcc
+    ensemble_scores_dict["tuned"]["acc_score"] = ensemble_clf_halving_grid_search_acc
     if messages:
+        print(classification_report(y_test, ensemble_clf_halving_grid_search_pred, digits=num_dp))
+        print("Final Tuned Ensemble Halving Grid Search Parameters:", ensemble_clf_halving_grid_search.best_params_)
         print("All Ensemble Scores:")
         for key01, val01 in ensemble_scores_dict.items():
             if not isinstance(val01, dict):
