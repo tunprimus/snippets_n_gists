@@ -206,7 +206,7 @@ def random_forest_classification_halving_search(
     rf_scores_dict["halving"]["rf_best_params"] = halving_rf_clf.best_params_
 
     if messages:
-        print("Best Halving Grid Search Parameters:", halving_rf_clf.best_params_)
+        print("Best RF Halving Grid Search Parameters:", halving_rf_clf.best_params_)
         titles_options = [
             ("RFC Confusion Matrix Without Normalisation", None),
             ("Normalised RFC Confusion Matrix", "true"),
@@ -233,7 +233,7 @@ def random_forest_classification_halving_search(
             else:
                 print(f"{key01}")
                 for key02, val02 in val01.items():
-                    print(f"{key02}: {np.round(val02, num_dp)}")
+                    print(f"{key02}: {val02}")
                 print("*********************")
             print()
 
@@ -306,7 +306,7 @@ def support_vector_classification_halving_search(
     svc_scores_dict["halving"]["rf_best_params"] = halving_svm_clf.best_params_
 
     if messages:
-        print("Best Halving Grid Search Parameters:", halving_svm_clf.best_params_)
+        print("Best SVC Halving Grid Search Parameters:", halving_svm_clf.best_params_)
         titles_options = [
             ("SVC Confusion Matrix Without Normalisation", None),
             ("Normalised SVC Confusion Matrix", "true"),
@@ -333,7 +333,7 @@ def support_vector_classification_halving_search(
             else:
                 print(f"{key01}")
                 for key02, val02 in val01.items():
-                    print(f"{key02}: {np.round(val02, num_dp)}")
+                    print(f"{key02}: {val02}")
                 print("*********************")
             print()
 
@@ -385,7 +385,7 @@ def voting_classifier(
         print("Creating Base Ensemble Model...")
     base_vc_classifier = VotingClassifier(
         estimators=[("svm", base_svm_clf), ("random_forest", base_rf_clf)],
-        voting="soft",
+        voting="hard",
     )
     # Train the base ensemble model
     base_vc_classifier.fit(X_train, y_train)
@@ -430,7 +430,7 @@ def voting_classifier(
     # Create halving-grid-search ensemble model using VotingClassifier
     halving_vc_classifier = VotingClassifier(
         estimators=[("halving_svm", halving_svm_clf), ("halving_random_forest", halving_rf_clf)],
-        voting="soft",
+        voting="hard",
     )
 
     # Train and assess prediction from the halving grid search ensemble model

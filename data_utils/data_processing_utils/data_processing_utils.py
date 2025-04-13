@@ -397,6 +397,28 @@ def generate_df_from_data_source(
         raise ValueError(f"Unsupported file extension: {ext}")
 
 
+def missing_value_overview(df, messages=True):
+    import pandas as pd
+
+    miss_val = df.isnull().sum()
+    df_length = len(df)
+    miss_val_perc = (miss_val / df_length) * 100
+    data_types = df.dtypes
+
+    miss_val_table_buffer = pd.concat([miss_val, miss_val_perc, data_types])
+    # Rename the columns
+    miss_val_table = miss_val_table_buffer.rename(columns = {0: "missing_values", 1: "pct_of_total_values", 2: "data_type"})
+    # Sort the table by percentage of missing descending
+    try:
+        miss_val_table = miss_val_table[miss_val_table.iloc[:, 1] != 0].sort_values("pct_of_total_values", ascending=False).round(1)
+    except Exception:
+        pass
+    if messages:
+        print ("Your selected dataframe has " + str(df.shape[1]) + " columns.\n" + "There are " + str(miss_val_table.shape[0]) + " columns that have missing values.")
+
+    return miss_val_table
+
+
 # ----------------------------------------------------------------------#
 # Function to get univariate statistics and plots from Pandas DataFrame #
 # ----------------------------------------------------------------------#

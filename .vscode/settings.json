@@ -116,6 +116,7 @@
         "nrows",
         "ocus",
         "offscreen",
+        "perc",
         "phthalo",
         "pred",
         "pydantic",
