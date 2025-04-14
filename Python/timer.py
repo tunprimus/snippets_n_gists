@@ -1,93 +1,58 @@
 #!/usr/bin/env python3
-# Adapted from realpython/materials: -> https://github.com/realpython/materials/blob/master/pandas-fast-flexible-intuitive/tutorial/timer.py
-import sys
+# Adapted from RealPython: -> https://realpython.com/python-timer/
+import time
+from contextlib import ContextDecorator
+from dataclasses import dataclass, field
+from typing import Any, Callable, ClassVar, Dict, Optional
 
-def timeit_decorator(_func=None, *, repeat=3, number=1000, file=sys.stdout):
-    """
-    A decorator to measure and print time from best of `repeat` trials taken by a function.
-    Mimics `timeit.repeat()`, but avg. time is printed.
-    Returns function result and prints time.
+class TimerError(Exception):
+    """A custom exception used to report errors in use of Timer class"""
 
-    Parameters
-    ----------
-    _func : callable, optional
-        The function to be timed. If not provided, this function can be used as a decorator.
-    repeat : int, optional
-        The number of times to repeat the timing. Defaults to 3.
-    number : int, optional
-        The number of times to call the function in each repeat. Defaults to 1000.
-    file : file-like, optional
-        The file to write the results to. Defaults to sys.stdout.
+@dataclass
+class Timer(ContextDecorator):
+    """Time your code using a class, context manager, or decorator"""
 
-    Returns
-    -------
-    A callable that wraps the original function and prints the timing results to the specified file.
+    timers: ClassVar[Dict[str, float]] = {}
+    name: Optional[str] = None
+    text: str = "Elapsed time: {:0.3f} seconds"
+    logger: Optional[Callable[[str], None]] = print
+    _start_time: Optional[float] = field(default=None, init=False, repr=False)
 
-    Examples
-    --------
-    from .timer import timeit_decorator
+    def __post_init__(self) -> None:
+        """Initialisation: add timer to dict of timers"""
+        if self.name:
+            self.timers.setdefault(self.name, 0)
 
-    >>> @timeit_decorator
-    ... def f():
-    ...     return "-".join(str(n) for n in range(100))
-    >>> @timeit_decorator(number=100000)
-    ... def g():
-    ...     return "-".join(str(n) for n in range(10))
-    """
-    import functools
-    import gc
-    import itertools
-    import sys
-    from timeit import default_timer as _timer
+    def start(self) -> None:
+        """Start a new timer"""
+        if self._start_time is not None:
+            raise TimerError(f"Timer is running. Use .stop() to stop it")
 
-    _repeat = functools.partial(itertools.repeat, None)
+        self._start_time = time.perf_counter()
 
-    def wrap(func):
-        @functools.wraps(func)
-        def _timeit_decorator(*args, **kwargs):
-            # Temporarily turn off garbage collection during the timing.
-            # Makes independent timings more comparable.
-            # If it was originally enabled, switch it back on afterwards.
-            gcold = gc.isenabled()
-            gc.disable()
+    def stop(self) -> float:
+        """Stop the timer, and report the elapsed time"""
+        if self._start_time is None:
+            raise TimerError(f"Timer is not running. Use .start() to start it")
 
-            try:
-                # Outer loop for the number of repetitions
-                trials = []
-                for _ in _repeat(repeat):
-                    # Inner loop for the number of calls within each repeat
-                    total = 0
-                    for _ in _repeat(number):
-                        start = _timer()
-                        result = func(*args, **kwargs)
-                        end = _timer()
-                        total += end - start
-                    trials.append(total)
-                # We want the *average time* from the *best* trial.
-                # For more on this methodology, see the docs for
-                # Python's `timeit` module.
-                #
-                # "In a typical case, the lowest value gives a lower bound
-                # for how fast your machine can run the given code snippet;
-                # higher values in the result vector are typically not
-                # caused by variability in Python’s speed, but by other
-                # processes interfering with your timing accuracy."
-                best = min(trials) / number
-                # Calculate the standard deviation of the trials
-                std = (sum((trial - best) ** 2 for trial in trials) / len(trials)) ** 0.5
-                print(f"Best of {repeat} with {number} function calls per trial:")
-                print(f"Function {func.__name__} ran in average of {best:.3f} seconds with standard deviation of {std:.3f}", end="\n\n", file=file)
-            finally:
-                # Switch garbage collection back on if it was originally on
-                if gcold:
-                    gc.enable()
-            # Result is returned *only once*
-            return result
+        # Calculate elapsed time
+        elapsed_time = time.perf_counter() - self._start_time
+        self._start_time = None
 
-        return _timeit_decorator
+        # Report elapsed time
+        if self.logger:
+            self.logger(self.text.format(elapsed_time))
+        if self.name:
+            self.timers[self.name] += elapsed_time
 
-    # Syntax trick from Python @dataclass
-    if _func is None:
-        return wrap
-    else:
-        return wrap(_func)
+        return elapsed_time
+
+    def __enter__(self) -> "Timer":
+        """Start a new timer as a context manager"""
+        self.start()
+        return self
+
+    def __exit__(self, *exc_info: Any) -> None:
+        """Stop the context manager timer"""
+        self.stop()
+

@@ -176,7 +176,7 @@ def random_forest_classification_halving_search(
 
     for k in estimators:
         rf_clf = RandomForest(
-            n_estimators=k, random_state=RANDOM_SEED or 42, class_weight="balanced"
+            n_estimators=k, n_jobs=-1, random_state=RANDOM_SEED or 42, class_weight="balanced"
         )
         rf_clf.fit(X_train, y_train)
         rf_pred = rf_clf.predict(X_test)
@@ -192,13 +192,13 @@ def random_forest_classification_halving_search(
     # Parameters for Halving-Grid Search
     rf_param_grid = {
         "n_estimators": [2, 3, 5, 7, 10, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 100, 151, 200, 233, 347, 500, 757, 1000, 1231, 1597, 1777, 2003, 2531, 3001, 3583,],
-        "max_depth": [None, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
-        "min_samples_leaf": [1, 2, 3, 4, 5, 7, 10, 11, 13, 17, 19, 23],
+        "max_depth": [None, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23,],
+        "min_samples_leaf": [1, 2, 3, 4, 5, 7, 10, 11, 13, 17, 19, 23,],
     }
 
     base_rf_clf = RandomForest(random_state=RANDOM_SEED or 42, class_weight="balanced")
 
-    halving_rf_clf = HalvingGridSearchCV(base_rf_clf, rf_param_grid, factor=3, aggressive_elimination=True, cv=num_cv, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3)
+    halving_rf_clf = HalvingGridSearchCV(base_rf_clf, rf_param_grid, factor=5, aggressive_elimination=True, cv=num_cv, scoring="f1_macro", random_state=RANDOM_SEED or 42, n_jobs=-1, verbose=4)
     halving_rf_clf.fit(X_train, y_train)
 
     rf_scores_dict["halving"] = {}
@@ -289,8 +289,8 @@ def support_vector_classification_halving_search(
 
    # Parameters for Halving-Grid Search
     svm_param_grid = {
-        "C": [0.1, 0.3, 0.5, 0.7, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
-        "gamma": [0.1, 0.05, 0.01, 0.001],
+        "C": [0.1, 0.3, 0.5, 0.7, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23,],
+        "gamma": [0.1, 0.05, 0.01, 0.001,],
         "kernel": ["linear", "poly", "rbf", "sigmoid",],
     }
 
@@ -298,7 +298,7 @@ def support_vector_classification_halving_search(
 
     svc_scores_dict["halving"] = {}
 
-    halving_svm_clf = HalvingGridSearchCV(base_svm_clf, svm_param_grid, factor=3, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, verbose=3)
+    halving_svm_clf = HalvingGridSearchCV(base_svm_clf, svm_param_grid, factor=5, aggressive_elimination=True, cv=3, scoring="f1_macro", random_state=RANDOM_SEED or 42, n_jobs=-1, verbose=3)
     halving_svm_clf.fit(X_train, y_train)
 
     svc_scores_dict["halving"] = {}
@@ -378,7 +378,7 @@ def voting_classifier(
 
     # Instantiate base models
     base_svm_clf = SVC(class_weight="balanced")
-    base_rf_clf = RandomForest(random_state=RANDOM_SEED or 42, class_weight="balanced")
+    base_rf_clf = RandomForest(n_jobs=-1, random_state=RANDOM_SEED or 42, class_weight="balanced")
 
     # Create base ensemble model using VotingClassifier
     if messages:
@@ -467,12 +467,12 @@ def voting_classifier(
     if messages:
         print("Creating Optimised Ensemble Model...")
     ensemble_param_grid = {
-        "svm__C": [0.1, 0.3, 0.5, 0.7, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
-        "svm__gamma": [0.1, 0.05, 0.01, 0.001],
+        "svm__C": [0.1, 0.3, 0.5, 0.7, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23,],
+        "svm__gamma": [0.1, 0.05, 0.01, 0.001,],
         "svm__kernel": ["linear", "poly", "rbf", "sigmoid",],
         "random_forest__n_estimators": [2, 3, 5, 7, 10, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 100, 151, 200, 233, 347, 500, 757, 1000, 1231, 1597, 1777, 2003, 2531, 3001, 3583,],
-        "random_forest__max_depth": [None, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23],
-        "random_forest__min_samples_leaf": [1, 2, 3, 4, 5, 7, 10, 11, 13, 17, 19, 23],
+        "random_forest__max_depth": [None, 1, 2, 3, 5, 7, 10, 11, 13, 17, 19, 23,],
+        "random_forest__min_samples_leaf": [1, 2, 3, 4, 5, 7, 10, 11, 13, 17, 19, 23,],
     }
 
     grid_search_vc_clf = HalvingGridSearchCV(
