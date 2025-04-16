@@ -37,7 +37,7 @@ def iqr_region_highlighter(data_to_use=None, median_line_colour="green", q_line_
     import matplotlib.pyplot as plt
     import numpy as np
     import seaborn as sns
-    
+
     # generate the iqr boundary values
     q1 = np.percentile(data_to_use, 25)
     median_of_data = np.median(data_to_use)
@@ -73,14 +73,44 @@ def advanced_beeswarm_plot(data_list=None, titles_list=None, swarmplot_colour="b
     This function will generate a beeswarm plot of the given data, with IQR region highlighter.
     The IQR region highlighter will generate 3 horizontal lines, one for Q1, one for the median, and one for Q3.
     It will also generate a filled region between Q1 and Q3.
+    Examples
+    --------
+    np.random.seed(42)
+
+    # Normal Distribution
+    normal_dist = np.random.normal(5, 1, 1000)
+
+    # Bimodal Distribution
+    bimodal_dist = np.concatenate([np.random.normal(3, 0.5, 500), np.random.normal(7, 0.5, 500)])
+
+    # Exponential Distribution
+    exponential_dist = np.random.exponential(scale=1, size=1000)
+
+    # Uniform Distribution
+    uniform_dist = np.random.uniform(0, 10, 1000)
+
+    # Skewed Distribution with Outliers
+    skewed_main = np.random.chisquare(3, 900)
+    outliers = [15, 16, 17, 18, 19]
+    skewed_dist = np.concatenate([skewed_main, outliers])
+
+    datasets = [normal_dist, bimodal_dist, exponential_dist, uniform_dist, skewed_dist]
+    titles = ["Normal Distribution", "Bimodal Distribution", "Exponential Distribution", "Uniform Distribution", "Skewed Distribution with Outliers"]
+
+    # Plotting
+    advanced_beeswarm_plot(data_list=datasets, titles_list=titles)
     """
+    import matplotlib.pyplot as plt
+    import numpy as np
+    import seaborn as sns
+    
     plt.subplots_adjust(hspace=0.23, wspace=0.23)
     if data_list:
         # n_cols = 3 or int(len(data_list)**0.5)
         # n_rows = len(data_list) // n_cols + (len(data_list) % n_cols > 0)
         n_cols = int(np.sqrt(len(data_list)))
         n_rows = int(np.ceil(len(data_list) / n_cols))
-    fig, axes = plt.subplots(nrows=n_rows, ncols=n_cols, sharex=True, sharey=True, figsize=FIG_SIZE, dpi=FIG_DPI)
+    fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols, sharex=True, sharey=True, figsize=FIG_SIZE, dpi=FIG_DPI)
     for i, data in enumerate(data_list):
         ax = plt.subplot(n_rows, n_cols, i+1)
         sns.swarmplot(ax=ax, y=data, size=3)
@@ -88,30 +118,5 @@ def advanced_beeswarm_plot(data_list=None, titles_list=None, swarmplot_colour="b
         ax.set_title(f"Beeswarm Plot: {titles_list[i]}")
     plt.tight_layout
     plt.show()
+    return axs
 
-
-# Tests
-np.random.seed(42)
-
-# Normal Distribution
-normal_dist = np.random.normal(5, 1, 1000)
-
-# Bimodal Distribution
-bimodal_dist = np.concatenate([np.random.normal(3, 0.5, 500), np.random.normal(7, 0.5, 500)])
-
-# Exponential Distribution
-exponential_dist = np.random.exponential(scale=1, size=1000)
-
-# Uniform Distribution
-uniform_dist = np.random.uniform(0, 10, 1000)
-
-# Skewed Distribution with Outliers
-skewed_main = np.random.chisquare(3, 900)
-outliers = [15, 16, 17, 18, 19]
-skewed_dist = np.concatenate([skewed_main, outliers])
-
-datasets = [normal_dist, bimodal_dist, exponential_dist, uniform_dist, skewed_dist]
-titles = ["Normal Distribution", "Bimodal Distribution", "Exponential Distribution", "Uniform Distribution", "Skewed Distribution with Outliers"]
-
-# Plotting
-advanced_beeswarm_plot(data_list=datasets, titles_list=titles)
