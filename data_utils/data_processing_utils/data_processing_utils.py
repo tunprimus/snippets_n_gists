@@ -405,9 +405,9 @@ def missing_value_overview(df, messages=True):
     miss_val_perc = (miss_val / df_length) * 100
     data_types = df.dtypes
 
-    miss_val_table_buffer = pd.concat([miss_val, miss_val_perc, data_types])
+    miss_val_table_buffer = pd.concat([miss_val, miss_val_perc, data_types], axis=1)
     # Rename the columns
-    miss_val_table = miss_val_table_buffer.rename(columns = {0: "missing_values", 1: "pct_of_total_values", 2: "data_type"})
+    miss_val_table = miss_val_table_buffer.rename(columns={0: "missing_values", 1: "pct_of_total_values", 2: "data_type"})
     # Sort the table by percentage of missing descending
     try:
         miss_val_table = miss_val_table[miss_val_table.iloc[:, 1] != 0].sort_values("pct_of_total_values", ascending=False).round(1)
@@ -779,6 +779,12 @@ def bivariate_stats(df, label, num_dp=4):
     -------
     pandas.DataFrame
         A DataFrame containing the results of the bivariate statistics
+
+    Examples
+    --------
+    bivariate_stats(df_insurance, "charges")
+    bivariate_stats(df_nba_salaries, "Salary")
+    bivariate_stats(df_airline_satisfaction, "satisfaction")
     """
     import matplotlib.pyplot as plt
     import pandas as pd
