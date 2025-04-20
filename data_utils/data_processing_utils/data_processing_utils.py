@@ -414,7 +414,7 @@ def missing_value_overview(df, messages=True):
     except Exception:
         pass
     if messages:
-        print ("Your selected dataframe has " + str(df.shape[1]) + " columns.\n" + "There are " + str(miss_val_table.shape[0]) + " columns that have missing values.")
+        print ("Your selected dataframe has " + str(df.shape[1]) + " columns.\n" + str(miss_val_table.shape[0]) + " column(s) with missing values.")
 
     return miss_val_table
 
