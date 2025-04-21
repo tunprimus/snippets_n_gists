@@ -99,6 +99,21 @@ def generate_violin_with_quartiles(
     Returns
     -------
     None
+
+    Examples
+    --------
+    np.random.seed(RANDOM_SEED)
+    data_to_use = pd.DataFrame(
+        {
+            "Group": np.random.choice(["A", "B", "C", "D"], size=200),
+            "Values": np.random.randn(200),
+        }
+    )
+    print(data_to_use)
+
+    generate_violin_with_quartiles(
+        data=data_to_use, category="Group", target_values="Values"
+    )
     """
     # Get category label
     category_label = category
@@ -183,6 +198,21 @@ def generate_violin_with_quartiles_plus_extremes(
     Returns
     -------
     None
+
+    Examples
+    --------
+    np.random.seed(RANDOM_SEED)
+    data_to_use = pd.DataFrame(
+        {
+            "Group": np.random.choice(["A", "B", "C", "D"], size=200),
+            "Values": np.random.randn(200),
+        }
+    )
+    print(data_to_use)
+
+    generate_violin_with_quartiles_plus_extremes(
+        data=data_to_use, category="Group", target_values="Values"
+    )
     """
     # Get category label
     category_label = category
@@ -275,6 +305,21 @@ def generate_violin_plot_with_boxplot(data, category, target_values):
     Returns
     -------
     None
+
+    Examples
+    --------
+    np.random.seed(RANDOM_SEED)
+    data_to_use = pd.DataFrame(
+        {
+            "Group": np.random.choice(["A", "B", "C", "D"], size=200),
+            "Values": np.random.randn(200),
+        }
+    )
+    print(data_to_use)
+
+    generate_violin_plot_with_boxplot(
+        data=data_to_use, category="Group", target_values="Values"
+    )
     """
     # Get category label
     category_label = category
@@ -311,22 +356,3 @@ def generate_violin_plot_with_boxplot(data, category, target_values):
     plt.ylabel(f"{target_values}", fontsize=FONT_SIZE)
     plt.show()
 
-
-np.random.seed(RANDOM_SEED)
-data_to_use = pd.DataFrame(
-    {
-        "Group": np.random.choice(["A", "B", "C", "D"], size=200),
-        "Values": np.random.randn(200),
-    }
-)
-print(data_to_use)
-
-generate_violin_with_quartiles(
-    data=data_to_use, category="Group", target_values="Values"
-)
-generate_violin_with_quartiles_plus_extremes(
-    data=data_to_use, category="Group", target_values="Values"
-)
-generate_violin_plot_with_boxplot(
-    data=data_to_use, category="Group", target_values="Values"
-)
