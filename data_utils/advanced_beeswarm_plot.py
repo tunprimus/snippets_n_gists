@@ -49,13 +49,13 @@ def iqr_region_highlighter(data_to_use=None, median_line_colour="green", q_line_
     plt.fill_between([-0.5, 0.5], q1, q3, color=iqr_colour, alpha=iqr_alpha)
 
 # Function to plot advanced beeswarm plots
-def advanced_beeswarm_plot(data_list=None, titles_list=None, swarmplot_colour="blue", plot_fig_size=FIG_SIZE):
+def advanced_beeswarm_plot(data=None, x=None, y=None, order=None, titles_list=None, swarmplot_colour="blue", plot_fig_size=FIG_SIZE):
     """
     Function to plot advanced beeswarm plots
 
     Parameters
     ----------
-    data_list : array_like or list of array_likes
+    data : array_like or list of array_likes
         The data to be plotted
     titles_list : list of str
         The titles of each subplot
@@ -98,23 +98,23 @@ def advanced_beeswarm_plot(data_list=None, titles_list=None, swarmplot_colour="b
     titles = ["Normal Distribution", "Bimodal Distribution", "Exponential Distribution", "Uniform Distribution", "Skewed Distribution with Outliers"]
 
     # Plotting
-    advanced_beeswarm_plot(data_list=datasets, titles_list=titles)
+    advanced_beeswarm_plot(data=datasets, titles_list=titles)
     """
     import matplotlib.pyplot as plt
     import numpy as np
     import seaborn as sns
-    
+
     plt.subplots_adjust(hspace=0.23, wspace=0.23)
-    if data_list:
+    if data:
         # n_cols = 3 or int(len(data_list)**0.5)
         # n_rows = len(data_list) // n_cols + (len(data_list) % n_cols > 0)
-        n_cols = int(np.sqrt(len(data_list)))
-        n_rows = int(np.ceil(len(data_list) / n_cols))
+        n_cols = int(np.sqrt(len(data)))
+        n_rows = int(np.ceil(len(data) / n_cols))
     fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols, sharex=True, sharey=True, figsize=FIG_SIZE, dpi=FIG_DPI)
-    for i, data in enumerate(data_list):
+    for i, item in enumerate(data):
         ax = plt.subplot(n_rows, n_cols, i+1)
-        sns.swarmplot(ax=ax, y=data, size=3)
-        iqr_region_highlighter(data_to_use=data)
+        sns.swarmplot(ax=ax, y=item, size=3)
+        iqr_region_highlighter(data_to_use=item)
         ax.set_title(f"Beeswarm Plot: {titles_list[i]}")
     plt.tight_layout
     plt.show()
