@@ -135,6 +135,7 @@
         "suptitle",
         "swarmplot",
         "tabindex",
+        "triu",
         "tyrian",
         "violinplot",
         "xlabel",
