@@ -435,15 +435,15 @@ def generate_df_from_data_source(
         raise ValueError(f"Unsupported file extension: {ext}")
 
 
-def missing_value_overview(df, messages=True):
+def missing_value_overview(df, numdp=4, messages=True):
     import pandas as pd
 
     miss_val = df.isnull().sum()
     df_length = len(df)
-    miss_val_perc = (miss_val / df_length) * 100
+    miss_val_pct = round(((miss_val / df_length) * 100), numdp)
     data_types = df.dtypes
 
-    miss_val_table_buffer = pd.concat([miss_val, miss_val_perc, data_types], axis=1)
+    miss_val_table_buffer = pd.concat([miss_val, miss_val_pct, data_types], axis=1)
     # Rename the columns
     miss_val_table = miss_val_table_buffer.rename(columns={0: "missing_values", 1: "pct_of_total_values", 2: "data_type"})
     # Sort the table by percentage of missing descending
@@ -455,6 +455,33 @@ def missing_value_overview(df, messages=True):
         print ("Your selected dataframe has " + str(df.shape[1]) + " columns.\n" + str(miss_val_table.shape[0]) + " column(s) with missing values.")
 
     return miss_val_table
+
+
+def missing_value_heatmap(df, figsize=(20, 12.4)):
+    """
+    Adapted from https://medium.com/@itk48/missing-data-imputation-with-chi-square-tests-mcar-mar-3278956387c8
+    Create a heatmap of missing values in a Pandas DataFrame.
+
+    This function generates a heatmap representation of missing values in the input DataFrame `df`.
+    The heatmap is a 2D representation of the matrix of missing values in the DataFrame, with NaN values
+    represented as black cells and non-missing values represented as white cells. It is a useful tool
+    for quickly visualising which columns in the DataFrame have missing values and which do not.
+
+    Parameters:
+    - df (pd.DataFrame): The DataFrame for which the heatmap of missing values is to be generated.
+    - figsize (tuple): The size of the figure to be generated. Defaults to (20, 12.4).
+    """
+    import matplotlib.pyplot as plt
+    import pandas as pd
+
+    plt.figure(figsize=figsize)
+    plt.imshow(df.isnull(), aspect="auto", cmap="viridis", interpolation="nearest")
+    plt.xticks(ticks=range(len(df.columns)), labels=df.columns, rotation=45)
+    plt.xlabel("Columns")
+    plt.ylabel("Rows")
+    plt.title("Heatmap of Missing Values in Dataset")
+    plt.show()
+
 
 
 # ----------------------------------------------------------------------#
