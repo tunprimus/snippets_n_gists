@@ -21,6 +21,7 @@ FIG_DPI = 72
 ## Some Useful Functions
 ##*********************##
 
+
 def cpu_logical_cores_count():
     """
     Return the number of logical cores on the machine.
@@ -445,14 +446,26 @@ def missing_value_overview(df, numdp=4, messages=True):
 
     miss_val_table_buffer = pd.concat([miss_val, miss_val_pct, data_types], axis=1)
     # Rename the columns
-    miss_val_table = miss_val_table_buffer.rename(columns={0: "missing_values", 1: "pct_of_total_values", 2: "data_type"})
+    miss_val_table = miss_val_table_buffer.rename(
+        columns={0: "missing_values", 1: "pct_of_total_values", 2: "data_type"}
+    )
     # Sort the table by percentage of missing descending
     try:
-        miss_val_table = miss_val_table[miss_val_table.iloc[:, 1] != 0].sort_values("pct_of_total_values", ascending=False).round(1)
+        miss_val_table = (
+            miss_val_table[miss_val_table.iloc[:, 1] != 0]
+            .sort_values("pct_of_total_values", ascending=False)
+            .round(1)
+        )
     except Exception:
         pass
     if messages:
-        print ("Your selected dataframe has " + str(df.shape[1]) + " columns.\n" + str(miss_val_table.shape[0]) + " column(s) with missing values.")
+        print(
+            "Your selected dataframe has "
+            + str(df.shape[1])
+            + " columns.\n"
+            + str(miss_val_table.shape[0])
+            + " column(s) with missing values."
+        )
 
     return miss_val_table
 
@@ -481,7 +494,6 @@ def missing_value_heatmap(df, figsize=(20, 12.4)):
     plt.ylabel("Rows")
     plt.title("Heatmap of Missing Values in Dataset")
     plt.show()
-
 
 
 # ----------------------------------------------------------------------#
@@ -1743,10 +1755,7 @@ def can_convert_dataframe_to_datetime(
         whether each column can be converted to datetime format, or list of boolean values.
     """
     import numpy as np
-    try:
-        import fireducks.pandas as pd
-    except ImportError:
-        import pandas as pd
+    import pandas as pd
     from pandas.api.types import is_datetime64_any_dtype as is_datetime
 
     # Change message flag based on whether or not to return result
@@ -1821,11 +1830,8 @@ def batch_convert_to_datetime(
         DataFrame with converted datetime columns.
     """
     import numpy as np
+    import pandas as pd
     import sys
-    try:
-        import fireducks.pandas as pd
-    except ImportError:
-        import pandas as pd
     from pandas.api.types import is_datetime64_any_dtype as is_datetime
 
     for col in df.columns[df.dtypes == "object"]:
@@ -1891,10 +1897,7 @@ def parse_column_as_date(
     df : pandas DataFrame
         DataFrame with parsed date features and additional extracted information.
     """
-    try:
-        import fireducks.pandas as pd
-    except ImportError:
-        import pandas as pd
+    import pandas as pd
     from datetime import datetime as pydt
 
     all_cols = df.columns
@@ -1923,7 +1926,6 @@ def parse_column_as_date(
 
 
 ### Bin Low Count Groups Values
-
 
 def bin_categories(df, features=[], cutoff=0.05, replace_with="Other", messages=True):
     """
@@ -1974,9 +1976,17 @@ def bin_categories(df, features=[], cutoff=0.05, replace_with="Other", messages=
 
 ### Traditional One-at-a-time Methods
 
-
 def clean_outlier_per_column(
-    df, features=[], skew_threshold=1, handle_outliers="remove", num_dp=4, messages=True
+    df,
+    features=[],
+    skew_threshold=1,
+    tukey_lo_val=0.25,
+    tukey_hi_val=0.75,
+    iqr_k=1.5,
+    emp_rule_val=3.0,
+    handle_outliers="remove",
+    num_dp=4,
+    messages=True,
 ):
     """
     Clean outliers from a column in a DataFrame
@@ -1989,6 +1999,14 @@ def clean_outlier_per_column(
         Columns to consider for outlier cleaning
     skew_threshold : float, default 1
         Threshold to determine if a column is skewed
+    tukey_lo_val : float, default 0.25
+        Lower bound for Tukey boxplot rule
+    tukey_hi_val : float, default 0.75
+        Upper bound for Tukey boxplot rule
+    iqr_k : float, default 1.5
+        Multiplier for IQR for Tukey boxplot rule
+    emp_rule_val : float, default 3.0
+        Multiplier for standard deviation for Empirical rule
     handle_outliers : str, default 'remove'
         How to handle outliers. Options are 'remove', 'replace', 'impute', 'null'
     num_dp : int, default 4
@@ -2025,15 +2043,15 @@ def clean_outlier_per_column(
                         skew = df[feat].skew()
                         # Tukey boxplot rule
                         if abs(skew) > skew_threshold:
-                            q1 = df[feat].quantile(0.25)
-                            q3 = df[feat].quantile(0.75)
+                            q1 = df[feat].quantile(tukey_lo_val)
+                            q3 = df[feat].quantile(tukey_hi_val)
                             iqr = q3 - q1
-                            lo_bound = q1 - 1.5 * iqr
-                            hi_bound = q3 + 1.5 * iqr
+                            lo_bound = q1 - iqr_k * iqr
+                            hi_bound = q3 + iqr_k * iqr
                         # Empirical rule
                         else:
-                            lo_bound = df[feat].mean() - (3 * df[feat].std())
-                            hi_bound = df[feat].mean() + (3 * df[feat].std())
+                            lo_bound = df[feat].mean() - (emp_rule_val * df[feat].std())
+                            hi_bound = df[feat].mean() + (emp_rule_val * df[feat].std())
                         # Get the number of outlier data points
                         min_count = df.loc[df[feat] < lo_bound, feat].shape[0]
                         max_count = df.loc[df[feat] > hi_bound, feat].shape[0]
@@ -2098,7 +2116,6 @@ def clean_outlier_per_column(
 
 
 ### Newer All-at-once Methods Based on Clustering
-
 
 def clean_outlier_by_all_columns(
     df,
@@ -2290,7 +2307,6 @@ def clean_outlier_by_all_columns(
 ## Skewness
 ##*********************##
 
-
 def skew_correct(df, feature, max_power=103, messages=True):
     """
     Corrects the skew of a given feature in a DataFrame by applying a transformation to achieve normality.
@@ -2435,7 +2451,6 @@ def skew_correct(df, feature, max_power=103, messages=True):
 
 ## Missing Data
 ##*********************##
-
 
 def missing_drop(
     df, label="", features=[], row_threshold=0.90, col_threshold=0.50, messages=True
