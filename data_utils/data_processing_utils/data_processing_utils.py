@@ -496,6 +496,43 @@ def missing_value_heatmap(df, figsize=(20, 12.4)):
     plt.show()
 
 
+
+# ----------------------------------------------------------------------#
+# Function to get quick summary of Pandas DataFrame #
+# ----------------------------------------------------------------------#
+def quick_data_summary(df, numdp=3):
+    """
+    Get a quick summary of a Pandas DataFrame.
+
+    This function computes and returns a dictionary containing a variety of summary statistics
+    for the input DataFrame `df`. It calculates metrics such as the shape, column names, data types,
+    count and percentage of missing values, and a summary of each feature (column) including data type,
+    count of non-missing values, number of missing values, number of unique values, and mode for all features.
+    For numerical features, it additionally calculates minimum, first quartile, median, third quartile, maximum,
+    mean, standard deviation.
+
+    Parameters:
+    - df (pd.DataFrame): The DataFrame for which the summary statistics are to be computed.
+    - numdp (int, optional): The number of decimal places to round the missing values percentage to.
+        Defaults to 3.
+
+    Returns:
+    - summary (dict): A dictionary containing the summary statistics.
+    """
+    import numpy as np
+    import pandas as pd
+
+    summary = {
+        "shape": df.shape,
+        "columns": df.columns.tolist(),
+        "dtypes": df.dtypes.to_dict(),
+        "missing_values": df.isnull().sum().to_dict(),
+        "missing_values_pct": (round((df.isnull().sum() / df.shape[0] * 100), numdp)).to_dict(),
+        "description": df.describe(include="all").T,
+    }
+    return summary
+
+
 # ----------------------------------------------------------------------#
 # Function to get univariate statistics and plots from Pandas DataFrame #
 # ----------------------------------------------------------------------#
