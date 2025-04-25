@@ -500,25 +500,7 @@ def missing_value_heatmap(df, figsize=(20, 12.4)):
 # ----------------------------------------------------------------------#
 # Function to get quick summary of Pandas DataFrame #
 # ----------------------------------------------------------------------#
-def quick_data_summary(df, numdp=3):
-    """
-    Get a quick summary of a Pandas DataFrame.
-
-    This function computes and returns a dictionary containing a variety of summary statistics
-    for the input DataFrame `df`. It calculates metrics such as the shape, column names, data types,
-    count and percentage of missing values, and a summary of each feature (column) including data type,
-    count of non-missing values, number of missing values, number of unique values, and mode for all features.
-    For numerical features, it additionally calculates minimum, first quartile, median, third quartile, maximum,
-    mean, standard deviation.
-
-    Parameters:
-    - df (pd.DataFrame): The DataFrame for which the summary statistics are to be computed.
-    - numdp (int, optional): The number of decimal places to round the missing values percentage to.
-        Defaults to 3.
-
-    Returns:
-    - summary (dict): A dictionary containing the summary statistics.
-    """
+def quick_data_summary(df, numdp=4, messages=False):
     import numpy as np
     import pandas as pd
 
@@ -530,6 +512,20 @@ def quick_data_summary(df, numdp=3):
         "missing_values_pct": (round((df.isnull().sum() / df.shape[0] * 100), numdp)).to_dict(),
         "description": df.describe(include="all").T,
     }
+    if messages:
+        for key01, val01 in summary.items():
+            if not isinstance(val01, dict):
+                if isinstance(val01, (int, float)):
+                    print(f"{key01}: {round(val01, num_dp)}")
+                else:
+                    print(f"{key01}: {val01}")
+                continue
+            else:
+                print(f"{key01}")
+                for key02, val02 in val01.items():
+                    print(f"{key02}: {round(val02, num_dp)}")
+                print("*********************")
+            print()
     return summary
 
 
