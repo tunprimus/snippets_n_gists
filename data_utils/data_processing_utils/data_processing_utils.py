@@ -158,6 +158,37 @@ def cpu_logical_cores_count():
 LOGICAL_CORES = cpu_logical_cores_count()
 
 
+def extended_print_report_object(obj, num_dp=4):
+    """
+    Prints out a nested dictionary (obj) in a more user-friendly manner.
+
+    Parameters
+    ----------
+    obj : dict
+        The dictionary to print
+    num_dp : int, optional
+        The number of decimal places to round any numerical values to. Defaults to 4.
+
+    Returns
+    -------
+    None
+    """
+    print(f"Full report history from {obj}.\n")
+    for key01, val01 in obj.items():
+            if not isinstance(val01, dict):
+                if isinstance(val01, (int, float)):
+                    print(f"{key01}: {round(val01, num_dp)}")
+                else:
+                    print(f"{key01}: {val01}")
+                continue
+            else:
+                print(f"{key01}")
+                for key02, val02 in val01.items():
+                    print(f"{key02}: {round(val02, num_dp)}")
+                print("*********************")
+            print()
+
+
 # Adapted from @georgerichardson -> https://gist.github.com/georgerichardson/db66b686b4369de9e7196a65df45fc37
 def standardise_column_names(df, remove_punct=True):
     """
@@ -2156,7 +2187,7 @@ def clean_outlier_by_all_columns(
     distance_method="manhattan",
     min_samples=5,
     num_dp=4,
-    num_cores_for_dbscan=LOGICAL_CORES - 2 if LOGICAL_CORES > 3 else 1,
+    num_cores_for_dbscan=-1,
     messages=True,
 ):
     """
@@ -2302,19 +2333,7 @@ def clean_outlier_by_all_columns(
         print(f"Optimal eps value: {round(eps, num_dp)}")
 
         print(f"\nHistory:")
-        for key01, val01 in outliers_per_eps_history.items():
-            if not isinstance(val01, dict):
-                if isinstance(val01, (int, float)):
-                    print(f"{key01}: {round(val01, num_dp)}")
-                else:
-                    print(f"{key01}: {val01}")
-                continue
-            else:
-                print(f"{key01}")
-                for key02, val02 in val01.items():
-                    print(f"{key02}: {round(val02, num_dp)}")
-                print("*********************")
-            print()
+        extended_print_report_object(outliers_per_eps_history)
     db = DBSCAN(
         eps=eps,
         metric=distance_method,
@@ -2610,7 +2629,7 @@ def check_target_balance(df, target="target"):
     -----
     This function will show a bar chart of the target classes count.
     The x-axis is the unique values of the target column and the y-axis is the count of each target class.
-    The bar colors are red for class 0 and green for class 1.
+    The bar colours are red for class 0 and green for class 1.
     """
     import matplotlib.pyplot as plt
     try:

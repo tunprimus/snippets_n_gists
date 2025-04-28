@@ -665,6 +665,7 @@ def detect_outliers_mahalanobis_distance(
 
     def is_positive_definite(matrix):
         """
+        from https://stackoverflow.com/a/51894355
         Checks if a given matrix is symmetrical and positive definite.
 
         A matrix is positive definite if it is symmetrical
