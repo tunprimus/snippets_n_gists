@@ -124,6 +124,7 @@ def classification_scores(y_true, y_pred, y_prob_scores=None, num_dp=4, messages
     score_obj["zero_one_loss"] = round(zero_one_loss(y_true, y_pred), num_dp)
     score_obj["f1"] = round(f1_score(y_true, y_pred), num_dp)
     score_obj["roc_auc"] = round(roc_auc_score(y_true, y_pred), num_dp)
+    score_obj["youden_j"] = round((((true_pos * true_neg) - (false_pos * false_neg)) / ((true_pos + false_neg) + (true_neg + false_pos))), num_dp)
     score_obj["recall_or_sensitivity_or_true_pos_rate"] = round(recall_score(y_true, y_pred), num_dp)
     score_obj["specificity_or_true_neg_rate"] = round((true_neg / (true_neg + false_pos)), num_dp)
     score_obj["precision_or_ppv"] = round(precision_score(y_true, y_pred), num_dp)
