@@ -21,7 +21,7 @@ FIG_DPI = 72
 ## Some Useful Functions
 ##*********************##
 
-
+### Get Number of CPU Logical Cores
 def cpu_logical_cores_count():
     """
     Return the number of logical cores on the machine.
@@ -157,7 +157,7 @@ def cpu_logical_cores_count():
 
 LOGICAL_CORES = cpu_logical_cores_count()
 
-
+### Extended Print Report
 def extended_print_report_object(obj, num_dp=4):
     """
     Prints out a nested dictionary (obj) in a more user-friendly manner.
@@ -173,7 +173,7 @@ def extended_print_report_object(obj, num_dp=4):
     -------
     None
     """
-    print(f"Full report history from {obj}.\n")
+    print("Full report history...\n")
     for key01, val01 in obj.items():
             if not isinstance(val01, dict):
                 if isinstance(val01, (int, float)):
