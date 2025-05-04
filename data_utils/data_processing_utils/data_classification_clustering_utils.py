@@ -5,6 +5,7 @@ from matplotlib import rcParams
 from matplotlib.cm import rainbow
 from auto_pip_finder import PipFinder
 from dbscan_pp import DBSCANPP
+from combined_scoring_metrics import classification_scores
 
 
 ## Some Constants
@@ -69,9 +70,10 @@ def k_nearest_neighbours(X_train, y_train, X_test, y_test, max_k=None, num_dp=4,
     for k in range(1, max_k + 1):
         knn_clf = KNeighboursClassifier(n_neighbors=k)
         knn_clf.fit(X_train, y_train)
-        knn_score = knn_clf.score(X_test, y_test)
-        knn_acc_scores_list.append(knn_score)
-        knn_acc_scores_dict[f"{k}_neighbours"] = knn_score
+        y_pred = knn_clf.predict(X_test)
+        knn_acc_score = knn_clf.score(X_test, y_test)
+        knn_acc_scores_list.append(knn_acc_score)
+        knn_acc_scores_dict[f"{k}_neighbours"] = classification_scores(y_test, y_pred, messages=False)
 
     if messages:
         # Plot the scores on a line plot
@@ -158,9 +160,10 @@ def support_vector_classification(
     for k in range(max_k):
         svc_clf = SVC(kernel=kernels[k])
         svc_clf.fit(X_train, y_train)
-        svc_score = svc_clf.score(X_test, y_test)
-        svc_acc_scores_list.append(svc_score)
-        svc_acc_scores_dict[kernels[k]] = svc_score
+        y_pred = svc_clf.predict(X_test)
+        svc_acc_score = svc_clf.score(X_test, y_test)
+        svc_acc_scores_list.append(svc_acc_score)
+        svc_acc_scores_dict[kernels[k]] = classification_scores(y_test, y_pred, messages=False)
 
     if messages:
         # Plot the scores on a barplot
@@ -226,9 +229,10 @@ def decision_tree_classification(X_train, y_train, X_test, y_test, num_dp=4, mes
             max_features=k, random_state=RANDOM_SEED or 42
         )
         dt_clf.fit(X_train, y_train)
-        dt_score = dt_clf.score(X_test, y_test)
-        dt_acc_scores_list.append(dt_score)
-        dt_acc_scores_dict[f"{k}_features"] = dt_score
+        y_pred = dt_clf.predict(X_test)
+        dt_acc_score = dt_clf.score(X_test, y_test)
+        dt_acc_scores_list.append(dt_acc_score)
+        dt_acc_scores_dict[f"{k}_features"] = classification_scores(y_test, y_pred, messages=False)
 
     if messages:
         # Plot the scores on a line plot
@@ -320,9 +324,10 @@ def random_forest_classification(
             n_estimators=k, random_state=RANDOM_SEED or 42
         )
         rf_clf.fit(X_train, y_train)
-        rf_score = rf_clf.score(X_test, y_test)
-        rf_acc_scores_list.append(rf_score)
-        rf_acc_scores_dict[f"{k}_estimators"] = rf_score
+        y_pred = rf_clf.predict(X_test)
+        rf_acc_score = rf_clf.score(X_test, y_test)
+        rf_acc_scores_list.append(rf_acc_score)
+        rf_acc_scores_dict[f"{k}_estimators"] = classification_scores(y_test, y_pred, messages=False)
 
     if messages:
         # Plot the scores on a barplot
@@ -423,9 +428,10 @@ def xgboost_classification(
             seed=RANDOM_SEED or 42,
         )
         xgb_clf.fit(X_train, y_train, verbose=False)
-        xgb_score = xgb_clf.score(X_test, y_test)
-        xgb_acc_scores_list.append(xgb_score)
-        xgb_acc_scores_dict[f"{k}_estimators"] = xgb_score
+        y_pred = xgb_clf.predict(X_test)
+        xgb_acc_score = xgb_clf.score(X_test, y_test)
+        xgb_acc_scores_list.append(xgb_acc_score)
+        xgb_acc_scores_dict[f"{k}_estimators"] = classification_scores(y_test, y_pred, messages=False)
 
     if messages:
         # Plot the scores on a line plot
@@ -512,9 +518,10 @@ def naive_bayes_classification(X_train, y_train, X_test, y_test, num_dp=4, messa
     for name, nb_clf in nb_classifiers.items():
         try:
             nb_clf.fit(X_train, y_train)
-            nb_score = nb_clf.score(X_test, y_test)
-            nb_acc_scores_list.append(nb_score)
-            nb_acc_scores_dict[name] = nb_score
+            y_pred = nb_clf.predict(X_test)
+            nb_acc_score = nb_clf.score(X_test, y_test)
+            nb_acc_scores_list.append(nb_acc_score)
+            nb_acc_scores_dict[name] = classification_scores(y_test, y_pred, messages=False)
         except ValueError:
             continue
 
