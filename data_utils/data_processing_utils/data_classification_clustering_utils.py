@@ -20,7 +20,7 @@ FIG_DPI = 72
 
 
 ## K Neighbours Classification Function
-def k_nearest_neighbours(X_train, y_train, X_test, y_test, max_k, num_dp=4):
+def k_nearest_neighbours(X_train, y_train, X_test, y_test, max_k=None, num_dp=4, messages=True):
     """
     Evaluate K-Nearest Neighbours classifier accuracy for different values of K.
 
@@ -73,30 +73,31 @@ def k_nearest_neighbours(X_train, y_train, X_test, y_test, max_k, num_dp=4):
         knn_acc_scores_list.append(knn_score)
         knn_acc_scores_dict[f"{k}_neighbours"] = knn_score
 
-    # Plot the scores on a line plot
-    plt.acc_plot(
-        [k for k in range(1, max_k + 1)],
-        knn_scores_list,
-        color="grey",
-        marker="o",
-        linewidth=0.73,
-        markerfacecolor="red",
-    )
-    for i in range(1, max_k + 1):
-        plt.acc_text(
-            i,
-            knn_scores_list[i - 1],
-            f"   ({i}, {round(knn_scores_list[i - 1], num_dp)})",
-            rotation=90,
-            va="bottom",
-            fontsize=8,
+    if messages:
+        # Plot the scores on a line plot
+        plt.acc_plot(
+            [k for k in range(1, max_k + 1)],
+            knn_scores_list,
+            color="grey",
+            marker="o",
+            linewidth=0.73,
+            markerfacecolor="red",
         )
-    plt.xticks([i for i in range(1, max_k + 2)])
-    y_bottom, y_top = plt.ylim()
-    plt.ylim(top=y_top * 1.05)
-    plt.xlabel("Number of Neighbours (K)")
-    plt.ylabel("Accuracy Scores")
-    plt.title("K Neighbours Classifier Accuracy Scores for Different K Values")
+        for i in range(1, max_k + 1):
+            plt.acc_text(
+                i,
+                knn_scores_list[i - 1],
+                f"   ({i}, {round(knn_scores_list[i - 1], num_dp)})",
+                rotation=90,
+                va="bottom",
+                fontsize=8,
+            )
+        plt.xticks([i for i in range(1, max_k + 2)])
+        y_bottom, y_top = plt.ylim()
+        plt.ylim(top=y_top * 1.05)
+        plt.xlabel("Number of Neighbours (K)")
+        plt.ylabel("Accuracy Scores")
+        plt.title("K Neighbours Classifier Accuracy Scores for Different K Values")
     return knn_acc_scores_list, knn_acc_scores_dict
 
 
@@ -108,6 +109,7 @@ def support_vector_classification(
     y_test,
     kernels=["linear", "poly", "rbf", "sigmoid"],
     num_dp=4,
+    messages=True
 ):
     """
     Evaluate Support Vector Classifier accuracy for different kernels.
@@ -160,28 +162,29 @@ def support_vector_classification(
         svc_acc_scores_list.append(svc_score)
         svc_acc_scores_dict[kernels[k]] = svc_score
 
-    # Plot the scores on a barplot
-    colours = rainbow(np.linspace(0, 1, max_k))
-    plt.bar(kernels, svc_acc_scores_list, color=colours)
-    for i in range(max_k):
-        plt.text(
-            i,
-            svc_acc_scores_list[i],
-            f"{round(svc_acc_scores_list[i], num_dp)}",
-            rotation=45,
-            va="bottom",
-            fontsize=10,
-        )
-    y_bottom, y_top = plt.ylim()
-    plt.ylim(top=y_top * 1.13)
-    plt.xlabel("Kernels")
-    plt.ylabel("Accuracy Scores")
-    plt.title("Support Vector Classifier Accuracy Scores for Different Kernels")
+    if messages:
+        # Plot the scores on a barplot
+        colours = rainbow(np.linspace(0, 1, max_k))
+        plt.bar(kernels, svc_acc_scores_list, color=colours)
+        for i in range(max_k):
+            plt.text(
+                i,
+                svc_acc_scores_list[i],
+                f"{round(svc_acc_scores_list[i], num_dp)}",
+                rotation=45,
+                va="bottom",
+                fontsize=10,
+            )
+        y_bottom, y_top = plt.ylim()
+        plt.ylim(top=y_top * 1.13)
+        plt.xlabel("Kernels")
+        plt.ylabel("Accuracy Scores")
+        plt.title("Support Vector Classifier Accuracy Scores for Different Kernels")
     return svc_acc_scores_list, svc_acc_scores_dict
 
 
 ## Decision Tree Classification Function
-def decision_tree_classification(X_train, y_train, X_test, y_test, num_dp=4):
+def decision_tree_classification(X_train, y_train, X_test, y_test, num_dp=4, messages=True):
     """
     Plots accuracy scores for DecisionTreeClassifier when using different number of max features.
 
@@ -227,32 +230,33 @@ def decision_tree_classification(X_train, y_train, X_test, y_test, num_dp=4):
         dt_acc_scores_list.append(dt_score)
         dt_acc_scores_dict[f"{k}_features"] = dt_score
 
-    # Plot the scores on a line plot
-    plt.plot(
-        [k for k in range(1, max_k + 1)],
-        dt_acc_scores_list,
-        color="green",
-        marker="o",
-        linewidth=0.73,
-        markerfacecolor="red",
-    )
-    for i in range(1, max_k + 1):
-        plt.text(
-            i,
-            dt_acc_scores_list[i - 1],
-            f"   ({i}, {round(dt_acc_scores_list[i - 1], num_dp)})",
-            rotation=90,
-            va="bottom",
-            fontsize=8,
+    if messages:
+        # Plot the scores on a line plot
+        plt.plot(
+            [k for k in range(1, max_k + 1)],
+            dt_acc_scores_list,
+            color="green",
+            marker="o",
+            linewidth=0.73,
+            markerfacecolor="red",
         )
-    plt.xticks([i for i in range(1, max_k + 2)])
-    y_bottom, y_top = plt.ylim()
-    plt.ylim(top=y_top * 1.05)
-    plt.xlabel("Max Features")
-    plt.ylabel("Accuracy Scores")
-    plt.title(
-        "Decision Tree Classifier Accuracy Scores for Different Number of Max Features"
-    )
+        for i in range(1, max_k + 1):
+            plt.text(
+                i,
+                dt_acc_scores_list[i - 1],
+                f"   ({i}, {round(dt_acc_scores_list[i - 1], num_dp)})",
+                rotation=90,
+                va="bottom",
+                fontsize=8,
+            )
+        plt.xticks([i for i in range(1, max_k + 2)])
+        y_bottom, y_top = plt.ylim()
+        plt.ylim(top=y_top * 1.05)
+        plt.xlabel("Max Features")
+        plt.ylabel("Accuracy Scores")
+        plt.title(
+            "Decision Tree Classifier Accuracy Scores for Different Number of Max Features"
+        )
     return dt_acc_scores_list, dt_acc_scores_dict
 
 
@@ -264,6 +268,7 @@ def random_forest_classification(
     y_test,
     estimators=[2, 3, 5, 7, 10, 13, 89, 100, 200, 233, 500, 1000, 1597],
     num_dp=4,
+    messages=True
 ):
     """
     Evaluate Random Forest Classifier accuracy for different numbers of estimators.
@@ -319,30 +324,31 @@ def random_forest_classification(
         rf_acc_scores_list.append(rf_score)
         rf_acc_scores_dict[f"{k}_estimators"] = rf_score
 
-    # Plot the scores on a barplot
-    colours = rainbow(np.linspace(0, 1, max_k))
-    plt.bar([i for i in range(max_k)], rf_acc_scores_list, color=colours, width=0.37)
-    for i in range(max_k):
-        plt.text(
-            i,
-            rf_acc_scores_list[i],
-            f"{round(rf_acc_scores_list[i], num_dp)}",
-            rotation=60,
-            va="bottom",
-            fontsize=10,
+    if messages:
+        # Plot the scores on a barplot
+        colours = rainbow(np.linspace(0, 1, max_k))
+        plt.bar([i for i in range(max_k)], rf_acc_scores_list, color=colours, width=0.37)
+        for i in range(max_k):
+            plt.text(
+                i,
+                rf_acc_scores_list[i],
+                f"{round(rf_acc_scores_list[i], num_dp)}",
+                rotation=60,
+                va="bottom",
+                fontsize=10,
+            )
+        plt.xticks(
+            ticks=[i for i in range(max_k)],
+            labels=[str(estimator) for estimator in estimators],
+            rotation=45,
         )
-    plt.xticks(
-        ticks=[i for i in range(max_k)],
-        labels=[str(estimator) for estimator in estimators],
-        rotation=45,
-    )
-    y_bottom, y_top = plt.ylim()
-    plt.ylim(top=y_top * 1.13)
-    plt.xlabel("Number of Estimators")
-    plt.ylabel("Accuracy Scores")
-    plt.title(
-        "Random Forest Classifier Accuracy Scores for Different Number of Estimators"
-    )
+        y_bottom, y_top = plt.ylim()
+        plt.ylim(top=y_top * 1.13)
+        plt.xlabel("Number of Estimators")
+        plt.ylabel("Accuracy Scores")
+        plt.title(
+            "Random Forest Classifier Accuracy Scores for Different Number of Estimators"
+        )
     return rf_acc_scores_list, rf_acc_scores_dict
 
 
@@ -356,6 +362,7 @@ def xgboost_classification(
     y_val=None,
     max_num_estimators=103,
     num_dp=4,
+    messages=True
 ):
     """
     Evaluate XGBoost Classifier accuracy for different numbers of estimators.
@@ -420,33 +427,34 @@ def xgboost_classification(
         xgb_acc_scores_list.append(xgb_score)
         xgb_acc_scores_dict[f"{k}_estimators"] = xgb_score
 
-    # Plot the scores on a line plot
-    plt.plot(
-        [k for k in range(1, max_num_estimators + 1)],
-        xgb_acc_scores_list,
-        color="green",
-        linewidth=0.73,
-    )
-    for i in range(0, max_num_estimators + 1, 10):
-        plt.text(
-            i,
-            xgb_acc_scores_list[i - 1],
-            f"   ({i}, {round(xgb_acc_scores_list[i - 1], num_dp)})",
-            rotation=90,
-            va="bottom",
-            fontsize=8,
+    if messages:
+        # Plot the scores on a line plot
+        plt.plot(
+            [k for k in range(1, max_num_estimators + 1)],
+            xgb_acc_scores_list,
+            color="green",
+            linewidth=0.73,
         )
-    plt.xticks([i for i in range(0, max_num_estimators + 2, 5)])
-    y_bottom, y_top = plt.ylim()
-    plt.ylim(top=y_top * 1.05)
-    plt.xlabel("Number of Estimators")
-    plt.ylabel("Accuracy Scores")
-    plt.title("XGBoost Classifier Accuracy Scores for Different Number of Estimators")
+        for i in range(0, max_num_estimators + 1, 10):
+            plt.text(
+                i,
+                xgb_acc_scores_list[i - 1],
+                f"   ({i}, {round(xgb_acc_scores_list[i - 1], num_dp)})",
+                rotation=90,
+                va="bottom",
+                fontsize=8,
+            )
+        plt.xticks([i for i in range(0, max_num_estimators + 2, 5)])
+        y_bottom, y_top = plt.ylim()
+        plt.ylim(top=y_top * 1.05)
+        plt.xlabel("Number of Estimators")
+        plt.ylabel("Accuracy Scores")
+        plt.title("XGBoost Classifier Accuracy Scores for Different Number of Estimators")
     return xgb_acc_scores_list, xgb_acc_scores_dict
 
 
 ## Naive Bayes Classification Function
-def naive_bayes_classification(X_train, y_train, X_test, y_test, num_dp=4):
+def naive_bayes_classification(X_train, y_train, X_test, y_test, num_dp=4, messages=True):
     """
     Plots accuracy scores for different Naive Bayes classifiers.
 
@@ -510,28 +518,29 @@ def naive_bayes_classification(X_train, y_train, X_test, y_test, num_dp=4):
         except ValueError:
             continue
 
-    # Plot the scores on a barplot
-    colours = rainbow(np.linspace(0, 1, len(nb_classifiers)))
-    plt.bar(nb_classifiers.keys(), nb_acc_scores_list, color=colours)
-    for i in range(len(nb_classifiers)):
-        plt.text(
-            i,
-            nb_acc_scores_list[i],
-            f"{round(nb_acc_scores_list[i], num_dp)}",
+    if messages:
+        # Plot the scores on a barplot
+        colours = rainbow(np.linspace(0, 1, len(nb_classifiers)))
+        plt.bar(nb_classifiers.keys(), nb_acc_scores_list, color=colours)
+        for i in range(len(nb_classifiers)):
+            plt.text(
+                i,
+                nb_acc_scores_list[i],
+                f"{round(nb_acc_scores_list[i], num_dp)}",
+                rotation=45,
+                va="bottom",
+                fontsize=10,
+            )
+        plt.xticks(
+            ticks=[i for i in range(len(nb_classifiers))],
+            labels=nb_classifiers.keys(),
             rotation=45,
-            va="bottom",
-            fontsize=10,
         )
-    plt.xticks(
-        ticks=[i for i in range(len(nb_classifiers))],
-        labels=nb_classifiers.keys(),
-        rotation=45,
-    )
-    y_bottom, y_top = plt.ylim()
-    plt.ylim(top=y_top * 1.13)
-    plt.xlabel("Classifiers")
-    plt.ylabel("Accuracy Scores")
-    plt.title("Naive Bayes Classifier Accuracy Scores for Different Classifiers")
+        y_bottom, y_top = plt.ylim()
+        plt.ylim(top=y_top * 1.13)
+        plt.xlabel("Classifiers")
+        plt.ylabel("Accuracy Scores")
+        plt.title("Naive Bayes Classifier Accuracy Scores for Different Classifiers")
     return nb_acc_scores_list, nb_acc_scores_dict
 
 
