@@ -828,6 +828,10 @@ img {
 	position: relative;
 }
 
+/**
+ * Make failed images have a fallback message
+ * @link https://codepen.io/t_afif/pen/QwbLwEb
+*/
 img::after {
 	content: "We failed to load the image of \A'"attr(alt) "'\A 😞"/ " ";
 	position: absolute;
