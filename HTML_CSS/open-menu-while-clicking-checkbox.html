@@ -1,0 +1,98 @@
+<!-- open menu while clicking on checkbox -> https://stackoverflow.com/a/55110183 -->
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Open Menu While Clicking on Checkbox</title>
+	<style>
+		.menu + .menu {
+			margin-top: 0.1rem;
+			margin-block-start: 0.1rem;
+		}
+
+		.menu {
+			width: 100%;
+		}
+
+		.menu-checkbox {
+			display: none;
+		}
+
+		.menu-label {
+			display: block;
+			position: relative;
+			background-color: black;
+			color: white;
+			font-weight: bold;
+			height: 2rem;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			cursor: pointer;
+		}
+
+		/*menu-label and menu-text have same padding*/
+
+		.menu-label {
+			padding: 0 0.5rem;
+		}
+
+		.menu-content {
+			overflow: hidden;
+			word-break: break-all;
+			background-color: black;
+			color: white;
+			-o-transition: max-height 0.35s ease-out;
+			-webkit-transition: max-height 0.35s ease-out;
+			transition: max-height 0.35s ease-out;
+			max-height: 0;
+		}
+
+		.menu-text {
+			padding: 0 0.5rem;
+		}
+
+		.menu-checkbox:checked ~ .menu-content {
+			max-height: 100vh;
+		}
+
+		.menu-label::after {
+			position: absolute;
+			right: 1rem;
+			-o-transition: all 0.35s ease-out;
+			-webkit-transition: all 0.35s ease-out;
+			transition: all 0.35s ease-out;
+		}
+
+		/*codes from utf-8 dingbats*/
+
+		.menu-checkbox[type=checkbox] + .menu-label::after {
+			content: "\2795";
+		}
+
+		.menu-checkbox[type=checkbox]:checked + .menu-label::after {
+			content: "\2796";
+		}
+	</style>
+</head>
+<body>
+	<!-- 1st Menu Section -->
+	<section class="section menu menu-01">
+		<input type="checkbox" name="tabs" class="input menu-checkbox menu-01-checkbox" id="menu_01_toggle">
+		<label class="label menu-label menu-01-label" for="menu_01_toggle">Menu 01</label>
+		<div class="menu-content menu-01-content">
+			<p class="p menu-text">Muse oer of noontide felt passed flash. On this longed change fondly sooth ways been moths him, in holy his glee peace taste. On this longed change fondly sooth ways been moths him, in holy his glee peace taste. To it heart misery to power. Of noontide felt passed flash. On this longed change fondly sooth ways been moths him, in holy his glee peace taste. To it heart misery to power.</p>
+		</div>
+	</section>
+
+	<!-- 2nd Menu Section -->
+	<section class="section menu menu-02">
+		<input type="checkbox" name="tabs" class="input menu-checkbox menu-01-checkbox" id="menu_02_toggle">
+		<label class="label menu-label menu-02-label" for="menu_02_toggle">Menu 02</label>
+		<div class="menu-content menu-02-content">
+			<p class="p menu-text">On this longed change fondly sooth ways been moths him, in holy his glee peace taste. To it heart misery to power. Of noontide felt passed flash. On this longed change fondly sooth ways been moths him, in holy his glee peace taste. To it heart misery to power.</p>
+		</div>
+	</section>
+</body>
+</html>
