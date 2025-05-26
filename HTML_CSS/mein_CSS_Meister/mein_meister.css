@@ -825,6 +825,23 @@ img {
 	max-height: 100%;
 	max-width: 100%;
 	max-inline-size: 100%;
+	position: relative;
+}
+
+img::after {
+	content: "We failed to load the image of \A'"attr(alt) "'\A 😞"/ " ";
+	position: absolute;
+	inset: 0;
+	display: grid;
+	align-items: center;
+	justify-items: center;
+	place-items: center;
+	text-align: center;
+	background-color: #EEEEEE;
+	border: 0.125rem dashed;
+	font: bold 1.6em/1.5 system-ui;
+	color: #E80E0D;
+	white-space: pre-wrap;
 }
 
 audio:not([controls]) {
