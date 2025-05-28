@@ -7,11 +7,6 @@ from os.path import expanduser, realpath
 pd.set_option("mode.copy_on_write", True)
 
 
-# Path to Database
-path_to_database = "./test.db"
-real_path_to_database = realpath(expanduser(path_to_database))
-
-
 def create_table(cur, table_name, columns):
     """
     Create a table in SQLite with the given table name and column names.
@@ -20,8 +15,10 @@ def create_table(cur, table_name, columns):
     ----------
     cur : sqlite3.Cursor
         The database connection cursor.
+
     table_name : str
         The name of the table to create.
+
     columns : list of str
         The column names of the table to create.
 
@@ -34,22 +31,28 @@ def create_table(cur, table_name, columns):
     cur.execute(table_create_stmt)
 
 
-def insert_into_db(table_name, df):
+def insert_into_db(table_name, df, path_to_database="./test.db"):
     """
-    Insert data from a pandas DataFrame into a SQLite database table.
+    Insert data from a DataFrame into a specified table within an SQLite database.
 
     Parameters
     ----------
     table_name : str
-        The name of the table to insert into.
+        The name of the table to insert data into.
+
     df : pandas.DataFrame
-        The DataFrame with data to be inserted.
+        The DataFrame containing data to be inserted into the table.
+
+    path_to_database : str, optional
+        The file path to the SQLite database. Defaults to "./test.db".
 
     Returns
     -------
     None
     """
-    with sqlite3.connect(real_path_to_db) as conn:
+    real_path_to_database = realpath(expanduser(path_to_database))
+
+    with sqlite3.connect(real_path_to_database) as conn:
         cur = conn.cursor()
         # Create table based on DataFrame columns
         create_table(cur, table_name, df.columns)
@@ -66,45 +69,36 @@ def insert_into_db(table_name, df):
             conn.commit()
 
 
-def process_csv_into_sqlite(file_path):
+def process_csv_into_sqlite(file_path, path_to_database="./test.db"):
     """
-    Read a CSV file into a pandas DataFrame and insert the data into a SQLite database table.
+    Insert data from a CSV file into a table within an SQLite database.
 
     Parameters
     ----------
     file_path : str
-        The path to the CSV file to read.
+        The file path to the CSV file to be inserted into the database.
+
+    path_to_database : str, optional
+        The file path to the SQLite database. Defaults to "./test.db".
 
     Returns
     -------
     None
     """
-    real_path_to_file_path = realpath(file_path)
-    df = pd.read_csv(real_path_to_file_path)
-    table_name = file_path.split("/")[-1].replace(".csv", "")
-    insert_into_db(table_name, df)
+    real_path_to_file = realpath(file_path)
+    real_path_to_database = realpath(expanduser(path_to_database))
+
+    df = pd.read_csv(real_path_to_file)
+    table_name = real_path_to_file.split("/")[-1].replace(".csv", "")
+    insert_into_db(table_name, df, real_path_to_database)
 
 
-def process_spreadsheet_into_sqlite(file_path, sheet_name=None):
-    """
-    Read an Excel spreadsheet into a pandas DataFrame and insert the data into a SQLite database table.
+def process_spreadsheet_into_sqlite(file_path, sheet_name=None, path_to_database="./test.db"):
+    real_path_to_file = realpath(file_path)
+    real_path_to_database = realpath(expanduser(path_to_database))
 
-    Parameters
-    ----------
-    file_path : str
-        The path to the Excel file to read.
-    sheet_name : str, optional
-        The name of the sheet to read. If not provided, the first sheet is used and the table name is derived
-        from the file name.
-
-    Returns
-    -------
-    None
-    """
-    real_path_to_file_path = realpath(file_path)
-    df = pd.read_excel(real_path_to_file_path)
+    df = pd.read_excel(real_path_to_file)
     table_name = (
-        sheet_name if sheet_name else file_path.split("/")[-1].replace(".xlsx", "")
+        sheet_name if sheet_name else real_path_to_file.split("/")[-1].replace(".xlsx", "")
     )
-    insert_into_db(table_name, df)
-
+    insert_into_db(table_name, df, real_path_to_database)
