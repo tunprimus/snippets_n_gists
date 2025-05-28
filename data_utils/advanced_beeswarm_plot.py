@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Define constants
-GOLDEN_RATIO = 1.618
+GOLDEN_RATIO = 1.618033989
 FIG_WIDTH = 20
 FIG_HEIGHT = FIG_WIDTH / GOLDEN_RATIO
 FIG_SIZE = (FIG_WIDTH, FIG_HEIGHT)
@@ -16,12 +16,16 @@ def iqr_region_highlighter(data_to_use=None, median_line_colour="green", q_line_
     ----------
     data_to_use : array_like
         The data to be plotted
+    
     median_line_colour : str, optional
         The colour of the median line. Defaults to "green".
+    
     q_line_colour : str, optional
         The colour of the Q1 and Q3 lines. Defaults to "red".
+    
     iqr_colour : str, optional
         The colour of the IQR region fill. Defaults to "red".
+    
     iqr_alpha : float, optional
         The alpha (transparency) value of the IQR region fill. Defaults to 0.2.
 
@@ -57,10 +61,13 @@ def advanced_beeswarm_plot(data=None, x=None, y=None, order=None, titles_list=No
     ----------
     data : array_like or list of array_likes
         The data to be plotted
+    
     titles_list : list of str
         The titles of each subplot
+    
     swarmplot_colour : str, optional
         The colour of the swarmplot. Defaults to "blue".
+    
     plot_fig_size : tuple of int, optional
         The size of the figure. Defaults to (20, 10).
 
@@ -102,6 +109,7 @@ def advanced_beeswarm_plot(data=None, x=None, y=None, order=None, titles_list=No
     """
     import matplotlib.pyplot as plt
     import numpy as np
+    import pandas as pd
     import seaborn as sns
 
     plt.subplots_adjust(hspace=0.23, wspace=0.23)
@@ -110,6 +118,7 @@ def advanced_beeswarm_plot(data=None, x=None, y=None, order=None, titles_list=No
         # n_rows = len(data_list) // n_cols + (len(data_list) % n_cols > 0)
         n_cols = int(np.sqrt(len(data)))
         n_rows = int(np.ceil(len(data) / n_cols))
+    
     fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols, sharex=True, sharey=True, figsize=FIG_SIZE, dpi=FIG_DPI)
     for i, item in enumerate(data):
         ax = plt.subplot(n_rows, n_cols, i+1)

@@ -2,30 +2,35 @@
 import pandas as pd
 
 
-def split_into_three_train_validate_test(
+def split_into_train_validate_test(
     df_input,
-    stratify_col_name="y",
+    stratify_col_name="target",
     train_prop=0.74,
     test_prop=0.13,
     validate_prop=0.13,
     random_state=42,
 ):
     """
-    Split a Pandas dataframe into three DataFrames: train, validate and test.
+    Split a Pandas DataFrame into three pairs: train, validate and test.
     Adapted from: https://stackoverflow.com/a/60804119
 
     Parameters
     ----------
     df_input : Pandas DataFrame
         The input dataframe to be split.
+
     stratify_col_name : str, optional
-        The name of a column in the dataframe to use for stratified splitting. By default "y".
+        The name of a column in the dataframe to use for stratified splitting. By default "target".
+
     train_prop : float, optional
         The proportion of the input dataframe to use for the training set. By default 0.74.
+
     test_prop : float, optional
         The proportion of the input dataframe to use for the test set. By default 0.13.
+
     validate_prop : float, optional
         The proportion of the input dataframe to use for the validation set. By default 0.13.
+
     random_state : int, optional
         The seed used by the random number generator. By default 42.
 
@@ -33,9 +38,20 @@ def split_into_three_train_validate_test(
     -------
     df_train : Pandas DataFrame
         The subset of the input dataframe to use for training.
+
     df_validate : Pandas DataFrame
         The subset of the input dataframe to use for validation.
+
     df_test : Pandas DataFrame
+        The subset of the input dataframe to use for testing.
+
+    y_train : Pandas DataFrame, Series or numpy.ndarray
+        The subset of the input dataframe to use for training.
+
+    y_validate : Pandas DataFrame, Series or numpy.ndarray
+        The subset of the input dataframe to use for validation.
+
+    y_test : Pandas DataFrame, Series or numpy.ndarray
         The subset of the input dataframe to use for testing.
 
     Example
@@ -52,7 +68,7 @@ def split_into_three_train_validate_test(
     baz    100
     Name: label, dtype: int64
 
-    >>> df_train, df_validate, df_test = split_into_three_train_validate_test(df_input, stratify_col_name="y", train_prop=0.74, test_prop=0.13, validate_prop=0.13, random_state=42)
+    >>> df_train, df_validate, df_test, y_train, y_validate, y_test = split_into_train_validate_test(df_input, stratify_col_name="y", train_prop=0.74, test_prop=0.13, validate_prop=0.13, random_state=42)
 
     >>> df_train.shape
     (740, 3)
@@ -135,7 +151,7 @@ def split_into_three_train_validate_test(
         raise ValueError("Some rows were duplicated in the split.")
 
     # Return DataFrames
-    return df_train, df_validate, df_test
+    return df_train, df_validate, df_test, y_train, y_validate, y_test
 
 
 if __name__ == "__main__":
@@ -147,7 +163,7 @@ if __name__ == "__main__":
         }
     )
 
-    df_train, df_validate, df_test = split_into_three_train_validate_test(
+    df_train, df_validate, df_test, y_train, y_validate, y_test = split_into_train_validate_test(
         df,
         stratify_col_name="label",
         train_prop=0.74,

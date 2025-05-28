@@ -7,7 +7,7 @@ import pyarrow.parquet as pq
 import rpy2.robjects as ro
 import yaml
 import gspread
-from os.path import realpath as realpath
+from os.path import expanduser, realpath
 from os.path import splitext as splitext
 from io import StringIO, BytesIO
 from fastavro import reader
@@ -75,7 +75,7 @@ def generate_df_from_data_source(data_source,from_aws=False, aws_access_key=None
     - The function uses different pandas functions to read different file types.
     - AWS, Google Sheets, and BigQuery connections require appropriate credentials.
     """
-    real_path_to_data_source = realpath(data_source)
+    real_path_to_data_source = realpath(expanduser(data_source))
     file_path_name, ext_buffer = splitext(real_path_to_data_source)
     ext = ext_buffer.lstrip(".")
     if ext == "csv":

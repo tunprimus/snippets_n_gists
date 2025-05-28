@@ -2,12 +2,12 @@
 # Adapted from: Convert an Excel dataset into a SQL insert statement
 # https://dev.to/smuniraj/convert-excel-dataset-into-sql-insert-statement-38k4
 import pandas as pd
-from os.path import realpath as realpath
+from os.path import expanduser, realpath
 
 
 def csv_to_sql_insert(path_to_csv, path_to_sql_output=".", table_name="Test_Table_Name"):
-    real_path_to_csv = realpath(path_to_csv)
-    real_path_to_sql_output = realpath(path_to_sql_output)
+    real_path_to_csv = realpath(expanduser(path_to_csv))
+    real_path_to_sql_output = realpath(expanduser(path_to_sql_output))
     # Generate SQL insert statements
     table_name = table_name
     sql_statements = []

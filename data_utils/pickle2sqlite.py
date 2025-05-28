@@ -4,6 +4,7 @@ import pickle
 import codecs
 import sys.version as version
 
+from os.path import expanduser, realpath
 
 
 python_version = version
@@ -24,6 +25,8 @@ def to_pickle_encoded(filename):
     str
         The base64 encoded string.
     """
+    filename = realpath(expanduser(filename))
+    
     with open(filename, "rb") as fin:
         to_dump = pickle.dumps(fin, -1)
         filename_encoded = codecs.encode(to_dump, "base64").decode()
@@ -50,7 +53,9 @@ def save_pickle_to_sqlite(pickled_file, db_name="test.db", id_val=1):
     int
         The id of the inserted row.
     """
-    with sqlite3.connect(db_name) as conn:
+    real_path_to_db = realpath(expanduser(db_name))
+    
+    with sqlite3.connect(real_path_to_db) as conn:
         conn.execute("create table pickle_store (id integer, pickled text, python_version text)")
         conn.execute(
             'insert into pickle_store values ({}, "{}", "{}")'.format(id_val, pickled_file, python_version)
@@ -76,7 +81,9 @@ def load_pickle_from_sqlite(db_name="test.db", id_val=1):
     object
         The unpickled object.
     """
-    with sqlite3.connect(db_name) as conn:
+    real_path_to_db = realpath(expanduser(db_name))
+    
+    with sqlite3.connect(real_path_to_db) as conn:
         cursor = conn.cursor()
         cursor.execute("select pickled from pickle_store where id == id_val")
         row = cursor.fetchone()
@@ -84,3 +91,4 @@ def load_pickle_from_sqlite(db_name="test.db", id_val=1):
         result = pickle.loads(codecs.decode(row[0].encode(), "base64"))
         print(result)
         return result
+

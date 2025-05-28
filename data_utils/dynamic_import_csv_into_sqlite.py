@@ -2,14 +2,14 @@
 # Modified from https://medium.com/@ccpythonprogramming/dynamically-import-csv-files-into-sqlite-with-python-3c9ba07fe559
 import sqlite3
 import pandas as pd
-from os.path import realpath as realpath
+from os.path import expanduser, realpath
 
 pd.set_option("mode.copy_on_write", True)
 
 
 # Path to Database
 path_to_database = "./test.db"
-real_path_to_database = realpath(path_to_database)
+real_path_to_database = realpath(expanduser(path_to_database))
 
 
 def create_table(cur, table_name, columns):
@@ -107,3 +107,4 @@ def process_spreadsheet_into_sqlite(file_path, sheet_name=None):
         sheet_name if sheet_name else file_path.split("/")[-1].replace(".xlsx", "")
     )
     insert_into_db(table_name, df)
+
