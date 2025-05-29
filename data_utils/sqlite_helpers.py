@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sqlite3
 import time
-from os.path import realpath as realpath
+from os.path import expanduser, realpath
 try:
     from ulid import ULID
 except ImportError:
@@ -16,7 +16,7 @@ def generate_ulid():
 def explain_query(search_name, path_to_db):
     """Explain the query execution plan for a SELECT query without an index."""
 
-    real_path_to_db = realpath(path_to_db)
+    real_path_to_db = realpath(expanduser(path_to_db))
 
     with sqlite3.connect(real_path_to_db) as connection:
         cursor = connection.cursor()
@@ -41,7 +41,7 @@ def explain_query(search_name, path_to_db):
 def create_index(path_to_db, table_name, column_name, index_name):
     """Create an index on the name column of a selected table."""
 
-    real_path_to_db = realpath(path_to_db)
+    real_path_to_db = realpath(expanduser(path_to_db))
 
     try:
         with sqlite3.connect(real_path_to_db) as connection:
@@ -83,7 +83,7 @@ def create_index(path_to_db, table_name, column_name, index_name):
 def query_with_index(path_to_db, table_name, column_name, index_name, target_name):
     """Query the specified table using an index on the given column."""
 
-    real_path_to_db = realpath(path_to_db)
+    real_path_to_db = realpath(expanduser(path_to_db))
 
     with sqlite3.connect(real_path_to_db) as connection:
         cursor = connection.cursor()
@@ -106,3 +106,4 @@ def query_with_index(path_to_db, table_name, column_name, index_name, target_nam
         # Display results and execution time
         print(f"Query result: {result}")
         print(f"Execution time with index: {execution_time:.5f} microseconds")
+

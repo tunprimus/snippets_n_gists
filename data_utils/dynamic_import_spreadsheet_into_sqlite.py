@@ -26,7 +26,9 @@ def create_table(cur, table_name, columns):
     -------
     None
     """
-    columns_defn = ", ".join(f"{col} TEXT" for col in columns)
+    columns_defn = ", ".join(f"{col} TEXT" for col in columns) if isinstance(columns, (pd.core.indexes.base.Index, pd.core.frame.DataFrame)) else columns
+    columns_defn = columns_defn + ",added_on DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL"
+
     table_create_stmt = f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_defn})"
     cur.execute(table_create_stmt)
 
@@ -54,13 +56,18 @@ def insert_into_db(table_name, df, path_to_database="./test.db"):
 
     with sqlite3.connect(real_path_to_database) as conn:
         cur = conn.cursor()
+
+        # Generate sanitised column labels
+        col_labels = ', '.join(df.columns).replace('/', '_').replace('-', '_').replace(' ', '')
+
         # Create table based on DataFrame columns
-        create_table(cur, table_name, df.columns)
+        create_table(cur, table_name, col_labels)
+
         # Insert data into the table
         try:
             for _, row in df.iterrows():
                 cur.execute(
-                    f"INSERT INTO {table_name} ({', '.join(df.columns)}) VALUES ({', '.join(['?'] * len(df.columns))})",
+                    f"INSERT OR REPLACE INTO {table_name} ({col_labels}) VALUES ({', '.join(['?'] * len(df.columns))})",
                     tuple(row),
                 )
         except:
@@ -89,7 +96,7 @@ def process_csv_into_sqlite(file_path, path_to_database="./test.db"):
     real_path_to_database = realpath(expanduser(path_to_database))
 
     df = pd.read_csv(real_path_to_file)
-    table_name = real_path_to_file.split("/")[-1].replace(".csv", "")
+    table_name = real_path_to_file.split("/")[-1].replace(".csv", "").replace("-", "_").replace("/", "")
     insert_into_db(table_name, df, real_path_to_database)
 
 
@@ -99,6 +106,6 @@ def process_spreadsheet_into_sqlite(file_path, sheet_name=None, path_to_database
 
     df = pd.read_excel(real_path_to_file)
     table_name = (
-        sheet_name if sheet_name else real_path_to_file.split("/")[-1].replace(".xlsx", "")
+        sheet_name if sheet_name else real_path_to_file.split("/")[-1].replace(".xlsx", "").replace("-", "_").replace("/", "")
     )
     insert_into_db(table_name, df, real_path_to_database)

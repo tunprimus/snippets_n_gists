@@ -7,14 +7,22 @@ def reorder_pandas_columns(df, pop_n_insert=False, col_to_pop=None, index_to_ins
 
     Parameters:
     df (Pandas DataFrame): The DataFrame to reorder.
+
     pop_n_insert (bool): If True, pop the column specified by col_to_pop and insert it at the index specified by index_to_insert.
+
     col_to_pop (str): The column to pop.
+    
     index_to_insert (int): The index to insert the popped column at.
+
     reindex (bool): If True, reindex the DataFrame with the columns specified by new_cols_for_reindex.
     new_cols_for_reindex (list): The columns to reindex the DataFrame with.
+
     custom_reorder (bool): If True, reorder the columns by first adding custom_first_cols, then adding any columns not in custom_first_cols, custom_last_cols, or custom_drop_cols, and finally adding custom_last_cols.
+
     custom_first_cols (list): The columns to add first.
+
     custom_last_cols (list): The columns to add last.
+
     custom_drop_cols (list): The columns to drop.
 
     Returns:
