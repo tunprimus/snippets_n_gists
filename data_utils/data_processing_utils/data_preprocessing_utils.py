@@ -468,6 +468,27 @@ def generate_df_from_data_source(
 
 
 def missing_value_overview(df, numdp=4, messages=True):
+    """
+    Provides an overview of missing values in a DataFrame.
+
+    This function calculates and returns a table that shows the number of missing
+    values, the percentage of missing values and the data type for each column in
+    the provided DataFrame. It also prints a summary message if requested.
+
+    Parameters:
+    - df: pd.DataFrame
+        The DataFrame for which to calculate missing values overview.
+    - numdp: int, optional (default=4)
+        Number of decimal places to round the percentage of missing values.
+    - messages: bool, optional (default=True)
+        If True, prints a message about the number of columns and columns with missing
+        values.
+
+    Returns:
+    - pd.DataFrame
+        A DataFrame containing columns 'missing_values', 'pct_of_total_values', and
+        'data_type', sorted by percentage of missing values in descending order.
+    """
     import pandas as pd
 
     miss_val = df.isnull().sum()
@@ -531,7 +552,25 @@ def missing_value_heatmap(df, figsize=(20, 12.4)):
 # ----------------------------------------------------------------------#
 # Function to get quick summary of Pandas DataFrame #
 # ----------------------------------------------------------------------#
+
 def quick_data_summary(df, numdp=4, messages=False):
+    """
+    Generate a quick summary of a Pandas DataFrame.
+
+    Parameters
+    ----------
+    - df : Pandas DataFrame
+        The DataFrame to be summarised
+    - numdp : int, default 4
+        Number of decimal places to round to
+    - messages : bool, default False
+        If `True`, print messages indicating the summary of the DataFrame
+
+    Returns
+    -------
+    summary : dict
+        A dictionary containing the summary of the DataFrame.
+    """
     import numpy as np
     import pandas as pd
 
@@ -691,20 +730,37 @@ def scatterplot(df, feature, label, num_dp=4, linecolour="darkorange"):
 
     Parameters
     ----------
-    df : pandas.DataFrame
+    - df : pandas.DataFrame
         The DataFrame containing the data
-    feature : str
+    - feature : str
         The feature to plot on the x-axis
-    label : str
+    - label : str
         The feature to plot on the y-axis
-    num_dp : int
+    - num_dp : int
         The number of decimal places to round the regression equation to
-    linecolour : str
+    - linecolour : str
         The colour of the regression line
 
     Returns
     -------
     None
+
+    Example
+    -------
+    >>> # Sample data
+    >>> rng = np.random.default_rng()
+    >>> age = rng.integers(low=18, high=61, size=103)
+    >>> sex = rng.choice(["female", "male"], size=103)
+    >>> bmi = rng.normal(loc=23, scale=7, size=103)
+    >>> children = rng.integers(low=0, high=9, size=103)
+    >>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+    >>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+    >>> charges = rng.normal(loc=5300, scale=2113, size=103)
+    >>>
+    >>> data_dict = {"age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "charges": charges}
+    >>> df = pd.DataFrame(data_dict)
+    >>>
+    >>> scatterplot(df, "age", "charges")
     """
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -762,22 +818,39 @@ def bar_chart(df, feature, label, num_dp=4, alpha=0.05, sig_ttest_only=True):
 
     Parameters
     ----------
-    df : pandas.DataFrame
+    - df : pandas.DataFrame
         The DataFrame containing the data
-    feature : str
+    - feature : str
         The feature to plot on the x-axis
-    label : str
+    - label : str
         The feature to plot on the y-axis
-    num_dp : int
+    - num_dp : int
         The number of decimal places to round the results to
-    alpha : float
+    - alpha : float
         The significance level for the t-tests
-    sig_ttest_only : bool
+    - sig_ttest_only : bool
         If True, only print the t-tests with p <= alpha / number of ttest comparisons
 
     Returns
     -------
     None
+
+    Example
+    -------
+    >>> # Sample data
+    >>> rng = np.random.default_rng()
+    >>> age = rng.integers(low=18, high=61, size=103)
+    >>> sex = rng.choice(["female", "male"], size=103)
+    >>> bmi = rng.normal(loc=23, scale=7, size=103)
+    >>> children = rng.integers(low=0, high=9, size=103)
+    >>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+    >>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+    >>> charges = rng.normal(loc=5300, scale=2113, size=103)
+    >>>
+    >>> data_dict = {"age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "charges": charges}
+    >>> df = pd.DataFrame(data_dict)
+    >>>
+    >>> bar_chart(df, "smoker", "charges")
     """
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -855,18 +928,41 @@ def crosstab(df, feature, label, num_dp=4):
 
     Parameters
     ----------
-    df : pandas.DataFrame
+    - df : pandas.DataFrame
         The DataFrame containing the data
-    feature : str
+    - feature : str
         The feature to plot on the x-axis
-    label : str
+    - label : str
         The feature to plot on the y-axis
-    num_dp : int
+    - num_dp : int
         The number of decimal places to round the Chi-Squared results to
 
     Returns
     -------
     None
+
+    Example
+    -------
+    >>> # Sample data
+    >>> rng = np.random.default_rng()
+    >>> age = rng.integers(low=18, high=61, size=103)
+    >>> sex = rng.choice(["female", "male"], size=103)
+    >>> bmi = rng.normal(loc=23, scale=7, size=103)
+    >>> children = rng.integers(low=0, high=9, size=103)
+    >>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+    >>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+    >>> low_earn = rng.normal(loc=997, scale=13, size=103)
+    >>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+    >>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+    >>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+    >>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+    >>> satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+    >>> charges = rng.normal(loc=5300, scale=2113, size=103)
+    >>>
+    >>> data_dict = {"age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges}
+    >>> df = pd.DataFrame(data_dict)
+    >>>
+    >>> crosstab(df, "class", "satisfaction")
     """
     import matplotlib.pyplot as plt
     import numpy as np
@@ -909,11 +1005,11 @@ def bivariate_stats(df, label, num_dp=4):
 
     Parameters
     ----------
-    df : pandas.DataFrame
+    - df : pandas.DataFrame
         The DataFrame containing the data
-    label : str
+    - label : str
         The label to be used for the target variable
-    num_dp : int
+    - num_dp : int
         The number of decimal places to round the results to
 
     Returns
@@ -921,11 +1017,30 @@ def bivariate_stats(df, label, num_dp=4):
     pandas.DataFrame
         A DataFrame containing the results of the bivariate statistics
 
-    Examples
-    --------
-    bivariate_stats(df_insurance, "charges")
-    bivariate_stats(df_nba_salaries, "Salary")
-    bivariate_stats(df_airline_satisfaction, "satisfaction")
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+    >>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+    >>> satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+    >>> charges = rng.normal(loc=5300, scale=2113, size=103)
+    >>>
+    >>> data_dict = {"age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> bivariate_stats(df, "charges")
+    >>> bivariate_stats(df, "satisfaction")
+    >>> bivariate_stats(df, "monthly_salary")
     """
     import matplotlib.pyplot as plt
     import pandas as pd
@@ -1083,12 +1198,35 @@ def plot_correlation_heatmap_with_matshow(df):
 
     Parameters
     ----------
-    df : pandas.core.frame.DataFrame
+    - df : pandas.core.frame.DataFrame
         The DataFrame to be plotted.
 
     Returns
     -------
     None
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+    >>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+    >>> satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+    >>> charges = rng.normal(loc=5300, scale=2113, size=103)
+    >>>
+    >>> data_dict = {"age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> plot_correlation_heatmap_with_matshow(df)
 
     Notes
     -----
@@ -1114,13 +1252,36 @@ def plot_correlation_heatmap(df):
 
     Parameters
     ----------
-    df : pandas.core.frame.DataFrame
+    - df : pandas.core.frame.DataFrame
         The DataFrame to be plotted.
 
     Returns
     -------
     pandas.io.formats.style.Styler
         The styled DataFrame containing the correlation matrix.
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+    >>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+    >>> satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+    >>> charges = rng.normal(loc=5300, scale=2113, size=103)
+    >>>
+    >>> data_dict = {"age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> plot_correlation_heatmap(df)
 
     Notes
     -----
@@ -1159,7 +1320,7 @@ def check_uniqueness(df):
 
     Parameters
     ----------
-    df : pandas.core.frame.DataFrame
+    - df : pandas.core.frame.DataFrame
         The DataFrame to be checked.
 
     Returns
@@ -1170,6 +1331,29 @@ def check_uniqueness(df):
         "num_unique" is the number of unique values in that column.
         "counts" is a numpy array of the counts of each unique value in that column,
         sorted by the unique value itself.
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+    >>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+    >>> satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+    >>> charges = rng.normal(loc=5300, scale=2113, size=103)
+    >>>
+    >>> data_dict = {"age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> check_uniqueness(df)
     """
     try:
         import fireducks.pandas as pd
@@ -1201,25 +1385,48 @@ def basic_wrangling(
 
     Parameters
     ----------
-    df : pandas DataFrame
+    - df : pandas DataFrame
         The DataFrame to be wrangled.
-    features : list of str, optional
+    - features : list of str, optional
         List of column names to focus on. If empty, all columns are considered.
-    drop_duplicates : bool, default False
+    - drop_duplicates : bool, default False
         Whether to drop duplicate rows.
-    drop_duplicates_subset_name : str, optional
+    - drop_duplicates_subset_name : str, optional
         Column name to consider when dropping duplicates. If None, all columns are considered.
-    missing_threshold : float, default 0.95
+    - missing_threshold : float, default 0.95
         Threshold for dropping columns with a high proportion of missing values.
-    unique_threshold : float, default 0.95
+    - unique_threshold : float, default 0.95
         Threshold for dropping columns with a high proportion of unique values.
-    messages : bool, default True
+    - messages : bool, default True
         If True, print messages about the operations performed.
 
     Returns
     -------
     df : pandas DataFrame
         The wrangled DataFrame.
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+	>>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+	satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+	>>> charges = rng.normal(loc=5300, scale=2113, size=103)
+	>>>
+	>>> data_dict = {"age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> basic_wrangling(df)
     """
     try:
         import fireducks.pandas as pd
@@ -1285,11 +1492,11 @@ def can_convert_dataframe_to_datetime(
 
     Parameters
     ----------
-    df : pandas DataFrame
+    - df : pandas DataFrame
         DataFrame to check
-    col_list : list, default []
+    - col_list : list, default []
         List of columns to check. If empty, all columns with dtype of object will be checked.
-    return_result : bool, default True
+    - return_result : bool, default True
         If `True`, return a dictionary with column names as keys and boolean values indicating
         whether each column can be converted to datetime format. If `False`, return nothing and print
         messages.
@@ -1359,17 +1566,17 @@ def batch_convert_to_datetime(
 
     Parameters
     ----------
-    df : pandas DataFrame
+    - df : pandas DataFrame
         DataFrame to convert
-    split_datetime : bool, default True
+    - split_datetime : bool, default True
         If `True`, split datetime columns into separate columns for year, month, day and weekday.
-    add_hr_min_sec : bool, default False
+    - add_hr_min_sec : bool, default False
         If `True`, add separate columns for hour, minute and second.
-    days_to_today : bool, default False
+    - days_to_today : bool, default False
         If `True`, add a column with the number of days to today.
-    drop_date : bool, default True
+    - drop_date : bool, default True
         If `True`, drop the original column after conversion.
-    messages : bool, default True
+    - messages : bool, default True
         If `True`, print messages indicating which columns were converted.
 
     Returns
@@ -1429,15 +1636,15 @@ def parse_column_as_date(
 
     Parameters
     ----------
-    df : pandas DataFrame
+    - df : pandas DataFrame
         DataFrame containing the features to be parsed.
-    features : list, default []
+    - features : list, default []
         List of column names to parse as date features. If empty, no columns are parsed.
-    days_to_today : bool, default False
+    - days_to_today : bool, default False
         If `True`, calculate the number of days from each date to today's date.
-    drop_date : bool, default True
+    - drop_date : bool, default True
         If `True`, drop the original date columns after parsing.
-    messages : bool, default True
+    - messages : bool, default True
         If `True`, print messages indicating parsing status for each feature.
 
     Returns
@@ -1481,21 +1688,97 @@ def bin_categories(df, features=[], cutoff=0.05, replace_with="Other", messages=
 
     Parameters
     ----------
-    df : pandas DataFrame
+    - df : pandas DataFrame
         DataFrame to clean
-    features : list of str, default []
+    - features : list of str, default []
         Columns to consider for binning
-    cutoff : float, default 0.05
+    - cutoff : float, default 0.05
         Proportion of total samples to define low count groups
-    replace_with : str, default 'Other'
+    - replace_with : str, default 'Other'
         Value to replace low count groups with
-    messages : bool, default True
+    - messages : bool, default True
         If `True`, print messages indicating which columns were cleaned
 
     Returns
     -------
     df : pandas DataFrame
         DataFrame with low count groups binned
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>>
+	>>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
+	>>>
+	>>> firstnames = ["Michael", "John", "Mary", "Segun", "Tolu", "Uche", "David", "Lekan", "Luke", "Jason", "Scott", "Jordan", "Hannah", "Robert", "Patricia", "Carla", "Nancy", "James", "Anne", "Mariusz", "Dagobert", "Sahin", "Francesca", "Niels", "Remedios", "Sonia", "Angela", "Catalina", "Sarah", "Joshua", "Fabio", "Sienna",]
+	>>>
+	>>> prefixes = ["Ade", "Olu", "Al", "Oluwa", "Chi", "Wa", "Fa", "Bet", "Sa", "Ah", "Abu", "Bint", "Ter", "Bath", "Ben", "Mac", "Nic", "Del", "Ab", "Bar", "Kil", "Mal", "Öz", "Mala", "Dos", "Fitz", "Ibn", "Du", "Gil", "Tre", "Mul", "Av",]
+	>>>
+	>>> suffixes = ["bert", "stan", "addin", "tou", "zi", "jiā", "biɑn", "chan", "kun", "san", "sama", "shi", "ujin", "joshi", "ach", "ant", "appa", "anu", "chian", "eanu", "enko", "ius", "kar", "onak", "on", "oui", "quin", "sen", "ulis", "ema", "awan", "ak",]
+	>>>
+	>>>
+	>>> def random_date_gen(start_date, range_in_days, count):
+	>>>     try:
+	>>>         start_date = np.datetime64(start_date)
+	>>>         base = np.full(count, start_date)
+	>>>         offset = rng.integers(low=0, high=range_in_days, size=count)
+	>>>         offset = offset.astype("timedelta64[D]")
+	>>>         random_date = base + offset
+	>>>     except Exception:
+	>>>         days_to_add = np.arange(0, range_in_days)
+	>>>         random_date = np.datetime64(start_date) + rng.choice(days_to_add)
+	>>>
+	>>>     return random_date
+	>>>
+	>>>
+	>>> def generate_name_advanced():
+	>>>     surname = rng.choice(surnames)
+	>>>     firstname = rng.choice(firstnames)
+	>>>     prefix = rng.choice(prefixes)
+	>>>     suffix = rng.choice(suffixes)
+	>>>     use_prefix_surname = rng.choice([True, False])
+	>>>     use_prefix_firstname = rng.choice([True, False])
+	>>>     use_suffix_surname = rng.choice([True, False])
+	>>>     use_suffix_firstname = rng.choice([True, False])
+	>>>     if use_prefix_surname:
+	>>>         fullname = f"{prefix}{surname.lower()} {firstname}"
+	>>>     elif use_prefix_firstname:
+	>>>         fullname = f"{surname} {prefix}{firstname.lower()}"
+	>>>     elif use_prefix_surname and use_prefix_firstname:
+	>>>         fullname = f"{prefix}{surname.lower()} {prefix}{firstname.lower()}"
+	>>>     elif use_suffix_surname:
+	>>>         fullname = f"{surname}{suffix} {firstname}"
+	>>>     elif use_suffix_firstname:
+	>>>         fullname = f"{surname} {firstname}{suffix}"
+	>>>     elif use_suffix_surname and use_suffix_firstname:
+	>>>         fullname = f"{surname}{suffix} {firstname}{suffix}"
+	>>>     else:
+	>>>         fullname = f"{surname} {firstname}"
+	>>>
+	>>>     return fullname
+	>>>
+	>>>
+	>>> name = [generate_name_advanced() for _ in range(103)]
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+	>>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+	satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+	>>> charges = rng.normal(loc=5300, scale=2113, size=103)
+	>>> onboard_date = random_date_gen("2023-01-01", 365, 103)
+	>>>
+	>>> data_dict = {"name": name, "age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges, "onboard_date": onboard_date}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> bin_categories(df, features=["satisfaction"], cutoff=0.025)
     """
     try:
         import fireducks.pandas as pd
@@ -1566,6 +1849,82 @@ def clean_outlier_per_column(
     -------
     df : pandas DataFrame
         DataFrame with outliers cleaned
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>>
+	>>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
+	>>>
+	>>> firstnames = ["Michael", "John", "Mary", "Segun", "Tolu", "Uche", "David", "Lekan", "Luke", "Jason", "Scott", "Jordan", "Hannah", "Robert", "Patricia", "Carla", "Nancy", "James", "Anne", "Mariusz", "Dagobert", "Sahin", "Francesca", "Niels", "Remedios", "Sonia", "Angela", "Catalina", "Sarah", "Joshua", "Fabio", "Sienna",]
+	>>>
+	>>> prefixes = ["Ade", "Olu", "Al", "Oluwa", "Chi", "Wa", "Fa", "Bet", "Sa", "Ah", "Abu", "Bint", "Ter", "Bath", "Ben", "Mac", "Nic", "Del", "Ab", "Bar", "Kil", "Mal", "Öz", "Mala", "Dos", "Fitz", "Ibn", "Du", "Gil", "Tre", "Mul", "Av",]
+	>>>
+	>>> suffixes = ["bert", "stan", "addin", "tou", "zi", "jiā", "biɑn", "chan", "kun", "san", "sama", "shi", "ujin", "joshi", "ach", "ant", "appa", "anu", "chian", "eanu", "enko", "ius", "kar", "onak", "on", "oui", "quin", "sen", "ulis", "ema", "awan", "ak",]
+	>>>
+	>>>
+	>>> def random_date_gen(start_date, range_in_days, count):
+	>>>     try:
+	>>>         start_date = np.datetime64(start_date)
+	>>>         base = np.full(count, start_date)
+	>>>         offset = rng.integers(low=0, high=range_in_days, size=count)
+	>>>         offset = offset.astype("timedelta64[D]")
+	>>>         random_date = base + offset
+	>>>     except Exception:
+	>>>         days_to_add = np.arange(0, range_in_days)
+	>>>         random_date = np.datetime64(start_date) + rng.choice(days_to_add)
+	>>>
+	>>>     return random_date
+	>>>
+	>>>
+	>>> def generate_name_advanced():
+	>>>     surname = rng.choice(surnames)
+	>>>     firstname = rng.choice(firstnames)
+	>>>     prefix = rng.choice(prefixes)
+	>>>     suffix = rng.choice(suffixes)
+	>>>     use_prefix_surname = rng.choice([True, False])
+	>>>     use_prefix_firstname = rng.choice([True, False])
+	>>>     use_suffix_surname = rng.choice([True, False])
+	>>>     use_suffix_firstname = rng.choice([True, False])
+	>>>     if use_prefix_surname:
+	>>>         fullname = f"{prefix}{surname.lower()} {firstname}"
+	>>>     elif use_prefix_firstname:
+	>>>         fullname = f"{surname} {prefix}{firstname.lower()}"
+	>>>     elif use_prefix_surname and use_prefix_firstname:
+	>>>         fullname = f"{prefix}{surname.lower()} {prefix}{firstname.lower()}"
+	>>>     elif use_suffix_surname:
+	>>>         fullname = f"{surname}{suffix} {firstname}"
+	>>>     elif use_suffix_firstname:
+	>>>         fullname = f"{surname} {firstname}{suffix}"
+	>>>     elif use_suffix_surname and use_suffix_firstname:
+	>>>         fullname = f"{surname}{suffix} {firstname}{suffix}"
+	>>>     else:
+	>>>         fullname = f"{surname} {firstname}"
+	>>>
+	>>>     return fullname
+	>>>
+	>>>
+	>>> name = [generate_name_advanced() for _ in range(103)]
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+	>>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+	satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+	>>> charges = rng.normal(loc=5300, scale=2113, size=103)
+	>>> onboard_date = random_date_gen("2023-01-01", 365, 103)
+	>>>
+	>>> data_dict = {"name": name, "age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges, "onboard_date": onboard_date}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> clean_outlier_per_column(df, features=df.columns)
     """
     import numpy as np
     try:
@@ -1698,6 +2057,82 @@ def clean_outlier_by_all_columns(
     -------
     df : pandas DataFrame
         DataFrame with outliers cleaned
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>>
+	>>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
+	>>>
+	>>> firstnames = ["Michael", "John", "Mary", "Segun", "Tolu", "Uche", "David", "Lekan", "Luke", "Jason", "Scott", "Jordan", "Hannah", "Robert", "Patricia", "Carla", "Nancy", "James", "Anne", "Mariusz", "Dagobert", "Sahin", "Francesca", "Niels", "Remedios", "Sonia", "Angela", "Catalina", "Sarah", "Joshua", "Fabio", "Sienna",]
+	>>>
+	>>> prefixes = ["Ade", "Olu", "Al", "Oluwa", "Chi", "Wa", "Fa", "Bet", "Sa", "Ah", "Abu", "Bint", "Ter", "Bath", "Ben", "Mac", "Nic", "Del", "Ab", "Bar", "Kil", "Mal", "Öz", "Mala", "Dos", "Fitz", "Ibn", "Du", "Gil", "Tre", "Mul", "Av",]
+	>>>
+	>>> suffixes = ["bert", "stan", "addin", "tou", "zi", "jiā", "biɑn", "chan", "kun", "san", "sama", "shi", "ujin", "joshi", "ach", "ant", "appa", "anu", "chian", "eanu", "enko", "ius", "kar", "onak", "on", "oui", "quin", "sen", "ulis", "ema", "awan", "ak",]
+	>>>
+	>>>
+	>>> def random_date_gen(start_date, range_in_days, count):
+	>>>     try:
+	>>>         start_date = np.datetime64(start_date)
+	>>>         base = np.full(count, start_date)
+	>>>         offset = rng.integers(low=0, high=range_in_days, size=count)
+	>>>         offset = offset.astype("timedelta64[D]")
+	>>>         random_date = base + offset
+	>>>     except Exception:
+	>>>         days_to_add = np.arange(0, range_in_days)
+	>>>         random_date = np.datetime64(start_date) + rng.choice(days_to_add)
+	>>>
+	>>>     return random_date
+	>>>
+	>>>
+	>>> def generate_name_advanced():
+	>>>     surname = rng.choice(surnames)
+	>>>     firstname = rng.choice(firstnames)
+	>>>     prefix = rng.choice(prefixes)
+	>>>     suffix = rng.choice(suffixes)
+	>>>     use_prefix_surname = rng.choice([True, False])
+	>>>     use_prefix_firstname = rng.choice([True, False])
+	>>>     use_suffix_surname = rng.choice([True, False])
+	>>>     use_suffix_firstname = rng.choice([True, False])
+	>>>     if use_prefix_surname:
+	>>>         fullname = f"{prefix}{surname.lower()} {firstname}"
+	>>>     elif use_prefix_firstname:
+	>>>         fullname = f"{surname} {prefix}{firstname.lower()}"
+	>>>     elif use_prefix_surname and use_prefix_firstname:
+	>>>         fullname = f"{prefix}{surname.lower()} {prefix}{firstname.lower()}"
+	>>>     elif use_suffix_surname:
+	>>>         fullname = f"{surname}{suffix} {firstname}"
+	>>>     elif use_suffix_firstname:
+	>>>         fullname = f"{surname} {firstname}{suffix}"
+	>>>     elif use_suffix_surname and use_suffix_firstname:
+	>>>         fullname = f"{surname}{suffix} {firstname}{suffix}"
+	>>>     else:
+	>>>         fullname = f"{surname} {firstname}"
+	>>>
+	>>>     return fullname
+	>>>
+	>>>
+	>>> name = [generate_name_advanced() for _ in range(103)]
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+	>>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+	satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+	>>> charges = rng.normal(loc=5300, scale=2113, size=103)
+	>>> onboard_date = random_date_gen("2023-01-01", 365, 103)
+	>>>
+	>>> data_dict = {"name": name, "age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges, "onboard_date": onboard_date}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> df_without_outliers = clean_outlier_by_all_columns(df)
     """
     import joblib
     import matplotlib.pyplot as plt
@@ -1849,19 +2284,95 @@ def skew_correct(df, feature, max_power=103, messages=True):
 
     Parameters
     ----------
-    df : pandas DataFrame
+    - df : pandas DataFrame
         DataFrame containing the feature to correct
-    feature : str
+    - feature : str
         Name of the feature to correct
-    max_power : int, optional
+    - max_power : int, optional
         Maximum power to use for transformation. Default: 103
-    messages : bool, optional
+    - messages : bool, optional
         If `True`, print messages about the transformation. Default: True
 
     Returns
     -------
     df : pandas DataFrame
         DataFrame with the corrected feature
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>>
+	>>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
+	>>>
+	>>> firstnames = ["Michael", "John", "Mary", "Segun", "Tolu", "Uche", "David", "Lekan", "Luke", "Jason", "Scott", "Jordan", "Hannah", "Robert", "Patricia", "Carla", "Nancy", "James", "Anne", "Mariusz", "Dagobert", "Sahin", "Francesca", "Niels", "Remedios", "Sonia", "Angela", "Catalina", "Sarah", "Joshua", "Fabio", "Sienna",]
+	>>>
+	>>> prefixes = ["Ade", "Olu", "Al", "Oluwa", "Chi", "Wa", "Fa", "Bet", "Sa", "Ah", "Abu", "Bint", "Ter", "Bath", "Ben", "Mac", "Nic", "Del", "Ab", "Bar", "Kil", "Mal", "Öz", "Mala", "Dos", "Fitz", "Ibn", "Du", "Gil", "Tre", "Mul", "Av",]
+	>>>
+	>>> suffixes = ["bert", "stan", "addin", "tou", "zi", "jiā", "biɑn", "chan", "kun", "san", "sama", "shi", "ujin", "joshi", "ach", "ant", "appa", "anu", "chian", "eanu", "enko", "ius", "kar", "onak", "on", "oui", "quin", "sen", "ulis", "ema", "awan", "ak",]
+	>>>
+	>>>
+	>>> def random_date_gen(start_date, range_in_days, count):
+	>>>     try:
+	>>>         start_date = np.datetime64(start_date)
+	>>>         base = np.full(count, start_date)
+	>>>         offset = rng.integers(low=0, high=range_in_days, size=count)
+	>>>         offset = offset.astype("timedelta64[D]")
+	>>>         random_date = base + offset
+	>>>     except Exception:
+	>>>         days_to_add = np.arange(0, range_in_days)
+	>>>         random_date = np.datetime64(start_date) + rng.choice(days_to_add)
+	>>>
+	>>>     return random_date
+	>>>
+	>>>
+	>>> def generate_name_advanced():
+	>>>     surname = rng.choice(surnames)
+	>>>     firstname = rng.choice(firstnames)
+	>>>     prefix = rng.choice(prefixes)
+	>>>     suffix = rng.choice(suffixes)
+	>>>     use_prefix_surname = rng.choice([True, False])
+	>>>     use_prefix_firstname = rng.choice([True, False])
+	>>>     use_suffix_surname = rng.choice([True, False])
+	>>>     use_suffix_firstname = rng.choice([True, False])
+	>>>     if use_prefix_surname:
+	>>>         fullname = f"{prefix}{surname.lower()} {firstname}"
+	>>>     elif use_prefix_firstname:
+	>>>         fullname = f"{surname} {prefix}{firstname.lower()}"
+	>>>     elif use_prefix_surname and use_prefix_firstname:
+	>>>         fullname = f"{prefix}{surname.lower()} {prefix}{firstname.lower()}"
+	>>>     elif use_suffix_surname:
+	>>>         fullname = f"{surname}{suffix} {firstname}"
+	>>>     elif use_suffix_firstname:
+	>>>         fullname = f"{surname} {firstname}{suffix}"
+	>>>     elif use_suffix_surname and use_suffix_firstname:
+	>>>         fullname = f"{surname}{suffix} {firstname}{suffix}"
+	>>>     else:
+	>>>         fullname = f"{surname} {firstname}"
+	>>>
+	>>>     return fullname
+	>>>
+	>>>
+	>>> name = [generate_name_advanced() for _ in range(103)]
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+	>>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+	satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+	>>> charges = rng.normal(loc=5300, scale=2113, size=103)
+	>>> onboard_date = random_date_gen("2023-01-01", 365, 103)
+	>>>
+	>>> data_dict = {"name": name, "age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges, "onboard_date": onboard_date}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> skew_correct(df, "charges")
     """
     import matplotlib.pyplot as plt
     import numpy as np
@@ -1996,23 +2507,99 @@ def missing_drop(
 
     Parameters
     ----------
-    df : pandas DataFrame
+    - df : pandas DataFrame
         DataFrame to drop missing values from
-    label : str, default ""
+    - label : str, default ""
         Label to drop columns with
-    features : list of str, default []
+    - features : list of str, default []
         Columns to consider for dropping
-    row_threshold : float, default 0.90
+    - row_threshold : float, default 0.90
         Threshold to determine if a row is missing too many values
-    col_threshold : float, default 0.50
+    - col_threshold : float, default 0.50
         Threshold to determine if a column is missing too many values
-    messages : bool, default True
+    - messages : bool, default True
         If `True`, print messages indicating which columns were dropped and how many missing values were dropped
 
     Returns
     -------
     df : pandas DataFrame
         DataFrame with columns and rows dropped
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>>
+	>>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
+	>>>
+	>>> firstnames = ["Michael", "John", "Mary", "Segun", "Tolu", "Uche", "David", "Lekan", "Luke", "Jason", "Scott", "Jordan", "Hannah", "Robert", "Patricia", "Carla", "Nancy", "James", "Anne", "Mariusz", "Dagobert", "Sahin", "Francesca", "Niels", "Remedios", "Sonia", "Angela", "Catalina", "Sarah", "Joshua", "Fabio", "Sienna",]
+	>>>
+	>>> prefixes = ["Ade", "Olu", "Al", "Oluwa", "Chi", "Wa", "Fa", "Bet", "Sa", "Ah", "Abu", "Bint", "Ter", "Bath", "Ben", "Mac", "Nic", "Del", "Ab", "Bar", "Kil", "Mal", "Öz", "Mala", "Dos", "Fitz", "Ibn", "Du", "Gil", "Tre", "Mul", "Av",]
+	>>>
+	>>> suffixes = ["bert", "stan", "addin", "tou", "zi", "jiā", "biɑn", "chan", "kun", "san", "sama", "shi", "ujin", "joshi", "ach", "ant", "appa", "anu", "chian", "eanu", "enko", "ius", "kar", "onak", "on", "oui", "quin", "sen", "ulis", "ema", "awan", "ak",]
+	>>>
+	>>>
+	>>> def random_date_gen(start_date, range_in_days, count):
+	>>>     try:
+	>>>         start_date = np.datetime64(start_date)
+	>>>         base = np.full(count, start_date)
+	>>>         offset = rng.integers(low=0, high=range_in_days, size=count)
+	>>>         offset = offset.astype("timedelta64[D]")
+	>>>         random_date = base + offset
+	>>>     except Exception:
+	>>>         days_to_add = np.arange(0, range_in_days)
+	>>>         random_date = np.datetime64(start_date) + rng.choice(days_to_add)
+	>>>
+	>>>     return random_date
+	>>>
+	>>>
+	>>> def generate_name_advanced():
+	>>>     surname = rng.choice(surnames)
+	>>>     firstname = rng.choice(firstnames)
+	>>>     prefix = rng.choice(prefixes)
+	>>>     suffix = rng.choice(suffixes)
+	>>>     use_prefix_surname = rng.choice([True, False])
+	>>>     use_prefix_firstname = rng.choice([True, False])
+	>>>     use_suffix_surname = rng.choice([True, False])
+	>>>     use_suffix_firstname = rng.choice([True, False])
+	>>>     if use_prefix_surname:
+	>>>         fullname = f"{prefix}{surname.lower()} {firstname}"
+	>>>     elif use_prefix_firstname:
+	>>>         fullname = f"{surname} {prefix}{firstname.lower()}"
+	>>>     elif use_prefix_surname and use_prefix_firstname:
+	>>>         fullname = f"{prefix}{surname.lower()} {prefix}{firstname.lower()}"
+	>>>     elif use_suffix_surname:
+	>>>         fullname = f"{surname}{suffix} {firstname}"
+	>>>     elif use_suffix_firstname:
+	>>>         fullname = f"{surname} {firstname}{suffix}"
+	>>>     elif use_suffix_surname and use_suffix_firstname:
+	>>>         fullname = f"{surname}{suffix} {firstname}{suffix}"
+	>>>     else:
+	>>>         fullname = f"{surname} {firstname}"
+	>>>
+	>>>     return fullname
+	>>>
+	>>>
+	>>> name = [generate_name_advanced() for _ in range(103)]
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+	>>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+	satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+	>>> charges = rng.normal(loc=5300, scale=2113, size=103)
+	>>> onboard_date = random_date_gen("2023-01-01", 365, 103)
+	>>>
+	>>> data_dict = {"name": name, "age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges, "onboard_date": onboard_date}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> missing_drop(df.copy())
     """
     try:
         import fireducks.pandas as pd
@@ -2100,9 +2687,9 @@ def check_target_balance(df, target="target"):
 
     Parameters
     ----------
-    df : pandas.core.frame.DataFrame
+    - df : pandas.core.frame.DataFrame
         The DataFrame containing the target column.
-    target : str, default "target"
+    - target : str, default "target"
         The name of the target column.
 
     Returns
@@ -2114,6 +2701,82 @@ def check_target_balance(df, target="target"):
     This function will show a bar chart of the target classes count.
     The x-axis is the unique values of the target column and the y-axis is the count of each target class.
     The bar colours are red for class 0 and green for class 1.
+
+	Example
+	-------
+	>>> # Sample data
+	>>> rng = np.random.default_rng()
+	>>>
+	>>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
+	>>>
+	>>> firstnames = ["Michael", "John", "Mary", "Segun", "Tolu", "Uche", "David", "Lekan", "Luke", "Jason", "Scott", "Jordan", "Hannah", "Robert", "Patricia", "Carla", "Nancy", "James", "Anne", "Mariusz", "Dagobert", "Sahin", "Francesca", "Niels", "Remedios", "Sonia", "Angela", "Catalina", "Sarah", "Joshua", "Fabio", "Sienna",]
+	>>>
+	>>> prefixes = ["Ade", "Olu", "Al", "Oluwa", "Chi", "Wa", "Fa", "Bet", "Sa", "Ah", "Abu", "Bint", "Ter", "Bath", "Ben", "Mac", "Nic", "Del", "Ab", "Bar", "Kil", "Mal", "Öz", "Mala", "Dos", "Fitz", "Ibn", "Du", "Gil", "Tre", "Mul", "Av",]
+	>>>
+	>>> suffixes = ["bert", "stan", "addin", "tou", "zi", "jiā", "biɑn", "chan", "kun", "san", "sama", "shi", "ujin", "joshi", "ach", "ant", "appa", "anu", "chian", "eanu", "enko", "ius", "kar", "onak", "on", "oui", "quin", "sen", "ulis", "ema", "awan", "ak",]
+	>>>
+	>>>
+	>>> def random_date_gen(start_date, range_in_days, count):
+	>>>     try:
+	>>>         start_date = np.datetime64(start_date)
+	>>>         base = np.full(count, start_date)
+	>>>         offset = rng.integers(low=0, high=range_in_days, size=count)
+	>>>         offset = offset.astype("timedelta64[D]")
+	>>>         random_date = base + offset
+	>>>     except Exception:
+	>>>         days_to_add = np.arange(0, range_in_days)
+	>>>         random_date = np.datetime64(start_date) + rng.choice(days_to_add)
+	>>>
+	>>>     return random_date
+	>>>
+	>>>
+	>>> def generate_name_advanced():
+	>>>     surname = rng.choice(surnames)
+	>>>     firstname = rng.choice(firstnames)
+	>>>     prefix = rng.choice(prefixes)
+	>>>     suffix = rng.choice(suffixes)
+	>>>     use_prefix_surname = rng.choice([True, False])
+	>>>     use_prefix_firstname = rng.choice([True, False])
+	>>>     use_suffix_surname = rng.choice([True, False])
+	>>>     use_suffix_firstname = rng.choice([True, False])
+	>>>     if use_prefix_surname:
+	>>>         fullname = f"{prefix}{surname.lower()} {firstname}"
+	>>>     elif use_prefix_firstname:
+	>>>         fullname = f"{surname} {prefix}{firstname.lower()}"
+	>>>     elif use_prefix_surname and use_prefix_firstname:
+	>>>         fullname = f"{prefix}{surname.lower()} {prefix}{firstname.lower()}"
+	>>>     elif use_suffix_surname:
+	>>>         fullname = f"{surname}{suffix} {firstname}"
+	>>>     elif use_suffix_firstname:
+	>>>         fullname = f"{surname} {firstname}{suffix}"
+	>>>     elif use_suffix_surname and use_suffix_firstname:
+	>>>         fullname = f"{surname}{suffix} {firstname}{suffix}"
+	>>>     else:
+	>>>         fullname = f"{surname} {firstname}"
+	>>>
+	>>>     return fullname
+	>>>
+	>>>
+	>>> name = [generate_name_advanced() for _ in range(103)]
+	>>> age = rng.integers(low=18, high=61, size=103)
+	>>> sex = rng.choice(["female", "male"], size=103)
+	>>> bmi = rng.normal(loc=23, scale=7, size=103)
+	>>> children = rng.integers(low=0, high=9, size=103)
+	>>> smoker = rng.choice(["smoker", "non-smoker"], size=103)
+	>>> region = rng.choice(["southwest", "northwest", "southeast", "northeast"], size=103)
+	>>> low_earn = rng.normal(loc=997, scale=13, size=103)
+	>>> normal_earn = rng.normal(loc=7933, scale=23, size=103)
+	>>> high_earn = rng.normal(loc=20011, scale=43, size=103)
+	>>> monthly_salary = rng.choice(np.concatenate([low_earn, normal_earn, high_earn]), size=103)
+	>>> cust_class = rng.choice(["economy", "business", "first-class"], size=103)
+	satisfaction = rng.choice(["extremely dissatisfied", "dissatisfied", "fair", "okay", "satisfied", "extremely satisfied", "excellent"], size=103)
+	>>> charges = rng.normal(loc=5300, scale=2113, size=103)
+	>>> onboard_date = random_date_gen("2023-01-01", 365, 103)
+	>>>
+	>>> data_dict = {"name": name, "age": age, "sex": sex, "bmi": bmi, "children": children, "smoker": smoker, "region": region, "monthly_salary": monthly_salary, "cust_class": cust_class, "satisfaction": satisfaction, "charges": charges, "onboard_date": onboard_date}
+	>>> df = pd.DataFrame(data_dict)
+	>>>
+	>>> check_target_balance(df, target="smoker")
     """
     import matplotlib.pyplot as plt
     try:

@@ -88,7 +88,7 @@ def synthesise_human_profile_data(num_records=23):
     for _ in range(num_records):
         data.append({
             "name": fake.name(),
-            "date_of_birth": fake.date_of_birth(),
+            "date_of_birth": fake.date_between("-67y", "-18y"),
             "phone": fake.phone_number(),
             "address": fake.address(),
             "email": fake.email(),
