@@ -1,0 +1,118 @@
+<!-- Adapted from: How to Create Secure HTML Login Forms -> https://markaicode.com/how-to-create-secure-html-login-forms/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<!-- Redirect HTTP to HTTPS -->
+	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+	<!-- Enable Content Security Policy (CSP) -->
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>How to Create Secure HTML Login Forms</title>
+	<style>
+		.h1 {
+			text-align: center;
+		}
+
+		.form-group + .form-group {
+			margin-top: 1rem;
+		}
+
+		.error {
+			color: red;
+			font-size: 0.8rem;
+			margin-top: 0.25rem;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="h1">Secure Login Form</h1>
+	<form action="/login" method="post" class="form">
+		<fieldset class="fieldset form-group">
+			<label for="username" class="label">Username:</label>
+			<input type="text" id="username" class="input input-username" name="username" pattern="[a-zA-Z0-9]{5,}" title="Username must contain at least 5 alphanumeric characters" required>
+			<span id="username_error" class="error"></span>
+		</fieldset>
+
+		<fieldset class="fieldset form-group">
+			<label for="password" class="label">Password:</label>
+			<input type="password" id="password" class="input input-password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{12,}$" title="Password must contain at least 12 characters, including at least one uppercase letter, one lowercase letter and one number" required>
+			<span id="password_error" class="error"></span>
+		</fieldset>
+
+		<!-- CSRF protection token -->
+		<input type="hidden" name="csrf_token" value="unique-token-here">
+
+		<fieldset class="fieldset form-group">
+			<button type="submit" class="button">Login</button>
+		</fieldset>
+
+		<div id="login_status"></div>
+	</form>
+
+	<!-- JavaScript Here -->
+	<script>
+		// Disable form submission
+		document.querySelectorAll('form')[0].addEventListener('submit', function(evt) {
+			evt.preventDefault();
+
+			const username = document.getElementById('username').value;
+			const password = document.getElementById('password').value;
+
+			// Client-side validation
+			let isValid = true;
+
+			if (!username.match(/[a-zA-Z0-9]{5,}/)) {
+				document.getElementById('username_error').textContent = 'Username must contain at least 5 alphanumeric characters';
+				isValid = false;
+			} else {
+				document.getElementById('username_error').textContent = '';
+			}
+
+			if (!password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{12,}$/)) {
+				document.getElementById('password_error').textContent = 'Password must contain at least 12 characters, including at least one uppercase letter, one lowercase letter and one number';
+				isValid = false;
+			} else {
+				document.getElementById('password_error').textContent = '';
+			}
+
+			if (isValid) {
+				try {
+					// In a real application, this would be an AJAX request to the server
+					// Always validate credentials on the server, never in client-side code
+					simulateServerRequest(username, password);
+				} catch (error) {
+					console.error(error);
+				} finally {
+					// Send form data to the server with an asynchronous POST request
+					const url = '/login';
+					const formData = new FormData();
+					formData.append('username', username);
+					formData.append('password', password);
+					fetch(url, {
+						method: 'POST',
+						body: formData,
+					})
+					.then(response => response.text())
+					.then(result => {
+						document.getElementById('login_status').textContent = result;
+					});
+				}
+			}
+		});
+
+		// Simulate server request
+		function simulateServerRequest(username, password) {
+			const statusElement = document.getElementById('login_status');
+			// Simulate server validation and response
+			setTimeout(() => {
+				statusElement.textContent = 'Login successful!';
+				statusElement.style.color = 'green';
+
+				// Redirect after successful login
+				window.location.href = '/dashboard';
+			}, 1000);
+		}
+	</script>
+</body>
+</html>
