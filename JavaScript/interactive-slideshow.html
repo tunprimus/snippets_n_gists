@@ -1,0 +1,199 @@
+<!-- Adapted from: HTML Slide-shows: Create Engaging Web Presentations -> https://markaicode.com/html-slideshows-create-engaging-web-presentations/ -->
+<!DOCTYPE html>
+<html lang="en-GB" dir="ltr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTML Slide-shows: Create Engaging Web Presentations</title>
+	<style>
+		.slideshow-container {
+			max-width: 62.5rem;
+			position: relative;
+			margin: auto;
+		}
+
+		.slide {
+			display: none;
+		}
+
+		.slide__img {
+			width: 100%;
+		}
+
+		.figcaption {
+			position: absolute;
+			bottom: 0.5rem;
+			width: 100%;
+			padding: 0.5rem 0.75rem;
+			color: #F2F2F2;
+			font-size: 0.938rem;
+			text-align: center;
+		}
+
+		.fade {
+			-webkit-animation-name: fade;
+			-webkit-animation-duration: 1.5s;
+			animation-name: fade;
+			animation-duration: 1.5s;
+		}
+
+		@-webkit-keyframes fade {
+			from {
+				opacity: .4
+			}
+			to {
+				opacity: 1
+			}
+		}
+
+		@keyframes fade {
+			from {
+				opacity: .4
+			}
+			to {
+				opacity: 1
+			}
+		}
+
+		.wc-slide-controls {
+			display: flex;
+			justify-content: center;
+			margin-top: 1rem;
+		}
+
+		.wc-slide-controls__anchor {
+			display: block;
+			position: relative;
+			z-index: 1;
+			cursor: pointer;
+			font-size: 1.5rem;
+			padding: 2em;
+		}
+	</style>
+</head>
+<body>
+	<h1 class="h1">HTML Slide-shows: Create Engaging Web Presentations</h1>
+
+	<slideshow-container class="wc-slideshow-container">
+		<section class="section slideshow-container">
+			<!-- Slide 01 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 1</h2>
+				<img src="image01.jpg" alt="Slide 1" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 1</figcaption>
+			</div>
+			<!-- Slide 02 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 2</h2>
+				<img src="image02.jpg" alt="Slide 2" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 2</figcaption>
+			</div>
+			<!-- Slide 03 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 3</h2>
+				<img src="image03.jpg" alt="Slide 3" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 3</figcaption>
+			</div>
+			<!-- Slide 04 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 4</h2>
+				<img src="image04.jpg" alt="Slide 4" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 4</figcaption>
+			</div>
+			<!-- Slide 05 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 5</h2>
+				<img src="image05.jpg" alt="Slide 5" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 5</figcaption>
+			</div>
+			<!-- Slide 06 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 6</h2>
+				<img src="image06.jpg" alt="Slide 6" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 6</figcaption>
+			</div>
+			<!-- Slide 07 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 7</h2>
+				<img src="image07.jpg" alt="Slide 7" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 7</figcaption>
+			</div>
+			<!-- Slide 08 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 8</h2>
+				<img src="image08.jpg" alt="Slide 8" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 8</figcaption>
+			</div>
+			<!-- Slide 09 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 9</h2>
+				<img src="image09.jpg" alt="Slide 9" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 9</figcaption>
+			</div>
+			<!-- Slide 10 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 10</h2>
+				<img src="image10.jpg" alt="Slide 10" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 10</figcaption>
+			</div>
+			<!-- Slide 11 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 11</h2>
+				<img src="image11.jpg" alt="Slide 11" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 11</figcaption>
+			</div>
+			<!-- Slide 12 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 12</h2>
+				<img src="image12.jpg" alt="Slide 12" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 12</figcaption>
+			</div>
+			<!-- Slide 13 -->
+			<div class="slide fade slideshow-container__slide">
+				<h2 class="h2 slide__h2">Slide 13</h2>
+				<img src="image13.jpg" alt="Slide 13" class="img slide__img">
+				<figcaption class="figcaption slide__figcaption">Caption for Slide 13</figcaption>
+			</div>
+
+			<slide-controls class="wc-slide-controls">
+				<a class="anchor wc-slide-controls__anchor prev" onclick="plusSlides(-1)">&#10094;</a>
+				<a class="anchor wc-slide-controls__anchor next" onclick="plusSlides(1)">&#10095;</a>
+			</slide-controls>
+		</section>
+	</slideshow-container>
+
+	<!-- JavaScript Here -->
+	<script>
+		let slideIndex = 0;
+		showSlides();
+
+		/**
+		 * Shows the slide that is n slides away from the current slide.
+		 * @param {number} n the number of slides to move. Positive to move forward, negative to move backward.
+		 */
+		function plusSlides(n) {
+			showSlides(slideIndex += n);
+		}
+
+		/**
+		 * Shows the given slide number
+		 * If n is greater than the total number of slides, it wraps around to the first slide.
+		 * If n is negative, it wraps around to the last slide.
+		 * @param {number} n the slide number to show
+		 */
+		function showSlides(n) {
+			let slides = document.getElementsByClassName("slide");
+			if (n > slides.length) {
+				slideIndex = 1;
+			}
+			if (n < 1) {
+				slideIndex = slides.length;
+			}
+			for (let i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";
+			}
+			slides[slideIndex-1].style.display = "block";
+		}
+	</script>
+</body>
+</html>
