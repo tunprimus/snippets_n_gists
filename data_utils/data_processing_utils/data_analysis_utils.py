@@ -11,6 +11,7 @@ from dbscan_pp import DBSCANPP
 RANDOM_SEED = 42
 RANDOM_SAMPLE_SIZE = 13
 NUM_DEC_PLACES = 4
+ALPHA_VALUE = 0.05
 GOLDEN_RATIO = 1.618033989
 FIG_WIDTH = 20
 FIG_HEIGHT = FIG_WIDTH / GOLDEN_RATIO
@@ -30,6 +31,10 @@ def cpu_logical_cores_count():
     number of threads that can run on each core (Simultaneous Multithreading,
     SMT). If the number of logical cores cannot be determined, an exception is
     raised.
+
+    Author
+    ------
+        tunprimus
     """
     import joblib
     import multiprocessing
@@ -172,6 +177,10 @@ def extended_print_report_object(obj, num_dp=4):
     Returns
     -------
     None
+
+    Author
+    ------
+        tunprimus
     """
     print("Full report history...\n")
     for key01, val01 in obj.items():
@@ -205,6 +214,7 @@ def standardise_column_names(df, remove_punct=True):
     -------
     pandas.DataFrame
         DataFrame with standardised column names
+
     Example
     -------
     >>> df = pd.DataFrame({'Column With Spaces': [1,2,3,4,5],
@@ -216,6 +226,11 @@ def standardise_column_names(df, remove_punct=True):
     Index(['column_with_spaces',
             'column_with_hyphens_others',
             'too_many_spaces'], dtype='object')
+
+    Author
+    ------
+        tunprimus
+        Adapted from: @georgerichardson -> https://gist.github.com/georgerichardson/db66b686b4369de9e7196a65df45fc37
     """
     import re
     import string
@@ -302,7 +317,8 @@ def generate_df_from_data_source(
     file type based on the file extension and uses the appropriate pandas
     reader function to load the data into a DataFrame.
 
-    Parameters:
+    Parameters
+    ----------
     - data_source: str
         Path to the data source file.
     - from_aws: bool, optional
@@ -332,17 +348,24 @@ def generate_df_from_data_source(
     - bigquery_table_id: str, optional
         BigQuery table ID.
 
-    Returns:
+    Returns
+    --------
     - pd.DataFrame
         A DataFrame containing the loaded data.
 
-    Raises:
+    Raises
+    -------
     - ValueError
         If the file extension is unsupported.
 
-    Notes:
+    Notes
+    -----
     - The function uses different pandas functions to read different file types.
     - AWS, Google Sheets, and BigQuery connections require appropriate credentials.
+
+    Author
+    ------
+        tunprimus
     """
     import boto3
     import gspread
@@ -475,7 +498,8 @@ def missing_value_overview(df, numdp=4, messages=True):
     values, the percentage of missing values and the data type for each column in
     the provided DataFrame. It also prints a summary message if requested.
 
-    Parameters:
+    Parameters
+    ----------
     - df: pd.DataFrame
         The DataFrame for which to calculate missing values overview.
     - numdp: int, optional (default=4)
@@ -484,10 +508,15 @@ def missing_value_overview(df, numdp=4, messages=True):
         If True, prints a message about the number of columns and columns with missing
         values.
 
-    Returns:
+    Returns
+    -------
     - pd.DataFrame
         A DataFrame containing columns 'missing_values', 'pct_of_total_values', and
         'data_type', sorted by percentage of missing values in descending order.
+
+    Author
+    ------
+        tunprimus
     """
     import pandas as pd
 
@@ -524,7 +553,6 @@ def missing_value_overview(df, numdp=4, messages=True):
 
 def missing_value_heatmap(df, figsize=(20, 12.4)):
     """
-    Adapted from https://medium.com/@itk48/missing-data-imputation-with-chi-square-tests-mcar-mar-3278956387c8
     Create a heatmap of missing values in a Pandas DataFrame.
 
     This function generates a heatmap representation of missing values in the input DataFrame `df`.
@@ -532,9 +560,15 @@ def missing_value_heatmap(df, figsize=(20, 12.4)):
     represented as black cells and non-missing values represented as white cells. It is a useful tool
     for quickly visualising which columns in the DataFrame have missing values and which do not.
 
-    Parameters:
+    Parameters
+    ----------
     - df (pd.DataFrame): The DataFrame for which the heatmap of missing values is to be generated.
     - figsize (tuple): The size of the figure to be generated. Defaults to (20, 12.4).
+
+    Author
+    ------
+        tunprimus
+        Adapted from https://medium.com/@itk48/missing-data-imputation-with-chi-square-tests-mcar-mar-3278956387c8
     """
     import matplotlib.pyplot as plt
     import pandas as pd
@@ -557,6 +591,8 @@ def quick_data_summary(df, numdp=4, messages=False):
     """
     Generate a quick summary of a Pandas DataFrame.
 
+    Author: tunprimus
+
     Parameters
     ----------
     - df : Pandas DataFrame
@@ -570,6 +606,10 @@ def quick_data_summary(df, numdp=4, messages=False):
     -------
     summary : dict
         A dictionary containing the summary of the DataFrame.
+
+    Author
+    ------
+        tunprimus
     """
     import numpy as np
     import pandas as pd
@@ -580,7 +620,7 @@ def quick_data_summary(df, numdp=4, messages=False):
         "dtypes": df.dtypes.to_dict(),
         "missing_values": df.isnull().sum().to_dict(),
         "missing_values_pct": (round((df.isnull().sum() / df.shape[0] * 100), numdp)).to_dict(),
-        "description": df.describe(include="all").T,
+        "description": df.describe(include="all").T.round(numdp),
     }
     if messages:
         for key01, val01 in summary.items():
@@ -599,12 +639,179 @@ def quick_data_summary(df, numdp=4, messages=False):
     return summary
 
 
+def column_summary(df, top_n=10, message=False):
+    """
+    Generates a summary DataFrame for each column in the input DataFrame.
+
+    This function iterates over each column in the provided DataFrame, calculating
+    and compiling statistics including the column's data type, the number of null
+    and non-null values, the number of distinct values, and the counts of distinct
+    values. For columns with more distinct values than a specified threshold, only
+    the top N most frequent values are included in the summary.
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+        The DataFrame to be summarized.
+    top_n : int, optional (default=10)
+        The number of top distinct values to include in the summary if a column
+        has more distinct values than this threshold.
+    message : bool, optional (default=False)
+        If True, prints the resulting summary DataFrame.
+
+    Returns
+    -------
+    pd.DataFrame
+        A DataFrame containing the summary statistics for each column in the input
+        DataFrame.
+
+    Author
+    ------
+        tunprimus
+    """
+    import numpy as np
+    import pandas as pd
+
+    summary_list = []
+
+    for col in df.columns:
+        col_dtype = df[col].dtype
+        num_of_nulls = df[col].isnull().sum()
+        num_of_non_nulls = df[col].notnull().sum()
+        num_of_distinct_val = df[col].nunique()
+
+        if num_of_distinct_val <= top_n:
+            distinct_val_counts = df[col].value_counts().to_dict()
+        else:
+            top_n_val_counts = df[col].value_counts().head(top_n).to_dict()
+            distinct_val_counts = {key: val for key, val in sorted(top_n_val_counts.items(), key = lambda item: item[1], reverse=True)}
+
+        summary_list.append({
+            "col_name": col,
+            "col_dtype": col_dtype,
+            "num_of_nulls": num_of_nulls,
+            "num_of_non_nulls": num_of_non_nulls,
+            "num_of_distinct_val": num_of_distinct_val,
+            "distinct_val_counts": distinct_val_counts
+        })
+
+    summary_df = pd.DataFrame(summary_list)
+    if messages:
+        print(summary_df)
+
+    return summary_df
+
+
+def column_summary_plus(df, top_n=10, messages=False):
+    """
+    Creates a summary of a given DataFrame, including the following information:
+        - The column's data type
+        - The number of distinct values
+        - The minimum and maximum values
+        - The median value of non-null values
+        - The average value of non-null values
+        - The average value of non-zero values
+        - Whether null values are present
+        - The number of null values
+        - The number of non-null values
+        - A dictionary where the keys are the top N distinct values and the values are the counts of each distinct value.
+
+    Parameters
+    ----------
+    df : DataFrame
+        The DataFrame to be summarised.
+    top_n : int, default 10
+        The number of distinct values to include in the summary.
+    messages : bool, default False
+        If True, prints a message about the start of the processing of each column and the final summary DataFrame.
+
+    Returns
+    -------
+    DataFrame
+        A DataFrame containing the summary of the given DataFrame.
+
+    Author
+    ------
+        tunprimus
+    """
+    import numpy as np
+    import pandas as pd
+
+    result_df = pd.DataFrame(columns=["col_name", "col_dtype", "num_of_distinct_val", "min_val", "max_val", "median_no_na", "average_no_na", "average_non_zero", "null_present", "num_of_nulls", "num_of_non_nulls", f"top_{top_n}_distinct_values"])
+
+    for col in df.columns:
+        if messages:
+            print(f"Start to process column {col} with dtype {df[col].dtype}")
+        col_dtype = df[col].dtype
+
+        # Get distinct values and their counts
+        val_counts = df[col].value_counts()
+        distinct_values = val_counts.index.tolist()
+        num_of_distinct_val = len(distinct_values)
+        sorted_values = sorted(distinct_values)
+        min_val = sorted_values[0] if sorted_values else None
+        max_val = sorted_values[-1] if sorted_values else None
+
+        # Get median value
+        non_distinct_val_list = sorted(df[col].dropna().tolist())
+        length_non_distinct_list = len(non_distinct_val_list)
+        if len(non_distinct_val_list) == 0:
+            median_no_na = None
+        else:
+            median_no_na = non_distinct_val_list[length_non_distinct_list//2]
+
+        # Get average value if it is a number
+        if np.issubdtype(df[col].dtype, np.number):
+            if len(non_distinct_val_list) > 0:
+                avg = sum(non_distinct_val_list) / len(non_distinct_val_list)
+                non_zero_val_list = [val for val in non_distinct_val_list if val != 0]
+                avg_non_zero = sum(non_zero_val_list) / length_non_distinct_list
+            else:
+                avg = None
+                avg_non_zero = None
+        else:
+            avg = None
+            avg_non_zero = None
+
+        null_present = 1 if df[col].isnull().any() else 0
+
+        num_of_nulls = df[col].isnull().sum()
+        num_of_non_nulls = df[col].notnull().sum()
+
+        # Distinct_values only take top N distinct values count
+        top_n_d_val = value_counts.head(top_n).index.tolist()
+        top_n_cnt = value_counts.head(top_n).tolist()
+        top_n_d_v_dict = dict(zip(top_n_d_val, top_n_cnt))
+
+        result_df = result_df.append({
+            "col_name": col,
+            "col_dtype": col_dtype,
+            "num_of_distinct_val": num_of_distinct_val,
+            "min_val": min_val,
+            "max_val": max_val,
+            "median_no_na": median_no_na,
+            "average_no_na": avg,
+            "average_non_zero": avg_non_zero,
+            "null_present": null_present,
+            "num_of_nulls": num_of_nulls,
+            "num_of_non_nulls": num_of_non_nulls,
+            f"top_{top_n}_distinct_values": top_n_d_v_dict,
+            }, ignore_index=True)
+
+    if messages:
+        print(result_df)
+
+    return result_df
+
+
 # ----------------------------------------------------------------------#
 # Function to get univariate statistics and plots from Pandas DataFrame #
 # ----------------------------------------------------------------------#
 def univariate_stats(df):
     """
     Generate descriptive statistics and visualisations for each feature in a DataFrame.
+
+    Author: tunprimus
 
     This function computes and returns a DataFrame containing a variety of univariate
     statistics for each feature (column) in the input DataFrame `df`. It calculates
@@ -615,12 +822,18 @@ def univariate_stats(df):
     standard deviation, skewness, and kurtosis. It also creates a histogram for
     numerical features and a count plot for categorical features.
 
-    Parameters:
+    Parameters
+    ----------
     - df (pd.DataFrame): The DataFrame for which univariate statistics are to be computed.
 
-    Returns:
+    Returns
+    -------
     - pd.DataFrame: A DataFrame where each row corresponds to a feature from the input
       DataFrame and columns contain the calculated statistics.
+
+    Author
+    ------
+        tunprimus
     """
     import matplotlib.pyplot as plt
     import pandas as pd
@@ -761,6 +974,10 @@ def scatterplot(df, feature, label, num_dp=4, linecolour="darkorange"):
     >>> df = pd.DataFrame(data_dict)
     >>>
     >>> scatterplot(df, "age", "charges")
+
+    Author
+    ------
+        tunprimus
     """
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -851,6 +1068,10 @@ def bar_chart(df, feature, label, num_dp=4, alpha=0.05, sig_ttest_only=True):
     >>> df = pd.DataFrame(data_dict)
     >>>
     >>> bar_chart(df, "smoker", "charges")
+
+    Author
+    ------
+        tunprimus
     """
     import matplotlib.pyplot as plt
     import seaborn as sns
@@ -963,6 +1184,10 @@ def crosstab(df, feature, label, num_dp=4):
     >>> df = pd.DataFrame(data_dict)
     >>>
     >>> crosstab(df, "class", "satisfaction")
+
+    Author
+    ------
+        tunprimus
     """
     import matplotlib.pyplot as plt
     import numpy as np
@@ -1041,6 +1266,10 @@ def bivariate_stats(df, label, num_dp=4):
 	>>> bivariate_stats(df, "charges")
     >>> bivariate_stats(df, "satisfaction")
     >>> bivariate_stats(df, "monthly_salary")
+
+    Author
+    ------
+        tunprimus
     """
     import matplotlib.pyplot as plt
     import pandas as pd
@@ -1231,6 +1460,10 @@ def plot_correlation_heatmap_with_matshow(df):
     Notes
     -----
     This function will show a heatmap of the correlation between columns in the given DataFrame.
+
+    Author
+    ------
+        tunprimus
     """
     import matplotlib.pyplot as plt
     import numpy as np
@@ -1286,6 +1519,10 @@ def plot_correlation_heatmap(df):
     Notes
     -----
     This function will show a heatmap of the correlation between columns in the given DataFrame.
+
+    Author
+    ------
+        tunprimus
     """
     import numpy as np
     try:
@@ -1314,7 +1551,7 @@ def plot_correlation_heatmap(df):
 ### Eliminate Empty Columns, Columns with All Unique Values and Columns with Single Values
 
 
-def check_uniqueness(df):
+def check_uniqueness(df, top_n=10):
     """
     Check uniqueness of each column in a DataFrame.
 
@@ -1322,6 +1559,8 @@ def check_uniqueness(df):
     ----------
     - df : pandas.core.frame.DataFrame
         The DataFrame to be checked.
+    - top_n: : int
+		The number of top items to keep. Defaults to 10
 
     Returns
     -------
@@ -1331,6 +1570,7 @@ def check_uniqueness(df):
         "num_unique" is the number of unique values in that column.
         "counts" is a numpy array of the counts of each unique value in that column,
         sorted by the unique value itself.
+        "top_{top_n}_unique" is the top N unique values.
 
 	Example
 	-------
@@ -1354,18 +1594,23 @@ def check_uniqueness(df):
 	>>> df = pd.DataFrame(data_dict)
 	>>>
 	>>> check_uniqueness(df)
+
+	Author
+    ------
+        tunprimus
     """
     try:
         import fireducks.pandas as pd
     except ImportError:
         import pandas as pd
 
-    df_buffer = pd.DataFrame(columns=["column", "num_unique", "counts"])
+    df_buffer = pd.DataFrame(columns=["column", "num_unique", "counts", f"top_{top_n}_unique"])
     for col in df.columns:
         df_buffer.loc[col] = [
             col,
             df[col].nunique(),
             df[col].value_counts().sort_index().values,
+			", ".join((df[col].value_counts().sort_index()[:top_n].index.values).astype(str)),
         ]
     return df_buffer
 
@@ -1427,6 +1672,10 @@ def basic_wrangling(
 	>>> df = pd.DataFrame(data_dict)
 	>>>
 	>>> basic_wrangling(df)
+
+	Author
+    ------
+        tunprimus
     """
     try:
         import fireducks.pandas as pd
@@ -1508,6 +1757,10 @@ def can_convert_dataframe_to_datetime(
     result : dict or list
         Dictionary with column names as keys and boolean values indicating
         whether each column can be converted to datetime format, or list of boolean values.
+
+    Author
+    ------
+        tunprimus
     """
     import numpy as np
     import pandas as pd
@@ -1583,6 +1836,10 @@ def batch_convert_to_datetime(
     -------
     df : pandas DataFrame
         DataFrame with converted datetime columns.
+
+    Author
+    ------
+        tunprimus
     """
     import numpy as np
     import pandas as pd
@@ -1651,6 +1908,10 @@ def parse_column_as_date(
     -------
     df : pandas DataFrame
         DataFrame with parsed date features and additional extracted information.
+
+    Author
+    ------
+        tunprimus
     """
     import pandas as pd
     from datetime import datetime as pydt
@@ -1779,6 +2040,10 @@ def bin_categories(df, features=[], cutoff=0.05, replace_with="Other", messages=
 	>>> df = pd.DataFrame(data_dict)
 	>>>
 	>>> bin_categories(df, features=["satisfaction"], cutoff=0.025)
+
+	Author
+    ------
+        tunprimus
     """
     try:
         import fireducks.pandas as pd
@@ -1925,6 +2190,10 @@ def clean_outlier_per_column(
 	>>> df = pd.DataFrame(data_dict)
 	>>>
 	>>> clean_outlier_per_column(df, features=df.columns)
+
+	Author
+    ------
+        tunprimus
     """
     import numpy as np
     try:
@@ -2133,6 +2402,10 @@ def clean_outlier_by_all_columns(
 	>>> df = pd.DataFrame(data_dict)
 	>>>
 	>>> df_without_outliers = clean_outlier_by_all_columns(df)
+
+	Author
+    ------
+        tunprimus
     """
     import joblib
     import matplotlib.pyplot as plt
@@ -2373,6 +2646,10 @@ def skew_correct(df, feature, max_power=103, messages=True):
 	>>> df = pd.DataFrame(data_dict)
 	>>>
 	>>> skew_correct(df, "charges")
+
+	Author
+    ------
+        tunprimus
     """
     import matplotlib.pyplot as plt
     import numpy as np
@@ -2600,6 +2877,10 @@ def missing_drop(
 	>>> df = pd.DataFrame(data_dict)
 	>>>
 	>>> missing_drop(df.copy())
+
+	Author
+    ------
+        tunprimus
     """
     try:
         import fireducks.pandas as pd
@@ -2777,6 +3058,10 @@ def check_target_balance(df, target="target"):
 	>>> df = pd.DataFrame(data_dict)
 	>>>
 	>>> check_target_balance(df, target="smoker")
+
+	Author
+    ------
+        tunprimus
     """
     import matplotlib.pyplot as plt
     try:
@@ -2791,3 +3076,24 @@ def check_target_balance(df, target="target"):
     plt.ylabel("Count")
     plt.title("Count of each Target Class")
     plt.show()
+
+
+
+# Function to test and print statistics reports
+def check_and_print_stats_gen(report_obj, alpha_val=ALPHA_VALUE, messages=False):
+    def get_stats(report_obj):
+        for key, val in report_obj.items():
+            if isinstance(val, dict):
+                for pair in get_stats(val):
+                    yield (key, *pair)
+            else:
+                yield (key, val)
+    if messages:
+        for item in get_stats(stat_results):
+            if item[1] == "p_value" and item[-1] < alpha_val:
+                print(f"The {item[0].capitalize()} statistics for `{item[2].capitalize()} content` is `significant` with a p-value of: {item[-1]:.4f}.\n")
+            elif item[1] == "p_value" and item[-1] > alpha_val:
+                print(f"The {item[0].capitalize()} statistics for `{item[2].capitalize()} content` has a p-value of: {item[-1]:.4f} - not significant.\n")
+            else:
+                print(f"The {item[0].capitalize()} statistics for `{item[2].capitalize()} content` is: {item[-1]:.4f}.\n")
+
