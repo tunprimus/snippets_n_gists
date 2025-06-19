@@ -32,7 +32,7 @@ def cpu_logical_cores_count():
     number of threads that can run on each core (Simultaneous Multithreading,
     SMT). If the number of logical cores cannot be determined, an exception is
     raised.
-
+age
     Author
     ------
         tunprimus
@@ -658,7 +658,7 @@ def column_summary(df, top_n=10, message=False):
     Parameters
     ----------
     df : pd.DataFrame
-        The DataFrame to be summarized.
+        The DataFrame to be summarised.
     top_n : int, optional (default=10)
         The number of top distinct values to include in the summary if a column
         has more distinct values than this threshold.
@@ -993,7 +993,7 @@ def scatterplot(df, feature, label, num_dp=4, linecolour="darkorange"):
     Example
     -------
     >>> # Sample data
-    >>> rng = np.random.default_rng()
+    >>> rng = np.random.default_rng(42)
     >>> age = rng.integers(low=18, high=61, size=103)
     >>> sex = rng.choice(["female", "male"], size=103)
     >>> bmi = rng.normal(loc=23, scale=7, size=103)
@@ -1088,7 +1088,7 @@ def bar_chart(df, feature, label, num_dp=4, alpha=0.05, sig_ttest_only=True):
     Example
     -------
     >>> # Sample data
-    >>> rng = np.random.default_rng()
+    >>> rng = np.random.default_rng(42)
     >>> age = rng.integers(low=18, high=61, size=103)
     >>> sex = rng.choice(["female", "male"], size=103)
     >>> bmi = rng.normal(loc=23, scale=7, size=103)
@@ -1199,7 +1199,7 @@ def crosstab(df, feature, label, num_dp=4):
     Example
     -------
     >>> # Sample data
-    >>> rng = np.random.default_rng()
+    >>> rng = np.random.default_rng(42)
     >>> age = rng.integers(low=18, high=61, size=103)
     >>> sex = rng.choice(["female", "male"], size=103)
     >>> bmi = rng.normal(loc=23, scale=7, size=103)
@@ -1280,7 +1280,7 @@ def bivariate_stats(df, label, num_dp=4):
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>> age = rng.integers(low=18, high=61, size=103)
         >>> sex = rng.choice(["female", "male"], size=103)
         >>> bmi = rng.normal(loc=23, scale=7, size=103)
@@ -1473,7 +1473,7 @@ def plot_correlation_heatmap_with_matshow(df):
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>> age = rng.integers(low=18, high=61, size=103)
         >>> sex = rng.choice(["female", "male"], size=103)
         >>> bmi = rng.normal(loc=23, scale=7, size=103)
@@ -1535,7 +1535,7 @@ def plot_correlation_heatmap(df, messages=True):
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>> age = rng.integers(low=18, high=61, size=103)
         >>> sex = rng.choice(["female", "male"], size=103)
         >>> bmi = rng.normal(loc=23, scale=7, size=103)
@@ -1623,7 +1623,7 @@ def check_uniqueness(df, top_n=10):
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>> age = rng.integers(low=18, high=61, size=103)
         >>> sex = rng.choice(["female", "male"], size=103)
         >>> bmi = rng.normal(loc=23, scale=7, size=103)
@@ -1705,7 +1705,7 @@ def basic_wrangling(
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>> age = rng.integers(low=18, high=61, size=103)
         >>> sex = rng.choice(["female", "male"], size=103)
         >>> bmi = rng.normal(loc=23, scale=7, size=103)
@@ -2021,7 +2021,7 @@ def bin_categories(df, features=[], cutoff=0.05, replace_with="Other", messages=
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>>
         >>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
         >>>
@@ -2172,7 +2172,7 @@ def clean_outlier_per_column(
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>>
         >>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
         >>>
@@ -2386,7 +2386,7 @@ def clean_outlier_by_all_columns(
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>>
         >>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
         >>>
@@ -2632,7 +2632,7 @@ def skew_correct(df, feature, max_power=103, messages=True):
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>>
         >>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
         >>>
@@ -2865,7 +2865,7 @@ def missing_drop(
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>>
         >>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
         >>>
@@ -3046,7 +3046,7 @@ def check_target_balance(df, target="target"):
         Example
         -------
         >>> # Sample data
-        >>> rng = np.random.default_rng()
+        >>> rng = np.random.default_rng(42)
         >>>
         >>> surnames = ["Olafusi", "Abiola", "Eze", "Owolabi", "Owoeye", "Nnamdi", "Aluko", "Bello", "Tsangi", "Hoffman", "Williams", "Stone", "Carter", "Gilbert", "Oconnor", "Hill", "Hernandez", "Leonard", "Berg", "Hans-Otto", "Riehl", "Biggen", "Pareja", "Vicenta", "Coronado", "Bonet", "Blanch", "Fontana", "Ferri", "Roosenboom", "Huijzing", "Nijman",]
         >>>
@@ -3200,23 +3200,30 @@ def check_and_print_stats_gen(report_obj, alpha_val=ALPHA_VALUE, messages=False)
 
 
 def info_value_n_weight_of_evidence_calc(
-    data, target_column, num_bins=10, num_dp=8, messages=False
+    df, target_column, num_bins=10, num_dp=8, messages=False
 ):
     """
     Calculate information value (IV) and weight of evidence (WoE) for a given dataframe and target column.
 
     Parameters
     ----------
-    data (pd.DataFrame): Input Pandas DataFrame
-    target_column (str): Name of the target column
-    num_bins (int, optional): Number of bins for numerical features. Defaults to 10.
-    num_dp (int, optional): Number of decimal places to round results to. Defaults to 8.
-    messages (bool, optional): If True, prints IV and WoE dataframes. Defaults to False.
+    df:  pd.DataFrame
+        Input Pandas DataFrame
+    target_column: str
+        Name of the target column
+    num_bins: int, optional
+        Number of bins for numerical features. Defaults to 10.
+    num_dp: int, optional
+        Number of decimal places to round results to. Defaults to 8.
+    messages: bool, optional
+        If True, prints IV and WoE dataframes. Defaults to False.
 
     Returns
     -------
-    iv_data (pd.DataFrame): DataFrame with IV, IV_pred_power, and feature names
-    woe_data (pd.DataFrame): DataFrame with WoE values for each feature
+    iv_data: pd.DataFrame
+        DataFrame with IV, IV_pred_power, and feature names
+    woe_data: pd.DataFrame
+        DataFrame with WoE values for each feature
 
     Notes
     -----
@@ -3314,7 +3321,7 @@ def info_value_n_weight_of_evidence_calc(
         import pandas as pd
 
     # Extract column names
-    cols = data.columns
+    cols = df.columns
 
     # Check that target_column is in the list of columns
     try:
@@ -3324,7 +3331,7 @@ def info_value_n_weight_of_evidence_calc(
 
     # Check that target is numeric
     try:
-        assert data.groupby(cols[0])[target_column].agg(["sum"]).values.dtype.kind in [
+        assert df.groupby(cols[0])[target_column].agg(["sum"]).values.dtype.kind in [
             "b",
             "f",
             "i",
@@ -3335,7 +3342,7 @@ def info_value_n_weight_of_evidence_calc(
         raise ValueError(f"Values of target column - {target_column} - must be numeric")
 
     # Copy data to avoid modifying the original
-    data = data.copy()
+    data = df.copy()
 
     # Initialise lists
     iv_values = []
@@ -3347,9 +3354,12 @@ def info_value_n_weight_of_evidence_calc(
 
         Parameters
         ----------
-        series (pd.Series): Input Pandas series
-        num_bin (int): Initial number of bins.
-        min_bin_percent (float, optional): Minimum percentage of the original array for each bin. Defaults to 0.05 (5%).
+        series: pd.Series
+            Input Pandas series
+        num_bin: int
+            Initial number of bins.
+        min_bin_percent: float, optional
+            Minimum percentage of the original array for each bin. Defaults to 0.05 (5%).
 
         Returns
         -------
