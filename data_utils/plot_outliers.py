@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # Modified from https://sustainabilitymethods.org/index.php/Outlier_Detection_in_Python
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
