@@ -545,7 +545,7 @@ def plot_price_sensitivity_via_plotly(
 
 
 # Get results
-def results(
+def psm_results(
     df, price_cols, to_plot=True, plot_title="", currency_symbol="$", figsize=FIG_SIZE, dpi=FIG_DPI, messages=True
 ):
     """
