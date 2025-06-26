@@ -807,8 +807,8 @@ def column_summary_plus(df, top_n=10, messages=False):
         num_of_non_nulls = df[col].notnull().sum()
 
         # Distinct_values only take top N distinct values count
-        top_n_d_val = value_counts.head(top_n).index.tolist()
-        top_n_cnt = value_counts.head(top_n).tolist()
+        top_n_d_val = df[col].value_counts().head(top_n).index.tolist()
+        top_n_cnt = df[col].value_counts().head(top_n).tolist()
         top_n_d_v_dict = dict(zip(top_n_d_val, top_n_cnt))
 
         result_df = result_df.append(

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import pandas as pd
 import numpy as np
-import scipy.stats.gmean as gmean
-import scipy.special.agm as ss_agm
+from scipy.stats import gmean
+from scipy.special import agm as ss_agm
 
 np.float = np.float64
 np.int = np.int_
