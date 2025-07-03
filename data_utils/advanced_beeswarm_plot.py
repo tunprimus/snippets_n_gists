@@ -16,16 +16,16 @@ def iqr_region_highlighter(data_to_use=None, median_line_colour="green", q_line_
     ----------
     data_to_use : array_like
         The data to be plotted
-    
+
     median_line_colour : str, optional
         The colour of the median line. Defaults to "green".
-    
+
     q_line_colour : str, optional
         The colour of the Q1 and Q3 lines. Defaults to "red".
-    
+
     iqr_colour : str, optional
         The colour of the IQR region fill. Defaults to "red".
-    
+
     iqr_alpha : float, optional
         The alpha (transparency) value of the IQR region fill. Defaults to 0.2.
 
@@ -54,78 +54,41 @@ def iqr_region_highlighter(data_to_use=None, median_line_colour="green", q_line_
 
 # Function to plot advanced beeswarm plots
 def advanced_beeswarm_plot(data=None, x=None, y=None, order=None, titles_list=None, swarmplot_colour="blue", plot_fig_size=FIG_SIZE):
-    """
-    Function to plot advanced beeswarm plots
-
-    Parameters
-    ----------
-    data : array_like or list of array_likes
-        The data to be plotted
-    
-    titles_list : list of str
-        The titles of each subplot
-    
-    swarmplot_colour : str, optional
-        The colour of the swarmplot. Defaults to "blue".
-    
-    plot_fig_size : tuple of int, optional
-        The size of the figure. Defaults to (20, 10).
-
-    Returns
-    -------
-    None
-
-    Notes
-    -----
-    This function will generate a beeswarm plot of the given data, with IQR region highlighter.
-    The IQR region highlighter will generate 3 horizontal lines, one for Q1, one for the median, and one for Q3.
-    It will also generate a filled region between Q1 and Q3.
-    Examples
-    --------
-    np.random.seed(42)
-
-    # Normal Distribution
-    normal_dist = np.random.normal(5, 1, 1000)
-
-    # Bimodal Distribution
-    bimodal_dist = np.concatenate([np.random.normal(3, 0.5, 500), np.random.normal(7, 0.5, 500)])
-
-    # Exponential Distribution
-    exponential_dist = np.random.exponential(scale=1, size=1000)
-
-    # Uniform Distribution
-    uniform_dist = np.random.uniform(0, 10, 1000)
-
-    # Skewed Distribution with Outliers
-    skewed_main = np.random.chisquare(3, 900)
-    outliers = [15, 16, 17, 18, 19]
-    skewed_dist = np.concatenate([skewed_main, outliers])
-
-    datasets = [normal_dist, bimodal_dist, exponential_dist, uniform_dist, skewed_dist]
-    titles = ["Normal Distribution", "Bimodal Distribution", "Exponential Distribution", "Uniform Distribution", "Skewed Distribution with Outliers"]
-
-    # Plotting
-    advanced_beeswarm_plot(data=datasets, titles_list=titles)
-    """
     import matplotlib.pyplot as plt
     import numpy as np
     import pandas as pd
     import seaborn as sns
 
     plt.subplots_adjust(hspace=0.23, wspace=0.23)
-    if data:
-        # n_cols = 3 or int(len(data_list)**0.5)
-        # n_rows = len(data_list) // n_cols + (len(data_list) % n_cols > 0)
-        n_cols = int(np.sqrt(len(data)))
-        n_rows = int(np.ceil(len(data) / n_cols))
-    
-    fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols, sharex=True, sharey=True, figsize=FIG_SIZE, dpi=FIG_DPI)
-    for i, item in enumerate(data):
-        ax = plt.subplot(n_rows, n_cols, i+1)
-        sns.swarmplot(ax=ax, y=item, size=3)
-        iqr_region_highlighter(data_to_use=item)
-        ax.set_title(f"Beeswarm Plot: {titles_list[i]}")
-    plt.tight_layout
-    plt.show()
-    return axs
 
+    # Get the numerical column names from the DataFrame
+    numerical_columns = [col for col in data.columns if data[col].dtype.kind in 'bifc']
+
+    n_cols = int(np.sqrt(len(numerical_columns)))
+    n_rows = int(np.ceil(len(numerical_columns) / n_cols))
+
+    # Create a figure with subplots for each numerical column
+    fig, axs = plt.subplots(nrows=n_rows, ncols=n_cols)
+
+    # Flatten the axs array for easier iteration
+    axs = axs.flatten()
+
+    # Iterate over each numerical column and create a beeswarm plot
+    for i, col in enumerate(numerical_columns):
+        sns.swarmplot(y=col, data=data, ax=axs[i], color=swarmplot_colour, size=2.3)
+
+        # Set the title for the subplot
+        if titles_list:
+            axs[i].set_title(titles_list[i])
+        else:
+            axs[i].set_title(col)
+
+    # Remove any unused subplots
+    for i in range(len(numerical_columns), len(axs)):
+        axs[i].axis('off')
+
+    # Layout so plots do not overlap
+    fig.tight_layout()
+    plt.show()
+
+    return axs
