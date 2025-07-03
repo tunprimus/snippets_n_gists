@@ -74,10 +74,10 @@
 	/**
 	 * DOM node references
 	 */
-	const viewLoadingElem = document.getElementById('view-loading');
-	const viewFailureElem = document.getElementById('view-failure');
-	const viewNeedsLoginElem = document.getElementById('view-needs-login');
-	const viewReadyElem = document.getElementById('view-ready');
+	const viewLoadingElem = document.getElementById('view_loading');
+	const viewFailureElem = document.getElementById('view_failure');
+	const viewNeedsLoginElem = document.getElementById('view_needs_login');
+	const viewReadyElem = document.getElementById('view_ready');
 	let currentViewElem = viewLoadingElem;
 	// NB: indexes match View ID's
 	let viewNodesReference = {
@@ -86,7 +86,7 @@
 		viewNeedsLoginElem,
 		viewFailureElem,
 	};
-	const messageCountElem = document.getElementById('message-count');
+	const messageCountElem = document.getElementById('message_count');
 
 	/**
 	 * DOM update functions
