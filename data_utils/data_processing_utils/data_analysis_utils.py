@@ -2,7 +2,6 @@
 from matplotlib import rcParams
 from matplotlib.cm import rainbow
 from auto_pip_finder import PipFinder
-from csv_importer import CsvImporter
 from dbscan_pp import DBSCANPP
 
 
@@ -385,11 +384,12 @@ def generate_df_from_data_source(
     from fastavro import reader
     from google.cloud import bigquery
     from io import StringIO, BytesIO
-    from os.path import realpath as realpath
+    from os.path import expanduser, realpath
     from os.path import splitext as splitext
     from rpy2.robjects import pandas2ri
     from scipy.io import arff
     from scipy.io import loadmat
+    from sqlalchemy import create_engine, text
 
     # Monkey patching NumPy >= 1.24 in order to successfully import model from sklearn and other libraries
     np.float = np.float64
@@ -400,7 +400,7 @@ def generate_df_from_data_source(
     pd.set_option("mode.copy_on_write", True)
 
     # Get file extension type
-    real_path_to_data_source = realpath(data_source)
+    real_path_to_data_source = realpath(expanduser(data_source))
     file_path_name, ext_buffer = splitext(real_path_to_data_source)
     ext = ext_buffer.lstrip(".")
 
@@ -415,8 +415,10 @@ def generate_df_from_data_source(
         return pd.read_excel(real_path_to_data_source)
     elif ext == "txt":
         return pd.read_csv(real_path_to_data_source, sep="\t")
-    elif ext == "db" or ext == "sqlite" or ext == "sqlite3" or ext == "sql":
-        return pd.read_sql(real_path_to_data_source, con=real_path_to_data_source)
+    # elif ext == "db" or ext == "sqlite" or ext == "sqlite3" or ext == "sql":
+    #     query = "SELECT name FROM sqlite_master WHERE type = 'table';"
+    #     cnx = create_engine(f"sqlite:///{real_path_to_data_source}").connect()
+    #     return pd.read_sql(sql=text(query), con=cnx)
     elif ext == "html":
         return pd.read_html(real_path_to_data_source)
     elif ext == "h5":
