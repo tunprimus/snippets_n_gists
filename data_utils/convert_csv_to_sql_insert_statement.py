@@ -26,3 +26,4 @@ def csv_to_sql_insert(path_to_csv, path_to_sql_output=".", table_name="Test_Tabl
 
 if __name__ == "__main__":
     csv_to_sql_insert()
+

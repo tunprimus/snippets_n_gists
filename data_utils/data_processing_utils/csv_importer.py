@@ -58,3 +58,4 @@ def _identifier(var_str):
 
 # Add the CSV importer at the end of the list of finders
 sys.meta_path.append(CsvImporter)
+
