@@ -269,7 +269,7 @@ def plot_price_sensitivity_via_plt_n_sns(
     import seaborn as sns
 
     sns.set()
-    fig, ax = plt.subplots(figsize=figsize, dpi=dpi)
+    fig, axs = plt.subplots(figsize=figsize, dpi=dpi)
 
     sns.lineplot(
         x=cdfs["price"].values,
@@ -296,28 +296,28 @@ def plot_price_sensitivity_via_plt_n_sns(
         color="green",
     )
 
-    ax.scatter(
+    axs.scatter(
         [point_of_marginal_cheapness],
         [pmc_height],
         label=f"Point of Marginal Cheapness: {currency_symbol}{point_of_marginal_cheapness:.2f}",
         color="blue",
         s=50,
     )
-    ax.scatter(
+    axs.scatter(
         [point_of_marginal_expensiveness],
         [pme_height],
         label=f"Point of Marginal Expensiveness: {currency_symbol}{Point_of_Marginal_Expensiveness:.2f}",
         color="red",
         s=50,
     )
-    ax.scatter(
+    axs.scatter(
         [indifference_price_point],
         [ipp_height],
         label=f"Indifference Price Point: {currency_symbol}{indifference_price_point:.2f}",
         color="orange",
         s=50,
     )
-    ax.scatter(
+    axs.scatter(
         [optimal_price_point],
         [opp_height],
         label=f"Optimal Price Point: {currency_symbol}{optimal_price_point:.2f}",
@@ -325,12 +325,12 @@ def plot_price_sensitivity_via_plt_n_sns(
         s=50,
     )
 
-    ax.set_title(f"Van Westendorp's Price Sensitivity Meter\n{plot_title}")
-    ax.set_xlabel(f"Price ({currency_symbol})")
-    ax.set_ylabel("% of Participants")
-    ax.set_xlim(cdfs["price"].min() - 5, cdfs["price"].max() + 5)
-    ax.set_ylim(-0.1, 1.1)
-    ax.legend()
+    axs.set_title(f"Van Westendorp's Price Sensitivity Meter\n{plot_title}")
+    axs.set_xlabel(f"Price ({currency_symbol})")
+    axs.set_ylabel("% of Participants")
+    axs.set_xlim(cdfs["price"].min() - 5, cdfs["price"].max() + 5)
+    axs.set_ylim(-0.1, 1.1)
+    axs.legend()
 
     plt.show()
 
@@ -401,68 +401,68 @@ def plot_price_sensitivity_via_plotly(
     line_width = 1
     marker_size = 3
 
-    var = "too_expensive"
+    var_01 = "too_expensive"
     trace_01 = go.Scatter(
         x=cdfs["price"].values,
-        y=cdfs[var].values,
+        y=cdfs[var_01].values,
         text=[
-            f"{var}<br>Price: {currency_symbol}{price:.2f}<br>Participants: {val*100:.2f}%"
-            for (price, val) in zip(cdfs["price"].values, cdfs[var].values)
+            f"{var_01}<br>Price: {currency_symbol}{price:.2f}<br>Participants: {val*100:.2f}%"
+            for (price, val) in zip(cdfs["price"].values, cdfs[var_01].values)
         ],
         mode="lines",
         opacity=0.8,
         marker={"size": marker_size, "color": "red"},
         hoverinfo="text",
         line={"color": "red", "width": line_width},
-        name=var,
+        name=var_01,
     )
 
-    var = "not_expensive"
+    var_02 = "not_expensive"
     trace_02 = go.Scatter(
         x=cdfs["price"].values,
-        y=cdfs[var].values,
+        y=cdfs[var_02].values,
         text=[
-            f"{var}<br>Price: {currency_symbol}{price:.2f}<br>Participants: {val*100:.2f}%"
-            for (price, val) in zip(cdfs["price"].values, cdfs[var].values)
+            f"{var_02}<br>Price: {currency_symbol}{price:.2f}<br>Participants: {val*100:.2f}%"
+            for (price, val) in zip(cdfs["price"].values, cdfs[var_02].values)
         ],
         mode="lines",
         opacity=0.8,
         marker={"size": marker_size, "color": "orange"},
         hoverinfo="text",
         line={"color": "orange", "width": line_width},
-        name=var,
+        name=var_02,
     )
 
-    var = "not_cheap"
+    var_03 = "not_cheap"
     trace_03 = go.Scatter(
         x=cdfs["price"].values,
-        y=cdfs[var].values,
+        y=cdfs[var_03].values,
         text=[
-            f"{var}<br>Price: {currency_symbol}{price:.2f}<br>Participants: {val*100:.2f}%"
-            for (price, val) in zip(cdfs["price"].values, cdfs[var].values)
+            f"{var_03}<br>Price: {currency_symbol}{price:.2f}<br>Participants: {val*100:.2f}%"
+            for (price, val) in zip(cdfs["price"].values, cdfs[var_03].values)
         ],
         mode="lines",
         opacity=0.8,
         marker={"size": marker_size, "color": "blue"},
         hoverinfo="text",
         line={"color": "blue", "width": line_width},
-        name=var,
+        name=var_03,
     )
 
-    var = "too_cheap"
+    var_04 = "too_cheap"
     trace_04 = go.Scatter(
         x=cdfs["price"].values,
-        y=cdfs[var].values,
+        y=cdfs[var_04].values,
         text=[
-            f"{var}<br>Price: {currency_symbol}{price:.2f}<br>Participants: {val*100:.2f}%"
-            for (price, val) in zip(cdfs["price"].values, cdfs[var].values)
+            f"{var_04}<br>Price: {currency_symbol}{price:.2f}<br>Participants: {val*100:.2f}%"
+            for (price, val) in zip(cdfs["price"].values, cdfs[var_04].values)
         ],
         mode="lines",
         opacity=0.8,
         marker={"size": marker_size, "color": "green"},
         hoverinfo="text",
         line={"color": "green", "width": line_width},
-        name=var,
+        name=var_04,
     )
 
     point_01 = go.Scatter(
