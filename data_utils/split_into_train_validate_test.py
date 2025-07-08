@@ -9,6 +9,7 @@ def split_into_train_validate_test(
     test_prop=0.13,
     validate_prop=0.13,
     random_state=42,
+    drop_stratify_col=False,
 ):
     """
     Split a Pandas DataFrame into three pairs: train, validate and test.
@@ -33,6 +34,9 @@ def split_into_train_validate_test(
 
     random_state : int, optional
         The seed used by the random number generator. By default 42.
+
+    drop_stratify_col : bool, optional
+        If True, the stratify_col_name column is dropped from the input dataframe.
 
     Returns
     -------
@@ -150,6 +154,12 @@ def split_into_train_validate_test(
     except:
         raise ValueError("Some rows were duplicated in the split.")
 
+    # Check if to drop the stratify column
+    if drop_stratify_col:
+        df_train = df_train.drop(stratify_col_name, axis=1)
+        df_validate = df_validate.drop(stratify_col_name, axis=1)
+        df_test = df_test.drop(stratify_col_name, axis=1)
+
     # Return DataFrames
     return df_train, df_validate, df_test, y_train, y_validate, y_test
 
@@ -170,4 +180,5 @@ if __name__ == "__main__":
         test_prop=0.13,
         validate_prop=0.13,
         random_state=42,
+        drop_stratify_col=False,
     )
