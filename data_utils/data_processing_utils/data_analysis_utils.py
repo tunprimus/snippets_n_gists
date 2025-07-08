@@ -840,6 +840,31 @@ def column_summary_plus(df, top_n=10, messages=False):
 # ----------------------------------------------------------------------#
 # Function to get univariate statistics and plots from Pandas DataFrame #
 # ----------------------------------------------------------------------#
+
+def adjust_bins(series, num_bin, min_bin_percent=0.05):
+    """
+    Adjust the number of bins for a Pandas series such that each bin is at least a certain percentage of the original array.
+    Parameters
+    ----------
+    series: pd.Series
+        Input Pandas series
+    num_bin: int
+        Initial number of bins.
+    min_bin_percent: float, optional
+        Minimum percentage of the original array for each bin. Defaults to 0.05 (5%).
+    Returns
+    -------
+    int: Adjusted number of bins
+    """
+    # Calculate the minimum number of samples per bin
+    min_samples_per_bin = int(len(series) * min_bin_percent)
+
+    # Calculate the adjusted number of bins
+    adjusted_bins = min(num_bin, int(np.ceil(len(series) / min_samples_per_bin)))
+
+    return adjusted_bins if (adjusted_bins < num_bin) else num_bin
+
+
 def univariate_stats(df):
     """
     Generate descriptive statistics and visualisations for each feature in a DataFrame.
@@ -1458,7 +1483,6 @@ def bivariate_stats(df, label, num_dp=4):
 # Functions to get multivariate statistics and plots from Pandas DataFrame #
 # ----------------------------------------------------------------------#
 
-
 def plot_correlation_heatmap_with_matshow(df):
     """
     Plot the correlation heatmap of the given DataFrame using plt.matshow.
@@ -1577,7 +1601,7 @@ def plot_correlation_heatmap(df, messages=True):
     mask[np.triu_indices_from(mask)] = True
     corr[mask] = np.nan
 
-    upper_trianle = corr.where(np.triu(np.ones(corr.shape), k=1).astype(np.bool))
+    upper_triangle = corr.where(np.triu(np.ones(corr.shape), k=1).astype(np.bool))
     max_corr = upper_triangle.max().max()
 
     if messages:
@@ -1599,7 +1623,6 @@ def plot_correlation_heatmap(df, messages=True):
 ##*********************##
 
 ### Eliminate Empty Columns, Columns with All Unique Values and Columns with Single Values
-
 
 def check_uniqueness(df, top_n=10):
     """
@@ -2531,7 +2554,9 @@ def clean_outlier_by_all_columns(
         INCREMENT_VAL = 0.350
     else:
         INCREMENT_VAL = 0.500
+
     db_scan_time_start = time.time_ns()
+
     while outliers > 0:
         loop_start_time = time.time_ns()
         eps_loop += INCREMENT_VAL
@@ -2566,10 +2591,12 @@ def clean_outlier_by_all_columns(
             print(
                 f"eps = {round(eps_loop, num_dp)}, (outliers: {outliers}, percent: {round(outliers_percent, num_dp)}% in {round(loop_time_diff_s, num_dp)}s)"
             )
+
     to_drop = min(
         outliers_per_eps,
         key=lambda x: abs(x - round((drop_proportion * row_count), num_dp)),
     )
+
     # Find the optimal eps value
     eps = (outliers_per_eps.index(to_drop) + 1) * INCREMENT_VAL
     outliers_per_eps_history["optimal_eps"] = eps
@@ -2585,12 +2612,14 @@ def clean_outlier_by_all_columns(
 
         print(f"\nHistory:")
         extended_print_report_object(outliers_per_eps_history)
+
     db = DBSCAN(
         eps=eps,
         metric=distance_method,
         min_samples=min_samples,
         n_jobs=num_cores_for_dbscan,
     ).fit(df_temp)
+
     df["outlier"] = db.labels_
     if messages:
         print(
@@ -2601,6 +2630,7 @@ def clean_outlier_by_all_columns(
         plt.xlabel(f"eps (divided by {INCREMENT_VAL})")
         plt.ylabel("Number of outliers")
         plt.show()
+
     # Drop rows that are outliers
     df = df[df["outlier"] != -1]
 
@@ -2609,7 +2639,6 @@ def clean_outlier_by_all_columns(
 
 ## Skewness
 ##*********************##
-
 
 def skew_correct(df, feature, max_power=103, messages=True):
     """
@@ -2764,6 +2793,7 @@ def skew_correct(df, feature, max_power=103, messages=True):
     skew = df_temp[feature].skew()
     if messages:
         print(f"Starting skew: {round(skew, 5)}")
+
     while (round(skew, 2) != 0) and (exp_val <= max_power):
         exp_val += 0.01
         if skew > 0:
@@ -2836,7 +2866,6 @@ def skew_correct(df, feature, max_power=103, messages=True):
 
 ## Missing Data
 ##*********************##
-
 
 def missing_drop(
     df, label="", features=[], row_threshold=0.90, col_threshold=0.50, messages=True
@@ -2968,6 +2997,7 @@ def missing_drop(
             f"Going to drop any column with more than {missing_col_thresh} missing value(s)."
         )
     df.dropna(axis=1, thresh=col_thresh_val, inplace=True)
+
     # Drop all rows that have less data than the proportion row_threshold requires
     row_thresh_val = round((row_threshold * df.shape[1]), 0)
     missing_row_thresh = df.shape[1] - row_thresh_val
@@ -2984,6 +3014,7 @@ def missing_drop(
             f"Going to drop any row with more than {missing_row_thresh} missing value(s)."
         )
     df.dropna(axis=0, thresh=row_thresh_val, inplace=True)
+    
     # Drop all column(s) of given label(s)
     if label != "":
         df.dropna(axis=0, subset=[label], inplace=True)
@@ -3349,31 +3380,6 @@ def info_value_n_weight_of_evidence_calc(
     # Initialise lists
     iv_values = []
     woe_data = data[[target_column]].copy()
-
-    def adjust_bins(series, num_bin, min_bin_percent=0.05):
-        """
-        Adjust the number of bins for a Pandas series such that each bin is at least a certain percentage of the original array.
-
-        Parameters
-        ----------
-        series: pd.Series
-            Input Pandas series
-        num_bin: int
-            Initial number of bins.
-        min_bin_percent: float, optional
-            Minimum percentage of the original array for each bin. Defaults to 0.05 (5%).
-
-        Returns
-        -------
-        int: Adjusted number of bins
-        """
-        # Calculate the minimum number of samples per bin
-        min_samples_per_bin = int(len(series) * min_bin_percent)
-
-        # Calculate the adjusted number of bins
-        adjusted_bins = min(num_bin, int(np.ceil(len(series) / min_samples_per_bin)))
-
-        return adjusted_bins if (adjusted_bins < num_bin) else num_bin
 
     # Process each feature while skipping the target and high cardinality features
     for col in data.columns:
