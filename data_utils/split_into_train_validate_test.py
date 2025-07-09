@@ -5,11 +5,13 @@ import pandas as pd
 def split_into_train_validate_test(
     df_input,
     stratify_col_name="target",
+    use_last_col_as_target=False,
     train_prop=0.74,
     test_prop=0.13,
     validate_prop=0.13,
     random_state=42,
-    drop_stratify_col=False,
+    drop_stratify_col=True,
+    return_y=True
 ):
     """
     Split a Pandas DataFrame into three pairs: train, validate and test.
@@ -18,10 +20,13 @@ def split_into_train_validate_test(
     Parameters
     ----------
     df_input : Pandas DataFrame
-        The input dataframe to be split.
+        The (combined) input dataframe to be split.
 
     stratify_col_name : str, optional
-        The name of a column in the dataframe to use for stratified splitting. By default "target".
+        The name of a column in the dataframe to use as target and for stratified splitting. By default "target".
+
+    use_last_col_as_target : bool, optional
+        To use the last column in the dataframe as target. By default False.
 
     train_prop : float, optional
         The proportion of the input dataframe to use for the training set. By default 0.74.
@@ -36,7 +41,10 @@ def split_into_train_validate_test(
         The seed used by the random number generator. By default 42.
 
     drop_stratify_col : bool, optional
-        If True, the stratify_col_name column is dropped from the input dataframe.
+        If True, the stratify_col_name column is dropped from the input dataframe. By default True.
+
+    return_y : bool, optional
+        If True, y_train, y_validate and y_test dataframes are returned. By default True.
 
     Returns
     -------
@@ -83,19 +91,19 @@ def split_into_train_validate_test(
     >>> df_test.shape
     (130, 3)
 
-    >>> df_train.label.value_counts()
+    >>> df_train["label"].value_counts()
     foo    555
     bar    111
     baz     74
     Name: label, dtype: int64
 
-    >>> df_validate.label.value_counts()
+    >>> df_validate["label"].value_counts()
     foo    98
     bar    19
     baz    13
     Name: label, dtype: int64
 
-    >>> df_test.label.value_counts()
+    >>> df_test["label"].value_counts()
     foo    97
     bar    20
     baz    13
@@ -114,7 +122,14 @@ def split_into_train_validate_test(
     try:
         assert stratify_col_name in df_input.columns
     except:
-        raise ValueError("stratify_col_name must be in df_input")
+        try:
+            assert use_last_col_as_target
+        except:
+            raise ValueError("stratify_col_name must be in df_input! Check spelling or case.\nOr set use_last_col_as_target=True")
+
+    df_columns = df_input.columns
+    if use_last_col_as_target:
+        stratify_col_name = df_columns[-1]
 
     X = df_input  # contains all columns.
     y = df_input[
@@ -148,9 +163,7 @@ def split_into_train_validate_test(
         raise ValueError("Some rows were lost in the split.")
     # Validate no rows were duplicated.
     try:
-        assert len(df_train) + len(df_validate) + len(df_test) == len(df_train) + len(
-            df_validate
-        ) + len(df_test)
+        assert len(df_train) + len(df_validate) + len(df_test) == len(df_train) + len(df_temp)
     except:
         raise ValueError("Some rows were duplicated in the split.")
 
@@ -161,7 +174,10 @@ def split_into_train_validate_test(
         df_test = df_test.drop(stratify_col_name, axis=1)
 
     # Return DataFrames
-    return df_train, df_validate, df_test, y_train, y_validate, y_test
+    if return_y:
+        return df_train, df_validate, df_test, y_train, y_validate, y_test
+    else:
+        return df_train, df_validate, df_test
 
 
 if __name__ == "__main__":
@@ -176,9 +192,11 @@ if __name__ == "__main__":
     df_train, df_validate, df_test, y_train, y_validate, y_test = split_into_train_validate_test(
         df,
         stratify_col_name="label",
+        use_last_col_as_target=False,
         train_prop=0.74,
         test_prop=0.13,
         validate_prop=0.13,
         random_state=42,
         drop_stratify_col=False,
+        return_y=True
     )
