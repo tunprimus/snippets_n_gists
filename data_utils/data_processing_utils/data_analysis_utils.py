@@ -3014,7 +3014,7 @@ def missing_drop(
             f"Going to drop any row with more than {missing_row_thresh} missing value(s)."
         )
     df.dropna(axis=0, thresh=row_thresh_val, inplace=True)
-    
+
     # Drop all column(s) of given label(s)
     if label != "":
         df.dropna(axis=0, subset=[label], inplace=True)
@@ -3163,13 +3163,26 @@ def check_target_balance(df, target="target"):
     except ImportError:
         import pandas as pd
 
-    print(df[target].value_counts())
-    plt.bar(df[target].unique(), df[target].value_counts(), color=["red", "green"])
-    plt.xticks([0, 1])
-    plt.xlabel("Target Classes")
+    colours = ["red", "green", "yellow", "blue", "orange"]
+    font = {"size": 17}
+
+    target_unique = df[target].unique()
+    target_values = df[target].value_counts()
+    target_values_pct = (df[target].value_counts(normalize=True) * 100).round(1)
+
+    print(target_values)
+
+    fig, ax = plt.subplots()
+
+    bar_container = ax.bar(target_unique, target_values, color=colours)
+    plt.xticks([val for _, val in enumerate(target_unique)])
+    ax.bar_label(bar_container, fmt="{:,.0f}")
+    plt.xlabel(f"Target `{target}´ Classes")
     plt.ylabel("Count")
-    plt.title("Count of each Target Class")
+    plt.title(f"Count of each `{target}´ Class", fontdict=font)
     plt.show()
+    print("Class percentages")
+    print(target_values_pct)
 
 
 # Function to test and print statistics reports
