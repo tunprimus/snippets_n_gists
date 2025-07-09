@@ -3181,7 +3181,7 @@ def check_target_balance(df, target="target"):
     plt.ylabel("Count")
     plt.title(f"Count of each `{target}´ Class", fontdict=font)
     plt.show()
-    print("Class percentages")
+    print(f"`{target}` Class Percentages")
     print(target_values_pct)
 
 
