@@ -10,8 +10,8 @@
 <body>
   <fieldset>
     <legend>Enter some config details</legend>
-    <textarea name="text-to-save" id="text-to-save" cols="30" rows="10"></textarea>
-    <button type="button" id="btnSave">save config</button>
+    <textarea name="text-to-save" id="text_to_save" cols="30" rows="10"></textarea>
+    <button type="button" id="btn_save">save config</button>
   </fieldset>
 
   <!-- JavaScript Here -->
@@ -27,8 +27,8 @@
       URL.revokeObjectURL(a.href);
     }
 
-    const saveBtn = document.querySelector('#btnSave');
-    const textArea = document.querySelector('#text-to-save');
+    const saveBtn = document.querySelector('#btn_save');
+    const textArea = document.querySelector('#text_to_save');
     const today = new Date();
     const pattern = /(:|\.)/g;
     const defaultFilePrefix = today.toISOString().replace(pattern, '').slice(0, -1);

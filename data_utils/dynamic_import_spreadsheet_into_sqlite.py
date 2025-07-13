@@ -31,7 +31,7 @@ def create_table(cur, table_name, columns):
     None
     """
     columns_defn = ", ".join(f"{col} TEXT" for col in columns) if isinstance(columns, (pd.core.indexes.base.Index, pd.core.frame.DataFrame)) else columns
-    columns_defn = columns_defn + ",added_on DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL"
+    columns_defn = "id INT PRIMARY KEY, " + "ulid_uuidv7" + columns_defn + ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL" + ", updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" + ", deleted_at DATETIME DEFAULT NULL"
 
     table_create_stmt = f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_defn})"
     cur.execute(table_create_stmt)
