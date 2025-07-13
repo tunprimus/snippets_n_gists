@@ -5,7 +5,7 @@ from os.path import expanduser, realpath
 
 # Parsing a sqlite database into a dictionary of DataFrames without knowing the table names
 
-def read_sqlite(path_to_db):
+def read_all_sqlite_tables(path_to_db):
     """
     Reads in a SQLite database from a specified file path and returns a dictionary of
     Pandas DataFrames, where each key is the name of a table in the database.
