@@ -30,8 +30,12 @@ def create_table(cur, table_name, columns):
     -------
     None
     """
-    columns_defn = ", ".join(f"{col} TEXT" for col in columns) if isinstance(columns, (pd.core.indexes.base.Index, pd.core.frame.DataFrame)) else columns
-    columns_defn = "id INT PRIMARY KEY, " + "ulid_uuidv7" + columns_defn + ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL" + ", updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP" + ", deleted_at DATETIME DEFAULT NULL"
+    # pre_col_defn = "id INT AUTO_INCREMENT PRIMARY KEY, ulid_uuidv7 DEFAULT NULL, "
+    pre_col_defn = "ulid_uuidv7 DEFAULT NULL, "
+    buffer_col_defn = ", ".join(f"{col} TEXT" for col in columns) if isinstance(columns, (pd.core.indexes.base.Index, pd.core.frame.DataFrame)) else columns
+    # post_col_defn = ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, deleted_at DATETIME DEFAULT NULL"
+    post_col_defn = ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, deleted_at DATETIME DEFAULT NULL"
+    columns_defn = f"{pre_col_defn}{buffer_col_defn}{post_col_defn}"
 
     table_create_stmt = f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_defn})"
     cur.execute(table_create_stmt)
@@ -57,6 +61,7 @@ def insert_into_db(table_name, df, path_to_database="./test.db"):
     None
     """
     real_path_to_database = realpath(expanduser(path_to_database))
+    col_length = len(df.columns)
 
     with sqlite3.connect(real_path_to_database) as conn:
         cur = conn.cursor()
@@ -71,7 +76,7 @@ def insert_into_db(table_name, df, path_to_database="./test.db"):
         try:
             for _, row in df.iterrows():
                 cur.execute(
-                    f"INSERT OR REPLACE INTO {table_name} ({col_labels}) VALUES ({', '.join(['?'] * len(df.columns))})",
+                    f"INSERT OR REPLACE INTO {table_name} ({col_labels}) VALUES ({', '.join(['?'] * (col_length))})",
                     tuple(row),
                 )
         except:
@@ -103,7 +108,7 @@ def process_csv_into_sqlite(file_path, path_to_database="./test.db"):
         df = pd.read_csv(real_path_to_file)
 
     df = standardise_column_names(df)
-    
+
     table_name = real_path_to_file.split("/")[-1].replace(".csv", "").replace("-", "_").replace("/", "")
     insert_into_db(table_name, df, real_path_to_database)
 
