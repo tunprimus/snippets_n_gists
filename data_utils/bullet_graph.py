@@ -109,7 +109,6 @@ def plot_bullet_graph(actual_sale, target_sale, acceptable_range):
 
             if i == 0:
                 axs[i].legend(loc="upper left")
-
     else:
         if not isinstance(actual_sale, (int, float)) or not isinstance(
             target_sale, (int, float)
