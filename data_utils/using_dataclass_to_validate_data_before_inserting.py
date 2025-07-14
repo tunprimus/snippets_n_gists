@@ -24,10 +24,10 @@ with sqlite3.connect("contacts.db") as conn:
 
     cur.execute(
         """CREATE TABLE IF NOT EXISTS contacts (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL
-    )"""
+            id INTEGER PRIMARY KEY,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL
+        )"""
     )
     conn.commit()
 
