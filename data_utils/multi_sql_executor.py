@@ -188,22 +188,23 @@ def execute_on_database(db_path="./test.db", db_type="sqlite", host_name=None, u
 
     sqlalchemy_version = sqlalchemy.__version__
     sqlalchemy_version = float(sqlalchemy_version.split(".")[0] + "." + sqlalchemy_version.split(".")[1])
+    result = None
 
     conn_engine = create_sql_connection(db_path=db_path, db_type=db_type, host_name=host_name, user_name=user_name, user_password=user_password, db_port=db_port, db_name=db_name, messages=messages)
 
     if (sqlalchemy_version >= 1.4):
-        with conn_engine.connect() as conn:
-            result = conn.execute(text(sql_query))
+        with conn_engine.begin() as conn:
+            result = conn.execute(text(sql_query)).fetchall()
             if messages:
                 print("Database operation successful!")
-            return result
+        return result
     else:
         with conn_engine.connect() as conn:
-            result = conn.execute(text(sql_query))
+            result = conn.execute(text(sql_query)).fetchall()
             conn.commit()
             if messages:
                 print("Database operation successful!")
-            return result
+        return result
 
 # if __name__ == "__main__":
 #     execute_on_database(db_path="test.db", db_type="sqlite", sql_query="CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY, username TEXT NOT NULL, surname TEXT NOT NULL, firstname TEXT NOT NULL, email TEXT NOT NULL, created_on DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL)")
