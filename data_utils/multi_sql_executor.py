@@ -140,7 +140,7 @@ def create_sql_connection(db_path="./test.db", db_type="sqlite", host_name=None,
         raise ValueError("Invalid database type. Please choose 'sqlite', 'mysql', 'postgres', 'oracle' or 'mssql'.")
 
 
-def create_database(db_path="./test.db", db_type="sqlite", host_name=None, user_name=None, user_password=None, db_port=None, db_name=None, sql_query=None, messages=True):
+def execute_on_database(db_path="./test.db", db_type="sqlite", host_name=None, user_name=None, user_password=None, db_port=None, db_name=None, sql_query=None, messages=True):
     """
     Create and execute a SQL query on a specified database using SQLAlchemy.
 
@@ -206,4 +206,5 @@ def create_database(db_path="./test.db", db_type="sqlite", host_name=None, user_
             return result
 
 # if __name__ == "__main__":
-#     create_database(db_path="test.db", db_type="sqlite", sql_query="CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY, username TEXT NOT NULL, surname TEXT NOT NULL, firstname TEXT NOT NULL, email TEXT NOT NULL, created_on DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL)")
+#     execute_on_database(db_path="test.db", db_type="sqlite", sql_query="CREATE TABLE IF NOT EXISTS test (id INTEGER PRIMARY KEY, username TEXT NOT NULL, surname TEXT NOT NULL, firstname TEXT NOT NULL, email TEXT NOT NULL, created_on DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL)")
+

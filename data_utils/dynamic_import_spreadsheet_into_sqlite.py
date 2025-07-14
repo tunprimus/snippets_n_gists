@@ -30,8 +30,9 @@ def create_table(cur, table_name, columns):
     -------
     None
     """
-    # pre_col_defn = "id INT AUTO_INCREMENT PRIMARY KEY, ulid_uuidv7 DEFAULT NULL, "
-    pre_col_defn = "ulid_uuidv7 DEFAULT NULL, "
+	# pre_col_defn = "id INTEGER PRIMARY KEY AUTOINCREMENT, ulid_uuidv7 DEFAULT NULL, "    
+	# pre_col_defn = "id INT AUTO_INCREMENT PRIMARY KEY, ulid_uuidv7 DEFAULT NULL, "
+    pre_col_defn = "ulid_uuidv7 UUID DEFAULT uuid(), "
     buffer_col_defn = ", ".join(f"{col} TEXT" for col in columns) if isinstance(columns, (pd.core.indexes.base.Index, pd.core.frame.DataFrame)) else columns
     # post_col_defn = ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, deleted_at DATETIME DEFAULT NULL"
     post_col_defn = ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, deleted_at DATETIME DEFAULT NULL"
