@@ -48,9 +48,9 @@ def timing_function(func, show_full_params=False):
 
         if show_full_params:
             print(f"Function: {func.__name__} | Args: {args} | Took: {execution_time:.3f} seconds")
-            print(f"Function: {func.__name__} | Args: {args} | Took: {execution_time_ns} ns ({(execution_time_ns / 1000000000):.3f} s)")
+            print(f"Function: {func.__name__} | Args: {args} | Took: {execution_time_ns}ns ({(execution_time_ns / 1000000000):.3f}s)")
         else:
-            print(f"Function: {func.__name__} took --> {execution_time_ns} ns ({(execution_time_ns / 1000000000):.3f} s)")
+            print(f"Function: {func.__name__} took --> {execution_time_ns}ns ({(execution_time_ns / 1000000000):.3f}s)")
 
         return result
     return wrapper
