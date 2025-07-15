@@ -55,9 +55,9 @@ def transform_tabular_data_into_sqlite(
         )
 
 
-transform_tabular_data_into_sqlite(
-    file_path="../../../?", sheet_name=None, path_to_database=PATH_TO_COMBO_DB
-)
+# transform_tabular_data_into_sqlite(
+#     file_path="../../../?", sheet_name=None, path_to_database=PATH_TO_COMBO_DB
+# )
 
 
 if __name__ == "__main__":
