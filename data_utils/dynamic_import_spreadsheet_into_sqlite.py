@@ -15,7 +15,7 @@ sys.path.append(realpath(expanduser("~/zzz_personal/snippets_n_gists/data_utils"
 from standardise_column_names import standardise_column_names
 
 
-# Create a UUID function.
+# Create UUID/ULID/UUIDv7 functions that would be registered with sqlite3.
 # Adapted from: https://stackoverflow.com/a/39690541 , https://docs.python.org/2/library/sqlite3.html#sqlite3.Connection.create_function and https://github.com/manufaktor/articles/blob/main/using-uuid-in-sqlite.md
 def uuid4_func():
     return str(uuid.uuid4())
@@ -50,8 +50,8 @@ def create_table(cur, table_name, columns):
     -------
     None
     """
-    # pre_col_defn = "id INTEGER PRIMARY KEY AUTOINCREMENT, ulid_uuidv7 DEFAULT NULL, "
-    # pre_col_defn = "id INT AUTO_INCREMENT PRIMARY KEY, ulid_uuidv7 DEFAULT NULL, "
+    # pre_col_defn = "id INTEGER PRIMARY KEY AUTOINCREMENT, ulid_uuidv7 DEFAULT NOT NULL, "
+    # pre_col_defn = "id INT AUTO_INCREMENT PRIMARY KEY, ulid_uuidv7 DEFAULT NOT NULL, "
     # pre_col_defn = f"ulid_uuidv7 UUID DEFAULT (uuid4()) NOT NULL, "
     # pre_col_defn = f"ulid_uuidv7 UUID DEFAULT (uuid7()) NOT NULL, "
     pre_col_defn = f"ulid_uuidv7 UUID DEFAULT (ulid()) NOT NULL, "
@@ -107,7 +107,7 @@ def insert_into_db(
     col_length = len(df.columns)
 
     with sqlite3.connect(real_path_to_database) as conn:
-        # Register the UUID/ULID/UUID7 functions with SQLite. Only one can work at a time
+        # Register the UUID/ULID/UUID7 functions with SQLite. Only one can work at a time!
 
         if use_uuid4:
             conn.create_function("uuid4", 0, uuid4_func)
@@ -168,6 +168,7 @@ def process_csv_into_sqlite(file_path, path_to_database="./test.db"):
     table_name = (
         real_path_to_file.split("/")[-1]
         .replace(".csv", "")
+        .replace(".tsv", "")
         .replace("-", "_")
         .replace("/", "")
     )
@@ -177,10 +178,34 @@ def process_csv_into_sqlite(file_path, path_to_database="./test.db"):
 def process_spreadsheet_into_sqlite(
     file_path, sheet_name=None, path_to_database="./test.db"
 ):
+    """
+    Insert data from a spreadsheet into a table within an SQLite database.
+
+    Parameters
+    ----------
+    file_path : str
+        The file path to the spreadsheet file to be inserted into the database.
+
+    sheet_name : str, optional
+        The name of the sheet in the spreadsheet. Defaults to None.
+
+    path_to_database : str, optional
+        The file path to the SQLite database. Defaults to "./test.db".
+
+    Returns
+    -------
+    None
+    """
     real_path_to_file = realpath(file_path)
     real_path_to_database = realpath(expanduser(path_to_database))
 
-    if (real_path_to_file.endswith(".xlsx")) or (real_path_to_file.endswith(".xls")):
+    if (
+        (real_path_to_file.endswith(".xlsx"))
+        or (real_path_to_file.endswith(".xls"))
+        or (real_path_to_file.endswith(".ods"))
+        or (real_path_to_file.endswith(".xlsm"))
+        or (real_path_to_file.endswith(".xlsb"))
+    ):
         df = pd.read_excel(real_path_to_file)
 
     df = standardise_column_names(df)
@@ -190,6 +215,10 @@ def process_spreadsheet_into_sqlite(
         if sheet_name
         else real_path_to_file.split("/")[-1]
         .replace(".xlsx", "")
+        .replace(".xls", "")
+        .replace(".ods", "")
+        .replace(".xlsm", "")
+        .replace(".xlsb", "")
         .replace("-", "_")
         .replace("/", "")
         .lower()

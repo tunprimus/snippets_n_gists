@@ -30,8 +30,8 @@ def transform_tabular_data_into_sqlite(
 ):
     """
     Take a file path and a database path, and copy the data from the file into
-    the database. If the file is a CSV, use process_csv_into_sqlite. If the file
-    is an Excel spreadsheet, use process_spreadsheet_into_sqlite.
+    the database. If the file is a CSV or TSV, use process_csv_into_sqlite. If the file
+    is a spreadsheet, use process_spreadsheet_into_sqlite.
 
     Parameters
     ----------
