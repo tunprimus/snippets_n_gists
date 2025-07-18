@@ -67,6 +67,17 @@ def create_table(cur, table_name, columns):
     table_create_stmt = f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_defn})"
     cur.execute(table_create_stmt)
 
+    # Create trigger for auto-updating columns later
+    # Adapted from https://stackoverflow.com/a/1964534 and https://stackoverflow.com/a/65237351
+    table_trigger_stmt = f"""
+    CREATE TRIGGER {table_name}_trig
+    AFTER UPDATE ON {table_name}
+        BEGIN
+            update {table_name} SET updated_at = datetime('now') WHERE ulid_uuidv7 = NEW.ulid_uuidv7;
+        END;
+    """
+    cur.execute(table_trigger_stmt)
+
 
 def insert_into_db(
     table_name,
@@ -119,6 +130,9 @@ def insert_into_db(
             conn.create_function("uuid7", 0, uuid7_func)
 
         cur = conn.cursor()
+
+        # Enable foreign key constraints
+        cur.execute("PRAGMA foreign_keys = ON;")
 
         # Generate sanitised column labels
         col_labels = (
