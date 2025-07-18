@@ -61,7 +61,8 @@ def create_table(cur, table_name, columns):
         else columns
     )
     # post_col_defn = ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, deleted_at DATETIME DEFAULT NULL"
-    post_col_defn = ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, deleted_at DATETIME DEFAULT NULL"
+    # post_col_defn = ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, deleted_at DATETIME DEFAULT NULL"
+    post_col_defn = ", created_at DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL, updated_at DATETIME DEFAULT (STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW')) NOT NULL, deleted_at DATETIME DEFAULT NULL"
     columns_defn = f"{pre_col_defn}{buffer_col_defn}{post_col_defn}"
 
     table_create_stmt = f"CREATE TABLE IF NOT EXISTS {table_name} ({columns_defn})"
@@ -73,7 +74,7 @@ def create_table(cur, table_name, columns):
     CREATE TRIGGER {table_name}_trig
     AFTER UPDATE ON {table_name}
         BEGIN
-            update {table_name} SET updated_at = datetime('now') WHERE ulid_uuidv7 = NEW.ulid_uuidv7;
+            update {table_name} SET updated_at = STRFTIME('%Y-%m-%d %H:%M:%f', 'NOW') WHERE ulid_uuidv7 = NEW.ulid_uuidv7 OR  updated_at IS NULL;
         END;
     """
     cur.execute(table_trigger_stmt)
